@@ -5,8 +5,8 @@
 
 **Context & Constraints:**
 *   **Key Files:** [Optional: List any key files, directories, or documentation (e.g., `README.md`, `AGENTS.md`) that are critical to the task.]
-*   **Requirements:** [List specific, non-negotiable requirements. E.g., "The endpoint must be authenticated using JWT.", "All new code must have 100% unit test coverage."]
-*   **Guiding Principles:** [List any critical "what to do" instructions framed positively. E.g., "You must use the existing logging library for all output.", "You must only add dependencies using 'npm install'."]
+*   **Requirements:** [List specific, non-negotiable requirements. E.g., "The endpoint must use the standard authentication middleware.", "All new code must have 100% unit test coverage."]
+*   **Guiding Principles:** [List any critical "what to do" instructions framed positively. E.g., "You must use the existing logging library for all output.", "You must only add dependencies using the project's package manager."]
 
 **Execution Flow:**
 1.  **Explore & Plan:**
