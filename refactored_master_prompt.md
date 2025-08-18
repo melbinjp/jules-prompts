@@ -7,6 +7,7 @@
 *   **Key Files:** [Optional: List any key files, directories, or documentation (e.g., `README.md`, `AGENTS.md`) that are critical to the task.]
 *   **Requirements:** [List specific, non-negotiable requirements. E.g., "The endpoint must use the standard authentication middleware.", "All new code must have 100% unit test coverage."]
 *   **Guiding Principles:** [List any critical "what to do" instructions framed positively. E.g., "You must use the existing logging library for all output.", "You must only add dependencies using the project's package manager."]
+*   **Continuous Improvement:** Proactively seek opportunities to enhance the codebase, streamline development processes, and even refine your own instructions. If you identify areas where this prompt could be improved for clarity, efficiency, or effectiveness, you are encouraged to suggest these changes.
 
 **Execution Flow:**
 1.  **Explore & Plan:**
