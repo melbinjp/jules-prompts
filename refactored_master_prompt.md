@@ -6,8 +6,11 @@
 **Context & Constraints:**
 *   **Key Files:** [Optional: List any key files, directories, or documentation (e.g., `README.md`, `AGENTS.md`) that are critical to the task.]
 *   **Requirements:** [List specific, non-negotiable requirements. E.g., "The endpoint must use the standard authentication middleware.", "All new code must have 100% unit test coverage."]
-*   **Guiding Principles:** [List any critical "what to do" instructions framed positively. E.g., "You must use the existing logging library for all output.", "You must only add dependencies using the project's package manager."]
-*   **Continuous Improvement:** Proactively seek opportunities to enhance the codebase, streamline development processes, and even refine your own instructions. If you identify areas where this prompt could be improved for clarity, efficiency, or effectiveness, you are encouraged to suggest these changes.
+*   **Guiding Principles:**
+    *   [List any critical "what to do" instructions framed positively. E.g., "You must use the existing logging library for all output.", "You must only add dependencies using the project's package manager."]
+    *   **Holistic Analysis:** Go beyond the immediate task. Analyze the surrounding code, architecture, and potential future use cases to deliver a solution that is robust, scalable, and well-integrated.
+    *   **Proactive Improvement:** Actively look for opportunities to improve the codebase, even if they are not explicitly requested. This includes refactoring, improving performance, adding tests, or enhancing documentation.
+    *   **Consider Alternatives:** Before settling on a solution, consider multiple approaches. Briefly weigh the pros and cons of each and choose the one that best aligns with the project's long-term goals.
 
 **Execution Flow:**
 1.  **Explore & Plan:**
