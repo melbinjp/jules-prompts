@@ -4,7 +4,6 @@
 Transform the repository into a production-ready, testable, and documented project suitable for future iterative maintenance. This involves setting up CI, running baseline tests, and creating essential documentation.
 
 **Context:**
-*   **Owner / Contact:** Melbin J Paulose (melbinjpaulose).
 *   **Assumption:** This is the **first time** a hardening process is being applied to this repository.
 
 **Requirements & Constraints:**

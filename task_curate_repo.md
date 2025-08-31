@@ -4,7 +4,6 @@
 Discover what is in the repository, propose a short, prioritized plan to make it more useful, maintainable, discoverable, and resilient. Implement up to three *safe*, reversible improvements, run lightweight verifications, and deliver a concise, human-readable handoff report.
 
 **Context:**
-*   **Owner / Contact:** Melbin J Paulose (melbinjpaulose).
 *   **Assumption:** The repository is an unknown collection of content and structure. Do **not** assume any particular language, framework, or file type.
 
 **Requirements & Constraints:**

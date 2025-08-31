@@ -4,12 +4,12 @@ This repository contains a curated library of pre-made, machine-readable task pr
 
 ## Prompt Library
 
-### `template_master_prompt.md`
+### [`template_master_prompt.md`](./template_master_prompt.md)
 This is the master template used to create and standardize all other prompts. It is not intended for direct use but serves as a "golden copy" for prompt engineering.
 
 ---
 
-### `task_audit_repo.md`
+### [`task_audit_repo.md`](./task_audit_repo.md)
 **Purpose:** To conduct a comprehensive, evidence-based audit of a repository or live website.
 
 This prompt guides the AI to produce a detailed report on the project's current state, including its features, architecture, dependencies, security vulnerabilities, and performance metrics. It is a discovery-focused prompt and does not make any changes to the codebase.
@@ -21,7 +21,7 @@ This prompt guides the AI to produce a detailed report on the project's current 
 
 ---
 
-### `task_harden_repo_initial.md`
+### [`task_harden_repo_initial.md`](./task_harden_repo_initial.md)
 **Purpose:** To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.
 
 This prompt guides the AI to set up a solid foundation for future development. It involves creating a CI/CD pipeline, adding linters, formatters, and smoke tests, establishing performance and accessibility baselines, and creating essential operational documentation.
@@ -32,7 +32,7 @@ This prompt guides the AI to set up a solid foundation for future development. I
 
 ---
 
-### `task_harden_repo_iterative.md`
+### [`task_harden_repo_iterative.md`](./task_harden_repo_iterative.md)
 **Purpose:** To perform ongoing, iterative improvements to a repository that has already been hardened.
 
 This prompt guides the AI to act as a senior developer or product steward, focusing on fixing instabilities, improving test coverage, and making small, high-impact feature enhancements. It uses a comprehensive "Verification Matrix" to ensure that all changes are safe and reliable.
@@ -43,7 +43,7 @@ This prompt guides the AI to act as a senior developer or product steward, focus
 
 ---
 
-### `task_fix_and_refine.md`
+### [`task_fix_and_refine.md`](./task_fix_and_refine.md)
 **Purpose:** To transform a prototype or demo-quality project into a production-grade application.
 
 This prompt guides the AI to identify the project's intended purpose, fix bugs, refactor suboptimal code, and improve reliability, maintainability, and robustness. It follows a "Test, Fix, Refine" workflow to ensure that all changes are covered by tests.
@@ -54,7 +54,7 @@ This prompt guides the AI to identify the project's intended purpose, fix bugs, 
 
 ---
 
-### `task_update_dependencies.md`
+### [`task_update_dependencies.md`](./task_update_dependencies.md)
 **Purpose:** To update a project's dependencies to their latest compatible versions.
 
 This prompt guides the AI to safely update dependencies while ensuring that all tests pass and the project remains stable. It follows an incremental approach and emphasizes the importance of reading changelogs to avoid breaking changes.
@@ -65,7 +65,7 @@ This prompt guides the AI to safely update dependencies while ensuring that all 
 
 ---
 
-### `task_curate_repo.md`
+### [`task_curate_repo.md`](./task_curate_repo.md)
 **Purpose:** To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.
 
 This prompt is designed for situations where the content and structure of a repository are unknown or sensitive. It guides the AI to act as a careful curator, prioritizing safety and reversibility above all else. It makes only a small number of safe changes, such as adding a README or creating a metadata manifest.
