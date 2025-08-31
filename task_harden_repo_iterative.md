@@ -8,7 +8,6 @@ Perform an iterative hardening pass on the repository. The primary goals, in ord
 4.  **Deliver Green PRs:** Only submit fully-tested, documented pull requests after all verification gates are green.
 
 **Context:**
-*   **Owner / Contact:** Melbin J Paulose (melbinjpaulose).
 *   **Assumption:** This prompt is used for ongoing maintenance of a repository that has already undergone an initial hardening pass.
 
 **Requirements & Constraints:**
