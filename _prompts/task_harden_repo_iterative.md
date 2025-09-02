@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Harden Repository (Iterative)
 description: To perform ongoing, iterative improvements to a repository that has already been hardened.
 ---
