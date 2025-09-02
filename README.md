@@ -9,11 +9,11 @@ A curated library of pre-made, machine-readable task prompts that let Jules (or 
 
 ## Getting Started
 
-To learn about the prompts in this library and how to use them together, please see the [Jules Prompt Library Guide](./PROMPTS_GUIDE.md).
+To learn about the prompts in this library and how to use them together, please see the [Jules Prompt Library Guide]({% link PROMPTS_GUIDE.md %}).
 
 ## Environment Setup for Jules
 
-To ensure Jules can work effectively with your repository, it's crucial to have a well-defined environment setup. This helps in cloning, installing dependencies, and running tests reliably. For a detailed guide on how to configure your repository for Jules, please see the [Environment Setup Guide](./ENVIRONMENT_SETUP.md).
+To ensure Jules can work effectively with your repository, it's crucial to have a well-defined environment setup. This helps in cloning, installing dependencies, and running tests reliably. For a detailed guide on how to configure your repository for Jules, please see the [Environment Setup Guide]({% link ENVIRONMENT_SETUP.md %}).
 
 ## How to Use
 
@@ -22,7 +22,7 @@ The prompts in this repository are designed to be used in two primary ways:
 ### For Humans (Copy-Paste)
 
 If you are a human interacting with an AI agent, the simplest way to use a prompt is to:
-1.  Navigate to the prompt file you want to use (e.g., [`task_audit_repo.md`](./task_audit_repo.md)).
+1.  Navigate to the prompt file you want to use (e.g., [`task_audit_repo.md`]({% link task_audit_repo.md %})).
 2.  Copy the entire content of the file.
 3.  Paste it into your agent's instruction input.
 
