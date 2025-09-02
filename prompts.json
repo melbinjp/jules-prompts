@@ -1,4 +1,15 @@
 ---
 layout: null
 ---
-{{ site.data.prompts | jsonify }}
+{%- assign prompts_for_json = "" | split: "" -%}
+{%- for prompt in site.prompts -%}
+  {%- capture prompt_json -%}
+    {
+      "title": {{ prompt.title | jsonify }},
+      "description": {{ prompt.description | jsonify }},
+      "path": {{ prompt.path | relative_url | jsonify }}
+    }
+  {%- endcapture -%}
+  {%- assign prompts_for_json = prompts_for_json | push: prompt_json -%}
+{%- endfor -%}
+[{{ prompts_for_json | join: "," }}]
