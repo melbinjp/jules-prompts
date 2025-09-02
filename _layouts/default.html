@@ -59,14 +59,22 @@
     });
 
     // Highlight the current page in the file tree
-    const currentPath = window.location.pathname.replace(/\/$/, "");
-    const links = document.querySelectorAll('.file-tree a');
-    links.forEach(link => {
-      const linkPath = link.getAttribute('href').replace(/\/$/, "").replace('.html', '');
-      if (linkPath === currentPath) {
-        link.classList.add('active');
-      }
-    });
+    try {
+      const currentPageUrl = new URL(window.location.href);
+      const links = document.querySelectorAll('.file-tree a');
+      links.forEach(link => {
+        try {
+          const linkUrl = new URL(link.href);
+          if (currentPageUrl.pathname === linkUrl.pathname) {
+            link.classList.add('active');
+          }
+        } catch (e) {
+          // Ignore invalid URLs in links
+        }
+      });
+    } catch (e) {
+      // Ignore if current URL is not valid
+    }
   </script>
 
 </body>
