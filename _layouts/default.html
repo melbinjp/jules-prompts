@@ -40,41 +40,51 @@
   </div>
 
   <script>
-    const copyButton = document.getElementById('copy-button');
-    const copyIcon = copyButton.innerHTML;
-    const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+    document.addEventListener("turbo:load", function() {
+      const copyButton = document.getElementById('copy-button');
+      if (copyButton) {
+        const copyIcon = copyButton.innerHTML;
+        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
-    copyButton.addEventListener('click', () => {
-      const content = document.getElementById('main-content').innerText;
-      navigator.clipboard.writeText(content).then(() => {
-        copyButton.innerHTML = checkIcon;
-        copyButton.title = 'Copied!';
-        setTimeout(() => {
-          copyButton.innerHTML = copyIcon;
-          copyButton.title = 'Copy to clipboard';
-        }, 2000);
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-      });
-    });
+        // This avoids adding multiple listeners to the same button
+        const newCopyButton = copyButton.cloneNode(true);
+        copyButton.parentNode.replaceChild(newCopyButton, copyButton);
 
-    // Highlight the current page in the file tree
-    try {
-      const currentPageUrl = new URL(window.location.href);
-      const links = document.querySelectorAll('.file-tree a');
-      links.forEach(link => {
-        try {
-          const linkUrl = new URL(link.href);
-          if (currentPageUrl.pathname === linkUrl.pathname) {
-            link.classList.add('active');
+        newCopyButton.addEventListener('click', () => {
+          const content = document.getElementById('main-content').innerText;
+          navigator.clipboard.writeText(content).then(() => {
+            newCopyButton.innerHTML = checkIcon;
+            newCopyButton.title = 'Copied!';
+            setTimeout(() => {
+              newCopyButton.innerHTML = copyIcon;
+              newCopyButton.title = 'Copy to clipboard';
+            }, 2000);
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+          });
+        });
+      }
+
+      // Highlight the current page in the file tree
+      try {
+        const currentPageUrl = new URL(window.location.href);
+        const links = document.querySelectorAll('.file-tree a');
+        links.forEach(link => {
+          // Remove active class from all links first
+          link.classList.remove('active');
+          try {
+            const linkUrl = new URL(link.href);
+            if (currentPageUrl.pathname === linkUrl.pathname) {
+              link.classList.add('active');
+            }
+          } catch (e) {
+            // Ignore invalid URLs in links
           }
-        } catch (e) {
-          // Ignore invalid URLs in links
-        }
-      });
-    } catch (e) {
-      // Ignore if current URL is not valid
-    }
+        });
+      } catch (e) {
+        // Ignore if current URL is not valid
+      }
+    });
   </script>
 
 </body>
