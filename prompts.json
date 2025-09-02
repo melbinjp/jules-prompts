@@ -1,37 +1,4 @@
-[
-  {
-    "title": "Audit Repository",
-    "description": "To conduct a comprehensive, evidence-based audit of a repository or live website.",
-    "path": "task_audit_repo.md"
-  },
-  {
-    "title": "Curate Repository",
-    "description": "To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.",
-    "path": "task_curate_repo.md"
-  },
-  {
-    "title": "Fix and Refine",
-    "description": "To transform a prototype or demo-quality project into a production-grade application.",
-    "path": "task_fix_and_refine.md"
-  },
-  {
-    "title": "Harden Repository (Initial)",
-    "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.",
-    "path": "task_harden_repo_initial.md"
-  },
-  {
-    "title": "Harden Repository (Iterative)",
-    "description": "To perform ongoing, iterative improvements to a repository that has already been hardened.",
-    "path": "task_harden_repo_iterative.md"
-  },
-  {
-    "title": "Update Dependencies",
-    "description": "To update a project's dependencies to their latest compatible versions.",
-    "path": "task_update_dependencies.md"
-  },
-  {
-    "title": "Master Prompt Template",
-    "description": "The master template used to create and standardize all other prompts. It is not intended for direct use but serves as a 'golden copy' for prompt engineering.",
-    "path": "template_master_prompt.md"
-  }
-]
+---
+layout: null
+---
+{{ site.data.prompts | jsonify }}

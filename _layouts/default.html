@@ -9,14 +9,15 @@
     <nav class="sidebar">
       <h3>Prompts</h3>
       <ul class="file-tree">
-        <li><a href="{{ '/' | relative_url }}" style="font-weight: 600;">Home (README)</a></li>
-        {%- assign pages = site.pages | sort: 'path' -%}
-        {%- for page in pages -%}
-          {%- assign path_parts = page.path | split: '/' -%}
-          {%- assign depth = path_parts.size | minus: 1 -%}
-          {%- unless page.path contains 'assets/' or page.url == '/' or page.path contains 'index.html' -%}
-            <li><a href="{{ page.url | relative_url }}" style="padding-left: {{ depth | times: 1.2 | plus: 0.8 }}rem;">{{ page.path }}</a></li>
-          {%- endunless -%}
+        <li><a href="{{ '/index.html' | relative_url }}" style="font-weight: 600;">Home</a></li>
+        <li><a href="{{ '/PROMPTS_GUIDE.html' | relative_url }}">Prompts Guide</a></li>
+        <li><a href="{{ '/ENVIRONMENT_SETUP.html' | relative_url }}">Environment Setup</a></li>
+        <li class="separator" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+            <span style="font-size: 0.9em; color: #888; padding-left: 0.8rem;">Prompts</span>
+        </li>
+        {%- for prompt in site.data.prompts -%}
+          {%- assign prompt_url = prompt.path | remove: '.md' | append: '.html' | relative_url -%}
+          <li><a href="{{ prompt_url }}">{{ prompt.title }}</a></li>
         {%- endfor -%}
       </ul>
     </nav>
