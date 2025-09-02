@@ -15,9 +15,8 @@
         <li class="separator" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
             <span style="font-size: 0.9em; color: #888; padding-left: 0.8rem;">Prompts</span>
         </li>
-        {%- for prompt in site.data.prompts -%}
-          {%- assign prompt_url = prompt.path | remove: '.md' | append: '.html' | relative_url -%}
-          <li><a href="{{ prompt_url }}">{{ prompt.title }}</a></li>
+        {%- for prompt in site.prompts -%}
+          <li><a href="{{ prompt.url | relative_url }}">{{ prompt.title }}</a></li>
         {%- endfor -%}
       </ul>
     </nav>
@@ -27,6 +26,14 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
       </button>
       <main id="main-content">
+        {% if page.title and page.collection == 'prompts' %}
+          <header class="prompt-header">
+            <h1>{{ page.title }}</h1>
+            {% if page.description %}
+              <p class="description">{{ page.description }}</p>
+            {% endif %}
+          </header>
+        {% endif %}
         {{ content }}
       </main>
     </div>
