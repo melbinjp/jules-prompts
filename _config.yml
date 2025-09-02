@@ -1,2 +1,7 @@
 title: Jules Prompts
 description: A curated library of pre-made, machine-readable task prompts.
+
+collections:
+  prompts:
+    output: true
+    layout: default
