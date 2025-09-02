@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Jules — Environment setup & AGENTS.md
 
 > A clear, practical guide for repository owners to prepare environments so Jules (and other agents) run reliably. Drop this file at the root of a repo or add as a documentation page on jules-prompts.wecanuseai.com.
