@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Jules Prompt Library Guide
 
 This repository contains a curated library of pre-made, machine-readable task prompts that empower an AI software engineer like Jules to turn user intent into production-grade work. This guide explains the purpose of each prompt and provides a recommended workflow for using them together.

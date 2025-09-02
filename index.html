@@ -1,0 +1,22 @@
+---
+layout: default
+title: Home
+---
+
+<div class="home">
+  <h1>Jules Prompts Library</h1>
+  <p>A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) — and humans — turn intent into production-grade work.</p>
+  <p>Select a prompt from the sidebar to view its content, or use the list below for a quick overview.</p>
+
+  <ul class="prompt-list">
+    {% for prompt in site.data.prompts %}
+      {%- assign prompt_url = prompt.path | remove: '.md' | append: '.html' | relative_url -%}
+      <li>
+        <a href="{{ prompt_url }}">
+          <span class="prompt-title">{{ prompt.title }}</span>
+          <span class="prompt-description">{{ prompt.description }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
