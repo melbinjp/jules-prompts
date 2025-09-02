@@ -22,7 +22,7 @@ The prompts in this repository are designed to be used in two primary ways:
 ### For Humans (Copy-Paste)
 
 If you are a human interacting with an AI agent, the simplest way to use a prompt is to:
-1.  Navigate to the prompt file you want to use (e.g., [`task_audit_repo.md`]({% link task_audit_repo.md %})).
+1.  Navigate to the prompt file you want to use (e.g., [`task_audit_repo.md`]({% link _prompts/task_audit_repo.md %})).
 2.  Copy the entire content of the file.
 3.  Paste it into your agent's instruction input.
 
