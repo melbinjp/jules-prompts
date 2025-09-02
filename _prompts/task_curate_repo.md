@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Curate Repository
 description: To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.
 ---
