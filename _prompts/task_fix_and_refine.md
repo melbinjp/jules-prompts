@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Fix and Refine
 description: To transform a prototype or demo-quality project into a production-grade application.
 ---
