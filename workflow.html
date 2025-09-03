@@ -1,0 +1,43 @@
+---
+layout: default
+title: Recommended Workflow
+---
+
+<div class="workflow-page">
+  <h1>Recommended Workflow</h1>
+  <p class="description">The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project to a production-ready state.</p>
+
+  <div class="workflow-flowchart">
+    <div class="workflow-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_audit_repo.md %}">Audit the Repository</a></h3>
+        <p>Start by conducting a comprehensive audit to get a deep understanding of the project's current state. This will inform all subsequent steps.</p>
+      </div>
+    </div>
+    <div class="arrow-down">&#8595;</div>
+    <div class="workflow-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_harden_repo_initial.md %}">Harden the Repository</a></h3>
+        <p>Set up a modern CI/CD pipeline, testing infrastructure, and other best practices to create a solid foundation for development.</p>
+      </div>
+    </div>
+    <div class="arrow-down">&#8595;</div>
+    <div class="workflow-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_fix_and_refine.md %}">Fix and Refine</a></h3>
+        <p>Address any bugs, technical debt, or architectural issues discovered during the audit. This step focuses on making the codebase robust and reliable.</p>
+      </div>
+    </div>
+    <div class="arrow-down">&#8595;</div>
+    <div class="workflow-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_harden_repo_iterative.md %}">Perform Ongoing Maintenance</a></h3>
+        <p>Continuously improve the project by fixing flaky tests, improving coverage, and making small, high-impact feature enhancements.</p>
+      </div>
+    </div>
+  </div>
+</div>
