@@ -4,18 +4,40 @@ title: Home
 ---
 
 <div class="home">
-  <h1>Jules Prompts Library</h1>
-  <p>A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) — and humans — turn intent into production-grade work.</p>
-  <p>Select a prompt from the sidebar to view its content, or use the list below for a quick overview.</p>
+  <div class="hero">
+    <h1>Jules Prompts Library</h1>
+    <p class="tagline">A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) — and humans — turn intent into production-grade work.</p>
+    <a href="{{ '/PROMPTS_GUIDE.html' | relative_url }}" class="btn btn-primary">Explore the Full Library</a>
+  </div>
 
-  <ul class="prompt-list">
-    {% for prompt in site.prompts %}
-      <li>
-        <a href="{{ prompt.url | relative_url }}">
-          <span class="prompt-title">{{ prompt.title }}</span>
-          <span class="prompt-description">{{ prompt.description }}</span>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="featured-prompts">
+    <h2>Featured Prompts</h2>
+    <div class="prompt-cards">
+      <div class="card">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_audit_repo.md %}">Repository Audit</a></h3>
+        <p>Conduct a comprehensive, evidence-based audit of a repository or live website.</p>
+      </div>
+      <div class="card">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_harden_repo_initial.md %}">Initial Repository Hardening</a></h3>
+        <p>Perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.</p>
+      </div>
+      <div class="card">
+        <h3><a href="{{ site.baseurl }}{% link _prompts/task_fix_and_refine.md %}">Fix and Refine</a></h3>
+        <p>Transform a prototype or demo-quality project into a production-grade application.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="workflow-section">
+    <h2>Recommended Workflow</h2>
+    <p>The prompts in this library are designed to be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project to a production-ready state:</p>
+    <ol class="workflow-steps">
+      <li><strong>Audit the repository</strong> with <code>task_audit_repo.md</code> to get a deep understanding of the project's current state.</li>
+      <li><strong>Harden the repository</strong> with <code>task_harden_repo_initial.md</code> to set up a modern CI/CD pipeline and testing infrastructure.</li>
+      <li><strong>Fix and refine the codebase</strong> with <code>task_fix_and_refine.md</code> to address any bugs or architectural issues.</li>
+      <li><strong>Perform ongoing maintenance</strong> with <code>task_harden_repo_iterative.md</code> and <code>task_update_dependencies.md</code>.</li>
+    </ol>
+    <a href="{{ '/workflow.html' | relative_url }}" class="btn">See the Interactive Workflow</a>
+  </div>
+
 </div>
