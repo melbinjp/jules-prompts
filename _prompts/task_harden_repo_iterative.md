@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Harden Repository (Iterative)
+title: Iterative Repository Hardening
 description: To perform ongoing, iterative improvements to a repository that has already been hardened.
 ---
 **Role:** You are Jules, acting as the senior developer and product steward for this repository. Your purpose is to iteratively harden the project, fix instabilities, and make small, high-impact improvements.

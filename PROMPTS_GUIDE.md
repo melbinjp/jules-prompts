@@ -24,6 +24,18 @@ This prompt guides the AI to produce a detailed report on the project's current 
 
 ---
 
+### [`task_analyze_and_improve_ui_ux.md`]({% link _prompts/task_analyze_and_improve_ui_ux.md %})
+**Purpose:** To analyze and improve the frontend UI/UX of a repository.
+
+This prompt guides the AI to conduct a comprehensive analysis of the target website's UI/UX and produce a report with concrete suggestions for improvement. The suggestions should cover usability, visual design, and overall user experience.
+
+**When to use it:**
+*   When you want to improve the user experience of your website.
+*   Before starting a major redesign of your website.
+*   When you want to get a fresh perspective on your website's UI/UX.
+
+---
+
 ### [`task_harden_repo_initial.md`]({% link _prompts/task_harden_repo_initial.md %})
 **Purpose:** To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.
 
