@@ -5,3 +5,4 @@ collections:
   prompts:
     output: true
     layout: default
+    sort_by: title
