@@ -2,6 +2,7 @@
 layout: default
 title: Jules Task Prompt Template
 description: The master template used to create and standardize all other prompts. It is not intended for direct use but serves as a 'golden copy' for prompt engineering.
+category: Meta
 ---
 **Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
 

@@ -2,6 +2,7 @@
 layout: default
 title: Audit Repository
 description: To conduct a comprehensive, evidence-based audit of a repository or live website.
+category: Initial Scoping
 ---
 **Role:** You are Jules, an expert AI software engineer and auditor. Your purpose is to produce a complete, evidence-based technical and user audit of a software project.
 

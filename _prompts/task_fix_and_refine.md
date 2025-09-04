@@ -2,6 +2,7 @@
 layout: default
 title: Fix and Refine
 description: To transform a prototype or demo-quality project into a production-grade application.
+category: Iterative Development
 ---
 **Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
 
