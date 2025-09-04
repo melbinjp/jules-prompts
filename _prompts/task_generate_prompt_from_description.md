@@ -9,7 +9,7 @@ description: To generate a new, high-quality prompt from a user's description.
 Generate a complete and high-quality prompt in markdown format based on the user's description of a need. The generated prompt must follow the structure and principles of the existing prompts in this library, using the `Jules Task Prompt Template` as a foundation.
 
 **Context:**
-*   **User's Need:** A high-level description of the purpose of the new prompt to be generated.
+*   **User's Need:** <PASTE_PROMPT_DESCRIPTION_HERE>
 *   **Prompt Template:** You must use the structure and sections from `_prompts/template_master_prompt.md`.
 *   **Existing Prompts:** You should review the existing prompts in the `_prompts/` directory to understand the expected level of detail, tone, and style.
 
