@@ -12,6 +12,17 @@ This is the master template used to create and standardize all other prompts. It
 
 ---
 
+### [`task_generate_prompt_from_description.md`]({% link _prompts/task_generate_prompt_from_description.md %})
+**Purpose:** To generate a new, high-quality prompt from a user's description.
+
+This prompt guides the AI to act as a prompt engineer, taking a high-level description of a task and generating a complete, well-structured prompt that follows the standards of this library.
+
+**When to use it:**
+*   When you have an idea for a new prompt but want the AI to help you write it.
+*   To quickly create new prompts that are consistent with the existing ones in the library.
+
+---
+
 ### [`task_audit_repo.md`]({% link _prompts/task_audit_repo.md %})
 **Purpose:** To conduct a comprehensive, evidence-based audit of a repository or live website.
 
@@ -21,6 +32,18 @@ This prompt guides the AI to produce a detailed report on the project's current 
 *   When you are new to a project and need to understand how it works.
 *   Before starting a major refactoring or migration project.
 *   As a periodic health check for a project.
+
+---
+
+### [`task_analyze_and_improve_ui_ux.md`]({% link _prompts/task_analyze_and_improve_ui_ux.md %})
+**Purpose:** To analyze and improve the frontend UI/UX of a repository.
+
+This prompt guides the AI to conduct a comprehensive analysis of the target website's UI/UX and produce a report with concrete suggestions for improvement. The suggestions should cover usability, visual design, and overall user experience.
+
+**When to use it:**
+*   When you want to improve the user experience of your website.
+*   Before starting a major redesign of your website.
+*   When you want to get a fresh perspective on your website's UI/UX.
 
 ---
 

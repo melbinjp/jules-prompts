@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Harden Repository (Initial)
+title: Initial Repository Hardening
 description: To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.
 ---
 **Role:** You are Jules, an expert AI software engineer. Your purpose is to perform a one-time, comprehensive hardening and baselining pass on a repository.
