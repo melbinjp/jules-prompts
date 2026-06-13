@@ -1,44 +1,91 @@
-﻿---
+---
 layout: default
 title: Home
+body_class: home
 ---
 
-<div class="home">
-  <div class="hero">
-    <h1>Jules Prompts Library</h1>
-    <p class="tagline">A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) â€” and humans â€” turn intent into production-grade work.</p>
+<section class="hero">
+  <h1>Jules Prompts Library</h1>
+  <p class="tagline">A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) — and humans — turn intent into production-grade work.</p>
+  <div class="hero-cta">
     <a href="{{ '/PROMPTS_GUIDE.html' | relative_url }}" class="btn btn-primary">Explore the Full Library</a>
+    <a href="https://github.com/melbinjp/jules-prompts" class="btn btn-outline" target="_blank" rel="noopener noreferrer">View on GitHub</a>
   </div>
+</section>
 
-  <div class="featured-prompts">
-    <h2>Featured Prompts</h2>
-    <div class="prompt-cards">
-      <div class="card">
-        <h3><a href="{{ site.baseurl }}{% link _prompts/task_audit_repo.md %}">Repository Audit</a></h3>
-        <p>Conduct a comprehensive, evidence-based audit of a repository or live website.</p>
-      </div>
-      <div class="card">
-        <h3><a href="{{ site.baseurl }}{% link _prompts/task_harden_repo_initial.md %}">Initial Repository Hardening</a></h3>
-        <p>Perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.</p>
-      </div>
-      <div class="card">
-        <h3><a href="{{ site.baseurl }}{% link _prompts/task_fix_and_refine.md %}">Fix and Refine</a></h3>
-        <p>Transform a prototype or demo-quality project into a production-grade application.</p>
-      </div>
+<section class="quick-start">
+  <h2>Get Started in 3 Steps</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <h3>Browse</h3>
+      <p>Find the prompt that matches your task from our curated library.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <h3>Copy</h3>
+      <p>Click the copy button to grab the full prompt text.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <h3>Paste &amp; Run</h3>
+      <p>Paste into Jules (or any AI agent) and let it execute.</p>
     </div>
   </div>
+</section>
 
-  <div class="workflow-section">
-    <h2>Recommended Workflow</h2>
-    <p>The prompts in this library are designed to be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project to a production-ready state:</p>
-    <ol class="workflow-steps">
-      <li><strong>Audit the repository</strong> with <code>task_audit_repo.md</code> to get a deep understanding of the project's current state.</li>
-      <li><strong>Harden the repository</strong> with <code>task_harden_repo_initial.md</code> to set up a modern CI/CD pipeline and testing infrastructure.</li>
-      <li><strong>Fix and refine the codebase</strong> with <code>task_fix_and_refine.md</code> to address any bugs or architectural issues.</li>
-      <li><strong>Perform ongoing maintenance</strong> with <code>task_harden_repo_iterative.md</code> and <code>task_update_dependencies.md</code>.</li>
-    </ol>
-    <a href="{{ '/workflow.html' | relative_url }}" class="btn">See the Interactive Workflow</a>
+<section class="featured-prompts">
+  <h2>Featured Prompts</h2>
+  <div class="prompt-cards">
+    <div class="card">
+      <span class="badge">Initial Scoping</span>
+      <h3><a href="{{ site.baseurl }}{% link _prompts/task_audit_repo.md %}">Repository Audit</a></h3>
+      <p>Conduct a comprehensive, evidence-based audit of a repository or live website.</p>
+    </div>
+    <div class="card">
+      <span class="badge">Initial Scoping</span>
+      <h3><a href="{{ site.baseurl }}{% link _prompts/task_harden_repo_initial.md %}">Initial Repository Hardening</a></h3>
+      <p>Perform a one-time, comprehensive hardening and baselining pass.</p>
+    </div>
+    <div class="card">
+      <span class="badge">Iterative Development</span>
+      <h3><a href="{{ site.baseurl }}{% link _prompts/task_fix_and_refine.md %}">Fix and Refine</a></h3>
+      <p>Transform a prototype or demo-quality project into a production-grade application.</p>
+    </div>
   </div>
+</section>
 
-</div>
+<section class="workflow-section">
+  <h2>Recommended Workflow</h2>
+  <p>The prompts in this library are designed to be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project to a production-ready state:</p>
+  <ol class="workflow-steps">
+    <li><strong>Audit the repository</strong> with <code>task_audit_repo.md</code> to get a deep understanding of the project's current state.</li>
+    <li><strong>Harden the repository</strong> with <code>task_harden_repo_initial.md</code> to set up a modern CI/CD pipeline and testing infrastructure.</li>
+    <li><strong>Fix and refine the codebase</strong> with <code>task_fix_and_refine.md</code> to address any bugs or architectural issues.</li>
+    <li><strong>Perform ongoing maintenance</strong> with <code>task_harden_repo_iterative.md</code> and <code>task_update_dependencies.md</code>.</li>
+  </ol>
+  <a href="{{ '/workflow.html' | relative_url }}" class="btn btn-primary">See the Interactive Workflow</a>
+</section>
 
+<section class="for-me-section">
+  <h2>Is This For Me?</h2>
+  <div class="for-me-grid">
+    <div class="for-me-yes">
+      <h3>This is for you if...</h3>
+      <ul>
+        <li>✅ You use AI coding agents (Jules, Copilot, Cursor, etc.) and want better results</li>
+        <li>✅ You want standardized prompt templates for your team</li>
+        <li>✅ You're building automation pipelines that use AI agents</li>
+        <li>✅ You want reproducible, production-grade outputs from AI</li>
+      </ul>
+    </div>
+    <div class="for-me-no">
+      <h3>This might not be for you if...</h3>
+      <ul>
+        <li>❌ You're looking for ChatGPT conversation prompts</li>
+        <li>❌ You need prompts for image generation or creative writing</li>
+        <li>❌ You don't use AI in your development workflow (yet!)</li>
+      </ul>
+    </div>
+  </div>
+</section>

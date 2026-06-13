@@ -1,5 +1,7 @@
 ---
 layout: default
+title: Prompts Guide
+permalink: /prompts-guide/
 ---
 # Jules Prompt Library Guide
 
