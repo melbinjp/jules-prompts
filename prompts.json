@@ -1,16 +1,24 @@
 ---
 layout: null
 ---
-{%- assign prompts_for_json = "" | split: "" -%}
-{%- for prompt in site.prompts -%}
-  {%- capture prompt_json -%}
+{
+  "version": "2.0",
+  "generated": "{{ 'now' | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "repository": "https://github.com/melbinjp/jules-prompts",
+  "documentation": "https://jules-prompts.wecanuseai.com/",
+  "total_prompts": {{ site.prompts | size }},
+  "categories": {{ site.prompts | map: "category" | uniq | sort | jsonify }},
+  "prompts": [
+    {%- assign sorted_prompts = site.prompts | sort: "title" -%}
+    {%- for prompt in sorted_prompts -%}
     {
       "title": {{ prompt.title | jsonify }},
       "description": {{ prompt.description | jsonify }},
       "category": {{ prompt.category | jsonify }},
-      "path": {{ prompt.path | relative_url | jsonify }}
-    }
-  {%- endcapture -%}
-  {%- assign prompts_for_json = prompts_for_json | push: prompt_json -%}
-{%- endfor -%}
-[{{ prompts_for_json | join: "," }}]
+      "url": {{ prompt.url | relative_url | jsonify }},
+      "source_path": {{ prompt.path | jsonify }},
+      "slug": {{ prompt.slug | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}

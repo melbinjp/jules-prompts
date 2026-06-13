@@ -1,5 +1,7 @@
 ---
 layout: default
+title: Environment Setup
+permalink: /environment-setup/
 ---
 # Jules — Environment setup & AGENTS.md
 
