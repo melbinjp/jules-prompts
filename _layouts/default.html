@@ -1,126 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" data-turbo="true">
+<html lang="en">
 <head>
-  {% include head.html %}
+  {%- include head.html -%}
 </head>
-
 <body>
-  {% include header.html %}
 
-  <!-- ============================================================
-       Page shell: sidebar + content
-       ============================================================ -->
-  <div class="page-shell">
+  <div class="page-wrapper">
+    <nav class="sidebar">
+      <h3>Prompts</h3>
+      <ul class="file-tree">
+        <li><a href="{{ '/index.html' | relative_url }}" style="font-weight: 600;">Home</a></li>
+        <li><a href="{{ '/PROMPTS_GUIDE.html' | relative_url }}">Prompts Guide</a></li>
+        <li><a href="{{ '/workflow.html' | relative_url }}">Workflow</a></li>
+        <li><a href="{{ '/ENVIRONMENT_SETUP.html' | relative_url }}">Environment Setup</a></li>
+        <li class="separator"></li>
+        <details class="collapsible-section" open>
+          <summary>Prompts</summary>
+          <ul class="file-tree-sub">
+            {%- for prompt in site.prompts -%}
+              <li><a href="{{ prompt.url | relative_url }}">{{ prompt.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </details>
+      </ul>
+    </nav>
 
-    <!-- ── Sidebar navigation ── -->
-    <aside class="sidebar" aria-label="Sidebar navigation">
-
-      <!-- Quick filter -->
-      <input
-        type="search"
-        class="search-input"
-        id="search-input"
-        placeholder="Filter prompts…"
-        aria-label="Filter prompts"
-      >
-
-      <nav class="sidebar-nav" aria-label="Sidebar links">
-        <ul class="file-tree">
-          <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
-          <li><a href="{{ '/prompts-guide/' | relative_url }}">📖 Prompts Guide</a></li>
-          <li><a href="{{ '/workflow/' | relative_url }}">⚙️ Workflow</a></li>
-          <li><a href="{{ '/environment-setup/' | relative_url }}">🛠️ Environment Setup</a></li>
-        </ul>
-
-        <li class="separator" aria-hidden="true"></li>
-
-        <!-- Collapsible prompts list grouped by category -->
-        <ul class="file-tree">
-          <li>
-            <details class="collapsible-section" open>
-              <summary>📋 Prompts</summary>
-              <ul class="file-tree-sub">
-                {% assign categories = site.prompts | map: 'category' | uniq | sort %}
-                {% for cat in categories %}
-                <li style="margin-top: 0.5rem; list-style: none;">
-                  <details class="collapsible-section" open>
-                    <summary style="font-weight: 600; font-size: 0.825rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); cursor: pointer;">{{ cat }}</summary>
-                    <ul class="file-tree-sub sidebar-prompts">
-                      {% assign cat_prompts = site.prompts | where: 'category', cat | sort: 'title' %}
-                      {% for prompt in cat_prompts %}
-                      <li>
-                        <a href="{{ prompt.url | relative_url }}" class="prompt-link"
-                           {% if page.url == prompt.url %}aria-current="page"{% endif %}>
-                          <span class="prompt-title">{{ prompt.title }}</span>
-                        </a>
-                      </li>
-                      {% endfor %}
-                    </ul>
-                  </details>
-                </li>
-                {% endfor %}
-              </ul>
-            </details>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- ── Mobile overlay for sidebar ── -->
-    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
-
-    <!-- ── Main content ── -->
-    <main class="content-area" id="main-content">
-
-      <!-- Breadcrumbs (skip on home page) -->
-      {% unless page.url == '/' %}
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="{{ '/' | relative_url }}">Home</a></li>
-          <li aria-current="page">{{ page.title }}</li>
-        </ol>
-      </nav>
-      {% endunless %}
-
-      <!-- Prompt-specific header + copy button -->
-      {% if page.collection == 'prompts' %}
-      <div class="copy-btn-wrapper">
-        <button class="copy-btn" aria-label="Copy prompt to clipboard" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               aria-hidden="true">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-          <span>Copy</span>
-        </button>
-      </div>
-
-      <div class="prompt-header">
-        <h1>{{ page.title }}</h1>
-        {% if page.description %}
-        <p class="prompt-description">{{ page.description }}</p>
+    <div class="container">
+      <button id="copy-button" title="Copy to clipboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+      <main id="main-content">
+        {% if page.title and page.collection == 'prompts' %}
+          <div class="prompt-page-header">
+            <header class="prompt-header">
+              <h1>{{ page.title }}</h1>
+              {% if page.description %}
+                <p class="description">{{ page.description }}</p>
+              {% endif %}
+            </header>
+            <hr class="prompt-header-divider">
+          </div>
         {% endif %}
-      </div>
-      <hr class="prompt-divider">
-      {% endif %}
-
-      <!-- Page content -->
-      {% if page.collection == 'prompts' %}
-      <div class="prompt-body" id="prompt-body">
         {{ content }}
-      </div>
-      {% else %}
-        {{ content }}
-      {% endif %}
-
-    </main>
+      </main>
+    </div>
   </div>
 
-  {% include footer.html %}
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const copyButton = document.getElementById('copy-button');
+      if (copyButton) {
+        const copyIcon = copyButton.innerHTML;
+        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
-  <!-- Scripts (deferred for Turbo compatibility) -->
-  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
-  <script src="{{ '/assets/js/copy.js' | relative_url }}" defer></script>
+        // This avoids adding multiple listeners to the same button
+        const newCopyButton = copyButton.cloneNode(true);
+        copyButton.parentNode.replaceChild(newCopyButton, copyButton);
+
+        newCopyButton.addEventListener('click', () => {
+          const content = document.getElementById('main-content').innerText;
+          navigator.clipboard.writeText(content).then(() => {
+            newCopyButton.innerHTML = checkIcon;
+            newCopyButton.title = 'Copied!';
+            setTimeout(() => {
+              newCopyButton.innerHTML = copyIcon;
+              newCopyButton.title = 'Copy to clipboard';
+            }, 2000);
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+          });
+        });
+      }
+
+      // Highlight the current page in the file tree
+      try {
+        const currentPageUrl = new URL(window.location.href);
+        const links = document.querySelectorAll('.file-tree a');
+        links.forEach(link => {
+          // Remove active class from all links first
+          link.classList.remove('active');
+          try {
+            const linkUrl = new URL(link.href);
+            if (currentPageUrl.pathname === linkUrl.pathname) {
+              link.classList.add('active');
+            }
+          } catch (e) {
+            // Ignore invalid URLs in links
+          }
+        });
+      } catch (e) {
+        // Ignore if current URL is not valid
+      }
+    });
+  </script>
+
 </body>
 </html>
