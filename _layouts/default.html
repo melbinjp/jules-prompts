@@ -3,96 +3,15 @@
 <head>
   {%- include head.html -%}
 </head>
-<body>
-
-  <div class="page-wrapper">
-    <nav class="sidebar">
-      <h3>Prompts</h3>
-      <ul class="file-tree">
-        <li><a href="{{ '/index.html' | relative_url }}" style="font-weight: 600;">Home</a></li>
-        <li><a href="{{ '/PROMPTS_GUIDE.html' | relative_url }}">Prompts Guide</a></li>
-        <li><a href="{{ '/workflow.html' | relative_url }}">Workflow</a></li>
-        <li><a href="{{ '/ENVIRONMENT_SETUP.html' | relative_url }}">Environment Setup</a></li>
-        <li class="separator"></li>
-        <details class="collapsible-section" open>
-          <summary>Prompts</summary>
-          <ul class="file-tree-sub">
-            {%- for prompt in site.prompts -%}
-              <li><a href="{{ prompt.url | relative_url }}">{{ prompt.title }}</a></li>
-            {%- endfor -%}
-          </ul>
-        </details>
-      </ul>
-    </nav>
-
-    <div class="container">
-      <button id="copy-button" title="Copy to clipboard">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-      </button>
-      <main id="main-content">
-        {% if page.title and page.collection == 'prompts' %}
-          <div class="prompt-page-header">
-            <header class="prompt-header">
-              <h1>{{ page.title }}</h1>
-              {% if page.description %}
-                <p class="description">{{ page.description }}</p>
-              {% endif %}
-            </header>
-            <hr class="prompt-header-divider">
-          </div>
-        {% endif %}
-        {{ content }}
-      </main>
+<body class="{{ page.body_class }}">
+  {%- include header.html -%}
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      {{ content }}
     </div>
-  </div>
-
-  <script>
-    document.addEventListener("turbo:load", function() {
-      const copyButton = document.getElementById('copy-button');
-      if (copyButton) {
-        const copyIcon = copyButton.innerHTML;
-        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-
-        // This avoids adding multiple listeners to the same button
-        const newCopyButton = copyButton.cloneNode(true);
-        copyButton.parentNode.replaceChild(newCopyButton, copyButton);
-
-        newCopyButton.addEventListener('click', () => {
-          const content = document.getElementById('main-content').innerText;
-          navigator.clipboard.writeText(content).then(() => {
-            newCopyButton.innerHTML = checkIcon;
-            newCopyButton.title = 'Copied!';
-            setTimeout(() => {
-              newCopyButton.innerHTML = copyIcon;
-              newCopyButton.title = 'Copy to clipboard';
-            }, 2000);
-          }).catch(err => {
-            console.error('Failed to copy text: ', err);
-          });
-        });
-      }
-
-      // Highlight the current page in the file tree
-      try {
-        const currentPageUrl = new URL(window.location.href);
-        const links = document.querySelectorAll('.file-tree a');
-        links.forEach(link => {
-          // Remove active class from all links first
-          link.classList.remove('active');
-          try {
-            const linkUrl = new URL(link.href);
-            if (currentPageUrl.pathname === linkUrl.pathname) {
-              link.classList.add('active');
-            }
-          } catch (e) {
-            // Ignore invalid URLs in links
-          }
-        });
-      } catch (e) {
-        // Ignore if current URL is not valid
-      }
-    });
-  </script>
-
+  </main>
+  {%- include footer.html -%}
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
 </body>
 </html>

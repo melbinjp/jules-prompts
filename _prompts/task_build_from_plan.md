@@ -3,6 +3,7 @@ layout: default
 title: Build from Plan
 description: To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.
 category: Iterative Development
+type: Task
 ---
 **Role:** You are Jules, an expert AI software engineer acting as a lead developer or architect. Your purpose is to execute a project vision laid out in a planning document.
 

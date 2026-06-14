@@ -4,317 +4,267 @@
 // 1. Variables
 :root {
   --font-family-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --primary-color: #007bff;
+  --font-family-pixel: "Pixelify Sans", var(--font-family-sans);
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+
+  // Light Theme
+  --primary-color: #444;
+  --primary-color-hover: #111;
   --text-color: #212529;
   --body-bg: #ffffff;
   --subtle-bg: #f8f9fa;
   --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --button-bg: var(--primary-color);
+  --button-text-color: #ffffff;
+  --button-hover-bg: var(--primary-color-hover);
+}
+
+// Dark Theme
+html[data-theme="dark"] {
+  --primary-color: #A755F7;
+  --primary-color-hover: #B777F7;
+  --text-color: #d1d1d6;
+  --body-bg: #1c1c1e;
+  --subtle-bg: #1E1E1E;
+  --border-color: #333333;
+  --card-bg: #1E1E1E;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --card-glow-shadow: 0 0 25px 5px rgba(167, 85, 247, 0.4);
+  --button-bg: var(--primary-color);
+  --button-text-color: #ffffff;
+  --button-hover-bg: var(--primary-color-hover);
 }
 
 // 2. Base Styles
 body {
   font-family: var(--font-family-sans);
-  line-height: 1.6;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   color: var(--text-color);
   background-color: var(--body-bg);
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.page-content {
+  flex: 1;
+  padding: 2rem 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 24px;
-  margin-bottom: 16px;
   font-weight: 600;
-  line-height: 1.25;
 }
 
 a {
   color: var(--primary-color);
   text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-pre {
+// 3. Header
+.site-header {
   background-color: var(--subtle-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .site-nav a, .site-nav button {
+    margin-left: 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
 }
 
-code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  padding: .2em .4em;
+// 4. Footer
+.site-footer {
+  background-color: var(--subtle-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
-pre > code {
-  background-color: transparent;
-  border-radius: 0;
-  border: 0;
-  font-size: 100%;
-  margin: 0;
+// 5. Prompt Cards
+.prompt-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  list-style: none;
   padding: 0;
 }
 
-// 3. Layout
-.page-wrapper {
-  display: flex;
-  height: 100vh;
-}
-
-.sidebar {
-  width: 280px;
-  min-width: 280px;
-  border-right: 1px solid var(--border-color);
-  padding: 2rem;
-  height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
-  background-color: var(--subtle-bg);
-}
-
-.container {
-  position: relative;
-  flex-grow: 1;
-  padding: 2rem 4rem;
-  overflow-y: auto;
-  box-sizing: border-box;
-}
-
-// 4. Sidebar Navigation
-.sidebar h3 {
-  margin-top: 0;
-  font-weight: 700;
-}
-
-.file-tree {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 1rem;
-}
-
-.file-tree li a {
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
   display: block;
-  padding: 8px;
-  border-radius: 6px;
-  text-decoration: none;
   color: var(--text-color);
-  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-glow-shadow, 0 8px 12px rgba(0, 0, 0, 0.15));
+    text-decoration: none;
+  }
+
+  h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+  }
+
+  p {
+    opacity: 0.8;
+  }
 }
 
-.file-tree li a:hover {
-  background-color: #e9ecef;
-}
-
-.file-tree li a.active {
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.separator {
-  margin: 1rem 0;
-  border-top: 1px solid var(--border-color);
-}
-
-.collapsible-section summary {
-  cursor: pointer;
-  font-weight: 600;
-  padding: 8px;
-  border-radius: 6px;
-}
-.collapsible-section summary:hover {
-  background-color: #e9ecef;
-}
-.collapsible-section[open] > summary {
-  background-color: #e9ecef;
-}
-
-.file-tree-sub {
+// 6. Commands Page
+.prompt-list {
   list-style: none;
-  padding-left: 1rem;
+  padding: 0;
+
+  li {
+    background-color: var(--subtle-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .prompt-actions {
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+
+  .prompt-content-wrapper {
+    margin-top: 1rem;
+
+    pre {
+      margin: 0;
+      padding: 1rem;
+      background-color: var(--body-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  }
 }
 
-// 5. Homepage
-.home .hero {
-  text-align: center;
-  padding: 4rem 0;
-}
-.home .hero h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-.home .hero .tagline {
-  font-size: 1.25rem;
-  color: #6c757d;
-  margin-bottom: 2rem;
-}
 
+// 7. Buttons
 .btn {
   display: inline-block;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--button-text-color);
+  background-color: var(--button-bg);
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  background-color: transparent;
   border: 1px solid transparent;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 0.25rem;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
-}
-.btn-primary {
-  color: #fff;
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-.btn-primary:hover {
-  background-color: #0069d9;
-  border-color: #0062cc;
-  text-decoration: none;
+
+  &:hover {
+    background-color: var(--button-hover-bg);
+    text-decoration: none;
+  }
 }
 
-.featured-prompts, .workflow-section {
-  margin-top: 4rem;
-}
-.featured-prompts h2, .workflow-section h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.prompt-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+// 8. Page-specific styles
+// Homepage
+.home .page-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
-.card {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: all 0.2s ease-in-out;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-.card h3 {
-  margin-top: 0;
-}
-.card h3 a {
-  text-decoration: none;
-  color: var(--text-color);
-}
-.card h3 a:hover {
-  text-decoration: underline;
+.home h1 {
+  font-family: var(--font-family-pixel);
+  text-transform: uppercase;
 }
 
-.workflow-steps {
-  list-style-position: inside;
-  background-color: var(--subtle-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 2rem;
-}
-.workflow-steps li {
+// 9. Copy Button
+.copy-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: 1rem;
 }
-.workflow-steps li:last-child {
-  margin-bottom: 0;
-}
 
-// 6. Prompt Page
-.prompt-page-header {
-  margin-bottom: 2rem;
-}
-.prompt-header h1 {
-  font-size: 2rem;
-  margin-top: 0;
-}
-.prompt-header .description {
-  font-size: 1.2rem;
-  color: #6c757d;
-}
-.prompt-header-divider {
-  border: 0;
-  border-top: 1px solid var(--border-color);
-  margin-top: 1.5rem;
-}
-
-// 7. Utility
-#copy-button {
-  position: absolute;
-  top: 2rem;
-  right: 4rem;
-  background: var(--subtle-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 6px 12px;
-  cursor: pointer;
+.copy-btn {
+  background: none;
+  border: none;
   color: var(--text-color);
-}
-#copy-button:hover {
-  background-color: #e9ecef;
-}
-#copy-button svg {
-  vertical-align: middle;
-}
-
-// 8. Workflow Page
-.workflow-page .description {
-  font-size: 1.2rem;
-  color: #6c757d;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.workflow-flowchart {
-  display: flex;
-  flex-direction: column;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
-}
-
-.workflow-step {
-  display: flex;
-  align-items: center;
-  background-color: var(--subtle-bg);
-  border: 1px solid var(--border-color);
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 700px;
+  transition: all 0.2s ease-in-out;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 
-.workflow-step .step-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-right: 1.5rem;
-  background-color: #e6f2ff;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+html[data-theme="light"] .copy-btn {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
 }
 
-.workflow-step .step-content h3 {
-  margin-top: 0;
-}
-
-.arrow-down {
-  font-size: 2rem;
-  color: var(--border-color);
-  margin: 1rem 0;
+html[data-theme="dark"] .copy-btn {
+  box-shadow: 0 0 15px 0px rgba(167, 85, 247, 0.3);
+  &:hover {
+    box-shadow: 0 0 25px 5px rgba(167, 85, 247, 0.4);
+    transform: translateY(-2px);
+  }
 }

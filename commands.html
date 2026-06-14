@@ -1,0 +1,54 @@
+---
+layout: default
+title: Commands
+---
+
+<div class="page">
+  <h1>Commands</h1>
+  <p>Granular, single-purpose prompts designed for quick, targeted actions. Use a Command when you need a quick intervention from Jules.</p>
+
+  {%- assign commands = site.prompts | where: "type", "Command" -%}
+  {%- assign commands_by_category = commands | group_by: "category" -%}
+  {%- for category in commands_by_category -%}
+    <h2 class="category-title">{{ category.name }}</h2>
+    <ul class="prompt-list">
+      {%- assign sorted_prompts = category.items | sort: "title" -%}
+      {%- for prompt in sorted_prompts -%}
+        <li>
+          <div class="prompt-actions">
+            <button class="btn copy-btn" data-clipboard-target="#{{ prompt.slug }}">Copy</button>
+          </div>
+          <h3>{{ prompt.title }}</h3>
+          <p>{{ prompt.description }}</p>
+          <div class="prompt-content-wrapper">
+            <pre id="{{ prompt.slug }}"><code>{{ prompt.content | strip }}</code></pre>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endfor -%}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  const copyButtons = document.querySelectorAll('.copy-btn');
+
+  copyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-clipboard-target');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        navigator.clipboard.writeText(targetElement.innerText).then(() => {
+          button.innerText = 'Copied!';
+          setTimeout(() => {
+            button.innerText = 'Copy';
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+          alert('Failed to copy prompt. See console for details.');
+        });
+      }
+    });
+  });
+});
+</script>

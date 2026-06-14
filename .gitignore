@@ -1,0 +1,10 @@
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Node
+node_modules/
+
+# Scratch directory
+jules-scratch/
