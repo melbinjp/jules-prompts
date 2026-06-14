@@ -9,14 +9,15 @@
   --line-height-base: 1.6;
 
   // Light Theme
-  --primary-color: #444;
-  --primary-color-hover: #111;
-  --text-color: #212529;
-  --body-bg: #ffffff;
-  --subtle-bg: #f8f9fa;
-  --border-color: #dee2e6;
+  --primary-color: #d97757;
+  --primary-color-hover: #c46343;
+  --text-color: #2b2825;
+  --body-bg: #f9f8f6;
+  --subtle-bg: #f0ede6;
+  --border-color: #e6e2d8;
   --card-bg: #ffffff;
-  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  --card-glow-shadow: 0 10px 30px rgba(217, 119, 87, 0.15);
   --button-bg: var(--primary-color);
   --button-text-color: #ffffff;
   --button-hover-bg: var(--primary-color-hover);
@@ -253,10 +254,10 @@ a {
   }
 }
 
-html[data-theme="light"] .copy-btn {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+html:not([data-theme="dark"]) .copy-btn {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--card-glow-shadow);
     transform: translateY(-2px);
   }
 }
