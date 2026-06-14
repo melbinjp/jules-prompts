@@ -269,3 +269,19 @@ html[data-theme="dark"] .copy-btn {
     transform: translateY(-2px);
   }
 }
+
+// 10. Mobile Responsiveness
+@media (max-width: 600px) {
+  .site-header .wrapper {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .prompt-cards {
+    grid-template-columns: 1fr;
+  }
+  .prompt-content-wrapper pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
