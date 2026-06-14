@@ -1,0 +1,24 @@
+---
+layout: default
+title: Tasks
+---
+
+<div class="page">
+  <h1>Tasks</h1>
+  <p>High-level, multi-step prompts that define a complete piece of work for Jules. Use a Task when you want Jules to take on a significant piece of work.</p>
+
+  {%- assign tasks = site.prompts | where: "type", "Task" -%}
+  {%- assign tasks_by_category = tasks | group_by: "category" -%}
+  {%- for category in tasks_by_category -%}
+    <h2 class="category-title">{{ category.name }}</h2>
+    <div class="prompt-cards">
+      {%- assign sorted_prompts = category.items | sort: "title" -%}
+      {%- for prompt in sorted_prompts -%}
+        <a href="{{ prompt.url | relative_url }}" class="card">
+          <h3>{{ prompt.title }}</h3>
+          <p>{{ prompt.description }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endfor -%}
+</div>
