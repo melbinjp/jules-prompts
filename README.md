@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/melbinjp/jules-prompts?style=social)](https://github.com/melbinjp/jules-prompts)
 
-A curated library of pre-made, machine-readable task prompts that let Jules (or any agent) — and humans — turn intent into production-grade work.
+A curated library of pre-made, machine-readable task prompts that help Jules (or any agent) — and humans — turn intent into well-scoped, verifiable engineering work.
 
 ## Getting Started
 
@@ -29,8 +29,21 @@ If you are a human interacting with an AI agent, the simplest way to use a promp
 AI agents can use the `prompts.json` file to discover and fetch prompts.
 
 1.  **Discover:** Fetch and parse `prompts.json` to get a list of available prompts.
-2.  **Select:** Choose a prompt based on its title and description.
-3.  **Execute:** Fetch the content of the markdown file specified in the `path` field and use it as the master instruction.
+2.  **Select:** Choose a prompt based on its title, description, or category.
+3.  **Execute:** Fetch the rendered prompt from its `url`, or read the source markdown at its `source_path`, then use it as the task instruction.
+
+## Keeping the library current
+
+New prompts are useful when they cover a recurring task that the existing set
+does not handle clearly. Do not add prompts only to increase the count.
+
+When adding or revising a prompt:
+
+1. Keep its YAML front matter aligned with the other files in `_prompts/`.
+2. Update `PROMPTS_GUIDE.md` when its purpose or recommended use changes.
+3. Update `workflow.json` only when the recommended sequence changes.
+4. Keep `AGENTS.md`, this README, and the generated `prompts.json` fields aligned.
+5. Test the Jekyll site and JSON endpoint before merging when the site structure changes.
 
 ## Contributing
 
