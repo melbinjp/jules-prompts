@@ -83,7 +83,7 @@ This prompt guides the AI to identify the project's intended purpose, fix bugs, 
 ---
 
 
-### [`task_build_from_plan.md`]({% link _prompts/task_build_from_plan.md%})
+### [`task_build_from_plan.md`]({% link _prompts/task_build_from_plan.md %})
 **Purpose:** To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.
 
 This prompt guides the AI to act as a lead developer, taking a project plan and executing it while using web research to make informed technical decisions and improvements.
