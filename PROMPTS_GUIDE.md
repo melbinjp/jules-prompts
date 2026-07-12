@@ -5,7 +5,7 @@ permalink: /prompts-guide/
 ---
 # Jules Prompt Library Guide
 
-This repository contains a curated library of pre-made, machine-readable task prompts that empower an AI software engineer like Jules to turn user intent into production-grade work. This guide explains the purpose of each prompt and provides a recommended workflow for using them together.
+This repository contains a curated library of pre-made, machine-readable task prompts that help an AI software engineer like Jules turn user intent into well-scoped, verifiable work. This guide explains the purpose of each prompt and provides a recommended workflow for using them together.
 
 ## Prompt Library
 
@@ -83,7 +83,7 @@ This prompt guides the AI to identify the project's intended purpose, fix bugs, 
 ---
 
 
-### [`task_build_from_plan.md`]({% link _prompts/task_build_from_plan.md%})
+### [`task_build_from_plan.md`]({% link _prompts/task_build_from_plan.md %})
 **Purpose:** To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.
 
 This prompt guides the AI to act as a lead developer, taking a project plan and executing it while using web research to make informed technical decisions and improvements.
@@ -116,7 +116,7 @@ This prompt is designed for situations where the content and structure of a repo
 
 ## Recommended Workflow
 
-The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project to a production-ready state:
+The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
 
 1.  **Audit the repository.**
     *   **Prompt:** `task_audit_repo.md`
