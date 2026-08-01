@@ -1,5 +1,7 @@
 title: Jules Prompts
 description: A curated library of pre-made, machine-readable task prompts.
+# Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
+url: https://jules-prompts.wecanuseai.com
 
 collections:
   prompts:
