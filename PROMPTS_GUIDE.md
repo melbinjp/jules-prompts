@@ -149,6 +149,17 @@ A suite that assumes a database, a broker or a live third-party API does not fai
 
 ---
 
+### [`task_security_review_agent_code.md`]({% link _prompts/task_security_review_agent_code.md %})
+**Purpose:** To review a change an agent wrote for the security defects agents specifically introduce.
+
+An agent asked to fix a failure finds the shortest route to the failure stopping, and that route is often to remove the thing that was objecting. The result is not a subtle logic flaw, it is a check that no longer checks, and it survives review because the diff looks like work: a scanner was added, an error was handled, a dependency was installed. This prompt targets that class directly, and its central move is to prove every check the change introduced can actually turn the build red by making it find something.
+
+**When to use it:**
+*   On any agent-written change that touches CI, dependencies, authentication, or anything handling input.
+*   Alongside `task_review_an_agent_pr.md`, which covers whether the change does what it claims; this one covers what it costs.
+
+---
+
 ### [`task_update_dependencies.md`]({% link _prompts/task_update_dependencies.md %})
 **Purpose:** To update a project's dependencies to their latest compatible versions.
 
