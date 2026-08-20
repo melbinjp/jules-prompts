@@ -8,3 +8,16 @@ collections:
     output: true
     layout: default
     sort_by: title
+
+# Jekyll's default exclude list is REPLACED, not extended, when this key is set - so
+# node_modules has to be named here or the whole tree gets copied into _site.
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - mcp
+  - scripts
+  - .jekyll-cache
+  - Gemfile
+  - Gemfile.lock
+  - vendor
