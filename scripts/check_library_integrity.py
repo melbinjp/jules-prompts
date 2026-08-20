@@ -22,10 +22,13 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "_prompts"
 GUIDE = ROOT / "PROMPTS_GUIDE.md"
 WORKFLOW = ROOT / "workflow.json"
+CONFIG = ROOT / "_config.yml"
 
 # Every prompt carries YAML front matter, and `prompts.json` is generated from these fields.
 # A missing one renders as an empty string in the JSON rather than an error, which is the
@@ -43,7 +46,15 @@ def front_matter(text: str) -> dict:
     if end == -1:
         return {}
     block = text[3:end]
-    return {m.group(1): True for m in FIELD.finditer(block)}
+    # Parsed as real YAML rather than regex-scraped for keys. A prompt whose front matter is
+    # malformed does not render at all, and the old key-regex would have called it complete.
+    try:
+        data = yaml.safe_load(block)
+    except yaml.YAMLError:
+        return {"__malformed__": True}
+    if not isinstance(data, dict):
+        return {"__malformed__": True}
+    return {k: True for k in data}
 
 
 def main() -> int:
@@ -66,12 +77,32 @@ def main() -> int:
 
     for p in sorted(PROMPTS.glob("*.md")):
         fm = front_matter(p.read_text(encoding="utf-8"))
+        if fm.get("__malformed__"):
+            problems.append(f"{p.name} front matter is not valid YAML, so it will not render")
+            continue
         if not fm:
             problems.append(f"{p.name} has no YAML front matter, so it will not render")
             continue
         for field in REQUIRED_FIELDS:
             if field not in fm:
                 problems.append(f"{p.name} front matter is missing '{field}'")
+
+    # **The site has to BUILD, and this check used to pass while it did not.** On 2026-08-20
+    # an unquoted colon went into the `description` value in `_config.yml`. Jekyll died with
+    # "mapping values are not allowed in this context", the deployment failed, and the live
+    # site silently kept serving the previous build - while this check reported everything
+    # agreeing, because it only ever read the prompt set. A green tick over a broken deploy
+    # is exactly the shape this file exists to prevent, so it now parses the config for real
+    # rather than trusting that YAML is easy.
+    config_ok = True
+    try:
+        cfg = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
+        if not isinstance(cfg, dict):
+            problems.append("_config.yml did not parse to a mapping")
+            config_ok = False
+    except yaml.YAMLError as e:
+        problems.append(f"_config.yml is not valid YAML, so Jekyll cannot build: {e}")
+        config_ok = False
 
     steps = json.loads(WORKFLOW.read_text(encoding="utf-8"))["steps"]
     for s in steps:
@@ -84,8 +115,11 @@ def main() -> int:
 
     # Say what was READ, not only what was wrong. A check that reports "OK" without its
     # coverage cannot be told apart from one whose globs stopped matching.
+    # Say what was actually found, not what was hoped. The first version of this line
+    # claimed "_config.yml parses" unconditionally, including on the run where it did not.
     print(f"checked {len(files)} prompt(s), {len(documented)} guide entry(ies), "
-          f"{len(steps)} workflow step(s)")
+          f"{len(steps)} workflow step(s); _config.yml "
+          f"{'parses' if config_ok else 'DOES NOT PARSE'}")
     if problems:
         print(f"\n{len(problems)} problem(s):")
         for p in problems:
