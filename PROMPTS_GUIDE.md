@@ -127,6 +127,28 @@ This prompt guides the AI to act as a lead developer, taking a project plan and 
 
 ---
 
+### [`task_review_an_agent_pr.md`]({% link _prompts/task_review_an_agent_pr.md %})
+**Purpose:** To review a pull request an agent wrote, against the failure modes agents actually have.
+
+Agent-written pull requests fail differently from human ones, so a review habit built on human mistakes misses them. The danger named by practitioners is not that the code is bad but that it reads as finished: correct style, sensible names, a confident description, and tests that pass because they assert what the code does rather than what it should do. This prompt checks each claim the pull request makes about itself, and its central move is to break the code a new test covers and confirm the test goes red, because a test that passes against both the fixed and the broken version is not evidence of anything.
+
+**When to use it:**
+*   Before merging any pull request written by an agent, including your own.
+*   When a change looks complete and you cannot say precisely which requirement each part of it satisfies.
+
+---
+
+### [`task_isolate_tests_from_services.md`]({% link _prompts/task_isolate_tests_from_services.md %})
+**Purpose:** To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.
+
+A suite that assumes a database, a broker or a live third-party API does not fail clearly inside an agent's environment. It fails partway through with a connection error, which the agent then reports as unrelated to its own changes before carrying on, so the work looks reviewed and was never tested. This prompt isolates the suite at the seams the project already has, and verifies the isolation twice over: by pointing the services at a dead port and re-running, and by reconciling the collected test count before and after so nothing has quietly stopped running.
+
+**When to use it:**
+*   When agent tasks fail with connection errors, or when an agent reports test failures as unrelated.
+*   Before handing a repository to an agent for the first time, alongside `task_repair_setup_script.md`.
+
+---
+
 ### [`task_update_dependencies.md`]({% link _prompts/task_update_dependencies.md %})
 **Purpose:** To update a project's dependencies to their latest compatible versions.
 
