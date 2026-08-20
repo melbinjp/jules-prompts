@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/melbinjp/jules-prompts?style=social)](https://github.com/melbinjp/jules-prompts)
 
-A curated library of pre-made, machine-readable task prompts that help Jules (or any agent) — and humans — turn intent into well-scoped, verifiable engineering work.
+A curated library of machine-readable task prompts for Jules and other coding agents, including prompts for the failures agents actually have: broken setup scripts, vague issues, tests that need services the sandbox cannot start, and pull requests that only read as finished.
 
 ## Getting Started
 
