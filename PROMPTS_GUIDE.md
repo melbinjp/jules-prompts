@@ -25,6 +25,17 @@ This prompt guides the AI to act as a prompt engineer, taking a high-level descr
 
 ---
 
+### [`task_repair_setup_script.md`]({% link _prompts/task_repair_setup_script.md %})
+**Purpose:** To diagnose and repair the environment setup script so agent tasks stop failing before any code is written.
+
+Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common causes of a failed task, and notes that long-running processes such as dev servers or watch scripts are not supported in setup scripts. Because the environment is snapshotted once the script succeeds and reused for later tasks, a defect here is paid for by every future task rather than once. This prompt guides the AI to reproduce the failure from cold, rebuild the script from the sequence CI proves works, and verify the two things that stay invisible when a run goes well: that the script actually fails when an install fails, and that nothing in it blocks.
+
+**When to use it:**
+*   Before any other prompt in this library, on a repository an agent has not worked in before.
+*   When tasks fail during setup, or fail with errors about a tool that was supposed to be installed.
+
+---
+
 ### [`task_audit_repo.md`]({% link _prompts/task_audit_repo.md %})
 **Purpose:** To conduct a comprehensive, evidence-based audit of a repository or live website.
 
@@ -118,22 +129,27 @@ This prompt is designed for situations where the content and structure of a repo
 
 The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
 
-1.  **Audit the repository.**
+1.  **Repair the environment setup script.**
+    *   **Prompt:** `task_repair_setup_script.md`
+    *   **Goal:** To make the repository reliably usable by an agent at all.
+    *   **Outcome:** Dependencies install from cold and the test suite runs to completion, so every later step has a working baseline instead of an assumed one.
+
+2.  **Audit the repository.**
     *   **Prompt:** `task_audit_repo.md`
     *   **Goal:** To get a deep understanding of the project's current state.
     *   **Outcome:** A comprehensive audit report that will inform the next steps.
 
-2.  **Harden the repository.**
+3.  **Harden the repository.**
     *   **Prompt:** `task_harden_repo_initial.md`
     *   **Goal:** To set up a modern CI/CD pipeline and testing infrastructure.
     *   **Outcome:** A repository with automated checks for quality, performance, and accessibility.
 
-3.  **Fix and refine the codebase.**
+4.  **Fix and refine the codebase.**
     *   **Prompt:** `task_fix_and_refine.md`
     *   **Goal:** To address any bugs or architectural issues found in the audit.
     *   **Outcome:** A robust, reliable, and well-documented codebase.
 
-4.  **Perform ongoing maintenance.**
+5.  **Perform ongoing maintenance.**
     *   **Prompts:** `task_harden_repo_iterative.md` and `task_update_dependencies.md`
     *   **Goal:** To keep the project in a good state over time.
     *   **Outcome:** A project that is continuously improved and kept up-to-date.
