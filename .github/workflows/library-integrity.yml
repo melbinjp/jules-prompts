@@ -1,0 +1,32 @@
+name: Library integrity
+
+# The prompt set, PROMPTS_GUIDE.md and workflow.json are three views of one library, and the
+# README asks for them to stay aligned. They had already drifted once. This makes the rule
+# checkable instead of remembered.
+#
+# Deliberately has no `continue-on-error` and no step that swallows an exit code: a check that
+# cannot fail is indistinguishable from one that was never run.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - '_prompts/**'
+      - 'PROMPTS_GUIDE.md'
+      - 'workflow.json'
+      - 'scripts/check_library_integrity.py'
+      - '.github/workflows/library-integrity.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: The library must agree with itself
+        run: python scripts/check_library_integrity.py
