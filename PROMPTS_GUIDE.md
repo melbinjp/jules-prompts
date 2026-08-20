@@ -36,6 +36,17 @@ Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common cau
 
 ---
 
+### [`task_scope_a_vague_issue.md`]({% link _prompts/task_scope_a_vague_issue.md %})
+**Purpose:** To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.
+
+The other half of what Jules' FAQ names as the common causes of a failed task. The failure is quiet rather than loud: given "the login is broken", an agent does not stop and ask, it guesses what broken means and builds on the guess, so the work looks complete and fixes something nobody reported. This prompt produces a minimal reproduction, a failing test that is checked to fail for the reported reason, and an explicit list of every ambiguity in the original issue with the reading taken for each. It deliberately produces no fix.
+
+**When to use it:**
+*   Before handing a thin bug report to an agent, especially one written by someone who is not the maintainer.
+*   When a previous agent attempt "fixed" something that was not what was reported.
+
+---
+
 ### [`task_audit_repo.md`]({% link _prompts/task_audit_repo.md %})
 **Purpose:** To conduct a comprehensive, evidence-based audit of a repository or live website.
 
@@ -45,6 +56,17 @@ This prompt guides the AI to produce a detailed report on the project's current 
 *   When you are new to a project and need to understand how it works.
 *   Before starting a major refactoring or migration project.
 *   As a periodic health check for a project.
+
+---
+
+### [`task_build_api_frontend.md`]({% link _prompts/task_build_api_frontend.md %})
+**Purpose:** To build a modern, functional frontend for an application based on its backend API.
+
+This prompt guides the AI to read an existing backend, from a live endpoint, its API documentation, or its source, and build a frontend that actually matches it. It is aimed at the common case where a frontend is missing, outdated, or has drifted away from the API it is supposed to call.
+
+**When to use it:**
+*   When a working backend has no usable interface in front of it.
+*   When the frontend and the API have diverged and the interface needs rebuilding against what the API really exposes.
 
 ---
 
