@@ -24,6 +24,27 @@ If you are a human interacting with an AI agent, the simplest way to use a promp
 2.  Copy the entire content of the file.
 3.  Paste it into your agent's instruction input.
 
+### As an MCP server (installed, not copy-pasted)
+
+Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as
+slash commands. Point any of them at this repository and the whole library appears there, and
+stays current, because the server reads this repository live rather than a bundled copy.
+
+```json
+{
+  "mcpServers": {
+    "jules-prompts": {
+      "command": "npx",
+      "args": ["-y", "github:melbinjp/jules-prompts"]
+    }
+  }
+}
+```
+
+Prompts that contain placeholders such as `<PR_URL_OR_DIFF_RANGE>` expose them as arguments,
+so the client asks for the value and the server substitutes it before handing over the text.
+That is the part a webpage cannot do.
+
 ### For Agents (Programmatic Access)
 
 AI agents can use the `prompts.json` file to discover and fetch prompts.

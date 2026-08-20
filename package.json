@@ -1,0 +1,24 @@
+{
+  "name": "jules-prompts-mcp",
+  "version": "1.0.0",
+  "description": "Serve the jules-prompts library to any MCP client as slash-command prompts.",
+  "type": "module",
+  "bin": {
+    "jules-prompts-mcp": "mcp/index.js"
+  },
+  "files": [
+    "mcp/index.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melbinjp/jules-prompts.git"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.4.3"
+  }
+}
