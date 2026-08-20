@@ -28,5 +28,8 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: The library must agree with itself
         run: python scripts/check_library_integrity.py
