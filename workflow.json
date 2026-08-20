@@ -5,6 +5,14 @@
   "steps": [
     {
       "order": 1,
+      "prompt_slug": "task_repair_setup_script",
+      "title": "Repair the Environment Setup Script",
+      "description": "Make the repository reliably usable by an agent: dependencies install, tests run, nothing blocks.",
+      "required": true,
+      "repeatable": false
+    },
+    {
+      "order": 2,
       "prompt_slug": "task_audit_repo",
       "title": "Audit the Repository",
       "description": "Conduct a comprehensive, evidence-based audit to understand the project's current state.",
@@ -12,7 +20,7 @@
       "repeatable": false
     },
     {
-      "order": 2,
+      "order": 3,
       "prompt_slug": "task_harden_repo_initial",
       "title": "Harden the Repository",
       "description": "Set up CI/CD pipeline, testing infrastructure, and development best practices.",
@@ -20,7 +28,7 @@
       "repeatable": false
     },
     {
-      "order": 3,
+      "order": 4,
       "prompt_slug": "task_fix_and_refine",
       "title": "Fix and Refine",
       "description": "Address bugs, technical debt, and architectural issues discovered during the audit.",
@@ -28,7 +36,7 @@
       "repeatable": true
     },
     {
-      "order": 4,
+      "order": 5,
       "prompt_slug": "task_harden_repo_iterative",
       "title": "Ongoing Maintenance",
       "description": "Continuously improve with better tests, coverage, and small feature enhancements.",
