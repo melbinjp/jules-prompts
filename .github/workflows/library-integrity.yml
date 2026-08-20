@@ -33,3 +33,22 @@ jobs:
 
       - name: The library must agree with itself
         run: python scripts/check_library_integrity.py
+
+  mcp:
+    # The server has to actually speak MCP, not merely parse. This starts it, runs a real
+    # initialize / prompts/list / prompts/get exchange over stdio, and checks the argument is
+    # substituted. It reaches the live index on purpose: a server that serves a stale or empty
+    # list is the failure worth catching, and only an end-to-end call sees it.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install
+        run: npm ci || npm install
+
+      - name: The MCP server must answer a real client
+        run: node mcp/smoke-test.mjs
