@@ -1,5 +1,5 @@
 title: Jules Prompts
-description: Machine-readable task prompts for coding agents, including the failures agents actually have: broken setup scripts, vague issues, unreviewed agent PRs.
+description: "Machine-readable task prompts for coding agents, including the failures agents actually have: broken setup scripts, vague issues, unreviewed agent PRs."
 # Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
 url: https://jules-prompts.wecanuseai.com
 
