@@ -180,6 +180,39 @@ This prompt is designed for situations where the content and structure of a repo
 *   When you encounter a repository with no documentation and need to understand its contents.
 *   For bulk curation or triage of a large number of repositories.
 
+---
+
+### [`task_qa_an_agents_tests.md`]({% link _prompts/task_qa_an_agents_tests.md %})
+**Purpose:** To find the tests an agent wrote that pass because they were written from the implementation, and cannot fail.
+
+An agent asked to add tests will add tests, and they will pass. A test written while looking at the implementation asserts what the code does, and a test that asserts what the code does can never catch the code doing the wrong thing. The failure has no symptom: coverage rises, the suite is fast, the pull request reads as careful work, and the number of real regressions caught is zero. This prompt answers the question by mutation rather than by reading, breaking the behaviour each test names and recording whether it went red, then fixing or deleting the ones that did not.
+
+**When to use it:**
+*   After any agent-authored pull request that added or changed tests.
+*   When coverage is high and regressions still reach production, which is the signature of this defect.
+
+---
+
+### [`task_fix_a_bug_test_first.md`]({% link _prompts/task_fix_a_bug_test_first.md %})
+**Purpose:** To fix a reported bug in the only order that produces evidence the fix worked.
+
+A fix written before its test is indistinguishable from a coincidence: the symptom stops, and nobody, including the author, can say whether the cause was removed or merely hidden. The quieter failure is a test that is written first, fails, and fails for the wrong reason, so a red tick from an import error gets spent as proof it never earned. This prompt requires the failing output to be read and checked against the report before any production code is touched, and it verifies afterwards that removing the fix turns the test red again.
+
+**When to use it:**
+*   For any bug that is already reproducible. If the report is vague, run `task_scope_a_vague_issue.md` first; it produces exactly the failing test this one begins with.
+*   When a previous fix did not hold and nobody can tell whether it ever worked.
+
+---
+
+### [`task_repair_a_green_pipeline.md`]({% link _prompts/task_repair_a_green_pipeline.md %})
+**Purpose:** To find the CI steps that pass because they are not running what they claim.
+
+A red pipeline gets fixed within the hour because it blocks someone. A green one that checks nothing is never looked at, and it removes the habit of checking, because everyone now believes the check is happening. The causes are mechanical and none of them look like a bug: a test command matching no files exits 0, a pipe reports the exit code of `tee` rather than the check, a `paths:` filter stops matching so the job never runs. The common shape is that absence looks exactly like success. This prompt establishes step by step that each job can still fail, by introducing the defect it exists to catch, and makes each step print its coverage so a future empty run is visible.
+
+**When to use it:**
+*   On any pipeline that has been green for a long time, especially one that has never been red.
+*   Before trusting CI as evidence in a review, and before adding new checks to it.
+
 ## Recommended Workflow
 
 The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
