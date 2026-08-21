@@ -213,6 +213,17 @@ A red pipeline gets fixed within the hour because it blocks someone. A green one
 *   On any pipeline that has been green for a long time, especially one that has never been red.
 *   Before trusting CI as evidence in a review, and before adding new checks to it.
 
+---
+
+### [`task_verify_a_migration.md`]({% link _prompts/task_verify_a_migration.md %})
+**Purpose:** To find what a database migration does at production row counts, on the production engine, and on the way back down.
+
+Almost every migration is verified the same way: run it forward, once, on a development database, and if it exits 0 that is the whole test. Every property that can cause an outage is invisible under exactly those conditions. A backfill over forty million rows completes in three milliseconds over the twelve in dev. Adding a non-null column is instant on an empty table and rewrites the whole thing on a full one. A unique constraint applies cleanly to data that happens to contain no duplicates, and production is where the duplicates live. The rollback is worse, because it is usually fiction: the reverse half exists because the framework generated a slot for it and in most repositories it has never been executed once. This prompt measures on the production engine at real row counts, records the lock each statement takes rather than only the total runtime, runs the reverse half and diffs the schema to prove it restores what it claims, and establishes which of the application code and the schema can safely ship first.
+
+**When to use it:**
+*   Before any migration that touches a table with real data in it, which is most of them.
+*   When the rollback has never been run, which is the normal case and is worth checking rather than assuming.
+
 ## Recommended Workflow
 
 The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
