@@ -238,6 +238,18 @@ Asked to describe an architecture, the obvious method is to read the directory n
 
 ---
 
+### [`task_automate_a_workflow.md`]({% link _prompts/task_automate_a_workflow.md %})
+**Purpose:** To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened.
+
+The obvious way to write an automation is to put the commands in order and check that running it prints no errors, which produces something that works on the day it was written, on the machine it was written on, in the state that machine happened to be in. But the failure worth designing against is not a script that breaks; it is a script that succeeds without doing anything, and that one is invisible by construction, because the command exits zero and the output looks complete and nothing says there was more. Its causes are few and they repeat: a pipeline takes the exit status of its last command, so a check on the left of a pipe has its verdict overruled by a formatting command; tools exit zero while failing to connect; truncated output is data you deleted before concluding from it; and a completion marker in an append-only log answers about some earlier run. This prompt has the agent find the workflow in the history rather than take it on description, verify each step by its effect instead of its exit code, make the thing safe to run twice and safe to interrupt, and then break it on purpose and report what it did.
+
+**When to use it:**
+*   When the same sequence keeps appearing in shell history, commit messages or onboarding docs.
+*   Before trusting an existing script that has never been watched failing.
+*   When something is green every time and nobody can say what it last actually produced.
+
+---
+
 ### [`task_translate_the_docs.md`]({% link _prompts/task_translate_the_docs.md %})
 **Purpose:** To add a language to a project's documentation together with the machinery that says when a translation has gone stale.
 
