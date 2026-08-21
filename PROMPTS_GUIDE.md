@@ -226,6 +226,18 @@ Almost every migration is verified the same way: run it forward, once, on a deve
 
 ---
 
+### [`task_run_the_error_paths.md`]({% link _prompts/task_run_the_error_paths.md %})
+**Purpose:** To find the failure handling that has never once executed, by causing each failure on purpose.
+
+Error handling is the least-executed code in most repositories and the most confidently written. It is typed once, at the moment of imagining the failure, and then never runs again, because the tests exercise the path where nothing goes wrong. An error path that has never executed is indistinguishable from one that works: both are green, both are covered by a passing suite, and both read fine, and nothing separates them until production does. So this prompt does not read the handlers and judge them. It causes the failure - points at a host that is not listening, corrupts the file, kills the subprocess - and watches. It narrows the catches that cannot tell a timeout from a typo, names the direction each handler fails in and checks that it is the safe one, and refuses a retry that has no cap or repeats an operation that is not idempotent.
+
+**When to use it:**
+*   Before anything is put in front of users who cannot read a traceback.
+*   After an incident, on the handler that was supposed to have caught it.
+*   When the suite is green and you have no evidence about what happens when the network is not.
+
+---
+
 ### [`task_prove_the_docs.md`]({% link _prompts/task_prove_the_docs.md %})
 **Purpose:** To find the claims in the documentation that were true when they were written and are not true now.
 
