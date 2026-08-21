@@ -238,6 +238,18 @@ Asked to describe an architecture, the obvious method is to read the directory n
 
 ---
 
+### [`task_translate_the_docs.md`]({% link _prompts/task_translate_the_docs.md %})
+**Purpose:** To add a language to a project's documentation together with the machinery that says when a translation has gone stale.
+
+Asked to translate a README, the obvious method is to produce the file in four languages and stop, and that is the reason so many repositories carry documentation that is confidently wrong in four languages. A translation is a fork of the documentation and it is a fork with no way to tell it has drifted: the English changes next week, nothing reports that the Spanish no longer says the same thing, and the stale file looks exactly as valid on the day it goes wrong as on the day it landed. So the deliverable here is not the translated text, which is the easy half and the half that decays. It is the translated text plus a recorded link from each file to the source revision it was made from, which turns "has this gone stale" from a question nobody can answer into one git command, plus the check that runs it. The prompt also settles what must not be translated at all, since a translated install command is a defect rather than a translation, and it establishes whether the docs build is an overlay before deciding what to leave in the source language, because leaving a page out is supported in one kind of build and broken in the other.
+
+**When to use it:**
+*   When a project wants a second language and nobody has thought about the fifth commit after it lands.
+*   On a repository that already has translations, to find out which of them the source has moved past.
+*   Before accepting a translation pull request, to know what a reviewer who does not read the language can actually check.
+
+---
+
 ### [`task_run_the_error_paths.md`]({% link _prompts/task_run_the_error_paths.md %})
 **Purpose:** To find the failure handling that has never once executed, by causing each failure on purpose.
 
