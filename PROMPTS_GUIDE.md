@@ -226,6 +226,18 @@ Almost every migration is verified the same way: run it forward, once, on a deve
 
 ---
 
+### [`task_map_the_architecture.md`]({% link _prompts/task_map_the_architecture.md %})
+**Purpose:** To describe how a system actually works, derived from what runs and what imports what rather than from the folder names.
+
+Asked to describe an architecture, the obvious method is to read the directory names and the class names and assemble a tidy diagram, which will be fluent and will describe the system somebody intended to build. The folder structure is a claim about the architecture and it is the claim most likely to be stale, because renaming directories is expensive and nobody does it when the design changes: a tree still laid out in layers long after the real coupling started running sideways through one shared helper is the normal case. This prompt builds the map from things that cannot be renamed into a lie - the entry points the packaging declares, the import graph resolved rather than inferred, the boundaries that fail independently, and co-change in git history, which names the real modules whatever directory they live in. Every claim carries how it was established, and the layers are reported as not holding when they do not hold.
+
+**When to use it:**
+*   On arrival at an unfamiliar codebase, before planning any change in it.
+*   When the documented architecture and the behaviour have visibly diverged.
+*   Before a refactor, to find the coupling nobody intended rather than the layers somebody designed.
+
+---
+
 ### [`task_run_the_error_paths.md`]({% link _prompts/task_run_the_error_paths.md %})
 **Purpose:** To find the failure handling that has never once executed, by causing each failure on purpose.
 
