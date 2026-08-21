@@ -1,0 +1,9 @@
+---
+layout: null
+---
+# Everything here is meant to be found. The library is only useful to someone who is
+# looking for it, and until 2026-08-21 this file did not exist and neither did a sitemap.
+User-agent: *
+Allow: /
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
