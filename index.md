@@ -12,6 +12,6 @@ Browse the [Tasks](./tasks.html) to get started.
 
 ## Writing
 
-Notes from actually running this kind of tooling, rather than from planning it.
-
-- [A clean verdict over five per cent of a repository is not a clean repository](./writing/a-clean-verdict-over-five-per-cent.html) - three ways a documentation checker reported success while blind in one evening, and what caught each one.
+Notes from actually running this kind of tooling now live at
+**[log.wecanuseai.com](https://log.wecanuseai.com/)**, so this stays a prompt library and the
+writing has somewhere of its own to accumulate.
