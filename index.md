@@ -9,3 +9,9 @@ A curated library of pre-made, machine-readable prompts to help AI agents like J
 This site provides a collection of **Tasks** that you can use to guide an agent to perform a variety of development activities, from simple file refactoring to complex repository audits.
 
 Browse the [Tasks](./tasks.html) to get started.
+
+## Writing
+
+Notes from actually running this kind of tooling, rather than from planning it.
+
+- [A clean verdict over five per cent of a repository is not a clean repository](./writing/a-clean-verdict-over-five-per-cent.html) - three ways a documentation checker reported success while blind in one evening, and what caught each one.
