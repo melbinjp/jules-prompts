@@ -3,6 +3,19 @@ description: "Machine-readable task prompts for coding agents, including the fai
 # Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
 url: https://jules-prompts.wecanuseai.com
 
+# WHY A SITEMAP, measured rather than assumed. Search is the only channel strangers actually
+# arrive through - the repository's own traffic for the fortnight to 2026-08-21 reads Google
+# 10 views from 2 uniques and perplexity.ai 5 from 1, against 2 from GitHub itself. And on
+# that date the site served no /sitemap.xml and no /robots.txt at all, so nineteen prompt
+# pages were reachable only by crawling links from the index.
+#
+# `jekyll-sitemap` is on the GitHub Pages plugin allowlist and this repository uses the
+# default Pages build with no Gemfile, so it needs no other change. Per-page titles,
+# descriptions and canonicals already exist by hand in `_includes/head.html`; what was
+# missing was telling a crawler the pages are there.
+plugins:
+  - jekyll-sitemap
+
 collections:
   prompts:
     output: true
