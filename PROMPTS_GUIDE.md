@@ -224,6 +224,18 @@ Almost every migration is verified the same way: run it forward, once, on a deve
 *   Before any migration that touches a table with real data in it, which is most of them.
 *   When the rollback has never been run, which is the normal case and is worth checking rather than assuming.
 
+---
+
+### [`task_prove_the_docs.md`]({% link _prompts/task_prove_the_docs.md %})
+**Purpose:** To find the claims in the documentation that were true when they were written and are not true now.
+
+Documentation does not fail loudly. Every sentence was true the day it was written, and nothing since has told anybody which ones stopped being true: there is no red tick for a stale document and no coverage report with a gap in it. The damage concentrates at the front door, because a quickstart is the first thing a new user runs and the last thing anyone with a working checkout re-runs, so it is at once the most important instructions in the repository and the least tested. There is a second failure worth knowing about before handing this task to an agent: asked to write documentation, it will read the names and the comments and produce fluent prose restating the same intent that was already wrong, now in a second place and sounding authoritative. This prompt extracts every checkable claim as its own line, gives each one a verdict and a piece of evidence by running it, and reruns the quickstart from a clean environment where the missing step is finally visible.
+
+**When to use it:**
+*   Before a release, and before pointing anyone new at the README.
+*   After any rename of a flag, a default or a path, which are the claims that rot fastest.
+*   Whenever a new user reports that the getting-started guide did not work for them, which is the symptom this exists to remove.
+
 ## Recommended Workflow
 
 The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
