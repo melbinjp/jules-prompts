@@ -5,7 +5,7 @@ description: To find what a migration does at production row counts, on the prod
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Take a pending database migration and establish what it will actually do to production: how long it runs at real row counts, what it locks while it runs, whether the rollback works, and whether old application code survives the new schema. Report timings and lock behaviour as measurements, not estimates.
@@ -46,7 +46,7 @@ Two more differences hide in the same gap. The dev database is often not the sam
 1.  **Explore & Plan:**
     *   Identify the pending migrations, the engine and exact version in production, and the row count of every table they touch.
     *   Read the forward and reverse halves and list every statement, with the table it affects.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Build a database on the same engine and version, seeded so that every affected table has a realistic order of magnitude of rows.
@@ -59,10 +59,10 @@ Two more differences hide in the same gap. The dev database is often not the sam
 
 3.  **Test & Review:**
     *   Report the numbers plainly, including the row counts every timing is based on.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A table of every statement in the migration with the row count it ran against, its duration, and the lock it held.

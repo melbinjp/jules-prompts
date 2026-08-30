@@ -5,13 +5,13 @@ description: To turn an underspecified bug report into a reproducible, testable 
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Take an issue that does not say enough to act on, and turn it into a specification that does: an exact reproduction, the observed behaviour, the expected behaviour, and a failing test that captures the difference. Produce no fix in this task. The deliverable is a task that can be handed on with nothing left to guess.
 
 **Context:**
-Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common causes of a failed task. The failure is quiet rather than loud: given "the login is broken", an agent does not stop and ask, it guesses what broken means and builds on the guess. The work then looks complete, passes review, and fixes something nobody reported. Scoping is cheap and the wrong fix is not, so this step exists to be done before the expensive one.
+Vague prompts are one of the two common ways an agent task fails before it starts (the other is a broken setup script). The failure is quiet rather than loud: given "the login is broken", an agent does not stop and ask, it guesses what broken means and builds on the guess. The work then looks complete, passes review, and fixes something nobody reported. Scoping is cheap and the wrong fix is not, so this step exists to be done before the expensive one.
 
 *   **The issue:** `<ISSUE_URL_OR_TEXT>`
 *   **Key Files & Folders:**
@@ -38,7 +38,7 @@ Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common cau
     *   Read the issue and list precisely what it does not say.
     *   Locate the code paths it could plausibly refer to, and enumerate the distinct readings the wording allows.
     *   Establish a baseline: confirm the suite runs cleanly before you add anything.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Attempt the reproduction. Record each attempt, including the ones that failed to reproduce.
@@ -48,11 +48,11 @@ Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common cau
 
 3.  **Test & Review:**
     *   State the reproduction, the failing test, its verbatim failure output, and the list of assumptions you had to make.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
     *   Address any feedback from the code review.
-    *   Use the `submit` tool to open a pull request containing the failing test and the scoping report, marked clearly as a reproduction rather than a fix.
+    *   Open a pull request containing the failing test and the scoping report, marked clearly as a reproduction rather than a fix.
 
 **Deliverables:**
 *   A minimal reproduction with exact steps, environment and input.

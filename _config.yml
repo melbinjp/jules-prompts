@@ -30,6 +30,9 @@ exclude:
   - package-lock.json
   - mcp
   - scripts
+  - skills
+  - fixtures
+  - harness
   - .jekyll-cache
   - Gemfile
   - Gemfile.lock

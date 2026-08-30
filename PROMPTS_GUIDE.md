@@ -5,7 +5,11 @@ permalink: /prompts-guide/
 ---
 # Jules Prompt Library Guide
 
-This repository contains a curated library of pre-made, machine-readable task prompts that help an AI software engineer like Jules turn user intent into well-scoped, verifiable work. This guide explains the purpose of each prompt and provides a recommended workflow for using them together.
+This repository contains a curated library of machine-readable task prompts, Agent Skills, and planted-failure fixtures that help a coding agent turn user intent into well-scoped, verifiable work. The procedures are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+
+Load a skill from `skills/` when the task matches. Paste [`harness/AGENTS.md`](https://github.com/melbinjp/jules-prompts/blob/main/harness/AGENTS.md) into a project's `AGENTS.md` so the doctrine fires when nobody picks a skill. Score an agent against `fixtures/` so the procedure can go red.
+
+This guide explains the purpose of each prompt and a recommended workflow for using them together.
 
 ## Prompt Library
 
@@ -28,7 +32,7 @@ This prompt guides the AI to act as a prompt engineer, taking a high-level descr
 ### [`task_repair_setup_script.md`]({% link _prompts/task_repair_setup_script.md %})
 **Purpose:** To diagnose and repair the environment setup script so agent tasks stop failing before any code is written.
 
-Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common causes of a failed task, and notes that long-running processes such as dev servers or watch scripts are not supported in setup scripts. Because the environment is snapshotted once the script succeeds and reused for later tasks, a defect here is paid for by every future task rather than once. This prompt guides the AI to reproduce the failure from cold, rebuild the script from the sequence CI proves works, and verify the two things that stay invisible when a run goes well: that the script actually fails when an install fails, and that nothing in it blocks.
+Asynchronous and sandboxed coding agents fail most often before any product code is touched: the setup script is broken, or the prompt is too vague to act on. Long-running processes such as a dev server or a file watcher do not belong in setup. Many harnesses snapshot a successful setup and reuse it, so a defect here is paid for by every future task rather than once. This prompt guides the agent to reproduce the failure from cold, rebuild the script from the sequence CI proves works, and verify the two things that stay invisible when a run goes well: that the script actually fails when an install fails, and that nothing in it blocks.
 
 **When to use it:**
 *   Before any other prompt in this library, on a repository an agent has not worked in before.
@@ -39,7 +43,7 @@ Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common cau
 ### [`task_scope_a_vague_issue.md`]({% link _prompts/task_scope_a_vague_issue.md %})
 **Purpose:** To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.
 
-The other half of what Jules' FAQ names as the common causes of a failed task. The failure is quiet rather than loud: given "the login is broken", an agent does not stop and ask, it guesses what broken means and builds on the guess, so the work looks complete and fixes something nobody reported. This prompt produces a minimal reproduction, a failing test that is checked to fail for the reported reason, and an explicit list of every ambiguity in the original issue with the reading taken for each. It deliberately produces no fix.
+Vague prompts are the other common way an agent task fails before it starts. The failure is quiet rather than loud: given "the login is broken", an agent does not stop and ask, it guesses what broken means and builds on the guess, so the work looks complete and fixes something nobody reported. This prompt produces a minimal reproduction, a failing test that is checked to fail for the reported reason, and an explicit list of every ambiguity in the original issue with the reading taken for each. It deliberately produces no fix.
 
 **When to use it:**
 *   Before handing a thin bug report to an agent, especially one written by someone who is not the maintainer.
@@ -312,3 +316,24 @@ The prompts in this library are designed to be complementary and can be used tog
     *   **Prompts:** `task_harden_repo_iterative.md` and `task_update_dependencies.md`
     *   **Goal:** To keep the project in a good state over time.
     *   **Outcome:** A project that is continuously improved and kept up-to-date.
+
+## Skills
+
+Each task prompt except the master template is also an [Agent Skill](https://agentskills.io/specification) under `skills/`. The skill body is generated from `_prompts/`; `python scripts/generate_skills.py --check` refuses a pass if they disagree.
+
+Copy a skill directory into `.claude/skills/` or `.agents/skills/`, or point the agent at this repository. The MCP server still serves the same text as slash-command prompts.
+
+## Standing doctrine
+
+[`harness/AGENTS.md`](https://github.com/melbinjp/jules-prompts/blob/main/harness/AGENTS.md) is a fragment to paste into a project's `AGENTS.md`. Three verdicts (holds / broken / skipped), prove it can fail, say what you read, do not guess. It fires on every task, not only the ones where someone loaded a skill.
+
+## Fixtures
+
+`fixtures/` contains miniature repositories with planted instances of the failures the skills exist to catch. Score an agent's report with:
+
+```bash
+python scripts/score_fixture.py fixtures/unfailable-tests path/to/REPORT.md
+```
+
+The last line is coverage. A clean report that never mentioned the test file is not a clean report. CI scores each fixture's `EXPECTED_REPORT.md` so the corpus itself can go red.
+

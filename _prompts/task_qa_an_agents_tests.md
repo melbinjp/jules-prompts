@@ -5,7 +5,7 @@ description: To find the tests that pass because they were written from the impl
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Audit a test suite an agent wrote, and find the tests that cannot fail. For every test added or changed by agent work, prove it fails when the behaviour it names is broken. Fix or delete the ones that do not, and report the count.
@@ -41,7 +41,7 @@ The tells are consistent and mechanical: a test that mocks the unit under test; 
 1.  **Explore & Plan:**
     *   Build the list of agent-authored tests from version control history rather than from names or comments.
     *   Run the suite from cold and record the exact collected count, the passed count, and every skip.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   For each test, mutate the behaviour it names, run only that test, and record red or green. Restore the mutation immediately.
@@ -52,10 +52,10 @@ The tells are consistent and mechanical: a test that mocks the unit under test; 
 
 3.  **Test & Review:**
     *   Report the numbers plainly: tests examined, tests that could not fail, rewritten, deleted, and the coverage change including its sign.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A table of every agent-authored test with the mutation used against it and whether it caught it.

@@ -5,7 +5,7 @@ description: To replace a repeated manual sequence with a script whose main job 
 category: Iterative Development
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Take a sequence somebody runs by hand in this project and turn it into a script that is safe to run twice, safe to interrupt, and unable to report success without having done the work. Establish what the sequence actually is by finding it in the history rather than by asking, and prove the script fails loudly by making it fail.

@@ -11,6 +11,10 @@ That is a small gap with an awkward property. A library whose own index is incom
 making a claim it cannot support, and this one is specifically sold as machine-readable, so
 the index is the product rather than documentation about it.
 
+Skills and fixtures are the same kind of claim. `skills/` is generated from `_prompts/`; a
+copy that can drift is a defect. A fixture whose EXPECTED_REPORT.md does not name its
+planted defects is a check that cannot fail.
+
 **This check is written to be able to fail.** No step in it swallows an exit code and there
 is no `continue-on-error` on the workflow that runs it. A verification that cannot fail is
 indistinguishable from one that was never run.
@@ -29,14 +33,29 @@ PROMPTS = ROOT / "_prompts"
 GUIDE = ROOT / "PROMPTS_GUIDE.md"
 WORKFLOW = ROOT / "workflow.json"
 CONFIG = ROOT / "_config.yml"
+FIXTURES = ROOT / "fixtures"
+SKILLS = ROOT / "skills"
 
-# Every prompt carries YAML front matter, and `prompts.json` is generated from these fields.
-# A missing one renders as an empty string in the JSON rather than an error, which is the
-# quiet kind of breakage this file exists to make loud.
+sys.path.insert(0, str(ROOT / "scripts"))
+import generate_skills  # noqa: E402
+import score_fixture  # noqa: E402
+
 REQUIRED_FIELDS = ("layout", "title", "description", "category", "type")
 
 GUIDE_ENTRY = re.compile(r"^### \[`([a-z0-9_]+)\.md`\]", re.M)
-FIELD = re.compile(r"^([a-z_]+):", re.M)
+
+# Tool names and a role line that only Jules understood. Naming Jules in a list of
+# harnesses the instructions do *not* depend on is allowed; addressing the agent as
+# Jules, or telling it to call set_plan, is not.
+FORBIDDEN_IN_PROMPTS = (
+    "You are Jules",
+    "`set_plan`",
+    "request_code_review",
+    "record_memory",
+    "`submit` tool",
+    "Jules' own FAQ",
+    "Jules' own FAQ",
+)
 
 
 def front_matter(text: str) -> dict:
@@ -46,8 +65,6 @@ def front_matter(text: str) -> dict:
     if end == -1:
         return {}
     block = text[3:end]
-    # Parsed as real YAML rather than regex-scraped for keys. A prompt whose front matter is
-    # malformed does not render at all, and the old key-regex would have called it complete.
     try:
         data = yaml.safe_load(block)
     except yaml.YAMLError:
@@ -76,7 +93,8 @@ def main() -> int:
             problems.append(f"PROMPTS_GUIDE.md documents {slug}.md, which does not exist")
 
     for p in sorted(PROMPTS.glob("*.md")):
-        fm = front_matter(p.read_text(encoding="utf-8"))
+        text = p.read_text(encoding="utf-8")
+        fm = front_matter(text)
         if fm.get("__malformed__"):
             problems.append(f"{p.name} front matter is not valid YAML, so it will not render")
             continue
@@ -86,14 +104,10 @@ def main() -> int:
         for field in REQUIRED_FIELDS:
             if field not in fm:
                 problems.append(f"{p.name} front matter is missing '{field}'")
+        for needle in FORBIDDEN_IN_PROMPTS:
+            if needle in text:
+                problems.append(f"{p.name} still contains Jules-specific harness {needle!r}")
 
-    # **The site has to BUILD, and this check used to pass while it did not.** On 2026-08-20
-    # an unquoted colon went into the `description` value in `_config.yml`. Jekyll died with
-    # "mapping values are not allowed in this context", the deployment failed, and the live
-    # site silently kept serving the previous build - while this check reported everything
-    # agreeing, because it only ever read the prompt set. A green tick over a broken deploy
-    # is exactly the shape this file exists to prevent, so it now parses the config for real
-    # rather than trusting that YAML is easy.
     config_ok = True
     try:
         cfg = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
@@ -113,19 +127,82 @@ def main() -> int:
     if orders != list(range(1, len(steps) + 1)):
         problems.append(f"workflow.json step orders are {orders}, not 1..{len(steps)}")
 
-    # Say what was READ, not only what was wrong. A check that reports "OK" without its
-    # coverage cannot be told apart from one whose globs stopped matching.
-    # Say what was actually found, not what was hoped. The first version of this line
-    # claimed "_config.yml parses" unconditionally, including on the run where it did not.
-    print(f"checked {len(files)} prompt(s), {len(documented)} guide entry(ies), "
-          f"{len(steps)} workflow step(s); _config.yml "
-          f"{'parses' if config_ok else 'DOES NOT PARSE'}")
+    # skills/ is a generated view of _prompts/. Disagreement is the defect.
+    planned = generate_skills.planned()
+    if not planned:
+        problems.append("BLIND: generate_skills.planned() returned nothing")
+    skill_problems_before = len(problems)
+    if generate_skills.check(planned) != 0:
+        # generate_skills.check already printed; record that it failed.
+        if len(problems) == skill_problems_before:
+            problems.append("skills/ disagrees with _prompts/ (see generate_skills --check)")
+
+    # Fixtures: every index entry exists, points at a real skill, and its expected
+    # report names every planted defect. A fixture that cannot fail is not a fixture.
+    index_path = FIXTURES / "index.json"
+    fixture_count = 0
+    expected_ok = 0
+    if not index_path.exists():
+        problems.append("fixtures/index.json is missing")
+    else:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        listed = index.get("fixtures") or []
+        if not listed:
+            problems.append("BLIND: fixtures/index.json lists no fixtures")
+        listed_names = []
+        for entry in listed:
+            name = entry.get("name")
+            skill = entry.get("skill")
+            listed_names.append(name)
+            fixture_dir = FIXTURES / name
+            if not fixture_dir.is_dir():
+                problems.append(f"fixtures/index.json lists {name}, which has no directory")
+                continue
+            fixture_count += 1
+            spec_path = fixture_dir / "defects.json"
+            expected_path = fixture_dir / "EXPECTED_REPORT.md"
+            if not spec_path.exists():
+                problems.append(f"fixtures/{name}/defects.json is missing")
+                continue
+            if not expected_path.exists():
+                problems.append(f"fixtures/{name}/EXPECTED_REPORT.md is missing")
+                continue
+            spec = score_fixture.load_defects(fixture_dir)
+            if spec.get("skill") != skill:
+                problems.append(
+                    f"fixtures/{name}: index skill {skill!r} != defects.json skill {spec.get('skill')!r}"
+                )
+            if skill not in planned:
+                problems.append(f"fixtures/{name} points at skill {skill!r}, which is not generated")
+            report = expected_path.read_text(encoding="utf-8")
+            out = score_fixture.score(report, spec)
+            if out["holds"] != out["planted"] or out["invented"]:
+                problems.append(
+                    f"fixtures/{name}/EXPECTED_REPORT.md names {out['holds']} of {out['planted']} "
+                    f"planted defects (invented {out['invented']})"
+                )
+            else:
+                expected_ok += 1
+        on_disk = sorted(
+            p.name for p in FIXTURES.iterdir()
+            if p.is_dir() and (p / "defects.json").exists()
+        )
+        for name in on_disk:
+            if name not in listed_names:
+                problems.append(f"fixtures/{name}/ exists but is not in fixtures/index.json")
+
+    print(
+        f"checked {len(files)} prompt(s), {len(documented)} guide entry(ies), "
+        f"{len(steps)} workflow step(s), {len(planned)} skill(s), "
+        f"{fixture_count} fixture(s) ({expected_ok} expected reports hold); _config.yml "
+        f"{'parses' if config_ok else 'DOES NOT PARSE'}"
+    )
     if problems:
         print(f"\n{len(problems)} problem(s):")
         for p in problems:
             print(f"  - {p}")
         return 1
-    print("the prompt set, the guide and the workflow agree")
+    print("the prompt set, the guide, the workflow, the skills and the fixtures agree")
     return 0
 
 

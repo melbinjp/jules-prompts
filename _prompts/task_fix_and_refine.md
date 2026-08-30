@@ -5,7 +5,7 @@ description: To transform a prototype or demo-quality project into a production-
 category: Iterative Development
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Transform the project into a production-grade application. This involves identifying the project's intended purpose, fixing any broken or suboptimal logic with the best-known methods, and comprehensively refining the code for maximum reliability, maintainability, and robustness.
@@ -35,7 +35,7 @@ Transform the project into a production-grade application. This involves identif
         2.  A list of bugs to fix and the proposed solutions.
         3.  A plan for creating a test suite.
         4.  A plan for refactoring and documentation.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute in Phases (Test, Fix, Refine):**
     *   **Phase 1: Test Suite Construction.** Begin by building out the test framework and writing tests for the existing (even if broken) functionality. This locks in current behavior and provides a safety net.
@@ -45,7 +45,7 @@ Transform the project into a production-grade application. This involves identif
 3.  **Final Review:**
     *   Run the complete test suite one last time to ensure everything is correct.
     *   Manually review the `README` and other documentation for clarity and completeness.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
     *   Address any feedback from the code review.
