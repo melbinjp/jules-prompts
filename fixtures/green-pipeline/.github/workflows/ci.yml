@@ -1,0 +1,17 @@
+name: CI
+on:
+  pull_request:
+    paths:
+      - 'legacy/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: python -m pytest test/ | tee pytest.log
+  security:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: exit 1

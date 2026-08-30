@@ -5,7 +5,7 @@ description: To review a pull request an agent wrote, against the failure modes 
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Review a pull request that was written by an agent, and decide whether it does what it claims. Produce a verdict with evidence for each claim the pull request makes about itself. Do not fix anything in this task unless the fix is trivial and you say so explicitly.
@@ -37,7 +37,7 @@ Agent-written pull requests fail differently from human ones, and a review habit
 1.  **Explore & Plan:**
     *   Read the linked issue and list its requirements as discrete, checkable items.
     *   Read the diff and note which files it touches and which it does not.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Establish a baseline: check out the base commit and run the suite, so you know what was already failing.
@@ -48,10 +48,10 @@ Agent-written pull requests fail differently from human ones, and a review habit
 
 3.  **Test & Review:**
     *   Write the verdict: what the pull request claims, what you verified, what you could not, and what you found.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Post the review. If you were asked to open a pull request with the review as a document, use the `submit` tool.
+    *   Post the review. If you were asked to open a pull request with the review as a document, do that.
 
 **Deliverables:**
 *   A per-requirement table: requirement, met or not, and the file and line that settles it.

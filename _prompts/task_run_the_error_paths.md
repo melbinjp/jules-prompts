@@ -5,7 +5,7 @@ description: To find the failure handling that has never once executed, by causi
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Find every place this project handles a failure, make that failure actually happen, and record what the code does. Fix the handlers that swallow the cause, mislead the caller, or fail in the dangerous direction. Report each one as executed, unreachable, or wrong, with the evidence.

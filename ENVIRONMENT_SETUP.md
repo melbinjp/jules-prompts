@@ -3,15 +3,17 @@ layout: default
 title: Environment Setup
 permalink: /environment-setup/
 ---
-# Jules — Environment setup & AGENTS.md
+# Environment setup and AGENTS.md
 
-> A clear, practical guide for repository owners to prepare environments so Jules (and other agents) run reliably. Drop this file at the root of a repo or add as a documentation page on jules-prompts.wecanuseai.com.
+> A practical guide for repository owners to prepare environments so coding agents (Jules, Claude Code, Codex, Cursor, and anything that reads `AGENTS.md`) run reliably. Drop this file at the root of a repo or add as a documentation page on jules-prompts.wecanuseai.com.
+
+`AGENTS.md` is the cross-agent standard ([agents.md](https://agents.md)). Jules reads it; so do Codex, Cursor, Amp and Factory. Put install, test, and convention commands there. The rest of this page keeps the Jules-specific snapshot steps, because Jules still snapshots a successful setup and reuses it.
 
 ---
 
 ## Goal
 
-Make it trivial for Jules to: clone your repo, install dependencies, run tests, and produce safe, reviewable changes. This document explains **when** to provide environment configuration, **what** to include, and **how** to validate it.
+Make it trivial for a coding agent to: clone your repo, install dependencies, run tests, and produce safe, reviewable changes. This document explains **when** to provide environment configuration, **what** to include, and **how** to validate it.
 
 ## Quick facts (what Jules does)
 

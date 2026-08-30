@@ -5,7 +5,7 @@ description: To find the claims in the docs that were true when written and are 
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Take the project's documentation, extract every claim in it that could be checked, and check each one against the code by running it. Report each claim as verified, false, or unverifiable, with the evidence. Fix the false ones and make the unverifiable ones checkable or remove them.
@@ -45,7 +45,7 @@ The tells are mechanical: a documented flag that no longer appears in the argume
 1.  **Explore & Plan:**
     *   Build the claim list first: read every document and extract each checkable statement as its own line, with the file and line it came from.
     *   Group them by how they will be checked: run this command, read this line of code, follow this link.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Set up a clean environment and run the installation and quickstart exactly as written, recording every deviation you had to make.
@@ -56,10 +56,10 @@ The tells are mechanical: a documented flag that no longer appears in the argume
 
 3.  **Test & Review:**
     *   Report the claim table in full, with the denominator.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A table of every claim examined, with its source location, verdict, and the command or line that settles it.

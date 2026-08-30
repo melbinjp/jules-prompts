@@ -1,0 +1,34 @@
+{
+  "fixture": "stale-docs",
+  "skill": "prove-the-docs",
+  "prompt_slug": "task_prove_the_docs",
+  "description": "A README whose checkable claims the code contradicts.",
+  "defects": [
+    {
+      "id": "missing-path",
+      "file": "README.md",
+      "tell": "tells the reader to run python src/cli.py; that path does not exist, the entry is src/pkg/cli.py",
+      "must_mention": [
+        "src/cli.py"
+      ]
+    },
+    {
+      "id": "wrong-flag",
+      "file": "README.md",
+      "tell": "documents --fast; argparse defines --quick",
+      "must_mention": [
+        "--fast",
+        "--quick"
+      ]
+    },
+    {
+      "id": "python-requirement",
+      "file": "README.md",
+      "tell": "Requires Python 3.8; pyproject.toml requires-python is >=3.10",
+      "must_mention": [
+        "3.8",
+        "3.10"
+      ]
+    }
+  ]
+}

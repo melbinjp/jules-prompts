@@ -5,7 +5,7 @@ description: To describe how the system actually works, by deriving it from what
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Produce a description of this system's real structure: its entry points, what calls what, where its genuine boundaries are, and where the complexity actually sits. Derive every part of it from the code and the history rather than from the layout, and say for each claim how you established it.

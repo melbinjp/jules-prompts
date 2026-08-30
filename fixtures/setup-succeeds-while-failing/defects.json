@@ -1,0 +1,33 @@
+{
+  "fixture": "setup-succeeds-while-failing",
+  "skill": "repair-setup-script",
+  "prompt_slug": "task_repair_setup_script",
+  "description": "A setup script that cannot fail and cannot exit.",
+  "defects": [
+    {
+      "id": "swallowed-install",
+      "file": "setup.sh",
+      "tell": "pip install ... || true swallows a missing package, so setup exits 0 after failing",
+      "must_mention": [
+        "|| true",
+        "requirements.txt"
+      ]
+    },
+    {
+      "id": "blocking-server",
+      "file": "setup.sh",
+      "tell": "python -m http.server 8000 never exits; setup scripts must install, verify, and return",
+      "must_mention": [
+        "http.server"
+      ]
+    },
+    {
+      "id": "no-set-e",
+      "file": "setup.sh",
+      "tell": "no set -euo pipefail, so a later failure is also invisible",
+      "must_mention": [
+        "set -e"
+      ]
+    }
+  ]
+}

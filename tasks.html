@@ -5,7 +5,7 @@ title: Tasks
 
 <div class="page">
   <h1>Tasks</h1>
-  <p>High-level, multi-step prompts that define a complete piece of work for Jules. Use a Task when you want Jules to take on a significant piece of work.</p>
+  <p>High-level, multi-step prompts that define a complete piece of work for a coding agent. Use a Task when you want the agent to take on a significant piece of work. The same procedures ship as Agent Skills in <code>skills/</code>.</p>
 
   {%- assign tasks = site.prompts | where: "type", "Task" -%}
   {%- assign tasks_by_category = tasks | group_by: "category" -%}
