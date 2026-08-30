@@ -5,7 +5,7 @@ description: To find the CI steps that pass because they are not running what th
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Take a pipeline that is passing and establish, step by step, that each step can still fail. For every job, deliberately introduce the defect it exists to catch and confirm the run goes red. Repair the ones that stay green, and report what each one was actually checking.
@@ -50,7 +50,7 @@ The common shape is that **absence looks exactly like success.** The run is gree
 1.  **Explore & Plan:**
     *   Inventory every job and step, and every check each one claims to perform.
     *   Read the recent run history and note which jobs have never been red, and which stopped appearing.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   For each step, introduce the specific defect it exists to catch, on a scratch branch. Record whether the run went red, and how long it took to say so.
@@ -61,10 +61,10 @@ The common shape is that **absence looks exactly like success.** The run is gree
 
 3.  **Test & Review:**
     *   Report the table of steps, defects used, and red or green, before and after.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A table with one row per step: what it claims to check, the defect used against it, whether it caught it before, and whether it catches it now.

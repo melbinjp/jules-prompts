@@ -5,7 +5,7 @@ description: To add a language to a project's documentation together with the ma
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Add one or more languages to this project's documentation, and deliver with it the thing that makes translations survivable: a recorded link from each translated file to the exact source revision it was made from, and a check that reports which translations the source has moved past. Decide deliberately what is not translated and say why.

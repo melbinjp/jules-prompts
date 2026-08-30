@@ -5,7 +5,7 @@ description: To make a test suite runnable in an agent's sandbox by removing its
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Make the test suite runnable from cold in an environment with no database, no message broker, no external API and no developer laptop behind it. Every test must either run without a live service or be excluded by a named marker that says which service it needs and why.
@@ -35,7 +35,7 @@ This is the failure that turns a working repository into one an agent cannot hel
 1.  **Explore & Plan:**
     *   Run the suite with nothing else running. Record the exact failure, the count, and whether it failed at collection or during tests.
     *   Inventory every external dependency: what it is, which tests touch it, and whether a seam already exists.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Introduce the substitutes, one dependency at a time, running the suite after each.
@@ -46,10 +46,10 @@ This is the failure that turns a working repository into one an agent cannot hel
 
 3.  **Test & Review:**
     *   Report both counts, the reconciliation, and the verbatim summary line from the isolated run.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A default test command that passes from cold with no external service running.

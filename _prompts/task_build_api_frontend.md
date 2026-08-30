@@ -5,7 +5,7 @@ description: To build a modern, functional frontend for an application based on 
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to build a high-quality user interface by understanding an application's backend API, planning the frontend architecture, and implementing a user-friendly and responsive interface.
+**Role:** You are a coding agent. Build a high-quality user interface by reading an application's backend API, planning the frontend architecture, and implementing a usable, responsive interface.
 
 **Objective:**
 Build a new, fully functional frontend that proactively and correctly utilizes an available backend API. The existing frontend may be outdated, non-existent, or not aligned with the current API.
@@ -49,7 +49,7 @@ Build a new, fully functional frontend that proactively and correctly utilizes a
     *   **Document:**
         1.  Create a detailed `PLAN.md` file containing the full, granular project plan.
         2.  Create or update `AGENT.md` with a high-level summary of the plan, the chosen architecture, and a direct link to `PLAN.md`. This keeps `AGENT.md` clean.
-    *   **Present:** Present the high-level summary and link to the detailed plan using the `set_plan` tool.
+    *   **Present:** Write the high-level summary and link to the detailed plan.
 
 2.  **Phase 2: Skeleton Implementation**
     *   Set up the development environment, project structure, and build tools.
@@ -59,13 +59,13 @@ Build a new, fully functional frontend that proactively and correctly utilizes a
 
 3.  **Phase 3: Verification & Handoff**
     *   **Visually Verify:** Use the `frontend_verification_instructions` tool to get instructions on how to create a Playwright script. Write and run a script to take a screenshot of the new frontend skeleton to ensure it is rendering correctly and is free of visual defects.
-    *   **Review:** Verify that the skeleton is working and that the `README.md`, `AGENT.md`, and `PLAN.md` are up-to-date. Request a code review of the foundational work using `request_code_review`.
-    *   **Recommend Next Step:** In your final `submit` message, recommend that the user run a follow-up prompt like "Build From Plan" to complete the project, pointing them to the `PLAN.md` you created.
+    *   **Review:** Verify that the skeleton is working and that the `README.md`, `AGENT.md`, and `PLAN.md` are up-to-date. Request a code review of the foundational work through the harness if it has one; otherwise include the review in the deliverable.
+    *   **Recommend Next Step:** In the pull request body (or the harness equivalent), recommend that the user run a follow-up prompt like "Build From Plan" to complete the project, pointing them to the `PLAN.md` you created.
 
 4.  **Record Memory and Submit:**
     *   Address any feedback from the code review.
     *   Update the `README.md` with instructions for setting up and running the new frontend skeleton.
-    *   Use the `record_memory` tool to save your key learnings.
+    *   Write anything that should persist into `AGENTS.md` or the session notes.
     *   Submit the foundational skeleton along with `AGENT.md` and `PLAN.md`.
 
 **Deliverables:**

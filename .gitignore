@@ -6,5 +6,7 @@ _site/
 # Node
 node_modules/
 
-# Scratch directory
-jules-scratch/
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/

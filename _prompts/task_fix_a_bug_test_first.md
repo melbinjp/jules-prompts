@@ -5,7 +5,7 @@ description: To fix a reported bug in an order that proves the fix worked, by ma
 category: Iterative Development
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Fix a reported bug in the only order that produces evidence: write a test that fails, confirm it fails **for the reason in the report**, then change the code until it passes, changing nothing else. Deliver the failing output and the passing output as the proof.
@@ -41,7 +41,7 @@ This prompt takes a bug that is already reproducible. If the report is vague, sc
 1.  **Explore & Plan:**
     *   Reproduce the bug by hand first, from the report's exact input, and record what you observed.
     *   Confirm the existing suite is green.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Write the failing test. Run it. **Record the verbatim failure output and confirm the message describes the reported behaviour**, not an error in the test.
@@ -52,10 +52,10 @@ This prompt takes a bug that is already reproducible. If the report is vague, sc
 
 3.  **Test & Review:**
     *   Report the failing output and the passing output, both verbatim.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Address any feedback, then use the `submit` tool to create a pull request.
+    *   Address any feedback, then open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   The test, committed before the fix, so the history shows the order.

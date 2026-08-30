@@ -1,0 +1,56 @@
+{
+  "fixture": "unfailable-tests",
+  "skill": "qa-an-agents-tests",
+  "prompt_slug": "task_qa_an_agents_tests",
+  "description": "Four tests that cannot fail, next to one that can, covering a discount function whose 10% off is wrong.",
+  "defects": [
+    {
+      "id": "shape-assertion",
+      "file": "tests/test_pricing.py",
+      "function": "test_discount_returns_something",
+      "tell": "asserts result is not None",
+      "must_mention": [
+        "test_discount_returns_something",
+        "not None"
+      ]
+    },
+    {
+      "id": "mocks-the-unit",
+      "file": "tests/test_pricing.py",
+      "function": "test_discount_is_called",
+      "tell": "patches pricing.discount and asserts the mock",
+      "must_mention": [
+        "test_discount_is_called",
+        "mock"
+      ]
+    },
+    {
+      "id": "reconstructed-expected",
+      "file": "tests/test_pricing.py",
+      "function": "test_discount_formula",
+      "tell": "expected value is the implementation's own arithmetic, including the /10 bug",
+      "must_mention": [
+        "test_discount_formula",
+        "/10"
+      ]
+    },
+    {
+      "id": "no-exception",
+      "file": "tests/test_pricing.py",
+      "function": "test_discount_does_not_raise",
+      "tell": "the only assertion is that no exception was raised",
+      "must_mention": [
+        "test_discount_does_not_raise"
+      ]
+    }
+  ],
+  "control": {
+    "file": "tests/test_pricing.py",
+    "function": "test_zero_percent_leaves_price",
+    "tell": "this test can fail; a report that flags it as unfailable is inventing"
+  },
+  "production_bug": {
+    "file": "pricing.py",
+    "tell": "discount uses percent/10, so 10% off 100 is 0, not 90. None of the unfailable tests catch this."
+  }
+}

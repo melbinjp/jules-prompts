@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "description": "Planted-failure fixtures. Each one contains known defects and a defects.json listing them. Score an agent report with scripts/score_fixture.py.",
+  "fixtures": [
+    {
+      "name": "unfailable-tests",
+      "skill": "qa-an-agents-tests",
+      "planted": 4
+    },
+    {
+      "name": "green-pipeline",
+      "skill": "repair-a-green-pipeline",
+      "planted": 4
+    },
+    {
+      "name": "setup-succeeds-while-failing",
+      "skill": "repair-setup-script",
+      "planted": 3
+    },
+    {
+      "name": "stale-docs",
+      "skill": "prove-the-docs",
+      "planted": 3
+    },
+    {
+      "name": "error-path-never-run",
+      "skill": "run-the-error-paths",
+      "planted": 2
+    },
+    {
+      "name": "security-check-removed",
+      "skill": "security-review-agent-code",
+      "planted": 2
+    },
+    {
+      "name": "vague-issue",
+      "skill": "scope-a-vague-issue",
+      "planted": 3
+    },
+    {
+      "name": "finished-looking-pr",
+      "skill": "review-an-agent-pr",
+      "planted": 3
+    }
+  ]
+}

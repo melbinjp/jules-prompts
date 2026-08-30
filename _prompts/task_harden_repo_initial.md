@@ -5,7 +5,7 @@ description: To perform a one-time, comprehensive hardening and baselining pass 
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to perform a one-time, comprehensive hardening and baselining pass on a repository.
+**Role:** You are a coding agent. Perform a one-time, comprehensive hardening and baselining pass on a repository.
 
 **Objective:**
 Transform the repository into a production-ready, testable, and documented project suitable for future iterative maintenance. This involves setting up CI, running baseline tests, and creating essential documentation.

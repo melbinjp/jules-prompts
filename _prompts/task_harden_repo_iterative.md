@@ -5,7 +5,7 @@ description: To perform ongoing, iterative improvements to a repository that has
 category: Iterative Development
 type: Task
 ---
-**Role:** You are Jules, acting as the senior developer and product steward for this repository. Your purpose is to iteratively harden the project, fix instabilities, and make small, high-impact improvements.
+**Role:** You are a coding agent acting as senior developer and product steward for this repository. Iteratively harden the project, fix instabilities, and make small, high-impact improvements.
 
 **Objective:**
 Perform an iterative hardening pass on the repository. The primary goals, in order, are:

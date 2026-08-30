@@ -1,0 +1,33 @@
+{
+  "fixture": "finished-looking-pr",
+  "skill": "review-an-agent-pr",
+  "prompt_slug": "task_review_an_agent_pr",
+  "description": "A pull request that reads as finished: confident description, a test that passes, and the send still commented out.",
+  "defects": [
+    {
+      "id": "claim-unverified",
+      "file": "PR.md",
+      "tell": "PR.md says reset delivery is restored; mailer.send is a no-op",
+      "must_mention": [
+        "PR.md",
+        "send"
+      ]
+    },
+    {
+      "id": "send-commented-out",
+      "file": "mailer.py",
+      "tell": "send_via_smtp is commented out; send() returns None",
+      "must_mention": [
+        "send_via_smtp"
+      ]
+    },
+    {
+      "id": "test-cannot-fail",
+      "file": "tests/test_reset.py",
+      "tell": "the test asserts the token prefix, not that mailer.send delivered anything",
+      "must_mention": [
+        "test_template_contains_token"
+      ]
+    }
+  ]
+}
