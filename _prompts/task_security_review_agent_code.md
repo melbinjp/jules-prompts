@@ -5,7 +5,7 @@ description: To review a change an agent wrote for the security defects agents s
 category: Security
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Review a change written by an agent for security defects, and report each with the evidence that establishes it. This is not a general audit of the project. It targets the specific ways a change goes wrong when it was produced by something optimising for a green build.
@@ -38,7 +38,7 @@ An agent asked to fix a failure will find the shortest route to the failure stop
 1.  **Explore & Plan:**
     *   Read the diff in full and list every file it touches, grouping them into code, configuration, CI, dependencies and fixtures.
     *   Identify which parts of the change are on a path that handles input, credentials or permissions.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Walk each principle above against the diff, recording a file and line for every hit.
@@ -49,10 +49,10 @@ An agent asked to fix a failure will find the shortest route to the failure stop
 
 3.  **Test & Review:**
     *   Write the findings, ordered by what an attacker gains, each with file, line, evidence and the smallest fix.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
-    *   Post the review, or use the `submit` tool if you were asked to open a pull request carrying it.
+    *   Post the review, or open a pull request if you were asked to, carrying the review as a document.
 
 **Deliverables:**
 *   A findings list ordered by impact: file, line, what an attacker gains, and the smallest change that closes it.

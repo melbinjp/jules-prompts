@@ -5,7 +5,7 @@ title: Commands
 
 <div class="page">
   <h1>Commands</h1>
-  <p>Granular, single-purpose prompts designed for quick, targeted actions. Use a Command when you need a quick intervention from Jules.</p>
+  <p>Granular, single-purpose prompts designed for quick, targeted actions. Use a Command when you need a quick intervention from an agent.</p>
 
   {%- assign commands = site.prompts | where: "type", "Command" -%}
   {%- assign commands_by_category = commands | group_by: "category" -%}

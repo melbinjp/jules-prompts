@@ -1,0 +1,34 @@
+{
+  "fixture": "vague-issue",
+  "skill": "scope-a-vague-issue",
+  "prompt_slug": "task_scope_a_vague_issue",
+  "description": "An issue that says 'the login is broken' over a login() with three plausible bugs. The skill must produce no fix.",
+  "defects": [
+    {
+      "id": "unscoped-issue",
+      "file": "ISSUE.md",
+      "tell": "the report is two lines and names no reproduction, expected behaviour, or environment",
+      "must_mention": [
+        "the login is broken"
+      ]
+    },
+    {
+      "id": "three-readings",
+      "file": "login.py",
+      "tell": "case sensitivity, lockout-after-one, and empty-password-is-a-match are three different bugs; the issue does not pick one",
+      "must_mention": [
+        "empty password",
+        "lockout",
+        "case"
+      ]
+    },
+    {
+      "id": "no-fix",
+      "file": "ISSUE.md",
+      "tell": "this task produces a reproduction and a failing test, not a patch to login.py",
+      "must_mention": [
+        "no fix"
+      ]
+    }
+  ]
+}

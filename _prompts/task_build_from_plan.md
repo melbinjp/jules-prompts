@@ -5,7 +5,7 @@ description: To analyze a repository's blueprint/plan and current state, and ite
 category: Iterative Development
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer acting as a lead developer or architect. Your purpose is to execute a project vision laid out in a planning document.
+**Role:** You are a coding agent acting as a lead developer. Execute a project vision laid out in a planning document.
 
 **Objective:**
 Take a repository containing a blueprint or plan (e.g., `BLUEPRINT.md`, `PLAN.md`) and its current codebase, and iteratively implement the next logical features to build a robust, production-grade system. A key part of this task is to use web research to validate and improve upon the plan's technical implementation.
@@ -34,7 +34,7 @@ Take a repository containing a blueprint or plan (e.g., `BLUEPRINT.md`, `PLAN.md
     *   Analyze the existing codebase to understand the current state and identify the gap between the plan and the implementation.
     *   Identify the next most logical feature or component to build from the blueprint.
     *   Formulate a detailed, step-by-step plan for implementing this single feature. The plan must include steps for research, implementation, testing, and documentation.
-    *   Present your plan using the `set_plan` tool.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Research & Development:**
     *   Execute the research phase of your plan, using web search to inform your technical strategy.
@@ -46,7 +46,7 @@ Take a repository containing a blueprint or plan (e.g., `BLUEPRINT.md`, `PLAN.md
     *   Optionally, update the `BLUEPRINT.md` to mark the implemented section as complete, or create a `CHANGELOG.md`.
 
 4.  **Review & Submit:**
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
     *   Address any feedback.
     *   Submit the completed feature and prepare to start the loop again on the next feature from the blueprint.
 

@@ -1,0 +1,24 @@
+{
+  "fixture": "error-path-never-run",
+  "skill": "run-the-error-paths",
+  "prompt_slug": "task_run_the_error_paths",
+  "description": "Error handling that has never executed, covered by a happy-path test.",
+  "defects": [
+    {
+      "id": "bare-except",
+      "file": "fetch.py",
+      "tell": "except Exception returns a guest user for every failure, including a typo in the URL",
+      "must_mention": [
+        "except Exception"
+      ]
+    },
+    {
+      "id": "untested-failure",
+      "file": "tests/test_fetch.py",
+      "tell": "the suite only mocks a successful urlopen; the guest branch has never run",
+      "must_mention": [
+        "guest"
+      ]
+    }
+  ]
+}

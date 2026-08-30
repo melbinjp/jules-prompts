@@ -5,13 +5,13 @@ description: To diagnose and repair the setup script so agent tasks stop failing
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Make this repository reliably usable by an asynchronous coding agent, by producing a setup script that installs everything the test suite needs and then exits. The measure of success is not that the script looks correct; it is that a clean environment can install, build and run the tests using only the script, with no step that a human would have to supply from memory.
 
 **Context:**
-This is a task about the environment, not about the product code. Jules' own FAQ names *"broken setup scripts or vague prompts"* as the common causes of a failed task, and states that *"Long-running processes like dev servers or watch scripts aren't currently supported in setup scripts"*, recommending discrete install and test commands instead. A setup script is also snapshotted after it succeeds and reused for later tasks from the same repository, so a defect here is not paid for once. It is paid for by every future task.
+This is a task about the environment, not about the product code. Asynchronous and sandboxed coding agents fail most often before any product code is touched: the setup script is broken, or the prompt is too vague to act on. Long-running processes such as a dev server or a file watcher do not belong in setup: the script must install, verify, and exit. Many harnesses snapshot a successful setup and reuse it, so a defect here is not paid for once. It is paid for by every future task.
 
 *   **Key Files & Folders:**
     *   The existing setup or bootstrap script, if there is one (e.g. `AGENTS.md`, `setup.sh`, `scripts/setup`, `Makefile`, `.devcontainer/`).
@@ -39,7 +39,7 @@ This is a task about the environment, not about the product code. Jules' own FAQ
     *   Read the CI workflow and extract the exact install, build and test commands it uses.
     *   Identify every external dependency the suite touches: databases, message queues, browsers, model endpoints, network fixtures.
     *   Establish the baseline: run the existing setup, if any, and record precisely where it fails, with the command and its output.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   Write or repair the setup script so it installs dependencies and exits cleanly.
@@ -49,11 +49,11 @@ This is a task about the environment, not about the product code. Jules' own FAQ
 
 3.  **Test & Review:**
     *   State the evidence: the commands run, their exit codes, and the final test-runner summary line verbatim.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
     *   Address any feedback from the code review.
-    *   Use the `submit` tool to create a pull request.
+    *   Open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A setup script that installs dependencies and exits, with no blocking process and no swallowed exit code.

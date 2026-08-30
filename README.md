@@ -3,32 +3,39 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/melbinjp/jules-prompts?style=social)](https://github.com/melbinjp/jules-prompts)
 
-A curated library of machine-readable task prompts for Jules and other coding agents, including prompts for the failures agents actually have: broken setup scripts, vague issues, tests that need services the sandbox cannot start, and pull requests that only read as finished.
+A curated library of machine-readable task prompts, Agent Skills, and planted-failure fixtures for coding agents. The procedures cover the failures agents actually have: broken setup scripts, vague issues, tests that need services a sandbox cannot start, and pull requests that only read as finished.
+
+The name is historical. The instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+
+## Three layers
+
+1. **`_prompts/`** — the canonical procedure text. Website, JSON index, MCP slash commands.
+2. **`skills/`** — the same text as [Agent Skills](https://agentskills.io/specification). Generated from `_prompts/`. Copy into `.claude/skills/` or `.agents/skills/`.
+3. **`fixtures/`** — miniature repositories with planted defects. The way to see a skill go red.
+
+Standing doctrine, for a project's `AGENTS.md` so it fires when nobody picks a skill: [`harness/AGENTS.md`](harness/AGENTS.md).
 
 ## Getting Started
 
-To learn about the prompts in this library and how to use them together, please see the [Jules Prompt Library Guide](PROMPTS_GUIDE.md).
+The [library guide](PROMPTS_GUIDE.md) explains each prompt and a recommended sequence.
 
-## Environment Setup for Jules
-
-To ensure Jules can work effectively with your repository, it's crucial to have a well-defined environment setup. This helps in cloning, installing dependencies, and running tests reliably. For a detailed guide on how to configure your repository for Jules, please see the [Environment Setup Guide](ENVIRONMENT_SETUP.md).
+To prepare a repository so an agent can clone, install, and test it, see the [Environment Setup Guide](ENVIRONMENT_SETUP.md).
 
 ## How to Use
 
-The prompts in this repository are designed to be used in two primary ways:
+### As Agent Skills (preferred)
 
-### For Humans (Copy-Paste)
+```bash
+cp -R skills/qa-an-agents-tests .claude/skills/
+# or all of them
+cp -R skills/* .claude/skills/
+```
 
-If you are a human interacting with an AI agent, the simplest way to use a prompt is to:
-1.  Navigate to the prompt file you want to use (e.g., [`task_audit_repo.md`](_prompts/task_audit_repo.md)).
-2.  Copy the entire content of the file.
-3.  Paste it into your agent's instruction input.
+Paste [`harness/AGENTS.md`](harness/AGENTS.md) into the project's `AGENTS.md`.
 
-### As an MCP server (installed, not copy-pasted)
+### As an MCP server
 
-Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as
-slash commands. Point any of them at this repository and the whole library appears there, and
-stays current, because the server reads this repository live rather than a bundled copy.
+Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as slash commands. The server reads this repository live rather than a bundled copy.
 
 ```json
 {
@@ -41,33 +48,46 @@ stays current, because the server reads this repository live rather than a bundl
 }
 ```
 
-Prompts that contain placeholders such as `<PR_URL_OR_DIFF_RANGE>` expose them as arguments,
-so the client asks for the value and the server substitutes it before handing over the text.
-That is the part a webpage cannot do.
+Prompts that contain placeholders such as `<PR_URL_OR_DIFF_RANGE>` expose them as arguments, so the client asks for the value and the server substitutes it before handing over the text.
 
-### For Agents (Programmatic Access)
+### For humans (copy-paste)
 
-AI agents can use the `prompts.json` file to discover and fetch prompts.
+1. Open the prompt file (e.g. [`task_audit_repo.md`](_prompts/task_audit_repo.md)).
+2. Copy the body after the YAML front matter.
+3. Paste it into the agent's instruction input.
 
-1.  **Discover:** Fetch and parse `prompts.json` to get a list of available prompts.
-2.  **Select:** Choose a prompt based on its title, description, or category.
-3.  **Execute:** Fetch the rendered prompt from its `url`, or read the source markdown at its `source_path`, then use it as the task instruction.
+### For agents (programmatic)
+
+1. Fetch `https://jules-prompts.wecanuseai.com/prompts.json`.
+2. Select a prompt by title, description, or category.
+3. Fetch the rendered prompt from its `url`, or read `_prompts/<slug>.md`.
+
+### Against fixtures (proof)
+
+```bash
+python scripts/score_fixture.py fixtures/unfailable-tests path/to/REPORT.md
+python scripts/score_fixture.py fixtures/unfailable-tests --self-check
+```
+
+Verdicts are **holds** / **broken** / **skipped**. The last line is coverage.
 
 ## Keeping the library current
 
-New prompts are useful when they cover a recurring task that the existing set
-does not handle clearly. Do not add prompts only to increase the count.
+New prompts are useful when they cover a recurring task that the existing set does not handle clearly. Do not add prompts only to increase the count.
 
 When adding or revising a prompt:
 
 1. Keep its YAML front matter aligned with the other files in `_prompts/`.
-2. Update `PROMPTS_GUIDE.md` when its purpose or recommended use changes.
-3. Update `workflow.json` only when the recommended sequence changes.
-4. Keep `AGENTS.md`, this README, and the generated `prompts.json` fields aligned.
-5. Test the Jekyll site and JSON endpoint before merging when the site structure changes.
+2. Write harness-agnostic instructions: no `You are Jules`, no `set_plan` / `submit` / `request_code_review`.
+3. Run `python scripts/generate_skills.py` so `skills/` matches.
+4. Update `PROMPTS_GUIDE.md` when its purpose or recommended use changes.
+5. Update `workflow.json` only when the recommended sequence changes.
+6. If the prompt exists to catch a failure, add a fixture under `fixtures/` with `defects.json` and an `EXPECTED_REPORT.md` that names every planted defect.
+7. Keep `AGENTS.md`, this README, and the generated `prompts.json` fields aligned.
+8. `python scripts/check_library_integrity.py` must pass.
 
 ## Contributing
 
-Contributions to this prompt library are welcome! The goal is to create a set of high-quality, general-purpose prompts that act as a "guiding light" for agents and developers, encoding best practices for common software engineering tasks.
+Contributions are welcome. The goal is a small set of high-quality, general-purpose procedures that encode best practices for the failures agents actually have — and a corpus that can show those procedures failing.
 
-If you have an idea for a new prompt or an improvement to an existing one, please open an issue to discuss it.
+If you have an idea for a new prompt, skill, or fixture, please open an issue to discuss it.

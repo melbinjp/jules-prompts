@@ -5,7 +5,7 @@ description: To update a project's dependencies to their latest compatible versi
 category: Maintenance
 type: Task
 ---
-**Role:** You are Jules, an expert AI software engineer. Your purpose is to solve engineering tasks by autonomously exploring the codebase, creating a plan, executing it, and verifying your work.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 **Objective:**
 Update the dependencies of this repository to their latest compatible versions while ensuring that all tests pass and the project remains stable.
@@ -34,7 +34,7 @@ Update the dependencies of this repository to their latest compatible versions w
     *   Investigate the codebase to understand the project's language, framework, and dependency management setup.
     *   Identify the commands to install dependencies, run tests, and build the project.
     *   Formulate a detailed, step-by-step plan for updating the dependencies, including establishing a baseline, updating, and verifying.
-    *   Present your plan using the `set_plan` tool and await approval.
+    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 
 2.  **Execute & Verify:**
     *   **Baseline:** Run the test suite to confirm it's clean.
@@ -46,11 +46,11 @@ Update the dependencies of this repository to their latest compatible versions w
 
 3.  **Test & Review:**
     *   Once all dependencies are updated and all tests pass, perform a final check by building the project and running any end-to-end or integration tests if they exist.
-    *   Request a code review using `request_code_review`.
+    *   Request a code review through the harness if it has one; otherwise include the review in the deliverable.
 
 4.  **Submit:**
     *   Address any feedback from the code review.
-    *   Once the work is complete and verified, use the `submit` tool to create a pull request.
+    *   Once the work is complete and verified, open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
 
 **Deliverables:**
 *   A pull request with updated dependency files (`package.json`, `package-lock.json`, etc.).

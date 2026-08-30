@@ -13,9 +13,14 @@ on:
   pull_request:
     paths:
       - '_prompts/**'
+      - 'skills/**'
+      - 'fixtures/**'
+      - 'harness/**'
       - 'PROMPTS_GUIDE.md'
       - 'workflow.json'
       - 'scripts/check_library_integrity.py'
+      - 'scripts/generate_skills.py'
+      - 'scripts/score_fixture.py'
       - '.github/workflows/library-integrity.yml'
 
 jobs:

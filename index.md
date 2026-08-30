@@ -4,11 +4,11 @@ body_class: "home"
 ---
 # Jules Prompts
 
-A curated library of pre-made, machine-readable prompts to help AI agents like Jules understand and execute software engineering tasks.
+A curated library of machine-readable prompts, [Agent Skills](https://github.com/melbinjp/jules-prompts/tree/main/skills), and [planted-failure fixtures](https://github.com/melbinjp/jules-prompts/tree/main/fixtures) to help coding agents turn intent into verifiable work. The procedures are harness-agnostic.
 
-This site provides a collection of **Tasks** that you can use to guide an agent to perform a variety of development activities, from simple file refactoring to complex repository audits.
+This site lists the **Tasks**. Skills are the same procedures in the format agents load in 2026. Fixtures are how those procedures go red.
 
-Browse the [Tasks](./tasks.html) to get started.
+Browse the [Tasks](./tasks.html) to get started. Standing doctrine for a project's `AGENTS.md` is in [`harness/AGENTS.md`](https://github.com/melbinjp/jules-prompts/blob/main/harness/AGENTS.md).
 
 ## Tools these prompts pair with
 

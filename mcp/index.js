@@ -2,11 +2,12 @@
 /**
  * jules-prompts as an MCP server.
  *
- * WHY THIS EXISTS. The library is currently copy-paste: a person finds it, opens a file,
+ * WHY THIS EXISTS. The library used to be copy-paste: a person finds it, opens a file,
  * selects the text, and pastes it into an agent. That works once. MCP prompts are surfaced as
  * slash commands by Claude Code, Claude Desktop, VS Code/Copilot, Windsurf and Zed, so the
  * same library becomes something installed rather than something visited, and it stays current
- * because this reads the live repository rather than a bundled copy.
+ * because this reads the live repository rather than a bundled copy. Skills under skills/ are
+ * the other install path, for agents that load SKILL.md.
  *
  * WHY IT FETCHES INSTEAD OF BUNDLING. A bundled snapshot is a second copy of the truth, and a
  * second copy is a thing that will disagree with the first and then be trusted anyway. The

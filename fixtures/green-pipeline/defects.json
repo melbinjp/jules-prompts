@@ -1,0 +1,46 @@
+{
+  "fixture": "green-pipeline",
+  "skill": "repair-a-green-pipeline",
+  "prompt_slug": "task_repair_a_green_pipeline",
+  "description": "A pipeline that is green because it does not run the check it names. Three independent ways absence looks like success.",
+  "defects": [
+    {
+      "id": "paths-never-match",
+      "file": ".github/workflows/ci.yml",
+      "tell": "pull_request paths: legacy/** matches nothing in this tree, so the workflow never runs",
+      "must_mention": [
+        "legacy",
+        "paths"
+      ]
+    },
+    {
+      "id": "wrong-test-dir",
+      "file": ".github/workflows/ci.yml",
+      "tell": "pytest test/ (singular) collects nothing; tests live in tests/",
+      "must_mention": [
+        "test/",
+        "tests/"
+      ]
+    },
+    {
+      "id": "pipe-to-tee",
+      "file": ".github/workflows/ci.yml",
+      "tell": "python -m pytest test/ | tee pytest.log reports tee's exit code",
+      "must_mention": [
+        "tee"
+      ]
+    },
+    {
+      "id": "continue-on-error",
+      "file": ".github/workflows/ci.yml",
+      "tell": "the security job exits 1 under continue-on-error, so a red check is a green workflow",
+      "must_mention": [
+        "continue-on-error"
+      ]
+    }
+  ],
+  "production_bug": {
+    "file": "src/app.py",
+    "tell": "add(1,1) returns 3. tests/test_app.py would catch this if CI ran it."
+  }
+}
