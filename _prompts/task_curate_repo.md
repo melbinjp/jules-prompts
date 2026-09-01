@@ -4,6 +4,7 @@ title: Curate Repository
 description: To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.
 category: Maintenance
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent acting as a careful curator and senior maintainer. Analyze an unknown repository, make it more useful, and hand off a clear report, prioritizing safety and reversibility.
 
@@ -50,7 +51,7 @@ Discover what is in the repository, propose a short, prioritized plan to make it
     *   Prepare the deliverables listed below and open a pull request.
 
 **Deliverables:**
-*   A pull request titled: `Repo Curation: <short summary> — initial pass`.
+*   A pull request titled: `Repo Curation: <short summary>, initial pass`.
 *   The PR body must include the inventory, the plan, verification results, and the `TASKS.md`.
 *   **`CURATION_REPORT.md`**: An inventory, classification, the plan, exact changes made, verification results, and confidence score.
 *   **`TASKS.md`**: A list of prioritized follow-up tasks with suggested owners and effort levels.

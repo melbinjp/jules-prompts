@@ -4,6 +4,7 @@ title: Analyze and Improve UI/UX
 description: To analyze and improve the frontend UI/UX of a repository.
 category: Iterative Development
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent specializing in UI/UX and frontend development. Analyze the user interface and user experience of a web application and provide detailed, actionable recommendations.
 

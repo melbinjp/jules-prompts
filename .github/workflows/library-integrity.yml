@@ -19,6 +19,10 @@ on:
       - 'PROMPTS_GUIDE.md'
       - 'workflow.json'
       - 'scripts/check_library_integrity.py'
+      - 'scripts/emit.py'
+      - 'plugin/**'
+      - 'library.json'
+      - '**/*.md'
       - 'scripts/generate_skills.py'
       - 'scripts/score_fixture.py'
       - '.github/workflows/library-integrity.yml'
@@ -38,6 +42,10 @@ jobs:
 
       - name: The library must agree with itself
         run: python scripts/check_library_integrity.py
+
+
+      - name: Every generated form must still match its source
+        run: python scripts/emit.py --check
 
   mcp:
     # The server has to actually speak MCP, not merely parse. This starts it, runs a real

@@ -1,4 +1,4 @@
-# AGENTS.md — Machine-Readable Instructions for AI Agents
+# AGENTS.md, Machine-Readable Instructions for AI Agents
 
 > This file tells AI agents how to discover and use the procedures in this repository.
 
@@ -17,10 +17,10 @@ GET https://jules-prompts.wecanuseai.com/prompts.json
 ```
 
 This returns a JSON object with:
-- `version` — API version
-- `total_prompts` — number of available prompts
-- `categories` — list of prompt categories
-- `prompts[]` — array of prompt objects, each with `title`, `description`, `category`, `url`, `source_path`, and `slug`
+- `version`: API version
+- `total_prompts`: number of available prompts
+- `categories`: list of prompt categories
+- `prompts[]`: array of prompt objects, each with `title`, `description`, `category`, `url`, `source_path`, and `slug`
 
 ### 2. Direct File Access
 
@@ -38,9 +38,9 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 
 1. **Select** a prompt from the JSON index, or load the matching skill.
 2. **Fetch** the prompt content from its `url` or `source_path`.
-3. **Parse** the markdown — the procedure starts after the YAML front matter (`---`).
-4. **Fill placeholders** — some prompts contain placeholders like `<REPO_OR_SITE_URL>`.
-5. **Execute** — use the prompt as the task instruction.
+3. **Parse** the markdown, the procedure starts after the YAML front matter (`---`).
+4. **Fill placeholders**: some prompts contain placeholders like `<REPO_OR_SITE_URL>`.
+5. **Execute**: use the prompt as the task instruction.
 6. **If the task is one the fixtures cover**, write a report that names planted defects by the strings in `fixtures/<name>/defects.json`, then run `python scripts/score_fixture.py fixtures/<name> REPORT.md`.
 
 ## Prompt Categories
@@ -56,11 +56,11 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 
 For taking a new project from zero to production, execute prompts in this order:
 
-1. `task_repair_setup_script` — Make the repository usable by an agent
-2. `task_audit_repo` — Understand the project
-3. `task_harden_repo_initial` — Set up CI/CD and testing
-4. `task_fix_and_refine` — Fix bugs and architecture
-5. `task_harden_repo_iterative` — Ongoing improvement (repeatable)
+1. `task_repair_setup_script`: Make the repository usable by an agent
+2. `task_audit_repo`: Understand the project
+3. `task_harden_repo_initial`: Set up CI/CD and testing
+4. `task_fix_and_refine`: Fix bugs and architecture
+5. `task_harden_repo_iterative`: Ongoing improvement (repeatable)
 
 See `workflow.json` for the machine-readable workflow graph.
 
