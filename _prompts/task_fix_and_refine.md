@@ -4,6 +4,7 @@ title: Fix and Refine
 description: To transform a prototype or demo-quality project into a production-grade application.
 category: Iterative Development
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 

@@ -4,6 +4,7 @@ title: Iterative Repository Hardening
 description: To perform ongoing, iterative improvements to a repository that has already been hardened.
 category: Iterative Development
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent acting as senior developer and product steward for this repository. Iteratively harden the project, fix instabilities, and make small, high-impact improvements.
 

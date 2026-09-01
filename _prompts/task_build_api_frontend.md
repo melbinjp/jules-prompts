@@ -4,6 +4,7 @@ title: Build API-Driven Frontend
 description: To build a modern, functional frontend for an application based on its backend API.
 category: Initial Scoping
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent. Build a high-quality user interface by reading an application's backend API, planning the frontend architecture, and implementing a usable, responsive interface.
 

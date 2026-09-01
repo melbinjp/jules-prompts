@@ -1,0 +1,7 @@
+{
+  "name": "jules-prompts",
+  "description": "Procedures for the failures coding agents actually have: setup scripts that report success while broken, tests that cannot fail, pipelines that are green without checking anything, and pull requests that only read as finished.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/melbinjp/jules-prompts",
+  "license": "MIT"
+}

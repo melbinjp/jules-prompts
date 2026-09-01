@@ -4,6 +4,7 @@ title: Initial Repository Hardening
 description: To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.
 category: Initial Scoping
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent. Perform a one-time, comprehensive hardening and baselining pass on a repository.
 

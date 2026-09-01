@@ -4,6 +4,7 @@ title: Build from Plan
 description: To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.
 category: Iterative Development
 type: Task
+status: legacy
 ---
 **Role:** You are a coding agent acting as a lead developer. Execute a project vision laid out in a planning document.
 

@@ -29,13 +29,13 @@ Add explicit setup instructions when your repo is non-trivial to build or test l
 * Projects requiring specific SDKs, compilers, or system packages
 * Repos that require multiple setup steps (db, migrations, prebuild steps)
 
-If your project is simple (single `npm install && npm test`), Jules will often auto-detect — but an explicit script still helps reliability.
+If your project is simple (single `npm install && npm test`), Jules will often auto-detect, but an explicit script still helps reliability.
 
 ## Where Jules looks for guidance
 
-1.  `AGENTS.md` (root) — a predictable, agent-focused markdown file describing build/test commands, conventions, and special notes. Jules will automatically read it if present.
-2.  `README.md` — Jules will use it for hints when `AGENTS.md` isn’t available.
-3.  Repository Configuration in the Jules UI (Codebase → Configuration → Initial Setup) — paste the setup script/commands there and use **Run and Snapshot** to validate.
+1.  `AGENTS.md` (root), a predictable, agent-focused markdown file describing build/test commands, conventions, and special notes. Jules will automatically read it if present.
+2.  `README.md`: Jules will use it for hints when `AGENTS.md` isn’t available.
+3.  Repository Configuration in the Jules UI (Codebase → Configuration → Initial Setup), paste the setup script/commands there and use **Run and Snapshot** to validate.
 
 ## What to put in AGENTS.md (recommended structure)
 
@@ -148,7 +148,7 @@ mvn -B -DskipTests=false test
 ## Handling secrets safely
 
 *   **Do not commit secrets** to the repo. Jules documentation and community discussions explicitly warn against committing tokens or secret files.
-*   If your task needs secrets (API keys), prefer external secret stores or CI-style secrets injected at runtime. Jules does not recommend committing tokens; specific secret-injection mechanisms are not documented publicly — contact Jules support or use a secure secret manager and document retrieval logic in `AGENTS.md` (e.g., "use project secret manager X to fetch credentials during CI").
+*   If your task needs secrets (API keys), prefer external secret stores or CI-style secrets injected at runtime. Jules does not recommend committing tokens; specific secret-injection mechanisms are not documented publicly, contact Jules support or use a secure secret manager and document retrieval logic in `AGENTS.md` (e.g., "use project secret manager X to fetch credentials during CI").
 
 ## Troubleshooting common environment issues
 
@@ -176,4 +176,4 @@ If a task fails due to environment setup, Jules will report logs and an error pa
 
 ## Where I pulled authoritative guidance
 
-This guide follows official Jules docs and the AGENTS.md recommendation. Keep your AGENTS.md small and explicit — agents read it first.
+This guide follows official Jules docs and the AGENTS.md recommendation. Keep your AGENTS.md small and explicit, agents read it first.
