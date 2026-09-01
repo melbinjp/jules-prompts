@@ -44,8 +44,7 @@ text as slash-command prompts for clients that do not load skills:
 }
 ```
 
-The standing doctrine — three verdicts, prove it can fail, say what you read —
-lives in [`harness/AGENTS.md`](../harness/AGENTS.md). Paste that into a project's
+The standing doctrine, three verdicts, prove it can fail, say what you read, lives in [`harness/AGENTS.md`](../harness/AGENTS.md). Paste that into a project's
 `AGENTS.md` so it fires when nobody picks a skill.
 
 ## What is not here

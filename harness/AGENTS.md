@@ -1,4 +1,4 @@
-# AGENTS.md fragment — verification doctrine
+# AGENTS.md fragment, verification doctrine
 
 Copy the sections below into the repository's `AGENTS.md`. They are standing
 instructions: they fire on every task, not only the ones where someone pasted a
@@ -15,9 +15,9 @@ the fixtures in `fixtures/` (the only way to see a skill go red).
 
 Every claim is one of three things. Guessing in either direction is a lie.
 
-- **holds** — you ran it, and the project agrees
-- **broken** — you ran it, and the project contradicts it
-- **skipped** — you could not check it reliably, and you said so with a reason
+- **holds**: you ran it, and the project agrees
+- **broken**: you ran it, and the project contradicts it
+- **skipped**: you could not check it reliably, and you said so with a reason
 
 A report that says "clean" without saying what it read cannot be told apart from
 one that read nothing. End every report with what you judged and what you did

@@ -6,9 +6,9 @@ to catch. A skill nobody has seen fail is a claim. These are the way it fails.
 Each fixture has:
 
 - the planted tree
-- `defects.json` — id, file, tell, and the strings a report must use to count
+- `defects.json`: id, file, tell, and the strings a report must use to count
   as having named it
-- `EXPECTED_REPORT.md` — a report that names every planted defect, used by CI
+- `EXPECTED_REPORT.md`: a report that names every planted defect, used by CI
   so this corpus can go red if a fixture is added without a scorable expected
 
 ```bash

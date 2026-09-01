@@ -1,0 +1,232 @@
+{
+  "library": "jules-prompts",
+  "source": "https://github.com/melbinjp/jules-prompts",
+  "count": 25,
+  "procedures": [
+    {
+      "slug": "analyze-and-improve-ui-ux",
+      "title": "Analyze and Improve UI/UX",
+      "description": "To analyze and improve the frontend UI/UX of a repository.",
+      "category": "Iterative Development",
+      "status": "legacy",
+      "prompt": "_prompts/task_analyze_and_improve_ui_ux.md",
+      "skill": "skills/analyze-and-improve-ui-ux/SKILL.md"
+    },
+    {
+      "slug": "audit-repo",
+      "title": "Audit Repository",
+      "description": "To conduct a comprehensive, evidence-based audit of a repository or live website.",
+      "category": "Initial Scoping",
+      "status": "core",
+      "prompt": "_prompts/task_audit_repo.md",
+      "skill": "skills/audit-repo/SKILL.md"
+    },
+    {
+      "slug": "automate-a-workflow",
+      "title": "Automate a Workflow That Can Report Its Own Failure",
+      "description": "To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.",
+      "category": "Iterative Development",
+      "status": "core",
+      "prompt": "_prompts/task_automate_a_workflow.md",
+      "skill": "skills/automate-a-workflow/SKILL.md"
+    },
+    {
+      "slug": "build-api-frontend",
+      "title": "Build API-Driven Frontend",
+      "description": "To build a modern, functional frontend for an application based on its backend API.",
+      "category": "Initial Scoping",
+      "status": "legacy",
+      "prompt": "_prompts/task_build_api_frontend.md",
+      "skill": "skills/build-api-frontend/SKILL.md"
+    },
+    {
+      "slug": "build-from-plan",
+      "title": "Build from Plan",
+      "description": "To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.",
+      "category": "Iterative Development",
+      "status": "legacy",
+      "prompt": "_prompts/task_build_from_plan.md",
+      "skill": "skills/build-from-plan/SKILL.md"
+    },
+    {
+      "slug": "curate-repo",
+      "title": "Curate Repository",
+      "description": "To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.",
+      "category": "Maintenance",
+      "status": "legacy",
+      "prompt": "_prompts/task_curate_repo.md",
+      "skill": "skills/curate-repo/SKILL.md"
+    },
+    {
+      "slug": "fix-a-bug-test-first",
+      "title": "Fix a Bug, Failing Test First",
+      "description": "To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.",
+      "category": "Iterative Development",
+      "status": "core",
+      "prompt": "_prompts/task_fix_a_bug_test_first.md",
+      "skill": "skills/fix-a-bug-test-first/SKILL.md"
+    },
+    {
+      "slug": "fix-and-refine",
+      "title": "Fix and Refine",
+      "description": "To transform a prototype or demo-quality project into a production-grade application.",
+      "category": "Iterative Development",
+      "status": "legacy",
+      "prompt": "_prompts/task_fix_and_refine.md",
+      "skill": "skills/fix-and-refine/SKILL.md"
+    },
+    {
+      "slug": "generate-prompt-from-description",
+      "title": "Generate Prompt from Description",
+      "description": "To generate a new, high-quality prompt from a user's description.",
+      "category": "Meta",
+      "status": "core",
+      "prompt": "_prompts/task_generate_prompt_from_description.md",
+      "skill": "skills/generate-prompt-from-description/SKILL.md"
+    },
+    {
+      "slug": "harden-repo-initial",
+      "title": "Initial Repository Hardening",
+      "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.",
+      "category": "Initial Scoping",
+      "status": "legacy",
+      "prompt": "_prompts/task_harden_repo_initial.md",
+      "skill": "skills/harden-repo-initial/SKILL.md"
+    },
+    {
+      "slug": "harden-repo-iterative",
+      "title": "Iterative Repository Hardening",
+      "description": "To perform ongoing, iterative improvements to a repository that has already been hardened.",
+      "category": "Iterative Development",
+      "status": "legacy",
+      "prompt": "_prompts/task_harden_repo_iterative.md",
+      "skill": "skills/harden-repo-iterative/SKILL.md"
+    },
+    {
+      "slug": "isolate-tests-from-services",
+      "title": "Isolate Tests from External Services",
+      "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_isolate_tests_from_services.md",
+      "skill": "skills/isolate-tests-from-services/SKILL.md"
+    },
+    {
+      "slug": "map-the-architecture",
+      "title": "Map the Architecture",
+      "description": "To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names.",
+      "category": "Initial Scoping",
+      "status": "core",
+      "prompt": "_prompts/task_map_the_architecture.md",
+      "skill": "skills/map-the-architecture/SKILL.md"
+    },
+    {
+      "slug": "prove-the-docs",
+      "title": "Prove the Documentation Against the Code",
+      "description": "To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_prove_the_docs.md",
+      "skill": "skills/prove-the-docs/SKILL.md"
+    },
+    {
+      "slug": "prove-the-fix",
+      "title": "Prove the Fix by Making It Fail",
+      "description": "To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_prove_the_fix.md",
+      "skill": "skills/prove-the-fix/SKILL.md"
+    },
+    {
+      "slug": "qa-an-agents-tests",
+      "title": "QA the Tests an Agent Wrote",
+      "description": "To find the tests that pass because they were written from the implementation rather than from the requirement, and cannot fail.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_qa_an_agents_tests.md",
+      "skill": "skills/qa-an-agents-tests/SKILL.md"
+    },
+    {
+      "slug": "repair-a-green-pipeline",
+      "title": "Repair a Pipeline That Is Green Without Checking Anything",
+      "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_repair_a_green_pipeline.md",
+      "skill": "skills/repair-a-green-pipeline/SKILL.md"
+    },
+    {
+      "slug": "repair-setup-script",
+      "title": "Repair the Environment Setup Script",
+      "description": "To diagnose and repair the setup script so agent tasks stop failing before any code is written.",
+      "category": "Initial Scoping",
+      "status": "core",
+      "prompt": "_prompts/task_repair_setup_script.md",
+      "skill": "skills/repair-setup-script/SKILL.md"
+    },
+    {
+      "slug": "review-an-agent-pr",
+      "title": "Review an Agent-Written Pull Request",
+      "description": "To review a pull request an agent wrote, against the failure modes agents actually have.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_review_an_agent_pr.md",
+      "skill": "skills/review-an-agent-pr/SKILL.md"
+    },
+    {
+      "slug": "run-the-error-paths",
+      "title": "Run the Error Paths",
+      "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_run_the_error_paths.md",
+      "skill": "skills/run-the-error-paths/SKILL.md"
+    },
+    {
+      "slug": "scope-a-vague-issue",
+      "title": "Scope a Vague Issue",
+      "description": "To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.",
+      "category": "Initial Scoping",
+      "status": "core",
+      "prompt": "_prompts/task_scope_a_vague_issue.md",
+      "skill": "skills/scope-a-vague-issue/SKILL.md"
+    },
+    {
+      "slug": "security-review-agent-code",
+      "title": "Security Review of Agent-Written Code",
+      "description": "To review a change an agent wrote for the security defects agents specifically introduce.",
+      "category": "Security",
+      "status": "core",
+      "prompt": "_prompts/task_security_review_agent_code.md",
+      "skill": "skills/security-review-agent-code/SKILL.md"
+    },
+    {
+      "slug": "translate-the-docs",
+      "title": "Translate the Docs Without Forking Them",
+      "description": "To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_translate_the_docs.md",
+      "skill": "skills/translate-the-docs/SKILL.md"
+    },
+    {
+      "slug": "update-dependencies",
+      "title": "Update Dependencies",
+      "description": "To update a project's dependencies to their latest compatible versions.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_update_dependencies.md",
+      "skill": "skills/update-dependencies/SKILL.md"
+    },
+    {
+      "slug": "verify-a-migration",
+      "title": "Verify a Database Migration Before It Meets Real Data",
+      "description": "To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you.",
+      "category": "Maintenance",
+      "status": "core",
+      "prompt": "_prompts/task_verify_a_migration.md",
+      "skill": "skills/verify-a-migration/SKILL.md"
+    }
+  ]
+}
