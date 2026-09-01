@@ -208,6 +208,16 @@ A fix written before its test is indistinguishable from a coincidence: the sympt
 
 ---
 
+### [`task_prove_the_fix.md`]({% link _prompts/task_prove_the_fix.md %})
+**Purpose:** To establish that a test shipped with a fix would actually have caught the defect.
+
+A fix arrives as a change and a test, the suite passes, and the pair looks proven. It is not. A passing suite says the test agrees with the code as written; it does not say the test would have noticed the code being wrong, and those are different claims. A test that cannot fail is the green pipeline defect moved down a level, and it costs the same thing: everyone now believes the case is covered, so nobody looks again. This prompt puts each defect back, one at a time, runs only the test meant to catch it, and requires the failure to be about the behaviour rather than an import error. Every edit is reverted and the tree must end where it started.
+
+**When to use it:**
+*   On any pull request where an agent wrote both the fix and its test.
+*   Before citing a test as evidence that a bug is closed.
+*   On a suite that has never had a failing run.
+
 ### [`task_repair_a_green_pipeline.md`]({% link _prompts/task_repair_a_green_pipeline.md %})
 **Purpose:** To find the CI steps that pass because they are not running what they claim.
 
