@@ -9,9 +9,15 @@
  * It asserts three things a broken server would fail:
  *   1. it initializes and DECLARES the prompts capability, which is what makes clients show
  *      slash commands at all
- *   2. prompts/list returns every prompt the live index says exists, matched by count
+ *   2. prompts/list returns every procedure the index at the same ref says exists, by count
  *   3. prompts/get on a prompt WITH a placeholder actually substitutes the argument, which is
  *      the one thing this server does that copying from the website does not
+ *
+ * If the server dies before answering, this says so at once, with the server's own reason.
+ * It used to wait out a 60-second timeout and report "initialize timed out", which hid the
+ * cause (a 403 from the index host) behind a symptom.
+ *
+ * JULES_PROMPTS_REF chooses the commit both sides read. CI sets it to the commit under test.
  */
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -24,6 +30,14 @@ const child = spawn(process.execPath, [path.join(here, "index.js")], {
 
 let stderr = "";
 child.stderr.on("data", (d) => (stderr += d.toString()));
+
+// A request the server can no longer answer fails now, with the server's reason.
+let exited = null;
+child.on("exit", (code) => {
+  exited = `server exited with code ${code}: ${stderr.trim() || "no output"}`;
+  for (const [, settle] of pending) settle({ error: exited });
+  pending.clear();
+});
 
 const pending = new Map();
 let buf = "";
@@ -46,7 +60,8 @@ let nextId = 1;
 function send(method, params) {
   const id = nextId++;
   return new Promise((resolve, reject) => {
-    pending.set(id, (m) => (m.error ? reject(new Error(JSON.stringify(m.error))) : resolve(m.result)));
+    if (exited) return reject(new Error(exited));
+    pending.set(id, (m) => (m.error ? reject(new Error(typeof m.error === "string" ? m.error : JSON.stringify(m.error))) : resolve(m.result)));
     child.stdin.write(JSON.stringify({ jsonrpc: "2.0", id, method, params }) + "\n");
     setTimeout(() => reject(new Error(`${method} timed out`)), 60000);
   });
@@ -76,10 +91,12 @@ try {
   const listed = await send("prompts/list", {});
   const names = (listed.prompts || []).map((p) => p.name);
 
-  const live = await (await fetch("https://jules-prompts.wecanuseai.com/prompts.json")).json();
-  check("every prompt in the live index is served",
-    names.length === live.total_prompts,
-    `served ${names.length}, index says ${live.total_prompts}`);
+  const repo = process.env.JULES_PROMPTS_REPO || "melbinjp/jules-prompts";
+  const ref = process.env.JULES_PROMPTS_REF || "main";
+  const library = await (await fetch(`https://raw.githubusercontent.com/${repo}/${ref}/library.json`)).json();
+  check("every procedure in the index is served",
+    names.length === library.procedures.length,
+    `served ${names.length}, ${repo}@${ref} library.json lists ${library.procedures.length}`);
 
   const withArgs = (listed.prompts || []).find((p) => (p.arguments || []).length > 0);
   check("at least one prompt exposes a fillable placeholder",
