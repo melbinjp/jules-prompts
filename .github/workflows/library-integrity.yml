@@ -10,6 +10,9 @@ name: Library integrity
 # And no path filter on pull requests. The old one listed the paths someone thought mattered;
 # mcp/ was not among them, so a pull request that changed only the MCP server ran no checks at
 # all. A gate that a path filter can skip is not a gate, and this workflow takes about a minute.
+#
+# Actions are pinned to the commit their tag pointed at when pinned, so a moved tag cannot change
+# what runs here. The comment names the tag, for updating.
 
 on:
   push:
@@ -20,9 +23,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -42,15 +45,15 @@ jobs:
     # llms.txt resolves, and that every page is whole, titled and loads nothing from elsewhere.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Build the site as GitHub Pages does
-        uses: actions/jekyll-build-pages@v1
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -66,14 +69,20 @@ jobs:
     env:
       JULES_PROMPTS_REF: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
 
       - name: Install
         run: npm ci
+
+      # The server's dependencies were carrying one high and two moderate advisories, pulled in
+      # by the SDK's HTTP transports. A new high one fails the build rather than waiting to be
+      # noticed.
+      - name: No known high-severity vulnerabilities in what the server ships
+        run: npm audit --omit=dev --audit-level=high
 
       - name: The MCP server must answer a real client
         run: node mcp/smoke-test.mjs

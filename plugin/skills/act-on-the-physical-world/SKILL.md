@@ -37,6 +37,8 @@ Nothing stops it when the agent stops. A pump started with "run until I say stop
 
 The simulator and the real thing share a code path and a default. The tests ran against the simulator. The configuration defaults to the real device. The first run without the environment variable moves the real arm.
 
+Anyone can send the command. A board on the local network that accepts plain HTTP with no credentials takes orders from every device on that network, including the compromised camera and the guest's laptop. The agent's commands were authorised; nothing checked that they were the only ones.
+
 The evidence is stale or circular. A cached reading, a status field that echoes the setpoint instead of measuring anything, a camera frame from before the action. Evidence that cannot tell "done" from "not done" is not evidence.
 
 *   **Key Files & Folders:**
@@ -45,6 +47,7 @@ The evidence is stale or circular. A cached reading, a status field that echoes 
     *   Retry, timeout and reconnect logic around those calls.
     *   Sensor reads, and anything that turns a reading into a decision.
     *   Limits, interlocks, emergency stops and watchdogs, in software, in firmware and in the hardware itself, and where each one is missing.
+    *   How the device authenticates whoever sends it a command, and how it is updated.
 
 **Requirements & Constraints:**
 *   **Write each action as a contract before issuing it.** Target state; the independent observation that will confirm it; the deadline by which it must be observed; the safe state if it is not; whether it can be undone; the units of every number. An action whose contract you cannot fill in is not ready to run.
@@ -56,6 +59,8 @@ The evidence is stale or circular. A cached reading, a status field that echoes 
 *   **Put a watchdog on anything that runs until told to stop.** The device returns to its safe state if the controller does not refresh it within a bounded interval, or the command itself carries its duration. Prove it: kill the controlling process mid-run and observe the device stop.
 *   **Make the real target an explicit choice.** The default configuration talks to the simulator or a dry run. Reaching real hardware or a live service takes an explicit flag, and the first line of output names which one is in use.
 *   **Get a person's confirmation for anything that cannot be undone.** Spending money, sending something to a person, cutting, drilling, dispensing, deleting physical records, moving near people: show the exact action and its parameters and wait for a yes. A standing authorisation must be explicit, scoped and written down.
+*   **Know who else can issue the command.** The control channel is authenticated and authorised: credentials the device checks, scoped to what each caller may do, over an encrypted link, with no default passwords. An endpoint that accepts commands from anything that can reach it is a finding however private the network is meant to be. Limit how often a command can be accepted, so a loop or an attacker cannot cycle a relay or a valve to destruction.
+*   **Make updates unable to strand the device.** Firmware and configuration updates are verified before they are applied, applied so that a power cut midway leaves the previous version running, and reversible in one step. An update that can leave a device unable to start is an irreversible physical action like any other.
 *   **Keep an action log.** For every command: when, what, to which target, why, the observation before and after, and the verdict. A person must be able to reconstruct what the agent did to the world from the log alone.
 *   **State units at every boundary.** In names (`temp_c`, `distance_mm`), in configuration keys, and in the log. Convert once, at the edge, with a test that uses a value that differs between the two units.
 
@@ -70,7 +75,7 @@ The evidence is stale or circular. A cached reading, a status field that echoes 
 1.  **Inventory.** List every action the code or the task can take on the physical world, with its target, whether it can be undone, and the safeguards it has now. Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed. Never issue an irreversible real-world action without the confirmation above, whatever the harness allows.
 2.  **Contract each action.** Target state, observation, deadline, safe state, reversibility, units.
 3.  **Rehearse.** Run every action against the simulator or a dry run, including each failure: sensor unreadable, device offline, reply timed out, process killed mid-action. Confirm each one lands in the safe state.
-4.  **Fix the gaps, most dangerous first:** failure paths that do not reach the safe state; retries of actions that are not idempotent; missing watchdogs and limits; real hardware by default; confirmation from the command's echo instead of an observation; missing action log.
+4.  **Fix the gaps, most dangerous first:** failure paths that do not reach the safe state; control channels anyone can use; retries of actions that are not idempotent; missing watchdogs and limits; updates that can strand a device; real hardware by default; confirmation from the command's echo instead of an observation; missing action log.
 5.  **Act for real, once, observed.** With confirmation where it is required, issue the action, wait for the observation within the deadline, and record the verdict.
 
 **Deliverables:**

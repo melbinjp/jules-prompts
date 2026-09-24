@@ -2,7 +2,7 @@
   "fixture": "looks-finished",
   "skill": "take-to-production",
   "prompt_slug": "task_take_to_production",
-  "description": "A notes app that looks done in the browser it was built in, and breaks the README's three promises everywhere else.",
+  "description": "A notes app that looks done in the browser it was built in, breaks the README's three promises everywhere else, and runs any note that is HTML.",
   "defects": [
     {
       "id": "loses-work",
@@ -12,6 +12,16 @@
       "must_mention": [
         "reload",
         "saved automatically"
+      ]
+    },
+    {
+      "id": "script-injection",
+      "file": "app/app.js",
+      "tell": "linkify() builds HTML from the note text and render() assigns it to innerHTML, so a note like <img src=x onerror=...> runs script in the page; once notes are saved, it runs on every visit",
+      "level": 4,
+      "must_mention": [
+        "innerHTML",
+        "script"
       ]
     },
     {

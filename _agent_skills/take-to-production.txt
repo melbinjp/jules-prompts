@@ -6,10 +6,11 @@ excerpt_separator: ""
 ---
 {% raw %}---
 name: take-to-production
-description: 'To take a project in any state, software or physical, to the point where
-  it does its one job dependably for the people it is for, feels finished to use,
-  carries nothing it does not need, and every claim about it has been checked rather
-  than assumed. Category: End to End.'
+description: 'To take a project in any state, software or physical, to production
+  quality. It does its one job dependably and securely on every platform its people
+  use, loses and leaks nothing, feels finished, carries nothing it does not need,
+  and every area that decides this, from security and privacy to operations, is checked
+  rather than assumed. Category: End to End.'
 license: MIT
 metadata:
   prompt_slug: task_take_to_production
@@ -26,7 +27,7 @@ metadata:
 Bring the project to production quality from whatever state it is in: an idea, a prototype, something that works until it doesn't, or a mature system with gaps. Production quality here means four things, and you will check each rather than claim it:
 
 1.  It does the one job it exists for, on every platform its people actually use.
-2.  It never loses what people trusted it with, whatever the environment does.
+2.  It never loses, corrupts or exposes what people trusted it with, whatever the environment or an attacker does.
 3.  It feels finished to use: nothing rough, nothing unexplained, nothing unreachable.
 4.  It carries nothing it does not need.
 
@@ -46,6 +47,8 @@ The obvious platform works and the others were never tried. It was built in one 
 The happy path is finished and the environment is not. Storage fills, the network drops, the app is sent to the background, the battery dies, a permission is refused, the device is slow, two copies run at once, the upgrade meets last year's data. Each of these is certain to happen to someone. Each was imagined once and never caused.
 
 The features are complete and the product is not. An empty screen that shows nothing, an error that names an exception, a control a keyboard cannot reach, a layout that scrolls sideways on a small phone, a button that does nothing visible for two seconds. None of these fails a test. All of them tell the person that nobody finished this.
+
+The review covers what the agent thought of. An area nobody named (who can call this endpoint, what is in the logs, whether the backup restores, what the licence of that font allows) is not reported as broken, it is not reported at all, and a report that is silent about it reads exactly like one that checked it. Security is where this costs most: a product can pass every journey on every platform and still hand anyone who asks for it the data of everyone else.
 
 **Complexity arrives dressed as diligence.** Every framework, build step, abstraction, service and document added "for production" is one more thing that can break, must be updated, and must be understood by the next person. Past the point of need, each one lowers dependability while looking like it raises it.
 
@@ -68,8 +71,24 @@ When the project acts on the physical world (hardware, devices, instruments, veh
     *   what must never be lost or corrupted;
     *   the budgets that decide "fast enough" and "small enough": load time, size, frame rate, memory, battery, latency, cost.
     Every later step checks against this, and the final verdict table is built from it. Where the project gives no evidence for an item, write down what you assumed and why.
+*   **Walk every area, and say which ones do not apply.** Go through each area below. For each item, either add a row to the bar or write down in one line why it does not apply to this project. Where a specialist skill exists, use its method. Where none does, the method is the one used everywhere here: make the failure or the attack happen, then look.
+    *   **Security.** Write the threat model in five lines: what is worth taking or breaking, who could reach it, and through which entry points. Then, for every entry point (a route, a form, an upload, a command-line argument, a message, a webhook, a device port):
+        *   who is allowed to use it, enforced where the caller cannot bypass it, never only in the client;
+        *   untrusted input handled as what it is: nothing a person typed becomes part of a query, a shell command, a template or HTML; no path built from input escapes its directory; nothing deserialised or fetched from a URL on a stranger's say-so.
+        Secrets: none in the repository or its history, the client bundle, logs, error messages or diagnostics; each one scoped to the least it needs, and rotatable. Supply chain: a lockfile, a known-vulnerability scan and its result, CI actions pinned, nothing loaded at runtime from a source you do not control. Transport: TLS, security headers and a content security policy, cookies flagged, cross-origin access no wider than needed. Abuse: limits on anything that costs money, sends something to a person, or can be called in a loop. Try each attack; a defence you reasoned about is not one you tested. For code an agent wrote, `security-review-agent-code` is the method.
+    *   **Privacy.** What personal data is collected, where it goes, who else receives it (analytics, error trackers, third-party scripts, model providers), how long it is kept, and how a person deletes it.
+    *   **Data.** Where every piece of state lives, what writes it, and what happens when two writers meet. Backups that have been restored at least once. Migrations run against a copy of real-shaped data, forwards and back (`verify-a-migration`).
+    *   **Reliability.** Every external dependency made to fail and to go slow: timeouts bounded, retries capped and safe to repeat, and a degraded mode the person can still use (`run-the-error-paths`).
+    *   **Performance and capacity.** The budgets, and for anything that serves more than one person: the expected peak with a margin, measured; memory and open handles steady over a long run; the cost of one use, known.
+    *   **Compatibility.** The platform matrix, plus the previous version's data and settings, other locales (longer translated text, right-to-left scripts, time zones, number, date and unit formats), and slow or metered networks.
+    *   **Accessibility and craft.** The craft standard below.
+    *   **Operations.** The operability items below, and for anything that runs as a service: a health check, an alert on each never-fail journey that fires before a person reports it, and logs with enough context to diagnose a failure that cannot be reproduced.
+    *   **Delivery.** A build that reproduces from the lockfile, checks that gate the merge and have been seen to fail, a release that is one action, and a rollback that has actually been tried.
+    *   **Maintainability.** Setup from cold (`repair-setup-script`), documentation whose commands run (`prove-the-docs`), dependencies current (`update-dependencies`), and the complexity budget below.
+    *   **Legal.** Licences of the dependencies, fonts, images and data compatible with how the project is distributed, with the notices they require; any terms or privacy notice the product's use requires.
+    *   **Physical safety,** when the project moves, heats, dispenses, spends or sends: every action contracted as in `act-on-the-physical-world`, the conditions it runs in (power loss, heat, interference, a person nearby), and updates that cannot leave a device unable to start.
 *   **Fix in order of cost to the person.** Rank every finding and work from the top:
-    1.  loses or corrupts what they trusted it with;
+    1.  loses, corrupts or exposes what they trusted it with;
     2.  cannot do the core job;
     3.  broken on a platform they use;
     4.  unsafe, insecure, or inaccessible;
@@ -108,7 +127,7 @@ When the project acts on the physical world (hardware, devices, instruments, veh
     *   Map what actually runs (`map-the-architecture` for anything non-trivial).
     *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
 2.  **Write the bar.** As above: short, specific, and in the repository.
-3.  **Measure the gap.** Walk every journey on every platform in the bar. Cause every failure on the never-lost list. Check every surface against the craft standard. Measure every budget. List every dependency with what it costs. Record each finding with its level from 1 to 7.
+3.  **Measure the gap.** Walk every journey on every platform in the bar. Walk every area, and attempt every attack in the threat model. Cause every failure on the never-lost list. Check every surface against the craft standard. Measure every budget. List every dependency with what it costs. Record each finding with its level from 1 to 7.
 4.  **Close the gap, highest level first.** Small, reviewable commits, each with the test that proves it and the reason in its message. Re-walk the affected journeys after each one.
 5.  **Lock it in.** Budgets and platform runs in CI, tests that were seen to fail, and the bar updated to what now holds.
 6.  **Verdict.** Re-run everything from cold and fill in the verdict table. Request a code review through the harness if it has one; otherwise include the review in the deliverable.
@@ -116,7 +135,8 @@ When the project acts on the physical world (hardware, devices, instruments, veh
 **Deliverables:**
 *   The bar, committed.
 *   The changes, as a pull request (or the harness equivalent) whose description lists each fix with its level and the evidence that it worked.
-*   **A verdict table** with one row per item in the bar: each journey on each platform, each never-lost item under each failure, each craft item, each budget. Each row is `holds`, `broken` or `skipped`, with the evidence (a command, a test name, a screenshot, a measurement) or the reason.
+*   **A verdict table** with one row per item in the bar: each journey on each platform, each area's items, each attempted attack, each never-lost item under each failure, each craft item, each budget. Each row is `holds`, `broken` or `skipped`, with the evidence (a command, a test name, a screenshot, a measurement) or the reason.
+*   The areas and items that do not apply, each with its one-line reason, so a reader can tell a considered omission from a forgotten one.
 *   What was removed, and which additions were refused, each with its reason.
 *   Last line, the denominator: `31 holds, 2 broken, 5 skipped of 38 items.`
 {% endraw %}

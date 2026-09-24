@@ -5,11 +5,16 @@ const list = document.getElementById('notes');
 const form = document.getElementById('new');
 const input = document.getElementById('text');
 
+// Links in a note become clickable.
+function linkify(text) {
+  return text.replace(/(https?:\/\/\S+)/g, '<a href="$1">$1</a>');
+}
+
 function render() {
   list.innerHTML = '';
   for (const note of notes) {
     const item = document.createElement('li');
-    item.textContent = note.text;
+    item.innerHTML = linkify(note.text);
     list.appendChild(item);
   }
 }

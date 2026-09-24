@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed. Category: Physical Systems.",
       "url": "/.well-known/agent-skills/act-on-the-physical-world/SKILL.md",
-      "digest": "sha256:5e7f5bf72fb130eaa6e88dc8088af0ef983e261cec8d94b4557af171cc6aabb5"
+      "digest": "sha256:3be7539e7e4cc3054614f461d7ec230fa4769f2b094e3961c3930dfdda466ee0"
     },
     {
       "name": "analyze-and-improve-ui-ux",
@@ -165,9 +165,9 @@
     {
       "name": "take-to-production",
       "type": "skill-md",
-      "description": "To take a project in any state, software or physical, to the point where it does its one job dependably for the people it is for, feels finished to use, carries nothing it does not need, and every claim about it has been checked rather than assumed. Category: End to End.",
+      "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed. Category: End to End.",
       "url": "/.well-known/agent-skills/take-to-production/SKILL.md",
-      "digest": "sha256:e76f061dda8b4cc8cb49532374cc685b645f40da2709e23abce4e4a9ec2a85ef"
+      "digest": "sha256:894fe437596681c66ae6d8572fe38a1d2d4f8a940a8e93f1b961db55b0abb58e"
     },
     {
       "name": "translate-the-docs",

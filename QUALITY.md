@@ -14,9 +14,18 @@ This library, held to its own [take-to-production](_prompts/task_take_to_product
 - **Never corrupted:** the procedure text. Every form an agent loads is byte for byte its source.
 - **Budgets:** stylesheet under 24 KB, script under 8 KB, every page under 120 KB. No script, stylesheet or font from another origin; only the shared favicon.
 
+## Areas walked
+
+- **Security:** a static site with no input, no cookies and no server. No secrets anywhere in the history. The MCP server fetches only from GitHub over HTTPS; its dependencies are audited in CI; CI actions are pinned to commits. The real exposure is the trust root: whatever is on `main` is what every agent that loads these skills is told to do, so who can push to `main` matters more than anything on the site. The discovery digests detect a changed file in transit, not a bad commit.
+- **Privacy:** no analytics, cookies or third-party scripts. The shared favicon host sees visitors' addresses.
+- **Reliability:** the MCP server depends on GitHub alone (it depended on the site as well).
+- **Compatibility, accessibility and craft:** rows below.
+- **Legal:** MIT; the web fonts are gone, so no third-party assets remain besides the owner's favicon.
+- **Not applicable:** a content security policy (nothing on the site takes input or runs third-party code; add one if that changes), capacity, monitoring and backups (static hosting, and the repository is the data), physical safety.
+
 ## Verdicts
 
-Checked on the branch that introduced this file. `scripts/check_site.py` covers the rows marked CI on every push and pull request.
+Checked on the branch that introduced this file. CI covers the rows marked CI on every push and pull request.
 
 | item | evidence | verdict |
 |---|---|---|
@@ -35,6 +44,10 @@ Checked on the branch that introduced this file. `scripts/check_site.py` covers 
 | every form matches its source | `emit.py --check`, and the served bytes (CI) | holds |
 | every core skill can go red | each fixture's expected report scores; the scorer exits 1 on a report that misses a defect | holds |
 | budgets | stylesheet 13.3 KB, script 3.3 KB, largest page 39 KB (CI) | holds |
+| no secrets in the history | pattern scan of every commit on every branch | holds |
+| no known vulnerabilities in what the MCP server ships | `npm audit`: 0 (was 1 high, 2 moderate, in the SDK's HTTP transports); high fails CI | holds |
+| CI actions pinned | each pinned to a commit, tag in a comment | holds |
+| who can change what agents are told | depends on `main`'s branch protection, which this session cannot read | skipped |
 | Safari and Firefox engines | only Chromium was available to run | skipped |
 | a real screen reader | labels, a live region and landmarks are in the markup; not heard with a screen reader | skipped |
 | the live deployment | checked on a local build with the GitHub Pages gem set; CI builds with the Pages action | skipped |
@@ -47,4 +60,4 @@ Turbo and two Google Fonts (three requests to other origins, for a static site).
 
 A search box: 27 skills in named groups fit on one page. A JavaScript framework or a build step beyond the one GitHub Pages runs. Moving the site to a different host to serve `SKILL.md` directly: wrapping each file as a plain-text collection document does it on Pages, and the site check proves the bytes.
 
-18 items: 15 holds, 0 broken, 3 skipped.
+22 items: 18 holds, 0 broken, 4 skipped.

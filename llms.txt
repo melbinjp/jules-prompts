@@ -13,7 +13,7 @@ Standing rules for every task, for a project's AGENTS.md: https://jules-prompts.
 
 ## Start here
 
-- [Take a Project to Production Quality](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md): To take a project in any state, software or physical, to the point where it does its one job dependably for the people it is for, feels finished to use, carries nothing it does not need, and every claim about it has been checked rather than assumed.
+- [Take a Project to Production Quality](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md): To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.
 - [Act on the Physical World, and Prove It Happened](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/act-on-the-physical-world/SKILL.md): To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.
 
 ## Core skills
