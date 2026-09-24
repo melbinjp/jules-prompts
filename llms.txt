@@ -1,0 +1,49 @@
+# Jules Prompts
+
+> Agent Skills for the failures agents actually have: work that reads as finished and is not, setup that reports success while broken, tests that cannot fail, and commands to the physical world that were accepted but never happened. Each skill is one self-contained Markdown file in the Agent Skills format, and none depends on a particular agent or harness.
+
+To use this site as an agent:
+
+1. Pick the skill below whose description matches your task.
+2. Fetch its SKILL.md and follow it. It needs nothing else from this site.
+3. Report every claim as holds, broken or skipped, and end with how many of each.
+
+Discovery index, with a SHA-256 digest per skill: https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
+Standing rules for every task, for a project's AGENTS.md: https://jules-prompts.wecanuseai.com/harness/AGENTS.md
+
+## Start here
+
+- [Take a Project to Production Quality](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md): To take a project in any state, software or physical, to the point where it does its one job dependably for the people it is for, feels finished to use, carries nothing it does not need, and every claim about it has been checked rather than assumed.
+- [Act on the Physical World, and Prove It Happened](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/act-on-the-physical-world/SKILL.md): To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.
+
+## Core skills
+
+- [Audit Repository](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/audit-repo/SKILL.md): To conduct a comprehensive, evidence-based audit of a repository or live website.
+- [Map the Architecture](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/map-the-architecture/SKILL.md): To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names.
+- [Repair the Environment Setup Script](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/repair-setup-script/SKILL.md): To diagnose and repair the setup script so agent tasks stop failing before any code is written.
+- [Scope a Vague Issue](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/scope-a-vague-issue/SKILL.md): To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.
+- [Automate a Workflow That Can Report Its Own Failure](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/automate-a-workflow/SKILL.md): To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.
+- [Fix a Bug, Failing Test First](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/fix-a-bug-test-first/SKILL.md): To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.
+- [Isolate Tests from External Services](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/isolate-tests-from-services/SKILL.md): To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.
+- [Prove the Documentation Against the Code](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/prove-the-docs/SKILL.md): To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.
+- [Prove the Fix by Making It Fail](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/prove-the-fix/SKILL.md): To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red.
+- [QA the Tests an Agent Wrote](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/qa-an-agents-tests/SKILL.md): To find the tests that pass because they were written from the implementation rather than from the requirement, and cannot fail.
+- [Repair a Pipeline That Is Green Without Checking Anything](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/repair-a-green-pipeline/SKILL.md): To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.
+- [Review an Agent-Written Pull Request](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/review-an-agent-pr/SKILL.md): To review a pull request an agent wrote, against the failure modes agents actually have.
+- [Run the Error Paths](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/run-the-error-paths/SKILL.md): To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does.
+- [Translate the Docs Without Forking Them](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/translate-the-docs/SKILL.md): To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation.
+- [Update Dependencies](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/update-dependencies/SKILL.md): To update a project's dependencies to their latest compatible versions.
+- [Verify a Database Migration Before It Meets Real Data](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/verify-a-migration/SKILL.md): To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you.
+- [Generate Prompt from Description](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/generate-prompt-from-description/SKILL.md): To generate a new, high-quality prompt from a user's description.
+- [Security Review of Agent-Written Code](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/security-review-agent-code/SKILL.md): To review a change an agent wrote for the security defects agents specifically introduce.
+
+## Optional
+
+- [Analyze and Improve UI/UX](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/analyze-and-improve-ui-ux/SKILL.md): To analyze and improve the frontend UI/UX of a repository.
+- [Build API-Driven Frontend](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/build-api-frontend/SKILL.md): To build a modern, functional frontend for an application based on its backend API.
+- [Build from Plan](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/build-from-plan/SKILL.md): To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.
+- [Curate Repository](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/curate-repo/SKILL.md): To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.
+- [Fix and Refine](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/fix-and-refine/SKILL.md): To transform a prototype or demo-quality project into a production-grade application.
+- [Initial Repository Hardening](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/harden-repo-initial/SKILL.md): To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.
+- [Iterative Repository Hardening](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/harden-repo-iterative/SKILL.md): To perform ongoing, iterative improvements to a repository that has already been hardened.
+- [Source repository](https://github.com/melbinjp/jules-prompts): the procedures, the planted-failure fixtures that show a skill going red, the scorer, a plugin bundle and an MCP server

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Map the Architecture
 description: To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names.
 category: Initial Scoping

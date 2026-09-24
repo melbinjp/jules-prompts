@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Automate a Workflow That Can Report Its Own Failure
 description: To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.
 category: Iterative Development

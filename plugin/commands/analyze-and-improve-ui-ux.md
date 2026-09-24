@@ -11,8 +11,8 @@ Conduct a comprehensive analysis of the target website's UI/UX and produce a rep
 
 **Context:**
 *   **Target:** `<REPO_OR_SITE_URL>`
-*   **Type:** `repo` | `deployed-site` | `repo+site`
-*   **Access:** `public` | `private` (If private, credentials must be provided.)
+*   **Type:** `repo`, `deployed-site`, or `repo+site`
+*   **Access:** `public` or `private` (If private, credentials must be provided.)
 *   **Business Profile/Goals:** [Optional: Describe the business, its goals, and the target audience.]
 *   **Key User Journeys:** [Optional: Describe the most important tasks users should be able to accomplish.]
 

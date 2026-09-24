@@ -1,24 +1,56 @@
 ---
 layout: default
-title: Tasks
+title: Skills
+description: Every procedure in the library, as a page to read and a SKILL.md to load. Core skills first, grouped by what they are for; the older general-purpose ones last, marked legacy.
 ---
+{%- comment -%} Skills only: the master template is for authors, has no SKILL.md, and is in the guide. {%- endcomment -%}
+{%- assign tasks = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
+{%- assign featured = tasks | where_exp: "p", "p.featured" | sort: "featured" -%}
+{%- assign core = tasks | where_exp: "p", "p.status != 'legacy'" | where_exp: "p", "p.featured == nil" | sort: "title" -%}
+{%- assign legacy = tasks | where: "status", "legacy" | sort: "title" -%}
+<header class="page-head">
+  <h1>Skills</h1>
+  <p class="lede">Each procedure is one page to read and one <code>SKILL.md</code> to load, with the same text in both. Start with the first two. The core skills are grouped by what they are for, and the older general-purpose ones are last, marked legacy.</p>
+</header>
 
-<div class="page">
-  <h1>Tasks</h1>
-  <p>High-level, multi-step prompts that define a complete piece of work for a coding agent. Use a Task when you want the agent to take on a significant piece of work. The same procedures ship as Agent Skills in <code>skills/</code>.</p>
+<section aria-labelledby="start">
+  <h2 id="start" class="section-title">Start here</h2>
+  <div class="cards">
+    {%- for p in featured %}
+    <a class="card card-featured" href="{{ p.url | relative_url }}">
+      <span class="card-meta">{{ p.category }}</span>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
 
-  {%- assign tasks = site.prompts | where: "type", "Task" -%}
-  {%- assign tasks_by_category = tasks | group_by: "category" -%}
-  {%- for category in tasks_by_category -%}
-    <h2 class="category-title">{{ category.name }}</h2>
-    <div class="prompt-cards">
-      {%- assign sorted_prompts = category.items | sort: "title" -%}
-      {%- for prompt in sorted_prompts -%}
-        <a href="{{ prompt.url | relative_url }}" class="card">
-          <h3>{{ prompt.title }}</h3>
-          <p>{{ prompt.description }}</p>
-        </a>
-      {%- endfor -%}
-    </div>
-  {%- endfor -%}
-</div>
+{%- assign groups = core | group_by: "category" | sort: "name" -%}
+{%- for group in groups %}
+<section aria-labelledby="c-{{ forloop.index }}">
+  <h2 id="c-{{ forloop.index }}" class="section-title">{{ group.name }}</h2>
+  <div class="cards">
+    {%- for p in group.items %}
+    <a class="card" href="{{ p.url | relative_url }}">
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{%- endfor %}
+
+<section aria-labelledby="legacy">
+  <h2 id="legacy" class="section-title">Legacy</h2>
+  <p class="measure muted">General-purpose task text from 2025. Still correct and still runnable, and kept because it is useful. It is not what makes this library different, so each one says so in its description.</p>
+  <div class="cards">
+    {%- for p in legacy %}
+    <a class="card card-legacy" href="{{ p.url | relative_url }}">
+      <span class="card-meta">{{ p.category }}</span>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.description }}</p>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: Environment Setup
 permalink: /environment-setup/
 ---

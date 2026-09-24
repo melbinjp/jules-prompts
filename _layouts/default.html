@@ -3,15 +3,13 @@
 <head>
   {%- include head.html -%}
 </head>
-<body class="{{ page.body_class }}">
+<body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
   {%- include header.html -%}
-  <main class="page-content" aria-label="Content">
+  <main id="main" class="page-content" tabindex="-1">
     <div class="wrapper">
       {{ content }}
     </div>
   </main>
   {%- include footer.html -%}
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/copy.js' | relative_url }}"></script>
 </body>
 </html>

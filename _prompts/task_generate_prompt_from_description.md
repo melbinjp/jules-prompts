@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Generate Prompt from Description
 description: To generate a new, high-quality prompt from a user's description.
 category: Meta

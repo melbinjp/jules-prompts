@@ -30,6 +30,19 @@ cp -R skills/qa-an-agents-tests .agents/skills/
 cp -R skills/* .claude/skills/
 ```
 
+Or fetch one straight from the site, byte for byte the file here:
+
+```bash
+mkdir -p .claude/skills/take-to-production
+curl -fsSL https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md \
+  -o .claude/skills/take-to-production/SKILL.md
+```
+
+`https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json` lists
+every skill with the SHA-256 of its `SKILL.md`, and
+`https://jules-prompts.wecanuseai.com/llms.txt` lists them for an agent that was
+given nothing but the domain.
+
 Or point the agent at this repository. The MCP server still serves the same
 text as slash-command prompts for clients that do not load skills:
 

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Review an Agent-Written Pull Request
 description: To review a pull request an agent wrote, against the failure modes agents actually have.
 category: Maintenance

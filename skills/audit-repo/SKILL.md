@@ -19,8 +19,8 @@ Produce a comprehensive audit that describes exactly how the target project (rep
 
 **Context:**
 *   **Target:** `<REPO_OR_SITE_URL>`
-*   **Type:** `repo` | `deployed-site` | `repo+site`
-*   **Access:** `public` | `private` (If private, credentials must be provided).
+*   **Type:** `repo`, `deployed-site`, or `repo+site`
+*   **Access:** `public` or `private` (If private, credentials must be provided).
 *   **Sample Inputs:** [Optional: Provide sample files, example API calls, models, or seed data to aid in the audit.]
 
 **Requirements & Constraints:**

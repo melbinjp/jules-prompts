@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Security Review of Agent-Written Code
 description: To review a change an agent wrote for the security defects agents specifically introduce.
 category: Security

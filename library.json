@@ -1,8 +1,17 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 25,
+  "count": 27,
   "procedures": [
+    {
+      "slug": "act-on-the-physical-world",
+      "title": "Act on the Physical World, and Prove It Happened",
+      "description": "To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.",
+      "category": "Physical Systems",
+      "status": "core",
+      "prompt": "_prompts/task_act_on_the_physical_world.md",
+      "skill": "skills/act-on-the-physical-world/SKILL.md"
+    },
     {
       "slug": "analyze-and-improve-ui-ux",
       "title": "Analyze and Improve UI/UX",
@@ -200,6 +209,15 @@
       "status": "core",
       "prompt": "_prompts/task_security_review_agent_code.md",
       "skill": "skills/security-review-agent-code/SKILL.md"
+    },
+    {
+      "slug": "take-to-production",
+      "title": "Take a Project to Production Quality",
+      "description": "To take a project in any state, software or physical, to the point where it does its one job dependably for the people it is for, feels finished to use, carries nothing it does not need, and every claim about it has been checked rather than assumed.",
+      "category": "End to End",
+      "status": "core",
+      "prompt": "_prompts/task_take_to_production.md",
+      "skill": "skills/take-to-production/SKILL.md"
     },
     {
       "slug": "translate-the-docs",

@@ -74,7 +74,7 @@ Perform an iterative hardening pass on the repository. The primary goals, in ord
 ---
 
 **Deliverables:**
-*   A pull request from a branch named `jules/hardening-followup-YYYYMMDD`.
+*   A pull request from a branch named `hardening-followup-YYYYMMDD`.
 *   The PR must include:
     *   A manager's note with rationale, risks, and rollback steps.
     *   Full test and audit artifacts (logs, reports).

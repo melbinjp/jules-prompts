@@ -1,0 +1,73 @@
+{
+  "fixture": "command-accepted",
+  "skill": "act-on-the-physical-world",
+  "prompt_slug": "task_act_on_the_physical_world",
+  "description": "A greenhouse controller whose tests all pass because every one of them checks what the agent sent, never what happened to the greenhouse.",
+  "defects": [
+    {
+      "id": "trusts-the-ack",
+      "file": "greenhouse.py",
+      "function": "close_valve",
+      "tell": "returns True on HTTP 200 from the board; nothing observes whether water stopped flowing",
+      "must_mention": [
+        "close_valve",
+        "200"
+      ]
+    },
+    {
+      "id": "retries-a-dispense",
+      "file": "greenhouse.py",
+      "function": "dispense_fertiliser",
+      "tell": "retries a dispense after a reply timeout, when the first dose may already have gone out; up to three doses for one request",
+      "must_mention": [
+        "dispense_fertiliser",
+        "idempot"
+      ]
+    },
+    {
+      "id": "fails-hot",
+      "file": "greenhouse.py",
+      "function": "keep_warm",
+      "tell": "an unreadable temperature sensor becomes 20.0 degrees, so the heater is switched on with no idea how hot it is",
+      "must_mention": [
+        "except Exception",
+        "heater"
+      ]
+    },
+    {
+      "id": "units-mismatch",
+      "file": "greenhouse.py",
+      "function": "keep_warm",
+      "tell": "compares a Celsius reading with a Fahrenheit target; 30 C is below 68 F, so the heater never turns off",
+      "must_mention": [
+        "Fahrenheit",
+        "Celsius"
+      ]
+    },
+    {
+      "id": "no-watchdog",
+      "file": "greenhouse.py",
+      "function": "water",
+      "tell": "pump on, sleep, pump off: if the process dies during the sleep, the pump runs until someone notices",
+      "must_mention": [
+        "pump",
+        "watchdog"
+      ]
+    },
+    {
+      "id": "real-by-default",
+      "file": "greenhouse.py",
+      "function": "DEVICE_URL",
+      "tell": "without GREENHOUSE_URL set, the code talks to the real board; the simulator is never the default",
+      "must_mention": [
+        "GREENHOUSE_URL",
+        "simulator"
+      ]
+    }
+  ],
+  "control": {
+    "file": "greenhouse.py",
+    "function": "open_vent",
+    "tell": "confirms from the vent's own position sensor, checks the reading is newer than the command, has a deadline, and closes the vent when it cannot confirm. A report that flags it as trusting the acknowledgement is inventing."
+  }
+}

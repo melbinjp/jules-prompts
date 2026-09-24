@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Update Dependencies
 description: To update a project's dependencies to their latest compatible versions.
 category: Maintenance

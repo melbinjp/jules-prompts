@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Prove the Documentation Against the Code
 description: To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.
 category: Maintenance

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Verify a Database Migration Before It Meets Real Data
 description: To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you.
 category: Maintenance

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Build API-Driven Frontend
 description: To build a modern, functional frontend for an application based on its backend API.
 category: Initial Scoping

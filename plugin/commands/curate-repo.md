@@ -45,7 +45,7 @@ Discover what is in the repository, propose a short, prioritized plan to make it
     *   If you rendered previews, confirm they are syntactically valid.
     *   Document the verification outputs (logs, sample previews).
 6.  **Report & Handoff:**
-    *   Commit your changes to a new branch named `jules/curation-pass-YYYYMMDD`.
+    *   Commit your changes to a new branch named `curation-pass-YYYYMMDD`.
     *   Prepare the deliverables listed below and open a pull request.
 
 **Deliverables:**

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Fix a Bug, Failing Test First
 description: To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.
 category: Iterative Development

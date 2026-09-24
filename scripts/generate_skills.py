@@ -48,18 +48,31 @@ def skill_name(stem: str) -> str:
     return name
 
 
-def render_skill(stem: str, meta: dict, body: str) -> str:
-    name = skill_name(stem)
+def describe(stem: str, meta: dict) -> str:
+    """The one description every loadable form uses: skills, commands, the discovery index.
+
+    agentskills wants it to say what AND when. The category is the when-hint. The tier is
+    appended for legacy procedures, because an agent choosing between two skills sees the
+    description and nothing else, and it should know which one this library stands behind.
+    """
     description = (meta.get("description") or "").strip()
-    title = (meta.get("title") or name).strip()
     category = (meta.get("category") or "").strip()
     if not description:
         raise SystemExit(f"{stem}: prompt has no description, skill would be unlistable")
-    # agentskills: description says what AND when. Category is the when-hint.
     if category and category.lower() not in description.lower():
         description = f"{description} Category: {category}."
+    if (meta.get("status") or "core").strip() == "legacy" and "legacy" not in description.lower():
+        description = f"{description} Legacy: general-purpose, kept for completeness."
     if len(description) > 1024:
         description = description[:1021] + "..."
+    return description
+
+
+def render_skill(stem: str, meta: dict, body: str) -> str:
+    name = skill_name(stem)
+    title = (meta.get("title") or name).strip()
+    category = (meta.get("category") or "").strip()
+    description = describe(stem, meta)
     front = {
         "name": name,
         "description": description,

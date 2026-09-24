@@ -1,45 +1,37 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "title": "New Repository to Production",
-  "description": "A recommended workflow for taking a new or unmaintained project to a production-ready state using the Jules Prompts library.",
+  "description": "The recommended sequence for taking a project in any state, software or physical, to production quality with the jules-prompts skills.",
   "steps": [
     {
       "order": 1,
       "prompt_slug": "task_repair_setup_script",
-      "title": "Repair the Environment Setup Script",
-      "description": "Make the repository reliably usable by an agent: dependencies install, tests run, nothing blocks.",
+      "title": "Make it run from cold",
+      "description": "Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.",
       "required": true,
       "repeatable": false
     },
     {
       "order": 2,
-      "prompt_slug": "task_audit_repo",
-      "title": "Audit the Repository",
-      "description": "Conduct a comprehensive, evidence-based audit to understand the project's current state.",
-      "required": true,
-      "repeatable": false
-    },
-    {
-      "order": 3,
-      "prompt_slug": "task_harden_repo_initial",
-      "title": "Harden the Repository",
-      "description": "Set up CI/CD pipeline, testing infrastructure, and development best practices.",
-      "required": true,
-      "repeatable": false
-    },
-    {
-      "order": 4,
-      "prompt_slug": "task_fix_and_refine",
-      "title": "Fix and Refine",
-      "description": "Address bugs, technical debt, and architectural issues discovered during the audit.",
+      "prompt_slug": "task_take_to_production",
+      "title": "Take it to production quality",
+      "description": "Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.",
       "required": true,
       "repeatable": true
     },
     {
-      "order": 5,
-      "prompt_slug": "task_harden_repo_iterative",
-      "title": "Ongoing Maintenance",
-      "description": "Continuously improve with better tests, coverage, and small feature enhancements.",
+      "order": 3,
+      "prompt_slug": "task_review_an_agent_pr",
+      "title": "Review what the agent produced",
+      "description": "Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.",
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 4,
+      "prompt_slug": "task_update_dependencies",
+      "title": "Keep it current",
+      "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",
       "required": false,
       "repeatable": true
     }
