@@ -14,6 +14,12 @@
  * index and the bodies are read from the repository at startup, so a prompt merged an hour ago
  * is available without anyone republishing anything.
  *
+ * WHY ONE HOST. The index used to come from the website and the bodies from GitHub, so the
+ * server needed two hosts up, and reachable, to start. Behind a proxy that allowed GitHub and
+ * not the site it failed outright, although everything it serves lives on GitHub. Both now
+ * come from the repository: library.json is the index the repository already generates.
+ * JULES_PROMPTS_INDEX can still point at a prompts.json.
+ *
  * WHAT IT DOES THAT COPY-PASTE DOES NOT. Several prompts carry placeholders such as
  * <PR_URL_OR_DIFF_RANGE>. Those are discovered per prompt and exposed as MCP arguments, so the
  * client can ask for them and this substitutes before handing the text over. That is the part
@@ -31,8 +37,8 @@ import { z } from "zod";
 const REPO = process.env.JULES_PROMPTS_REPO || "melbinjp/jules-prompts";
 const REF = process.env.JULES_PROMPTS_REF || "main";
 const RAW = `https://raw.githubusercontent.com/${REPO}/${REF}`;
-const INDEX = process.env.JULES_PROMPTS_INDEX ||
-  "https://jules-prompts.wecanuseai.com/prompts.json";
+const INDEX = process.env.JULES_PROMPTS_INDEX || `${RAW}/library.json`;
+const VERSION = "1.1.0";
 
 const PLACEHOLDER = /<([A-Z][A-Z0-9_]*)>/g;
 
@@ -67,9 +73,26 @@ function placeholdersIn(body) {
   return [...new Set([...body.matchAll(PLACEHOLDER)].map((m) => m[1]))];
 }
 
+/** The prompts an index lists, as {slug, title, description, category, source_path}.
+ *  library.json lists procedures; the site's prompts.json lists prompts. Either is accepted.
+ *  The prompt name stays the file stem (task_audit_repo), as it always was, so a slash
+ *  command someone already uses keeps its name. */
+function entriesOf(index) {
+  if (Array.isArray(index.procedures)) {
+    return index.procedures.map((p) => ({
+      slug: p.prompt.replace(/^.*\//, "").replace(/\.md$/, ""),
+      title: p.title,
+      description: p.description,
+      category: p.category,
+      source_path: p.prompt,
+    }));
+  }
+  return index.prompts || [];
+}
+
 async function main() {
   const index = await getJson(INDEX);
-  const entries = index.prompts || [];
+  const entries = entriesOf(index);
   if (entries.length === 0) throw new Error(`${INDEX} listed no prompts`);
 
   const loaded = await Promise.all(
@@ -80,7 +103,7 @@ async function main() {
     }),
   );
 
-  const server = new McpServer({ name: "jules-prompts", version: index.version || "1.0.0" });
+  const server = new McpServer({ name: "jules-prompts", version: VERSION });
 
   for (const p of loaded) {
     const argsSchema = {};
@@ -110,7 +133,7 @@ async function main() {
   process.stderr.write(
     `jules-prompts: ${loaded.length} prompt(s) from ${REPO}@${REF}, ` +
       `${withArgs} with fillable placeholders, ` +
-      `categories: ${(index.categories || []).join(", ")}\n`,
+      `categories: ${[...new Set(loaded.map((p) => p.category))].sort().join(", ")}\n`,
   );
 
   await server.connect(new StdioServerTransport());

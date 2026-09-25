@@ -2,7 +2,7 @@
 name: build-from-plan
 description: 'To analyze a repository''s blueprint/plan and current state, and iteratively
   implement the next logical steps to build a robust, production-grade system. Category:
-  Iterative Development.'
+  Iterative Development. Legacy: general-purpose, kept for completeness.'
 license: MIT
 metadata:
   prompt_slug: task_build_from_plan
@@ -32,7 +32,7 @@ Take a repository containing a blueprint or plan (e.g., `BLUEPRINT.md`, `PLAN.md
 
 **Guiding Principles:**
 *   **Blueprint First:** The planning document is the primary source of truth for the project's intended functionality. Always refer back to it.
-*   **Research and Improve:** Actively use web search (`google_search`, `view_text_website`) to research best practices, compare libraries, and validate technical choices before implementing them.
+*   **Research and Improve:** Actively search the web and read the primary sources to research best practices, compare libraries, and validate technical choices before implementing them.
 *   **Show Your Work:** Document your research findings and technical decisions in the pull request description to provide context for your work.
 *   **Leave it Better:** Proactively fix bugs, refactor code for clarity, and improve documentation as you work on your assigned feature.
 

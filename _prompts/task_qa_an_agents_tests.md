@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: QA the Tests an Agent Wrote
 description: To find the tests that pass because they were written from the implementation rather than from the requirement, and cannot fail.
 category: Maintenance

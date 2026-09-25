@@ -41,6 +41,16 @@
       "name": "finished-looking-pr",
       "skill": "review-an-agent-pr",
       "planted": 3
+    },
+    {
+      "name": "looks-finished",
+      "skill": "take-to-production",
+      "planted": 8
+    },
+    {
+      "name": "command-accepted",
+      "skill": "act-on-the-physical-world",
+      "planted": 6
     }
   ]
 }

@@ -44,9 +44,11 @@ REQUIRED_FIELDS = ("layout", "title", "description", "category", "type")
 
 GUIDE_ENTRY = re.compile(r"^### \[`([a-z0-9_]+)\.md`\]", re.M)
 
-# Tool names and a role line that only Jules understood. Naming Jules in a list of
-# harnesses the instructions do *not* depend on is allowed; addressing the agent as
-# Jules, or telling it to call set_plan, is not.
+# Tool names, branch names and a role line that only Jules understood. Naming Jules in a
+# list of harnesses the instructions do *not* depend on is allowed; addressing the agent as
+# Jules, telling it to call set_plan or google_search, or naming its branches jules/..., is
+# not. The last three were still in four legacy prompts after the unwrap, because this list
+# only named the tools that had already been found.
 FORBIDDEN_IN_PROMPTS = (
     "You are Jules",
     "`set_plan`",
@@ -54,8 +56,20 @@ FORBIDDEN_IN_PROMPTS = (
     "record_memory",
     "`submit` tool",
     "Jules' own FAQ",
-    "Jules' own FAQ",
+    "google_search",
+    "view_text_website",
+    "`jules/",
 )
+
+# Every procedure renders through the skill layout, which is what gives its page a title,
+# its tier and the ways to load it. A prompt on any other layout renders as a bare body.
+PROMPT_LAYOUT = "skill"
+
+# kramdown reads a list item with a bare pipe in it as a table row. "`repo` | `site`" in a
+# Context list rendered as a two-row table on the live site. A pipe inside a code span is
+# fine, so code spans are removed before looking.
+LIST_ITEM = re.compile(r"^\s*(?:[*+-]|\d+\.)\s")
+CODE_SPAN = re.compile(r"`[^`]*`")
 
 
 def front_matter(text: str) -> dict:
@@ -107,6 +121,14 @@ def main() -> int:
         for needle in FORBIDDEN_IN_PROMPTS:
             if needle in text:
                 problems.append(f"{p.name} still contains Jules-specific harness {needle!r}")
+        layout = (yaml.safe_load(text[3:text.find("\n---", 3)]) or {}).get("layout")
+        if layout != PROMPT_LAYOUT:
+            problems.append(f"{p.name} uses layout {layout!r}, not {PROMPT_LAYOUT!r}, so its "
+                            "page has no title or install panel")
+        for number, line in enumerate(text.splitlines(), 1):
+            if LIST_ITEM.match(line) and "|" in CODE_SPAN.sub("", line):
+                problems.append(f"{p.name}:{number} has a bare '|' in a list item, which "
+                                "renders as a table on the site")
 
     config_ok = True
     try:

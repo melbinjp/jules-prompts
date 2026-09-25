@@ -1,8 +1,11 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{% assign page_title = page.title | default: site.title | default: "Jules Prompts" %}
-{% assign page_desc = page.description | default: site.description %}
+{%- assign page_desc = page.description | default: site.description | strip_html | normalize_whitespace -%}
+{%- if page.url == "/" -%}
+  {%- assign page_title = site.title | append: ": " | append: site.tagline -%}
+{%- else -%}
+  {%- assign page_title = page.title | default: site.title | append: " · " | append: site.title -%}
+{%- endif %}
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_desc }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
@@ -14,13 +17,24 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ page_title }}">
 <meta name="twitter:description" content="{{ page_desc }}">
+<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/x-icon" href="https://favicon.wecanuseai.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="https://favicon.wecanuseai.com/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://favicon.wecanuseai.com/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="https://favicon.wecanuseai.com/apple-touch-icon-180x180.png">
-<script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.13/dist/turbo.es2017-umd.js" defer></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+{%- comment -%} Where an agent that fetched this page should look instead. {%- endcomment %}
+<link rel="alternate" type="text/plain" title="llms.txt" href="{{ '/llms.txt' | relative_url }}">
+<link rel="alternate" type="application/json" title="Agent Skills discovery index" href="{{ '/.well-known/agent-skills/index.json' | relative_url }}">
+{%- assign slug_prefix = page.slug | slice: 0, 5 -%}
+{%- if page.collection == "prompts" and slug_prefix == "task_" -%}
+{%- assign skill_name = page.slug | remove_first: "task_" | replace: "_", "-" %}
+<link rel="alternate" type="text/markdown" title="SKILL.md" href="{{ '/.well-known/agent-skills/' | append: skill_name | append: '/SKILL.md' | relative_url }}">
+{%- endif %}
+{%- comment -%}
+  An explicit theme choice is applied before the first paint, so a reader who chose dark never
+  sees a flash of light. With no choice stored, the stylesheet follows the system on its own.
+{%- endcomment %}
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>

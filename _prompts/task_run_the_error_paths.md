@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Run the Error Paths
 description: To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does.
 category: Maintenance

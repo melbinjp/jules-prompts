@@ -1,12 +1,17 @@
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrapper">
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
-
-    <nav class="site-nav">
-      <a class="page-link" href="{{ '/tasks.html' | relative_url }}">Tasks</a>
-      <button id="theme-toggle" class="btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      </button>
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{{ '/tasks.html' | relative_url }}"{% if page.url == "/tasks.html" or page.collection == "prompts" %} aria-current="page"{% endif %}>Skills</a>
+      <a href="{{ '/workflow/' | relative_url }}"{% if page.url == "/workflow/" %} aria-current="page"{% endif %}>Workflow</a>
+      <a href="{{ '/prompts-guide/' | relative_url }}"{% if page.url == "/prompts-guide/" %} aria-current="page"{% endif %}>Guide</a>
+      <a href="{{ '/#agents' | relative_url }}">Agents</a>
     </nav>
+    <button id="theme-toggle" class="icon-button" type="button" aria-label="Theme: System. Switch theme" title="Theme: System" data-mode="system">
+      <svg class="i-system" aria-hidden="true" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <svg class="i-light" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M1.5 12H4M20 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>
+      <svg class="i-dark" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
 </header>

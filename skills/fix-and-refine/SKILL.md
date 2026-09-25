@@ -1,7 +1,8 @@
 ---
 name: fix-and-refine
 description: 'To transform a prototype or demo-quality project into a production-grade
-  application. Category: Iterative Development.'
+  application. Category: Iterative Development. Legacy: general-purpose, kept for
+  completeness.'
 license: MIT
 metadata:
   prompt_slug: task_fix_and_refine

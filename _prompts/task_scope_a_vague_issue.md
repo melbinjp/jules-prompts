@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Scope a Vague Issue
 description: To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.
 category: Initial Scoping

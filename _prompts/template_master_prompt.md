@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Task Prompt Template
 description: The master template used to create and standardize all other prompts. It is not intended for direct use but serves as a 'golden copy' for prompt engineering.
 category: Meta

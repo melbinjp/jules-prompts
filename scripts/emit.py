@@ -24,6 +24,8 @@ per-format, it is structural.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import html
 import json
 import re
 import sys
@@ -42,6 +44,17 @@ SKIP = {"template_master_prompt"}
 
 PLUGIN_NAME = "jules-prompts"
 PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
+PLUGIN_VERSION = "1.1.0"
+
+# The published site, from the file that tells GitHub Pages which domain to serve.
+SITE = "https://" + (ROOT / "CNAME").read_text(encoding="utf-8").strip()
+
+# Where an agent finds the skills on the site: the Agent Skills discovery layout
+# (github.com/cloudflare/agent-skills-discovery-rfc, v0.2.0), so a client that knows the
+# convention needs nothing but the domain.
+DISCOVERY = "/.well-known/agent-skills"
+DISCOVERY_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
+
 
 
 def split_front_matter(text: str) -> tuple[dict, str]:
@@ -84,6 +97,9 @@ def load_prompts() -> list[dict]:
                 # Absent means core. Only legacy is written down, so the default
                 # costs nothing to maintain.
                 "status": (meta.get("status") or "core").strip(),
+                # `featured: <n>` in front matter puts a procedure first, in that order, on
+                # the site and in llms.txt. One place decides it, for both.
+                "featured": meta.get("featured"),
                 "body": body.rstrip() + "\n",
                 # The original front matter, so a renderer can use it rather
                 # than a lossy reconstruction.
@@ -94,14 +110,8 @@ def load_prompts() -> list[dict]:
 
 
 def _described(prompt: dict) -> str:
-    """agentskills wants a description that says what and when."""
-    description = prompt["description"]
-    category = prompt["category"]
-    if category and category.lower() not in description.lower():
-        description = f"{description} Category: {category}."
-    if prompt["status"] == "legacy" and "legacy" not in description.lower():
-        description = f"{description} Legacy: general-purpose, kept for completeness."
-    return description
+    """The shared description, so a skill and its slash command cannot disagree."""
+    return generate_skills.describe(prompt["stem"], prompt["meta"])
 
 
 # --- targets -----------------------------------------------------------------
@@ -136,11 +146,12 @@ def emit_plugin(prompts: list[dict]) -> dict[str, str]:
     manifest = {
         "name": PLUGIN_NAME,
         "description": (
-            "Procedures for the failures coding agents actually have: setup scripts that "
-            "report success while broken, tests that cannot fail, pipelines that are green "
-            "without checking anything, and pull requests that only read as finished."
+            "Procedures for the failures agents actually have: work that reads as finished "
+            "and is not, setup scripts that report success while broken, tests that cannot "
+            "fail, pipelines that are green without checking anything, and commands to the "
+            "physical world that were accepted but never happened."
         ),
-        "version": "1.0.0",
+        "version": PLUGIN_VERSION,
         "homepage": PLUGIN_REPO,
         "license": "MIT",
     }
@@ -189,11 +200,146 @@ def emit_index(prompts: list[dict]) -> dict[str, str]:
     return {"library.json": json.dumps(payload, indent=2) + "\n"}
 
 
+def _skill_text(prompt: dict) -> str:
+    return emit_skills([prompt])[f"{prompt['slug']}/SKILL.md"]
+
+
+def _skill_url(prompt: dict) -> str:
+    return f"{SITE}{DISCOVERY}/{prompt['slug']}/SKILL.md"
+
+
+def emit_agent_skills(prompts: list[dict]) -> dict[str, str]:
+    """Each SKILL.md, served by the site byte for byte at its discovery URL.
+
+    GitHub Pages runs Jekyll, and Jekyll turns any `.md` with front matter into HTML, so a
+    SKILL.md cannot simply be copied into the site: it would arrive as a page, not a skill.
+    Each one is instead wrapped as a plain-text collection document whose permalink is the
+    discovery URL. `.txt` has no converter, and `raw` stops Liquid touching the text, so what
+    is served is exactly the SKILL.md, and its digest in the index can be checked.
+    """
+    files = {}
+    for prompt in prompts:
+        text = _skill_text(prompt)
+        if "{% endraw %}" in text or "{%- endraw" in text:
+            raise SystemExit(f"{prompt['stem']}: contains endraw, it cannot be served verbatim")
+        front = (
+            "---\n"
+            f"permalink: {DISCOVERY}/{prompt['slug']}/SKILL.md\n"
+            "layout: null\n"
+            "sitemap: false\n"
+            'excerpt_separator: ""\n'
+            "---\n"
+        )
+        files[f"{prompt['slug']}.txt"] = front + "{% raw %}" + text + "{% endraw %}"
+    return files
+
+
+def _line(prompt: dict) -> str:
+    return f"- [{prompt['title']}]({_skill_url(prompt)}): {prompt['description']}"
+
+
+def emit_site(prompts: list[dict]) -> dict[str, str]:
+    """The files that let an agent use the site with no prior knowledge of it.
+
+    - `.well-known/agent-skills/index.json`: the discovery index, with the SHA-256 of each
+      served SKILL.md, so a client can verify what it loads.
+    - `llms.txt`: the same list for an agent that was simply handed the domain.
+    - `_includes/workflow-steps.html`: the workflow page's steps, from workflow.json, so the
+      page and the JSON cannot drift apart again (they had: four steps against five).
+    """
+    index = {
+        "$schema": DISCOVERY_SCHEMA,
+        "skills": [
+            {
+                "name": p["slug"],
+                "type": "skill-md",
+                "description": _described(p),
+                "url": f"{DISCOVERY}/{p['slug']}/SKILL.md",
+                "digest": "sha256:" + hashlib.sha256(_skill_text(p).encode("utf-8")).hexdigest(),
+            }
+            for p in prompts
+        ],
+    }
+
+    featured = sorted((p for p in prompts if p["featured"]), key=lambda p: p["featured"])
+    if not featured:
+        raise SystemExit("no procedure is featured, so llms.txt would have no starting point")
+    core = sorted(
+        (p for p in prompts if p["status"] == "core" and not p["featured"]),
+        key=lambda p: (p["category"], p["title"]),
+    )
+    legacy = sorted((p for p in prompts if p["status"] == "legacy"), key=lambda p: p["title"])
+    llms = "\n".join(
+        [
+            "# Jules Prompts",
+            "",
+            "> Agent Skills for the failures agents actually have: work that reads as finished "
+            "and is not, setup that reports success while broken, tests that cannot fail, and "
+            "commands to the physical world that were accepted but never happened. Each skill "
+            "is one self-contained Markdown file in the Agent Skills format, and none depends "
+            "on a particular agent or harness.",
+            "",
+            "To use this site as an agent:",
+            "",
+            "1. Pick the skill below whose description matches your task.",
+            "2. Fetch its SKILL.md and follow it. It needs nothing else from this site.",
+            "3. Report every claim as holds, broken or skipped, and end with how many of each.",
+            "",
+            f"Discovery index, with a SHA-256 digest per skill: {SITE}{DISCOVERY}/index.json",
+            f"Standing rules for every task, for a project's AGENTS.md: {SITE}/harness/AGENTS.md",
+            "",
+            "## Start here",
+            "",
+            *[_line(p) for p in featured],
+            "",
+            "## Core skills",
+            "",
+            *[_line(p) for p in core],
+            "",
+            "## Optional",
+            "",
+            *[_line(p) for p in legacy],
+            f"- [Source repository]({PLUGIN_REPO}): the procedures, the planted-failure "
+            "fixtures that show a skill going red, the scorer, a plugin bundle and an MCP server",
+            "",
+        ]
+    )
+
+    workflow = json.loads((ROOT / "workflow.json").read_text(encoding="utf-8"))
+    steps = []
+    for step in workflow["steps"]:
+        stem = step["prompt_slug"]
+        tags = [] if step.get("required") else ["optional"]
+        if step.get("repeatable"):
+            tags.append("repeat as needed")
+        tag_html = "".join(f'<span class="tag">{t}</span>' for t in tags)
+        steps.append(
+            f'<li class="step">\n'
+            f'  <h2><a href="{{{{ "/prompts/{stem}.html" | relative_url }}}}">{html.escape(step["title"])}</a></h2>\n'
+            f'  <p>{html.escape(step["description"])}</p>\n'
+            + (f"  <p class=\"tags\">{tag_html}</p>\n" if tag_html else "")
+            + "</li>"
+        )
+    steps_html = (
+        "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
+        f'<p class="lede">{html.escape(workflow["description"])}</p>\n'
+        '<ol class="steps">\n' + "\n".join(steps) + "\n</ol>\n"
+    )
+
+    return {
+        f"{DISCOVERY.lstrip('/')}/index.json": json.dumps(index, indent=2) + "\n",
+        "llms.txt": llms,
+        "_includes/workflow-steps.html": steps_html,
+    }
+
+
 # name -> (output directory relative to the repo root, renderer)
 TARGETS = {
     "skills": ("skills", emit_skills),
     "plugin": ("plugin", emit_plugin),
     "index": (".", emit_index),
+    "agent-skills": ("_agent_skills", emit_agent_skills),
+    "site": (".", emit_site),
 }
 
 

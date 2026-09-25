@@ -1,0 +1,87 @@
+{
+  "fixture": "looks-finished",
+  "skill": "take-to-production",
+  "prompt_slug": "task_take_to_production",
+  "description": "A notes app that looks done in the browser it was built in, breaks the README's three promises everywhere else, and runs any note that is HTML.",
+  "defects": [
+    {
+      "id": "loses-work",
+      "file": "app/app.js",
+      "tell": "notes live only in an in-memory array; one reload loses them all, against the README's 'saved automatically'",
+      "level": 1,
+      "must_mention": [
+        "reload",
+        "saved automatically"
+      ]
+    },
+    {
+      "id": "script-injection",
+      "file": "app/app.js",
+      "tell": "linkify() builds HTML from the note text and render() assigns it to innerHTML, so a note like <img src=x onerror=...> runs script in the page; once notes are saved, it runs on every visit",
+      "level": 4,
+      "must_mention": [
+        "innerHTML",
+        "script"
+      ]
+    },
+    {
+      "id": "chromium-only",
+      "file": "app/app.js",
+      "tell": "Export calls window.showSaveFilePicker with no feature detection; Safari and Firefox do not have it, so Export cannot work there",
+      "level": 3,
+      "must_mention": [
+        "showSaveFilePicker"
+      ]
+    },
+    {
+      "id": "blank-error",
+      "file": "app/app.js",
+      "tell": "every export failure, including the person cancelling the save dialog, becomes alert('Something went wrong') with no cause and no next step",
+      "level": 6,
+      "must_mention": [
+        "Something went wrong"
+      ]
+    },
+    {
+      "id": "phone-overflow",
+      "file": "app/style.css",
+      "tell": ".toolbar has width: 560px, so a 320 px phone scrolls sideways (document 592 px wide)",
+      "level": 3,
+      "must_mention": [
+        "toolbar",
+        "320"
+      ]
+    },
+    {
+      "id": "focus-hidden",
+      "file": "app/style.css",
+      "tell": "*:focus { outline: none } with no replacement, so a keyboard user cannot see where they are",
+      "level": 4,
+      "must_mention": [
+        "outline"
+      ]
+    },
+    {
+      "id": "dead-weight",
+      "file": "app/index.html",
+      "tell": "loads lodash from a CDN that app.js never uses: a third-party request and a failure point that buy nothing",
+      "level": 5,
+      "must_mention": [
+        "lodash"
+      ]
+    },
+    {
+      "id": "no-empty-state",
+      "file": "app/app.js",
+      "tell": "with no notes the list renders nothing at all; a first-time visitor sees a blank page under the toolbar",
+      "level": 6,
+      "must_mention": [
+        "empty state"
+      ]
+    }
+  ],
+  "control": {
+    "file": "app/style.css",
+    "tell": "dark mode is done right: color-scheme plus a prefers-color-scheme block redefining the same tokens. A report that flags the theme is inventing."
+  }
+}

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Repair a Pipeline That Is Green Without Checking Anything
 description: To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.
 category: Maintenance

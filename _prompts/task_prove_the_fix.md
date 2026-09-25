@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Prove the Fix by Making It Fail
 description: To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red.
 category: Maintenance

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: Prompts Guide
 permalink: /prompts-guide/
 ---
@@ -26,6 +26,28 @@ This prompt guides the AI to act as a prompt engineer, taking a high-level descr
 **When to use it:**
 *   When you have an idea for a new prompt but want the AI to help you write it.
 *   To quickly create new prompts that are consistent with the existing ones in the library.
+
+---
+
+### [`task_take_to_production.md`]({% link _prompts/task_take_to_production.md %})
+**Purpose:** To take a project in any state, software or physical, to production quality, and show item by item that it got there.
+
+Asked to make something "production-grade", an agent adds the visible signs of production (a CI file, a container, a coverage badge, docstrings everywhere) and none of them is the thing. This prompt starts by writing down the bar: the one job, who does it on what, the journeys that must never fail, what must never be lost, and the budgets. Then it makes the bad day happen, on every platform the bar names and under every failure the environment can produce, and fixes what breaks in order of what it costs the person it happens to. It walks every area a real project has (security, privacy, data, reliability, capacity, compatibility, accessibility, operations, delivery, maintainability, licensing and physical safety), attempts the attacks in a written threat model instead of reasoning about them, and says which areas do not apply and why, so a considered omission can be told from a forgotten one. It holds a craft standard (every state designed, errors that say what to do, 320 px, keyboard, contrast), turns budgets into checks that fail, and holds a complexity budget, so machinery that does not earn its place is removed rather than added. It ends in a verdict table, one row per item in the bar, with the denominator.
+
+**When to use it:**
+*   On any project someone depends on, or is about to: a prototype going public, a tool that has started losing people's work, a product that works on the developer's machine.
+*   Instead of the legacy sequence of audit, harden and fix-and-refine, which it replaces.
+
+---
+
+### [`task_act_on_the_physical_world.md`]({% link _prompts/task_act_on_the_physical_world.md %})
+**Purpose:** To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards.
+
+Agents now drive valves, printers, robots, lab instruments and the services behind an API call that ship, pay or send. The habits that make an agent good at software (try it, look, revert) do not exist there. This prompt makes each action a contract before it runs: target state, the independent observation that will confirm it, a deadline, a safe state, and whether it can be undone. It finds the failures that recur on every kind of hardware: success read from an acknowledgement, retries of actions that are not idempotent, failure paths that default to the dangerous side, units that disagree, nothing to stop a device when the agent disappears, and real hardware by default. Anything irreversible waits for a person's yes.
+
+**When to use it:**
+*   Before an agent issues any command that moves, heats, dispenses, spends or sends.
+*   On any code that talks to hardware or a real-world service, whoever wrote it.
 
 ---
 
@@ -300,32 +322,25 @@ Documentation does not fail loudly. Every sentence was true the day it was writt
 
 ## Recommended Workflow
 
-The prompts in this library are designed to be complementary and can be used together in a logical sequence. Here is a recommended workflow for taking a new or unmaintained project toward a more maintainable, verifiable state:
+The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), for taking a project in any state to production quality:
 
-1.  **Repair the environment setup script.**
-    *   **Prompt:** `task_repair_setup_script.md`
-    *   **Goal:** To make the repository reliably usable by an agent at all.
-    *   **Outcome:** Dependencies install from cold and the test suite runs to completion, so every later step has a working baseline instead of an assumed one.
+1.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
+2.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
+3.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
+4.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
 
-2.  **Audit the repository.**
-    *   **Prompt:** `task_audit_repo.md`
-    *   **Goal:** To get a deep understanding of the project's current state.
-    *   **Outcome:** A comprehensive audit report that will inform the next steps.
+The earlier sequence (`task_audit_repo.md`, then the legacy hardening and fix-and-refine prompts) still works and is still here. `task_take_to_production.md` covers what it was for, and checks it.
 
-3.  **Harden the repository.**
-    *   **Prompt:** `task_harden_repo_initial.md`
-    *   **Goal:** To set up a modern CI/CD pipeline and testing infrastructure.
-    *   **Outcome:** A repository with automated checks for quality, performance, and accessibility.
+## For agents: using the site
 
-4.  **Fix and refine the codebase.**
-    *   **Prompt:** `task_fix_and_refine.md`
-    *   **Goal:** To address any bugs or architectural issues found in the audit.
-    *   **Outcome:** A robust, reliable, and well-documented codebase.
+Everything here can be used by an agent that was given nothing but the domain:
 
-5.  **Perform ongoing maintenance.**
-    *   **Prompts:** `task_harden_repo_iterative.md` and `task_update_dependencies.md`
-    *   **Goal:** To keep the project in a good state over time.
-    *   **Outcome:** A project that is continuously improved and kept up-to-date.
+*   [`/llms.txt`]({{ '/llms.txt' | relative_url }}) lists every skill with a one-line description and a link to its `SKILL.md`.
+*   [`/.well-known/agent-skills/index.json`]({{ '/.well-known/agent-skills/index.json' | relative_url }}) is the [Agent Skills discovery](https://github.com/cloudflare/agent-skills-discovery-rfc) index, with a SHA-256 digest of each `SKILL.md` so a client can verify what it loads.
+*   `/.well-known/agent-skills/<name>/SKILL.md` serves each skill, byte for byte the file in `skills/`.
+*   [`/harness/AGENTS.md`]({{ '/harness/AGENTS.md' | relative_url }}) is the standing doctrine, and [`/prompts.json`]({{ '/prompts.json' | relative_url }}) the older index, now with each skill's URL.
+
+`scripts/check_site.py` checks all of this against the built site in CI, so a skill that is not served, or served differently from its source, fails the build.
 
 ## Skills
 

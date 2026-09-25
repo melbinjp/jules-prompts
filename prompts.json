@@ -2,20 +2,25 @@
 layout: null
 ---
 {
-  "version": "2.0",
+  "version": "2.1",
   "generated": "{{ 'now' | date: '%Y-%m-%dT%H:%M:%S%z' }}",
   "repository": "https://github.com/melbinjp/jules-prompts",
   "documentation": "https://jules-prompts.wecanuseai.com/",
+  "skills_index": {{ '/.well-known/agent-skills/index.json' | absolute_url | jsonify }},
   "total_prompts": {{ site.prompts | size }},
   "categories": {{ site.prompts | map: "category" | uniq | sort | jsonify }},
   "prompts": [
     {%- assign sorted_prompts = site.prompts | sort: "title" -%}
     {%- for prompt in sorted_prompts -%}
+    {%- assign slug_prefix = prompt.slug | slice: 0, 5 -%}
+    {%- assign skill_name = prompt.slug | remove_first: "task_" | replace: "_", "-" -%}
     {
       "title": {{ prompt.title | jsonify }},
       "description": {{ prompt.description | jsonify }},
       "category": {{ prompt.category | jsonify }},
+      "status": {{ prompt.status | default: "core" | jsonify }},
       "url": {{ prompt.url | relative_url | jsonify }},
+      "skill": {% if slug_prefix == "task_" %}{{ "/.well-known/agent-skills/" | append: skill_name | append: "/SKILL.md" | relative_url | jsonify }}{% else %}null{% endif %},
       "source_path": {{ prompt.path | jsonify }},
       "slug": {{ prompt.slug | jsonify }}
     }{% unless forloop.last %},{% endunless %}

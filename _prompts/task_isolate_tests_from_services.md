@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Isolate Tests from External Services
 description: To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.
 category: Maintenance

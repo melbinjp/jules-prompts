@@ -1,5 +1,6 @@
 title: Jules Prompts
-description: "Machine-readable task prompts for coding agents, including the failures agents actually have: broken setup scripts, vague issues, unreviewed agent PRs."
+tagline: Skills for agents that have to get it right
+description: "Agent Skills for the failures agents actually have: work that reads as finished and is not, tests that cannot fail, setup that reports success while broken, and commands to the physical world that were accepted but never happened."
 # Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
 url: https://jules-prompts.wecanuseai.com
 
@@ -17,13 +18,25 @@ plugins:
   - jekyll-sitemap
 
 collections:
+  # The procedures, one page each, at /prompts/<name>.html.
   prompts:
     output: true
-    layout: default
     sort_by: title
+  # Each SKILL.md, served verbatim at /.well-known/agent-skills/<name>/SKILL.md. Generated
+  # by scripts/emit.py; see emit_agent_skills for why they are wrapped rather than copied.
+  agent_skills:
+    output: true
+
+# Jekyll skips dot-directories. The Agent Skills discovery index lives in one.
+include:
+  - .well-known
 
 # Jekyll's default exclude list is REPLACED, not extended, when this key is set - so
 # node_modules has to be named here or the whole tree gets copied into _site.
+#
+# plugin/ is excluded because Jekyll rendered every SKILL.md and command in it as a bare HTML
+# fragment (no layout, no styles) and listed all fifty in the sitemap. The skills are served
+# from /.well-known/agent-skills/ instead, verbatim.
 exclude:
   - node_modules
   - package.json
@@ -31,8 +44,8 @@ exclude:
   - mcp
   - scripts
   - skills
+  - plugin
   - fixtures
-  - harness
   - .jekyll-cache
   - Gemfile
   - Gemfile.lock

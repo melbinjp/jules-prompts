@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Translate the Docs Without Forking Them
 description: To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation.
 category: Maintenance

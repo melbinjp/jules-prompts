@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: skill
 title: Repair the Environment Setup Script
 description: To diagnose and repair the setup script so agent tasks stop failing before any code is written.
 category: Initial Scoping

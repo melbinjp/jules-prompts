@@ -1,75 +1,94 @@
-(function() {
-  const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-  const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
-  const systemIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`;
+// The site's only script: the theme choice and the copy buttons. No framework and no
+// third-party code. Every page reads, links and follows the system theme without it.
+(function () {
+  var root = document.documentElement;
+  var MODES = ['system', 'light', 'dark'];
+  var LABELS = { system: 'System', light: 'Light', dark: 'Dark' };
 
-  function getSystemTheme() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
+  function storedMode() {
+    try {
+      var mode = localStorage.getItem('theme');
+      return mode === 'light' || mode === 'dark' ? mode : 'system';
+    } catch (e) {
+      return 'system'; // storage blocked: follow the system, which needs nothing stored
     }
   }
 
-  function getInitialTheme() {
-    return localStorage.getItem('theme') || 'system';
+  function applyMode(mode) {
+    if (mode === 'system') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', mode);
+    try {
+      if (mode === 'system') localStorage.removeItem('theme');
+      else localStorage.setItem('theme', mode);
+    } catch (e) { /* the choice lasts for this page only */ }
   }
 
-  function updateIcon(theme, toggleBtn) {
-    if (!toggleBtn) return;
-    if (theme === 'system') {
-      toggleBtn.innerHTML = systemIcon;
-    } else if (theme === 'dark') {
-      toggleBtn.innerHTML = moonIcon;
-    } else {
-      toggleBtn.innerHTML = sunIcon;
+  function announce(text) {
+    var live = document.getElementById('live');
+    if (!live) return;
+    live.textContent = '';
+    setTimeout(function () { live.textContent = text; }, 50);
+  }
+
+  function initTheme() {
+    var button = document.getElementById('theme-toggle');
+    if (!button) return;
+    var mode = storedMode();
+    function show() {
+      button.setAttribute('data-mode', mode);
+      button.setAttribute('aria-label', 'Theme: ' + LABELS[mode] + '. Switch theme');
+      button.title = 'Theme: ' + LABELS[mode];
     }
+    show();
+    button.addEventListener('click', function () {
+      mode = MODES[(MODES.indexOf(mode) + 1) % MODES.length];
+      applyMode(mode);
+      show();
+      announce('Theme: ' + LABELS[mode]);
+    });
   }
 
-  let currentTheme = getInitialTheme();
-
-  if (currentTheme === 'system') {
-    applyTheme(getSystemTheme());
-  } else {
-    applyTheme(currentTheme);
+  // Selects the element's text, so a person can copy it by hand when the clipboard is refused.
+  function select(element) {
+    var range = document.createRange();
+    range.selectNodeContents(element);
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 
-  function initialize() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      updateIcon(currentTheme, themeToggle);
-
-      themeToggle.addEventListener('click', () => {
-        let newTheme;
-        if (currentTheme === 'system') {
-          newTheme = getSystemTheme() === 'dark' ? 'light' : 'dark';
-        } else {
-          newTheme = 'system';
+  function initCopy() {
+    var buttons = document.querySelectorAll('[data-copy]');
+    Array.prototype.forEach.call(buttons, function (button) {
+      var label = button.textContent;
+      var timer = null;
+      function say(text) {
+        button.textContent = text;
+        announce(text);
+        clearTimeout(timer);
+        timer = setTimeout(function () { button.textContent = label; }, 2000);
+      }
+      button.addEventListener('click', function () {
+        var target = document.querySelector(button.getAttribute('data-copy'));
+        if (!target) return;
+        var text = target.innerText.trim();
+        function byHand() {
+          select(target);
+          var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+          var apple = /Mac|iPhone|iPad/.test(navigator.platform || '');
+          say(touch ? 'Selected' : 'Selected: press ' + (apple ? '\u2318C' : 'Ctrl+C'));
         }
-
-        localStorage.setItem('theme', newTheme);
-        currentTheme = newTheme;
-
-        if (newTheme === 'system') {
-          applyTheme(getSystemTheme());
-        } else {
-          applyTheme(newTheme);
-        }
-        updateIcon(newTheme, themeToggle);
+        if (!navigator.clipboard || !window.isSecureContext) return byHand();
+        navigator.clipboard.writeText(text).then(function () { say('Copied'); }, byHand);
       });
-    }
+    });
   }
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (currentTheme === 'system') {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
+  function init() {
+    initTheme();
+    initCopy();
+  }
 
-  document.addEventListener('DOMContentLoaded', initialize);
-  document.addEventListener('turbo:load', initialize);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

@@ -38,7 +38,7 @@ Transform the repository into a production-ready, testable, and documented proje
     *   If jobs that do not require secrets pass, open a pull request with the results. If secrets are required, document them and note the CI failure in the PR.
 
 **Deliverables:**
-*   A pull request from a branch named `jules/initial-hardening-YYYYMMDD`.
+*   A pull request from a branch named `initial-hardening-YYYYMMDD`.
 *   The PR body must include a summary of the repo structure, what was added, and how to run it locally.
 *   **`.github/workflows/ci.yml`**: A comprehensive CI pipeline.
 *   **`.github/OPERATIONS.md`**: A runbook explaining the CI setup and local execution steps.

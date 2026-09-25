@@ -1,0 +1,23 @@
+<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
+<p class="lede">The recommended sequence for taking a project in any state, software or physical, to production quality with the jules-prompts skills.</p>
+<ol class="steps">
+<li class="step">
+  <h2><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></h2>
+  <p>Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.</p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></h2>
+  <p>Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.</p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></h2>
+  <p>Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.</p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_update_dependencies.html" | relative_url }}">Keep it current</a></h2>
+  <p>Update dependencies in small, verified steps, so staying current never becomes a rewrite.</p>
+  <p class="tags"><span class="tag">optional</span><span class="tag">repeat as needed</span></p>
+</li>
+</ol>
