@@ -1,0 +1,18 @@
+---
+layout: page
+title: MIT License
+description: The licence for Jules Prompts. Every skill, fixture and script here is free to use, copy, change and share under the MIT License.
+---
+{%- comment -%}
+  The licence page, read from LICENSE rather than kept as a second copy: LICENSE is what
+  GitHub, npm and licence scanners read, and a copy is a thing that can disagree with it.
+  Its first line is the heading; each blank-line-separated block is a paragraph.
+{%- endcomment -%}
+{%- capture licence -%}{% include_relative LICENSE %}{%- endcapture -%}
+{%- assign blocks = licence | strip | split: "
+
+" -%}
+<h1>{{ blocks.first | escape }}</h1>
+{%- for block in blocks offset: 1 %}
+<p>{{ block | escape }}</p>
+{%- endfor %}
