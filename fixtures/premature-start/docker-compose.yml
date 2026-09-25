@@ -1,0 +1,22 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    depends_on: [zookeeper]
+  postgres:
+    image: postgres:16
+  redis:
+    image: redis:7
+  api-gateway:
+    build: ./services/api-gateway
+    depends_on: [kafka]
+  readings:
+    build: ./services/readings
+    depends_on: [kafka, postgres]
+  insights:
+    build: ./services/insights
+    depends_on: [kafka, redis]
+  notifications:
+    build: ./services/notifications
+    depends_on: [kafka]

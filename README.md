@@ -3,9 +3,16 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/melbinjp/jules-prompts?style=social)](https://github.com/melbinjp/jules-prompts)
 
-A curated library of Agent Skills, and the planted-failure fixtures that show each one working, for coding agents and for agents that act on the physical world. The procedures cover the failures agents actually have: work that reads as finished and is not, broken setup scripts, vague issues, tests that cannot fail, pull requests that only read as finished, and commands to hardware that were accepted but never happened.
+A curated library of Agent Skills, and the planted-failure fixtures that show each one working, for coding agents and for agents that act on the physical world. The procedures cover the failures agents actually have: projects started on decisions nobody compared, changes with no reason that drift from the goal, work that reads as finished and is not, broken setup scripts, vague issues, tests that cannot fail, pull requests that only read as finished, and commands to hardware that were accepted but never happened.
 
-**Start with [Take a Project to Production Quality](_prompts/task_take_to_production.md)**, which takes a project in any state to the point where it does its one job dependably, feels finished, and carries nothing it does not need, and then shows it item by item. For anything that moves, heats, dispenses, spends or sends, use [Act on the Physical World](_prompts/task_act_on_the_physical_world.md).
+**Where to start depends on what you have.**
+
+- **An idea:** [Start a Project from an Idea](_prompts/task_start_from_an_idea.md). It decides whether the thing should be built at all, and what success is and when to stop. It makes the few costly-to-reverse decisions with evidence, and makes every stage of the pipeline runnable by a person or an agent. It builds one thin slice end to end and writes the ledger every later change traces to.
+- **A project that exists:** [Take a Project to Production Quality](_prompts/task_take_to_production.md). It takes a project in any state to the point where it does its one job dependably, feels finished and carries nothing it does not need, and shows that item by item.
+- **A change to make,** however vaguely it was asked for: [Change a Project with a Reason](_prompts/task_change_with_a_reason.md).
+- **Anything that moves, heats, dispenses, spends or sends:** [Act on the Physical World](_prompts/task_act_on_the_physical_world.md).
+
+Between those, [Choose Between Options with Evidence](_prompts/task_choose_with_evidence.md) makes each consequential choice. [Keep a Project on Course](_prompts/task_keep_it_on_course.md) reviews the project at every milestone and after launch, so it does not drift from its reason for existing.
 
 A prompt and a skill here are the same procedure. The prompt is the text; the skill is that text with a name and a description in front, so an agent can decide for itself when to load it. The site serves both.
 
@@ -33,6 +40,12 @@ library exists: the failures agents actually have. Legacy is the general-purpose
 what makes this different.
 
 Standing doctrine, for a project's `AGENTS.md` so it fires when nobody picks a skill: [`harness/AGENTS.md`](harness/AGENTS.md).
+
+### The ledger
+
+The lifecycle skills keep one ledger in the project they work on: `PROJECT.md` (the goal, success measures, journeys, resources, stop conditions and milestones, each with an ID) and `decisions/` (one file per decision, saying what it serves, its options and evidence, its way out and what would reopen it). Every commit names what it serves in a `Serves:` line. [`harness/check_trace.py`](harness/check_trace.py) is the check for that project's CI. It needs Python 3.8 and nothing else, and refuses a decision that serves nothing, a costly-to-reverse decision without its evidence, exit or approval, and a commit that serves nothing. [`harness/ledger-example/`](harness/ledger-example/) is a small worked example that passes it, and `scripts/test_check_trace.py` breaks that example in each of the 25 ways the check covers, to show it goes red.
+
+The check proves a record has the right shape. Whether its criteria, evidence and arithmetic are honest is what the skills are for, and two fixtures show the difference: the trace check passes on `vendor-comparison` and `six-months-in`, and each still has six or seven planted defects.
 
 ## Getting Started
 
@@ -111,7 +124,7 @@ When adding or revising a prompt:
 5. Update `workflow.json` only when the recommended sequence changes.
 6. If the prompt exists to catch a failure, add a fixture under `fixtures/` with `defects.json` and an `EXPECTED_REPORT.md` that names every planted defect.
 7. Keep `AGENTS.md`, this README, and the generated `prompts.json` fields aligned.
-8. `python scripts/check_library_integrity.py` and `python scripts/emit.py --check` must pass, and so must `python scripts/check_site.py _site` on a build of the site (CI builds it the way GitHub Pages does).
+8. `python scripts/check_library_integrity.py`, `python scripts/emit.py --check` and `python scripts/test_check_trace.py` must pass, and so must `python scripts/check_site.py _site` on a build of the site (CI builds it the way GitHub Pages does).
 
 ## Contributing
 

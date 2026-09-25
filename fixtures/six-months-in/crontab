@@ -1,0 +1,2 @@
+0 2 * * * cd /srv/woodshop && python calendar_sync.py
+0 3 * * * cd /srv/woodshop && make backup

@@ -1,0 +1,5 @@
+shop internet outages, from the router's log
+2027-01-22  47 min
+2027-02-03  2 h 10 min
+2027-02-11  35 min
+2027-02-26  1 h 05 min

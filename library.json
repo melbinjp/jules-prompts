@@ -1,7 +1,7 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 27,
+  "count": 31,
   "procedures": [
     {
       "slug": "act-on-the-physical-world",
@@ -56,6 +56,24 @@
       "status": "legacy",
       "prompt": "_prompts/task_build_from_plan.md",
       "skill": "skills/build-from-plan/SKILL.md"
+    },
+    {
+      "slug": "change-with-a-reason",
+      "title": "Change a Project with a Reason",
+      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is measured before and after, is built through every layer it touches, and leaves nothing detached. Or into a reasoned no, with the number that shows why.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_change_with_a_reason.md",
+      "skill": "skills/change-with-a-reason/SKILL.md"
+    },
+    {
+      "slug": "choose-with-evidence",
+      "title": "Choose Between Options with Evidence",
+      "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_choose_with_evidence.md",
+      "skill": "skills/choose-with-evidence/SKILL.md"
     },
     {
       "slug": "curate-repo",
@@ -119,6 +137,15 @@
       "status": "core",
       "prompt": "_prompts/task_isolate_tests_from_services.md",
       "skill": "skills/isolate-tests-from-services/SKILL.md"
+    },
+    {
+      "slug": "keep-it-on-course",
+      "title": "Keep a Project on Course, During and After Launch",
+      "description": "To review a project against its own ledger at each milestone and after launch. Every measure is taken again from its source, every stop and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. It ends in a decision, with evidence, to continue, adjust, pivot, pause or stop.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_keep_it_on_course.md",
+      "skill": "skills/keep-it-on-course/SKILL.md"
     },
     {
       "slug": "map-the-architecture",
@@ -209,6 +236,15 @@
       "status": "core",
       "prompt": "_prompts/task_security_review_agent_code.md",
       "skill": "skills/security-review-agent-code/SKILL.md"
+    },
+    {
+      "slug": "start-from-an-idea",
+      "title": "Start a Project from an Idea",
+      "description": "To take an idea, software or physical, to a foundation later work will not have to undo. It decides whether to build it at all, what success is and when to stop, makes the costly-to-reverse decisions with evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_start_from_an_idea.md",
+      "skill": "skills/start-from-an-idea/SKILL.md"
     },
     {
       "slug": "take-to-production",

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book the {{ machine }}</title>
+<img src="/static/hero.jpg" alt="The workshop" width="360">
+<h1>Book the {{ machine }}</h1>
+<ul>
+  {% for slot in free %}<li><button name="slot" value="{{ slot }}">{{ slot }}:00</button></li>{% endfor %}
+</ul>
+</html>

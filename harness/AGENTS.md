@@ -53,6 +53,28 @@ not: `3 broken, 11 checked, 4 not judged.`
 - Do not add machinery (a framework, a container, a service, a runbook) because
   production projects have one. Add it when you can name what breaks without it.
 
+## Every change has a reason
+
+For a project that keeps a ledger: `PROJECT.md` (goal, measures, journeys,
+resources, stop conditions, milestones) and `decisions/` (one file per decision).
+
+- Every commit names what it serves in a trailer line: `Serves: M2` or
+  `Serves: D0004`. A change that serves nothing is a question for the owner,
+  not work.
+- Translate a vague request ("faster", "scalable", "modern", "add AI") into a
+  measure, and measure before changing anything. If the measure already meets
+  its target, the answer is no, with the number.
+- Read the accepted decisions a change touches. Contradicting one takes new
+  evidence and a record that supersedes it, before the code changes.
+- A change is done when it is wired through every layer it touches and what it
+  replaced is gone: no module nothing calls, no setting nothing reads, no
+  dependency nothing imports, no two paths computing the same fact.
+- Evidence in proportion to the cost of being wrong. A decision that is costly
+  to reverse needs three options, two independent kinds of evidence, a way out
+  and a person's name; a cheap one needs a reason.
+- Every pipeline stage is a command in this repository that a person, an agent
+  or CI can run. Nothing lives only in an agent's memory or tools.
+
 ## Acting on the world
 
 For anything a command can move, heat, dispense, spend or send: hardware,
@@ -75,6 +97,10 @@ If this repository has the jules-prompts skills installed, load the matching
 one rather than improvising. If it does not, each one is a single file listed at
 https://jules-prompts.wecanuseai.com/llms.txt.
 
+- an idea, or a project with no written reason for what it is → `start-from-an-idea`
+- a vendor, platform, part, provider or approach to choose → `choose-with-evidence`
+- any requested change, especially a vague one → `change-with-a-reason`
+- a milestone reached, or a scheduled review after launch → `keep-it-on-course`
 - making a project dependable, finished and production-ready → `take-to-production`
 - any command to hardware, a device or a real-world service → `act-on-the-physical-world`
 - agent-authored tests → `qa-an-agents-tests`

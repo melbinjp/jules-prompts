@@ -44,6 +44,20 @@
       "digest": "sha256:cb496686f694468848a2768b306a6d84dab432b710e9630cf47fa7f4edd0368a"
     },
     {
+      "name": "change-with-a-reason",
+      "type": "skill-md",
+      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is measured before and after, is built through every layer it touches, and leaves nothing detached. Or into a reasoned no, with the number that shows why. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/change-with-a-reason/SKILL.md",
+      "digest": "sha256:fbee29d9a63eebcef73285c45158cfe67f0bf91a72108c0695e2ef3307b0a2e7"
+    },
+    {
+      "name": "choose-with-evidence",
+      "type": "skill-md",
+      "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/choose-with-evidence/SKILL.md",
+      "digest": "sha256:394ec9bb9f8c5a134818168f0f4d8084989aa9797de624e40e29cf25e350cc4b"
+    },
+    {
       "name": "curate-repo",
       "type": "skill-md",
       "description": "To analyze an unknown repository, make safe, reversible improvements, and provide a clear report. Category: Maintenance. Legacy: general-purpose, kept for completeness.",
@@ -91,6 +105,13 @@
       "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start. Category: Maintenance.",
       "url": "/.well-known/agent-skills/isolate-tests-from-services/SKILL.md",
       "digest": "sha256:16d41151ff0ec8afcd0c8e77077d964c3395c020e109a200a9e5c53e86c82bf3"
+    },
+    {
+      "name": "keep-it-on-course",
+      "type": "skill-md",
+      "description": "To review a project against its own ledger at each milestone and after launch. Every measure is taken again from its source, every stop and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. It ends in a decision, with evidence, to continue, adjust, pivot, pause or stop. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/keep-it-on-course/SKILL.md",
+      "digest": "sha256:6e9a92cc8dbd438a5b29b5a619ae3e92bae38bb76091ba5d6b9f26bfdc963482"
     },
     {
       "name": "map-the-architecture",
@@ -161,6 +182,13 @@
       "description": "To review a change an agent wrote for the security defects agents specifically introduce.",
       "url": "/.well-known/agent-skills/security-review-agent-code/SKILL.md",
       "digest": "sha256:3a0a271de4ff77f265be022d9b562eef0701ffc051a9aed6a788f5ba79e78a8a"
+    },
+    {
+      "name": "start-from-an-idea",
+      "type": "skill-md",
+      "description": "To take an idea, software or physical, to a foundation later work will not have to undo. It decides whether to build it at all, what success is and when to stop, makes the costly-to-reverse decisions with evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/start-from-an-idea/SKILL.md",
+      "digest": "sha256:e50487b7cea80373e0fd2eee02b7a44a17330d85bdc843cbd2338ce2b566ea72"
     },
     {
       "name": "take-to-production",

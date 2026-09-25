@@ -1,0 +1,4 @@
+month    bookings  help messages in the chat
+2027-01  168       70
+2027-02  190       74
+2027-03  212       81

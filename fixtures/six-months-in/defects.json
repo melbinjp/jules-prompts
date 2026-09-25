@@ -1,0 +1,54 @@
+{
+  "fixture": "six-months-in",
+  "skill": "keep-it-on-course",
+  "prompt_slug": "task_keep_it_on_course",
+  "description": "The booking app six months after launch. The status report says every measure is on track; its own logs, bills and scripts say a measure has been missed for months, two decisions are due to be reopened, a superseded job still runs, the backups have not been restored since October and nobody but the agent can release.",
+  "defects": [
+    {
+      "id": "measure-missed-quietly",
+      "file": "STATUS.md",
+      "tell": "M2 is 62% in March (131 of 212 bookings without help), against 90% by 2027-01-31; STATUS.md says all measures are on track",
+      "must_mention": ["M2", "62%"]
+    },
+    {
+      "id": "trigger-fired",
+      "file": "logs/outages.txt",
+      "tell": "D0002 is to be revisited at two or more outages in a month; February had three, and nobody reopened it",
+      "must_mention": ["D0002", "outage"]
+    },
+    {
+      "id": "superseded-still-running",
+      "file": "crontab",
+      "tell": "calendar_sync.py still runs at 2 a.m. every night, serving D0003, which D0004 superseded and said was removed; its dependency and credentials are still in place",
+      "must_mention": ["calendar_sync", "D0003"]
+    },
+    {
+      "id": "ghost-dependency",
+      "file": "requirements.txt",
+      "tell": "pandas is installed on every deploy and imported nowhere",
+      "must_mention": ["pandas"]
+    },
+    {
+      "id": "cost-over-budget",
+      "file": "invoices/2027-03.md",
+      "tell": "March cost £11.83 against M3's £5, because SafeBox's free tier ended on 15 January; that is also D0005's revisit condition",
+      "must_mention": ["£11", "M3"]
+    },
+    {
+      "id": "manual-path-broken",
+      "file": "Makefile",
+      "tell": "make release runs scripts/release.sh, which was renamed to ship.sh in January; the agent calls ship.sh directly, so the documented path for a person has been broken for months without anyone noticing",
+      "must_mention": ["release.sh", "ship.sh"]
+    },
+    {
+      "id": "restore-never-tried",
+      "file": "logs/restore-check.txt",
+      "tell": "the monthly restore check was last done on 2026-10-03; five were missed, so nobody knows whether the backups restore",
+      "must_mention": ["restore", "October"]
+    }
+  ],
+  "control": {
+    "file": "logs/double-bookings.txt",
+    "tell": "M1 holds: zero overlapping bookings in each of the last three months, from the log itself. A report that calls M1 unverified or missed is inventing."
+  }
+}

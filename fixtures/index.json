@@ -51,6 +51,26 @@
       "name": "command-accepted",
       "skill": "act-on-the-physical-world",
       "planted": 6
+    },
+    {
+      "name": "premature-start",
+      "skill": "start-from-an-idea",
+      "planted": 10
+    },
+    {
+      "name": "vendor-comparison",
+      "skill": "choose-with-evidence",
+      "planted": 6
+    },
+    {
+      "name": "optimise-it",
+      "skill": "change-with-a-reason",
+      "planted": 7
+    },
+    {
+      "name": "six-months-in",
+      "skill": "keep-it-on-course",
+      "planted": 7
     }
   ]
 }

@@ -31,24 +31,26 @@ Checked on the branch that introduced this file. CI covers the rows marked CI on
 | item | evidence | verdict |
 |---|---|---|
 | agent, from `llms.txt` | every skill listed; every link resolves in the built site (CI) | holds |
-| agent, from the discovery index | 27 of 27 `SKILL.md` served byte for byte, digests match (CI) | holds |
+| agent, from the discovery index | 31 of 31 `SKILL.md` served byte for byte, digests match (CI) | holds |
 | agent that fetched a skill's HTML page | each carries `<link rel="alternate" type="text/markdown">` to its `SKILL.md` (CI) | holds |
 | MCP client | smoke test: every procedure served, placeholder substituted, reading only GitHub (CI) | holds |
 | MCP client where the site is unreachable | before: exited with a 403 from the site. After: starts, index and bodies from GitHub | holds |
 | person, desktop, light and dark | screenshots of home, skills, a skill, workflow, guide | holds |
-| person, 320 px phone | document width 320 on all 37 pages (was 359 and 915 before the first redesign) | holds |
+| person, 320 px phone | document width 320 on all 41 pages (was 359 and 915 before the first redesign) | holds |
 | person, keyboard | skip link is the first stop and moves focus to the content; every stop has a 2 px outline, ink in light and lime in dark | holds |
 | contrast, WCAG AA | computed for every token pair on every surface. Light: text 15.8, secondary 6.1, links 8.3, labels 6.4, verdict colours at least 4.7. Dark: 14.0, 6.7, 12.6, 11.0, 7.1. Ink on the highlighter 14.2 | holds |
 | copy and download | copied text equals the snippet; `SKILL.md` downloads as `text/markdown` | holds |
 | every page whole and titled | one `<h1>` and a `<title>` on every page; no fragments (CI; was 26 skill pages with no heading, and 50 fragments) | holds |
 | no prompt text rendered as a table | (CI; was 2 pages) | holds |
 | every form matches its source | `emit.py --check`, and the served bytes (CI) | holds |
-| every core skill can go red | each fixture's expected report scores; the scorer exits 1 on a report that misses a defect | holds |
-| budgets | stylesheet 18.7 KB, script 3.3 KB, font 23.6 KB, preview image 64.5 KB, largest page 46 KB (CI) | holds |
+| every core skill can go red | 14 fixtures, 68 planted defects: each fixture's expected report names all of its own; the scorer exits 1 on a report that misses one | holds |
+| budgets | stylesheet 18.7 KB, script 3.3 KB, font 23.6 KB, preview image 64.5 KB, largest page 53 KB, the guide (CI) | holds |
 | a search engine or assistant reading a page | titles and descriptions name what it is and which agents read it; structured data parses on every page; the home page has WebSite and FAQPage, each skill page a TechArticle naming its title and its `SKILL.md` (CI) | holds |
 | a link shared in a chat or a post | every page names a 1200 by 630 preview image the site serves (CI) | holds |
 | the report on the home page | generated from the fixture's expected report; the generator refuses a total that disagrees with the table (CI) | holds |
-| Claude Code plugin install | from a clean config, marketplace add and install: 27 skills, about 1.7k tokens in every session (was 54 entries and 3.5k, every skill twice); both manifests pass `claude plugin validate --strict` | holds |
+| Claude Code plugin install | from a clean config, marketplace add and install: 31 skills, about 2.2k tokens in every session (was 54 entries and 3.5k, every skill twice; the four lifecycle skills add about 520). The longest skill, `start-from-an-idea`, costs about 5.6k when loaded, next to `take-to-production`'s 5.5k (it was 6.7k before it was cut). Both manifests pass `claude plugin validate --strict` | holds |
+| the ledger check other projects copy | the worked example passes; each of the 25 ways of breaking a ledger fails it by name; a checker with a rule weakened fails the tests (CI) | holds |
+| a ledger check that passes is not a verdict | it passes on `vendor-comparison` and `six-months-in`, which have 13 planted defects between them; the skills and the fixtures say so | holds |
 | no secrets in the history | pattern scan of every commit on every branch | holds |
 | no known vulnerabilities in what the MCP server ships | `npm audit`: 0 (was 1 high, 2 moderate, in the SDK's HTTP transports); high fails CI | holds |
 | CI actions pinned | each pinned to a commit, tag in a comment | holds |
@@ -56,6 +58,7 @@ Checked on the branch that introduced this file. CI covers the rows marked CI on
 | Safari and Firefox engines | only Chromium was available to run | skipped |
 | a real screen reader | labels, a live region and landmarks are in the markup; not heard with a screen reader | skipped |
 | the live deployment | checked on a local build with the GitHub Pages gem set; CI builds with the Pages action | skipped |
+| a live agent, given each lifecycle skill, scored on its fixture | the expected reports score; no agent run on these four fixtures has been scored yet, and one run by the author, who planted the defects, would not count | skipped |
 | found in search results | a web search still shows the site's old description; a fresh crawl can only be requested by the owner, in Google Search Console and Bing Webmaster Tools | skipped |
 
 ## Removed
@@ -64,6 +67,6 @@ The plugin's 27 slash commands, which Claude Code loaded as a second copy of eve
 
 ## Refused
 
-Renaming the library. The name is where it started, and it is what people already search for; every page says what it is now, and that it is not affiliated with Google. A search box: 27 skills in named groups fit on one page. A JavaScript framework or a build step beyond the one GitHub Pages runs. Moving the site to a different host to serve `SKILL.md` directly: wrapping each file as a plain-text collection document does it on Pages, and the site check proves the bytes.
+Proof, a simulation or several backings behind every change, which the lifecycle was asked for. The skills ask for evidence in proportion to what a wrong decision would cost: three options, two independent kinds of evidence, a way out and a person's name for a decision that is costly to reverse, and a reason for one that is not. Proof for everything spends a project's budget on its trivia. A service to run the lifecycle: two folders in the project and a check in its CI do it, with nothing to host. Renaming the library. The name is where it started, and it is what people already search for; every page says what it is now, and that it is not affiliated with Google. A search box: 31 skills in named groups fit on one page. A JavaScript framework or a build step beyond the one GitHub Pages runs. Moving the site to a different host to serve `SKILL.md` directly: wrapping each file as a plain-text collection document does it on Pages, and the site check proves the bytes.
 
-27 items: 22 holds, 0 broken, 5 skipped.
+30 items: 24 holds, 0 broken, 6 skipped.

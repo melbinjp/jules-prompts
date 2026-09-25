@@ -29,6 +29,39 @@ This prompt guides the AI to act as a prompt engineer, taking a high-level descr
 
 ---
 
+### [`task_start_from_an_idea.md`]({% link _prompts/task_start_from_an_idea.md %})
+**Purpose:** To take an idea, software or physical, to a foundation that later work will not have to undo.
+
+Given an idea, an agent scaffolds. Within minutes there is a framework, a database and a folder of services, and every piece is a decision taken from the first search result. This prompt first decides whether the thing should exist. That means the evidence of need, what people use today, the arithmetic of what it costs to build and run, how it is paid for, and how its first hundred people will hear of it. Then it writes the goal as measures with dates and the conditions for stopping. It sorts every decision by what it would cost to reverse, and spends the evidence there. One-way doors (the data model, the platform, the board, a vendor holding the data) get three options, two independent kinds of evidence, a way out and the owner's approval. The cheap decisions get a reason. It founds every area the product needs, not only engineering: legal and certification, finance, distribution, support. It threads each journey through all of them, so the user flow, the architecture and the data model stay one design. Every stage of the pipeline becomes a command a person, an agent or CI can run, so automation is a dial rather than a rebuild. It takes stock of what the agent can do and builds the missing tools into the repository. It then builds one thin slice end to end before any breadth, and plans milestones that each leave something usable. It writes the ledger (`PROJECT.md` and `decisions/`) that every later change must trace to, with a CI check that refuses what the ledger cannot account for.
+
+**When to use it:**
+*   On an idea, before anything is built, or on a project an agent has already started from one.
+*   On an existing project that has no written reason for what it is, to write its ledger from what is there.
+
+---
+
+### [`task_choose_with_evidence.md`]({% link _prompts/task_choose_with_evidence.md %})
+**Purpose:** To make a consequential choice by comparing real options against criteria from the goal, with evidence in proportion to the stakes.
+
+Asked to choose, an agent takes the first result with an SDK and writes a comparison to fit. This prompt frames the question as the job, not the product. It sets the stakes by whether the choice is costly to reverse, and writes the criteria before looking at any candidate. The options include doing nothing, building it and combining several. The evidence comes from primary sources and from measurements shaped like the real use, never from the vendor's page alone. It redoes every number with units, at today's size and the target, and names the assumption that would flip the result. It can choose one option, a portfolio, a sequence with a switch condition written in advance, or a timed experiment. It keeps the way out cheap, asks the owner once with everything, and records the decision with the condition that reopens it.
+
+**When to use it:**
+*   For any choice that holds data or users, fixes identifiers or URLs, has lead time, or spends money: a vendor, a platform, a part, a provider, a library.
+*   When a resource the project needs (an account, a model, hosting, a supplier) is about to be taken from wherever it was found first.
+
+---
+
+### [`task_change_with_a_reason.md`]({% link _prompts/task_change_with_a_reason.md %})
+**Purpose:** To turn any request for a change, including a vague one, into a change that traces to the goal and leaves nothing detached behind.
+
+Owners ask in the words they have: "it feels slow", "make it scalable", "add AI", "use microservices". An agent does what the words say. It caches a query that takes four milliseconds while the page downloads a two-megabyte photograph, and it adds an AI module nothing calls. It splits a service against a decision it never read, and leaves the old code answering half the requests. This prompt splits the request into claims and translates each into its measurable meanings. It maps each meaning to the ledger, and shows the owner the project as it is before changing anything. It measures first, and finds the cause before choosing the fix. It checks the change against the decisions already made, and reopens one only with new evidence. It builds through every layer the change touches, removes what the change replaces, and proves nothing is left detached. Each claim ends as changed (with before and after), not needed (with the number), the owner's call, or refused.
+
+**When to use it:**
+*   For every milestone and every requested change on a project with a ledger, and on one without, writing the smallest ledger the change needs.
+*   Whenever a request names a technique ("microservices", "AI", "a cache") instead of a result.
+
+---
+
 ### [`task_take_to_production.md`]({% link _prompts/task_take_to_production.md %})
 **Purpose:** To take a project in any state, software or physical, to production quality, and show item by item that it got there.
 
@@ -48,6 +81,17 @@ Agents now drive valves, printers, robots, lab instruments and the services behi
 **When to use it:**
 *   Before an agent issues any command that moves, heats, dispenses, spends or sends.
 *   On any code that talks to hardware or a real-world service, whoever wrote it.
+
+---
+
+### [`task_keep_it_on_course.md`]({% link _prompts/task_keep_it_on_course.md %})
+**Purpose:** To review a project against its own ledger at every milestone and on a schedule after launch, and decide with evidence what happens next.
+
+Projects rarely fail on one day. They drift: a status report copied forward, a decision whose revisit condition fired unnoticed, a superseded job still running, a free tier that ended, a documented release path that broke while an agent released through its own tool. This prompt takes every measure again from its source, never from the last report. It evaluates every stop condition and revisit condition, and finds the code, services, dependencies and spending that nothing serves any more. It runs every pipeline stage twice, once through the person's path and once through the agent's or CI's. It checks advisories, end-of-life notices and rules, and maps what the people using the project said to measures. Then it decides, with the owner: continue, adjust, pivot, pause or stop. A stop means a proper handover, with the data returned, devices left safe, paid services cancelled and keys revoked.
+
+**When to use it:**
+*   At the end of every milestone, weekly in the first month after launch, and monthly after that.
+*   When a status report says everything is fine and nobody can say where the numbers came from.
 
 ---
 
@@ -322,12 +366,18 @@ Documentation does not fail loudly. Every sentence was true the day it was writt
 
 ## Recommended Workflow
 
-The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), for taking a project in any state to production quality:
+The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from an idea to production and after. Start at the first step for an idea, and at the second for a project that already exists.
 
-1.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
-2.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
-3.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
-4.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
+1.  **Start from the idea.** `task_start_from_an_idea.md`. Whether it should exist, the measures and when to stop, the costly decisions made with evidence, a pipeline anyone can run, one slice end to end, and the ledger. For an existing project, write the ledger from what is there.
+2.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
+3.  **Choose with evidence, whenever a choice matters.** `task_choose_with_evidence.md`, repeated for each consequential choice.
+4.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
+5.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
+6.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
+7.  **Keep it on course.** `task_keep_it_on_course.md`, at every milestone and on a schedule after launch.
+8.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
+
+The first, third, fourth and seventh steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, stop conditions and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
 
 The earlier sequence (`task_audit_repo.md`, then the legacy hardening and fix-and-refine prompts) still works and is still here. `task_take_to_production.md` covers what it was for, and checks it.
 

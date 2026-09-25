@@ -1,0 +1,7 @@
+make pageload: mid-range phone profile, throttled 4G, median of 5 runs, 2026-11-02
+ready: 6.1 s
+transferred: 2,612 KB
+  static/hero.jpg   2,431 KB   (4032 x 3024, displayed at 360 x 270)
+  book.html            4 KB
+  style.css            9 KB
+  other              168 KB

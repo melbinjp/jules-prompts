@@ -1,11 +1,12 @@
 ---
 layout: default
 title: Recommended Workflow
-description: The order to use the skills in when taking a project in any state to production quality.
+description: The order to use the skills in, from an idea to production quality and after launch, for software and for physical products.
 permalink: /workflow/
 ---
 <div class="page-head">
   <h1>Recommended workflow</h1>
   {% include workflow-steps.html %}
 </div>
+<p class="measure">Any step calls on the other skills when it needs them: <a href="{{ '/prompts/task_act_on_the_physical_world.html' | relative_url }}">act on the physical world</a> for anything that moves, heats, dispenses, spends or sends, and <a href="{{ '/prompts/task_run_the_error_paths.html' | relative_url }}">run the error paths</a>, <a href="{{ '/prompts/task_fix_a_bug_test_first.html' | relative_url }}">fix a bug test first</a> and <a href="{{ '/prompts/task_map_the_architecture.html' | relative_url }}">map the architecture</a> where they fit. The lifecycle steps share one ledger in the project, checked in its CI by <a href="{{ '/harness/check_trace.py' | relative_url }}"><code>check_trace.py</code></a>.</p>
 <p class="fine">The same sequence, for agents: <a href="{{ '/workflow.json' | relative_url }}"><code>workflow.json</code></a>.</p>

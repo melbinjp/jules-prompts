@@ -44,18 +44,20 @@ SKIP = {"template_master_prompt"}
 
 PLUGIN_NAME = "jules-prompts"
 PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
-PLUGIN_VERSION = "1.2.0"
+PLUGIN_VERSION = "1.3.0"
 PLUGIN_AUTHOR = {"name": "Melbin J Paulose", "url": "https://github.com/melbinjp"}
 # The words a marketplace, a registry or a search matches on.
 PLUGIN_KEYWORDS = [
     "agent-skills", "skill-md", "verification", "production-readiness", "security-review",
-    "testing", "ci", "hardware", "physical-world", "claude-code", "codex", "jules",
+    "testing", "ci", "hardware", "physical-world", "project-lifecycle", "sdlc",
+    "decision-records", "claude-code", "codex", "jules",
 ]
 PLUGIN_DESCRIPTION = (
-    "Procedures for the failures agents actually have: work that reads as finished "
-    "and is not, setup scripts that report success while broken, tests that cannot "
-    "fail, pipelines that are green without checking anything, and commands to the "
-    "physical world that were accepted but never happened."
+    "Procedures for the failures agents actually have: projects started on decisions "
+    "nobody compared, changes with no reason that drift from the goal, work that reads "
+    "as finished and is not, setup scripts that report success while broken, tests "
+    "that cannot fail, and commands to the physical world that were accepted but never "
+    "happened."
 )
 
 # The published site, from the file that tells GitHub Pages which domain to serve.
@@ -303,9 +305,11 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         [
             "# Jules Prompts",
             "",
-            "> Agent Skills for the failures agents actually have: work that reads as finished "
-            "and is not, setup that reports success while broken, tests that cannot fail, and "
-            "commands to the physical world that were accepted but never happened. Each skill "
+            "> Agent Skills for the failures agents actually have: projects started on decisions "
+            "nobody compared, changes with no reason that drift from the goal, work that reads "
+            "as finished and is not, setup that reports success while broken, tests that cannot "
+            "fail, and commands to the physical world that were accepted but never happened. "
+            "They cover a project from the idea to production and after. Each skill "
             "is one self-contained Markdown file in the Agent Skills format, and none depends "
             "on a particular agent or harness.",
             "",
@@ -317,6 +321,7 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
             "",
             f"Discovery index, with a SHA-256 digest per skill: {SITE}{DISCOVERY}/index.json",
             f"Standing rules for every task, for a project's AGENTS.md: {SITE}/harness/AGENTS.md",
+            f"The ledger check, for a project's CI (Python, no dependencies): {SITE}/harness/check_trace.py",
             "",
             "## Start here",
             "",

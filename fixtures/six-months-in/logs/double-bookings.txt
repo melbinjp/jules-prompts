@@ -1,0 +1,4 @@
+overlapping pairs in the booking log
+2027-01: 0
+2027-02: 0
+2027-03: 0

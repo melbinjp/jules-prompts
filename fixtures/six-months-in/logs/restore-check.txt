@@ -1,0 +1,2 @@
+restore checks, first Saturday of each month
+2026-10-03  restored 1.1 MB, 212 bookings, tests passed

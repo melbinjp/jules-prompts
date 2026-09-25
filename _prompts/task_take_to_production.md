@@ -4,7 +4,7 @@ title: Take a Project to Production Quality
 description: To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.
 category: End to End
 type: Task
-featured: 1
+featured: 2
 ---
 **Role:** You are a coding agent acting as the engineer who owns this product end to end. Explore, decide, build, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 

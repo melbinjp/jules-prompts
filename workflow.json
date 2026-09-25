@@ -1,10 +1,18 @@
 {
-  "version": "2.0",
-  "title": "New Repository to Production",
-  "description": "The recommended sequence for taking a project in any state, software or physical, to production quality with the jules-prompts skills.",
+  "version": "3.0",
+  "title": "From an Idea to Production, and After",
+  "description": "The recommended sequence for a project in any state, software or physical: start it on written reasons, build it in traced changes, take it to production quality, and keep it on course after launch. Start at the first step for an idea, and at the second for a project that already exists.",
   "steps": [
     {
       "order": 1,
+      "prompt_slug": "task_start_from_an_idea",
+      "title": "Start from the idea",
+      "description": "Decide whether it should exist, and write down what success is and when to stop. Make the few decisions that are costly to reverse with evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.",
+      "required": true,
+      "repeatable": false
+    },
+    {
+      "order": 2,
       "prompt_slug": "task_repair_setup_script",
       "title": "Make it run from cold",
       "description": "Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.",
@@ -12,7 +20,23 @@
       "repeatable": false
     },
     {
-      "order": 2,
+      "order": 3,
+      "prompt_slug": "task_choose_with_evidence",
+      "title": "Choose with evidence, whenever a choice matters",
+      "description": "Compare real options for each consequential choice, including doing nothing, building it, and combining several. Use criteria from the goal and evidence in proportion to the stakes, redo every number, and keep a way out.",
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 4,
+      "prompt_slug": "task_change_with_a_reason",
+      "title": "Build in changes that each have a reason",
+      "description": "Every milestone and every request, including a vague one, is translated into a measure, measured before and after, built through every layer it touches, and traced to the goal, with nothing left behind.",
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 5,
       "prompt_slug": "task_take_to_production",
       "title": "Take it to production quality",
       "description": "Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.",
@@ -20,7 +44,7 @@
       "repeatable": true
     },
     {
-      "order": 3,
+      "order": 6,
       "prompt_slug": "task_review_an_agent_pr",
       "title": "Review what the agent produced",
       "description": "Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.",
@@ -28,7 +52,15 @@
       "repeatable": true
     },
     {
-      "order": 4,
+      "order": 7,
+      "prompt_slug": "task_keep_it_on_course",
+      "title": "Keep it on course, at every milestone and after launch",
+      "description": "Take every measure again from its source, reopen the decisions whose conditions fired, and remove what no longer serves the goal. Run the pipeline both ways, then decide with evidence to continue, adjust, pivot, pause or stop.",
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 8,
       "prompt_slug": "task_update_dependencies",
       "title": "Keep it current",
       "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",

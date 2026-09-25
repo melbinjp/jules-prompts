@@ -1,9 +1,23 @@
 <!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
-<p class="lede">The recommended sequence for taking a project in any state, software or physical, to production quality with the jules-prompts skills.</p>
+<p class="lede">The recommended sequence for a project in any state, software or physical: start it on written reasons, build it in traced changes, take it to production quality, and keep it on course after launch. Start at the first step for an idea, and at the second for a project that already exists.</p>
 <ol class="steps">
+<li class="step">
+  <h2><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></h2>
+  <p>Decide whether it should exist, and write down what success is and when to stop. Make the few decisions that are costly to reverse with evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.</p>
+</li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></h2>
   <p>Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.</p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></h2>
+  <p>Compare real options for each consequential choice, including doing nothing, building it, and combining several. Use criteria from the goal and evidence in proportion to the stakes, redo every number, and keep a way out.</p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></h2>
+  <p>Every milestone and every request, including a vague one, is translated into a measure, measured before and after, built through every layer it touches, and traced to the goal, with nothing left behind.</p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></h2>
@@ -13,6 +27,11 @@
 <li class="step">
   <h2><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></h2>
   <p>Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.</p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course, at every milestone and after launch</a></h2>
+  <p>Take every measure again from its source, reopen the decisions whose conditions fired, and remove what no longer serves the goal. Run the pipeline both ways, then decide with evidence to continue, adjust, pivot, pause or stop.</p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">

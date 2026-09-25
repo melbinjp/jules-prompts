@@ -1,6 +1,6 @@
 # Jules Prompts
 
-> Agent Skills for the failures agents actually have: work that reads as finished and is not, setup that reports success while broken, tests that cannot fail, and commands to the physical world that were accepted but never happened. Each skill is one self-contained Markdown file in the Agent Skills format, and none depends on a particular agent or harness.
+> Agent Skills for the failures agents actually have: projects started on decisions nobody compared, changes with no reason that drift from the goal, work that reads as finished and is not, setup that reports success while broken, tests that cannot fail, and commands to the physical world that were accepted but never happened. They cover a project from the idea to production and after. Each skill is one self-contained Markdown file in the Agent Skills format, and none depends on a particular agent or harness.
 
 To use this site as an agent:
 
@@ -10,10 +10,13 @@ To use this site as an agent:
 
 Discovery index, with a SHA-256 digest per skill: https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
 Standing rules for every task, for a project's AGENTS.md: https://jules-prompts.wecanuseai.com/harness/AGENTS.md
+The ledger check, for a project's CI (Python, no dependencies): https://jules-prompts.wecanuseai.com/harness/check_trace.py
 
 ## Start here
 
+- [Start a Project from an Idea](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/start-from-an-idea/SKILL.md): To take an idea, software or physical, to a foundation later work will not have to undo. It decides whether to build it at all, what success is and when to stop, makes the costly-to-reverse decisions with evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.
 - [Take a Project to Production Quality](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md): To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.
+- [Change a Project with a Reason](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/change-with-a-reason/SKILL.md): To turn any requested change, including a vague one like "optimise it", "make it scalable" or "add AI", into one that traces to the project's goal, is measured before and after, is built through every layer it touches, and leaves nothing detached. Or into a reasoned no, with the number that shows why.
 - [Act on the Physical World, and Prove It Happened](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/act-on-the-physical-world/SKILL.md): To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.
 
 ## Core skills
@@ -24,6 +27,8 @@ Standing rules for every task, for a project's AGENTS.md: https://jules-prompts.
 - [Scope a Vague Issue](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/scope-a-vague-issue/SKILL.md): To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.
 - [Automate a Workflow That Can Report Its Own Failure](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/automate-a-workflow/SKILL.md): To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.
 - [Fix a Bug, Failing Test First](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/fix-a-bug-test-first/SKILL.md): To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.
+- [Choose Between Options with Evidence](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/choose-with-evidence/SKILL.md): To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another.
+- [Keep a Project on Course, During and After Launch](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/keep-it-on-course/SKILL.md): To review a project against its own ledger at each milestone and after launch. Every measure is taken again from its source, every stop and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. It ends in a decision, with evidence, to continue, adjust, pivot, pause or stop.
 - [Isolate Tests from External Services](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/isolate-tests-from-services/SKILL.md): To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.
 - [Prove the Documentation Against the Code](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/prove-the-docs/SKILL.md): To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.
 - [Prove the Fix by Making It Fail](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/prove-the-fix/SKILL.md): To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red.

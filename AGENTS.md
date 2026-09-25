@@ -55,6 +55,7 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 
 | Category | Description |
 |----------|-------------|
+| **Lifecycle** | From an idea to a foundation (`start-from-an-idea`), choices made with evidence (`choose-with-evidence`), every change traced to the goal (`change-with-a-reason`), and reviews at milestones and after launch (`keep-it-on-course`) |
 | **End to End** | Taking a project in any state to production quality (`take-to-production`) |
 | **Physical Systems** | Commands to hardware, devices and real-world services (`act-on-the-physical-world`) |
 | **Initial Scoping** | First-pass tasks for new or unknown projects (audit, hardening, frontend build) |
@@ -65,12 +66,18 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 
 ## Recommended Workflow
 
-For taking a project in any state to production, in this order:
+From an idea to production and after. Start at step 1 for an idea, at step 2 for a project that already exists:
 
-1. `task_repair_setup_script`: make it run from cold
-2. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
-3. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
-4. `task_update_dependencies`: keep it current (optional, repeatable)
+1. `task_start_from_an_idea`: whether it should exist, the measures and when to stop, the costly decisions made with evidence, a pipeline a person or an agent can run, one slice end to end, and the ledger
+2. `task_repair_setup_script`: make it run from cold
+3. `task_choose_with_evidence`: each consequential choice (repeatable)
+4. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
+5. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
+6. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
+7. `task_keep_it_on_course`: at every milestone and on a schedule after launch (repeatable)
+8. `task_update_dependencies`: keep it current (optional, repeatable)
+
+Steps 1, 3, 4 and 7 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` line, in that project's CI.
 
 See `workflow.json` for the machine-readable workflow graph.
 
@@ -84,6 +91,8 @@ _agent_skills/      → The same SKILL.md files, wrapped so the site serves them
 llms.txt            → Every skill, for an agent given only the domain
 fixtures/           → Planted-failure trees + defects.json
 harness/AGENTS.md   → Standing doctrine fragment for other repos
+harness/check_trace.py → The ledger check for other repos (Python 3.8+, no dependencies)
+harness/ledger-example/ → A small ledger that passes it
 prompts.json        → Machine-readable prompt index (JSON API)
 scripts/            → emit.py (generates every form), the integrity, site and fixture checks
 workflow.json       → Machine-readable workflow graph

@@ -1,0 +1,48 @@
+{
+  "fixture": "vendor-comparison",
+  "skill": "choose-with-evidence",
+  "prompt_slug": "task_choose_with_evidence",
+  "description": "A hosting decision for a radio archive that has the right shape and passes the trace check, and is wrong: criteria from nowhere, two options, the vendor's own page as evidence, an upload test for a download problem, and arithmetic that turns $473 a month into $23.45.",
+  "defects": [
+    {
+      "id": "criteria-not-from-measures",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "Popularity 40% and developer experience 30% come from no measure; cost, which M1 makes a hard limit of $60, is only a 30% weight; M2 (links that never change) is not a criterion at all",
+      "must_mention": ["Popularity", "M1"]
+    },
+    {
+      "id": "missing-options",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "only the two vendors that came up; doing nothing, the station's own NAS, and combining (masters on the NAS, a host for serving) were never options",
+      "must_mention": ["NAS", "doing nothing"]
+    },
+    {
+      "id": "egress-arithmetic",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "transfer out is 5,000 GB x $0.09 = $450, not 0.09 x 5 = $0.45; CloudA is $473 a month, nearly eight times M1. CloudB is $55, because free downloads stop at three times the stored volume",
+      "must_mention": ["egress", "450"]
+    },
+    {
+      "id": "vendor-claim-only",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "the only source on quality is CloudA's own marketing page, including its comparison with CloudB",
+      "must_mention": ["why-cloud-a"]
+    },
+    {
+      "id": "unrepresentative-test",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "the speed test uploads a 2 MB file from the office; the use is listeners downloading 60 MB shows on phones",
+      "must_mention": ["2 MB"]
+    },
+    {
+      "id": "door-misclassified",
+      "file": "decisions/D0003-audio-hosting.md",
+      "tell": "recorded as two-way, but CloudA serves only from its own domain, so every feed and blog link would carry CloudA's URL and leaving would break M2: a one-way door with no exit, no approval and a revisit condition that never fires",
+      "must_mention": ["one-way", "URL"]
+    }
+  ],
+  "control": {
+    "file": "decisions/D0002-serve-mp3-keep-flac.md",
+    "tell": "the audio format decision is done right: criteria dated before the comparison and tied to measures, four options, a blind ABX test and the apps' own support pages as independent evidence, the arithmetic shown, and an exit through the FLAC masters. A report that faults it is inventing."
+  }
+}

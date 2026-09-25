@@ -1,0 +1,54 @@
+{
+  "fixture": "optimise-it",
+  "skill": "change-with-a-reason",
+  "prompt_slug": "task_change_with_a_reason",
+  "description": "An owner asks for 'optimise it, make it scalable, add AI, microservices', and an agent did exactly that: a cache on a 4 ms query, a service that contradicts a recorded decision, AI nothing calls, and a setting nothing reads, while the 2.4 MB photo that made the page slow is untouched.",
+  "defects": [
+    {
+      "id": "unmeasured-cache",
+      "file": "services/availability/server.py",
+      "tell": "a Redis cache in front of a query measured at 4 ms at the 95th percentile; it adds a service, and its five-minute staleness shows booked slots as free and cancelled slots as taken, against J2",
+      "must_mention": ["Redis", "4 ms"]
+    },
+    {
+      "id": "real-slowness-missed",
+      "file": "templates/book.html",
+      "tell": "the page the owner feels is slow takes 6.1 s against M4's 2 s, and 2.4 MB of its 2.6 MB is one photo, hero.jpg, shown 360 px wide; nothing in the change touches it",
+      "must_mention": ["hero.jpg"]
+    },
+    {
+      "id": "contradicts-decision",
+      "file": "services/availability/server.py",
+      "tell": "splitting availability into its own service contradicts D0002 (one process, one place availability is decided), with no new evidence and no superseding decision; load is 38 bookings a day at 1% CPU",
+      "must_mention": ["D0002", "services/availability"]
+    },
+    {
+      "id": "never-wired",
+      "file": "ai_suggest.py",
+      "tell": "nothing imports ai_suggest.py; it adds the openai dependency and an API key for a job no measure names",
+      "must_mention": ["ai_suggest"]
+    },
+    {
+      "id": "two-sources-of-truth",
+      "file": "reminders.py",
+      "tell": "the booking page asks the new service (cached) while reminders.py still calls app.slots_free (the database), so the same fact has two answers that can disagree",
+      "must_mention": ["slots_free", "reminders"]
+    },
+    {
+      "id": "config-never-read",
+      "file": ".env.example",
+      "tell": "SCALE_MODE is added and read nowhere",
+      "must_mention": ["SCALE_MODE"]
+    },
+    {
+      "id": "untraced",
+      "file": "CHANGES.md",
+      "tell": "four of the five commits have no Serves line; 'optimise' and 'modernise' name no measure",
+      "must_mention": ["Serves"]
+    }
+  ],
+  "control": {
+    "file": "emails.py",
+    "tell": "the time-zone fix is done right: it serves J1, shows shop time whatever the server clock, and its test checks a summer and a winter date so it fails if either season is wrong. A report that reverts or faults it is inventing."
+  }
+}

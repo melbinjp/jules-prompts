@@ -1,0 +1,4 @@
+availability query, SQLite on the Pi, 1,000 requests, 2026-11-02 (before the change)
+p50 2.1 ms
+p95 4.0 ms
+p99 5.2 ms
