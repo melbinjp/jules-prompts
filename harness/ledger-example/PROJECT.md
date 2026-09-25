@@ -1,8 +1,9 @@
 # Machine bookings for the Eastside Woodshop
 
 A worked example of a ledger, small on purpose. Every row below has an ID, every decision in
-`decisions/` says which IDs it serves, and every commit says the same in a `Serves:` line.
-`python check_trace.py --root .` passes on it.
+`decisions/` says which IDs it serves and what backs it, and every commit says what it serves
+and how it was verified, in `Serves:` and `Verified:` lines. `python check_trace.py --root .`
+passes on it.
 
 ## Goal
 
@@ -45,11 +46,14 @@ than the shop's whole software budget.
 Built by a member for free; running cost paid from the shop's £60 a year software budget,
 which M3 keeps it inside.
 
-## Stop or change course
+## Change course
+
+The goal stands. When a condition is measured, the project switches to the route it names.
 
 | id | condition | then |
 |---|---|---|
-| K1 | fewer than 20 bookings a month by 2027-03-31 | stop, export the bookings, go back to the paper sheet |
+| K1 | fewer than 20 bookings a month by 2027-03-31 | ask ten members what stops them, and fix what they name first, starting with the booking flow on a phone |
+| K2 | the Pi down for more than a day | move to the £4 cloud instance from the nightly backup (D0002's fallback) |
 
 ## Operating model
 

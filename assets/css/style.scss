@@ -904,6 +904,26 @@ section:first-of-type > .section-title { margin-top: 8px; }
 
   h2 { margin: 4px 0 6px; font-size: 1.2rem; }
   p { margin: 0 0 8px; color: var(--text-2); }
+
+  // The gate and the branches: what finishes the step, and the skills it calls on.
+  .gate, .branches { font-size: 0.92rem; }
+  .gate { color: var(--text); }
+  .gate strong, .branches strong {
+    margin-right: 6px;
+    color: var(--label);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+// The home page's short list of the same steps.
+.path {
+  max-width: var(--measure);
+  margin: 12px 0 8px;
+  padding-left: 1.6em;
+  li { margin: 4px 0; }
+  li::marker { color: var(--label); font-weight: 700; }
 }
 
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -1,42 +1,56 @@
 <!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
-<p class="lede">The recommended sequence for a project in any state, software or physical: start it on written reasons, build it in traced changes, take it to production quality, and keep it on course after launch. Start at the first step for an idea, and at the second for a project that already exists.</p>
+<p class="lede">The recommended sequence for making any idea real, software or physical, and keeping it working and improving: found it on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. Start at the first step for an idea, and at the second for a project that already exists. Each step names when it is done, and the other skills it calls on.</p>
 <ol class="steps">
 <li class="step">
   <h2><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></h2>
-  <p>Decide whether it should exist, and write down what success is and when to stop. Make the few decisions that are costly to reverse with evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.</p>
+  <p>Work out what it takes to make the idea happen and how it is paid for. Make the few decisions that are costly to reverse with verified evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.</p>
+  <p class="gate"><strong>Done when</strong> the owner has agreed the path and its first step, the ledger passes the trace check, and the walking skeleton has run end to end and been rolled back once.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></h2>
   <p>Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.</p>
+  <p class="gate"><strong>Done when</strong> a clean checkout installs and runs its tests with one command, and breaking a step makes that command fail.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_isolate_tests_from_services.html" | relative_url }}">Isolate Tests from External Services</a></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></h2>
-  <p>Compare real options for each consequential choice, including doing nothing, building it, and combining several. Use criteria from the goal and evidence in proportion to the stakes, redo every number, and keep a way out.</p>
+  <p>Compare real options for each consequential choice, including building it and combining several. Use criteria from the goal, back the decision with at least two pieces of evidence (one verified), redo every number, and keep a way out.</p>
+  <p class="gate"><strong>Done when</strong> the decision record passes the trace check, and the owner has approved it if it is costly to reverse.</p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></h2>
-  <p>Every milestone and every request, including a vague one, is translated into a measure, measured before and after, built through every layer it touches, and traced to the goal, with nothing left behind.</p>
+  <p>Every milestone and every request, however vaguely worded, is translated into a measure, verified before and after, built through every layer it touches, and traced to the goal, with nothing left behind.</p>
+  <p class="gate"><strong>Done when</strong> every claim in the request is accounted for, every commit has its Serves and Verified lines, the measure moved, and nothing is left detached.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_scope_a_vague_issue.html" | relative_url }}">Scope a Vague Issue</a>, <a href="{{ "/prompts/task_fix_a_bug_test_first.html" | relative_url }}">Fix a Bug, Failing Test First</a>, <a href="{{ "/prompts/task_verify_a_migration.html" | relative_url }}">Verify a Database Migration Before It Meets Real Data</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></h2>
   <p>Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.</p>
+  <p class="gate"><strong>Done when</strong> every row of the bar holds, or is broken or skipped with its reason and its next step in the plan.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_security_review_agent_code.html" | relative_url }}">Security Review of Agent-Written Code</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_prove_the_docs.html" | relative_url }}">Prove the Documentation Against the Code</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></h2>
   <p>Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.</p>
+  <p class="gate"><strong>Done when</strong> every claim the pull request makes is checked, and every new test has been seen to fail.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_qa_an_agents_tests.html" | relative_url }}">QA the Tests an Agent Wrote</a>, <a href="{{ "/prompts/task_prove_the_fix.html" | relative_url }}">Prove the Fix by Making It Fail</a>, <a href="{{ "/prompts/task_repair_a_green_pipeline.html" | relative_url }}">Repair a Pipeline That Is Green Without Checking Anything</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
-  <h2><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course, at every milestone and after launch</a></h2>
-  <p>Take every measure again from its source, reopen the decisions whose conditions fired, and remove what no longer serves the goal. Run the pipeline both ways, then decide with evidence to continue, adjust, pivot, pause or stop.</p>
+  <h2><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></h2>
+  <p>At every milestone and continuously after launch: take every measure again from its source, switch routes where a course change fired, remove what no longer serves the goal, run the pipeline both ways, and rank the next improvements. The project continues, adjusts, re-routes or grows; it is never left half-done.</p>
+  <p class="gate"><strong>Done when</strong> every measure was taken from its source this run, the next improvements are ranked into the next milestone, and the ledger is committed. Then it starts again.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Change a Project with a Reason</a>, <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a>, <a href="{{ "/prompts/task_update_dependencies.html" | relative_url }}">Update Dependencies</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_update_dependencies.html" | relative_url }}">Keep it current</a></h2>
   <p>Update dependencies in small, verified steps, so staying current never becomes a rewrite.</p>
+  <p class="gate"><strong>Done when</strong> each update is its own verified commit, and the suite passes on the new versions.</p>
   <p class="tags"><span class="tag">optional</span><span class="tag">repeat as needed</span></p>
 </li>
 </ol>

@@ -5,14 +5,14 @@
     "url": "https://github.com/melbinjp"
   },
   "metadata": {
-    "description": "Procedures for the failures agents actually have: projects started on decisions nobody compared, changes with no reason that drift from the goal, work that reads as finished and is not, setup scripts that report success while broken, tests that cannot fail, and commands to the physical world that were accepted but never happened.",
+    "description": "Take any idea, software or hardware, to a working product and keep it improving: every decision backed by verified evidence, every change traced to the goal, and every claim checked, including work that reads as finished and is not, tests that cannot fail, and commands to the physical world that were accepted but never happened.",
     "version": "1.3.0"
   },
   "plugins": [
     {
       "name": "jules-prompts",
       "source": "./plugin",
-      "description": "Procedures for the failures agents actually have: projects started on decisions nobody compared, changes with no reason that drift from the goal, work that reads as finished and is not, setup scripts that report success while broken, tests that cannot fail, and commands to the physical world that were accepted but never happened.",
+      "description": "Take any idea, software or hardware, to a working product and keep it improving: every decision backed by verified evidence, every change traced to the goal, and every claim checked, including work that reads as finished and is not, tests that cannot fail, and commands to the physical world that were accepted but never happened.",
       "version": "1.3.0",
       "author": {
         "name": "Melbin J Paulose",

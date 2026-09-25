@@ -2,8 +2,9 @@
 name: change-with-a-reason
 description: 'To turn any requested change, including a vague one like "optimise it",
   "make it scalable" or "add AI", into one that traces to the project''s goal, is
-  measured before and after, is built through every layer it touches, and leaves nothing
-  detached. Or into a reasoned no, with the number that shows why. Category: Lifecycle.'
+  verified before and after, is built through every layer it touches, and leaves nothing
+  detached. Nothing asked for is dismissed. When the named part already meets its
+  target, the work goes where the owner''s feeling comes from. Category: Lifecycle.'
 license: MIT
 metadata:
   prompt_slug: task_change_with_a_reason
@@ -24,9 +25,9 @@ Take a request for a change, however it is worded, and make exactly the change t
 - measured before;
 - built through every layer it touches, with nothing left behind;
 - measured after;
-- recorded with its reason.
+- recorded with its reason and its verification.
 
-When the measurement shows no change is needed, the deliverable is that measurement and a plain no.
+When the measurement shows the part named needs no change, the deliverable is that measurement and the improvement that does matter, found from where the owner's feeling comes from. Nothing asked for ends as a bare no.
 
 **Context:**
 *   **The request, in the owner's words:** `<THE_REQUEST>`.
@@ -51,7 +52,7 @@ The rule that prevents all of this has four parts. Every change traces to a meas
 
 *   **Key Files & Folders:**
     *   The ledger:
-        *   `PROJECT.md`, for the goal, measures, journeys, milestones and stop conditions;
+        *   `PROJECT.md`, for the goal, measures, journeys, milestones and course changes;
         *   `decisions/`, for what was already decided, why, and what would reopen it.
         *   If there is no ledger, write the smallest one that serves this change: the goal, and the measure the change moves. `start-from-an-idea` has the full form.
     *   How each measure is taken: the benchmark, the load test, the page-weight check, the meter, the log query.
@@ -67,20 +68,20 @@ The rule that prevents all of this has four parts. Every change traces to a meas
     *   **"AI":** which job, for whom, and what is done today instead?
 
     Each meaning maps to an existing measure or journey, or to none.
-*   **A meaning that maps to no measure is the owner's decision.** Do not guess, and do not simply refuse. Present the meaning, the measure it would need and what it would cost, and ask once. If the owner wants it, it enters the ledger as a new measure before any code is written. If it is a one-way door, it also needs a decision record.
+*   **Nothing the owner asks for is dismissed.** A meaning that maps to no measure becomes a proposed new measure: present the meaning, the measure it would need, what it would take and what it would cost, and ask once. When the owner wants it, it enters the ledger as a new measure before any code is written, with a decision record if it is a one-way door, and then it is built like any other change.
 *   **Show the owner the project as it is, before changing it.** Write one short paragraph per claim, giving the current value, the target, and what that means. For example: "The booking page takes 6.1 s to load on a mid-range phone on 4G. The target is 2 s. 2.4 MB of the page is one photograph." This is how the owner comes out of the dark, and often it ends the request.
 *   **Measure before changing anything.** Take the measurement the way the ledger says it is taken, on the devices, data and conditions it names.
-    *   If the current value already meets the target, the answer for that claim is no change, with the number.
+    *   If the current value already meets the target, that part needs no change: say so with the number, and put the work where the owner's feeling actually comes from.
     *   If you cannot measure it, say so. Do not change anything on a guess.
 *   **Find the cause before choosing the change.** Profile, trace, weigh the page, read the query plan, or meter the current. The fix goes where the time, bytes, cost or failures actually are.
 *   **Check the change against the decisions already made.** Read every accepted decision it touches. If the change contradicts one, there are two ways forward:
-    *   do not make the change;
+    *   take a route that gets the owner what they wanted without breaking the decision;
     *   or reopen the decision with new evidence (`choose-with-evidence`), and mark it superseded before the code changes.
 
     A change that quietly contradicts a recorded decision is drift, however good it looks.
-*   **Size the evidence to the stakes.**
-    *   **A change that is cheap to reverse** needs its measurements before and after, and a test.
-    *   **A change that is costly to reverse** needs a decision record first, with its options, two kinds of evidence, an exit, and the owner's approval. This covers the data model, identifiers, the public interface, the platform, and anything stored, spent or physical.
+*   **Back every change with a verified reason, and size the rest to the stakes.**
+    *   **Every change** needs its reason (the ID it serves) and its verification: measurements before and after, and a test seen to fail without it.
+    *   **A change that is costly to reverse** also needs a decision record first, with three options, two different kinds of evidence, an exit, and the owner's approval. This covers the data model, identifiers, the public interface, the platform, and anything stored, spent or physical.
 *   **Build it through every layer it touches, in the same change.**
     *   **The layers:** the interface and every state it shows, the logic, the data and its migration, the configuration, the tests, the documentation, and the operations (monitoring, backups, the runbook).
     *   **Everything added is reached** from an entry point that a person or a device uses.
@@ -94,38 +95,38 @@ The rule that prevents all of this has four parts. Every change traces to a meas
     *   no feature flag lacks an owner and a date for removal;
     *   the project's own dead-code and unused-dependency tools report nothing new.
 *   **Prove the change moved the measure, and that its test can fail.** Measure again after the change, the same way as before. The change's test must go red when the change is taken out. Walk again the journeys the change touches.
-*   **Record the reason.**
-    *   Each commit carries a `Serves:` line naming the measure, journey or decision it serves.
+*   **Record the reason and the verification.**
+    *   Each commit carries two trailer lines: `Serves:`, naming the measure, journey or decision it serves, and `Verified:`, naming the test or measurement that shows it works.
     *   Update the measurement in the ledger.
     *   If the change needed a decision, commit the decision record before the code, or with it.
     *   The project's trace check must pass. jules-prompts publishes one: `harness/check_trace.py`.
-*   **Say what you did not do, and why.** Every claim in the request ends as one of four things:
+*   **Account for every claim.** Every claim in the request ends as one of four things, and none ends as a bare no:
     *   **changed,** with the before and after;
-    *   **not needed,** with the number;
-    *   **the owner's call,** with the question;
-    *   **refused,** with the decision or the evidence it contradicts.
+    *   **already meets its target,** with the number, and what was improved instead;
+    *   **the owner's call,** with the proposed measure and the question;
+    *   **redirected,** with the decision it would have broken and the route that got the owner what they wanted.
 *   **Do not claim what you did not check.** Each row ends as `holds`, `broken` or `skipped`, with evidence or a reason.
 
 **Guiding Principles:**
 *   **The request is a symptom report.** The owner's feeling is evidence that something is wrong for them. The words they chose are not the diagnosis. Find what they felt, and fix that.
-*   **No measure, no change.** A change you cannot measure is one you cannot defend, keep or safely remove.
+*   **No measure, no change.** A change you cannot measure is one you cannot defend, keep or safely remove. So give it a measure first.
 *   **Whole or not at all.** A change that stops halfway through the layers is worse than no change, because it adds a second way of doing the same thing.
 *   **Removing is part of changing.** The change is not done while what it replaced is still in the repository.
 *   **Decisions are changed on purpose.** Overturning an earlier decision is allowed, with new evidence and in the open. Drifting away from it is not.
-*   **A no with a number is a result.** "It already meets the target; here is the measurement" can save the project more than any optimisation.
+*   **Every request moves the project.** The words may point at the wrong place, but the feeling behind them is real. Find where it comes from and improve that, with numbers the owner can see.
 
 **Execution Flow:**
 1.  **Intake.** Record the request word for word and split it into claims. Read the ledger, and the decisions each claim touches.
 2.  **Translate.** Write down each claim's meanings and map each to a ledger ID. Send the owner one message for the meanings that map to nothing.
 3.  **Measure and show.** Take the current values, and write the owner the paragraph for each claim.
-4.  **Decide each claim.** The answer is one of no change, a change (once the cause is found, with a decision record if the change is one-way or contradicts a decision), or the owner's call.
-5.  **Build.** Build each change through every layer, remove what it replaces, and put a `Serves:` line on every commit.
+4.  **Decide each claim.** A change where the cause is (with a decision record if it is one-way or reopens a decision), the improvement that matters where the claim already meets its target, a redirected route, or a proposed measure for the owner.
+5.  **Build.** Build each change through every layer, remove what it replaces, and put `Serves:` and `Verified:` lines on every commit.
 6.  **Verify.** Measure again. Show each test failing without its change. Check that nothing is left detached, and run the trace check.
 7.  **Report.**
 
 **Deliverables:**
-*   **The translation table,** one row per meaning. Each row gives the claim, the meaning, the ledger ID, the value before, the target, the action (changed, not needed, the owner's call or refused), the value after, and the evidence.
-*   **The change,** as small commits each with its `Serves:` line, plus any decision records.
+*   **The translation table,** one row per meaning. Each row gives the claim, the meaning, the ledger ID, the value before, the target, the action (changed, already meets its target, the owner's call or redirected), the value after, and the evidence.
+*   **The change,** as small commits each with its `Serves:` and `Verified:` lines, plus any decision records.
 *   **The detached-code check:** what was removed, and the evidence that nothing detached remains.
 *   **A verdict table,** one row per meaning, plus the detached-code check and the trace check. Each row is `holds`, `broken` or `skipped`, with the evidence or the reason.
 *   Last line, the denominator: `5 holds, 0 broken, 1 skipped of 6 items.`

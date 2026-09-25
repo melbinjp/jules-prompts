@@ -16,6 +16,7 @@ decided: 2026-09-12
 ## Evidence
 
 - Measured: 60 MB of memory and under 2% of one core at 30 bookings an hour.
+- Calculation: the £4 instance is £48 a year; the Pi the shop already runs costs nothing extra.
 
 ## Decision
 

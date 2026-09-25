@@ -15,4 +15,6 @@ decided: 2026-10-01
 
 ## Evidence
 
-- Most members already had the shop calendar on their phones (a show of hands at the October meeting).
+- Measured: a show of hands at the October meeting; most members had the shop calendar on
+  their phones.
+- Test: a week of nightly syncs into a copy of the calendar created each booking once.

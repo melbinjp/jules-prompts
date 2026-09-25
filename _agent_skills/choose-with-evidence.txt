@@ -75,7 +75,7 @@ The failures are the same whether the choice is a database, a board, a supplier 
         *   the door: one-way if reversing it is costly, two-way if it is cheap;
         *   what a wrong choice would cost, and how long it would take to reverse.
     *   **What each door needs:**
-        *   A two-way door needs two options, one piece of evidence and a seam. It is an hour's work, not a week's.
+        *   A two-way door needs two options, two backings (at least one of them verified by you) and a seam. It is an hour's work, not a week's.
         *   A one-way door needs three or more options, two independent kinds of evidence, a way out, a condition that reopens it, and the owner's approval.
     *   **Signs of a one-way door:** it holds the data or the users; it fixes the identifiers or the public URLs; it has lead time or tooling; it is compiled into firmware in people's hands; or it spends money or commits the owner to a person.
     *   **Match the effort to the door.** Spending one-way effort on a two-way choice is how a project spends its budget on trivia.
@@ -93,6 +93,7 @@ The failures are the same whether the choice is a database, a board, a supplier 
     *   **For hardware:** part families, and a second source for each part.
     *   **No free passes:** include the option the owner suggested and the one found first, and give neither a pass.
     *   **Nothing is excluded for being unusual, large or unfamiliar.** An option is excluded by evidence, and the reason is written down.
+    *   **If every option fails a hard limit, the limit is the problem to solve.** Find what would move it (a funding route, a phased approach, a different design, a tool built for the job) and cost that route. The answer is never that the choice cannot be made.
 *   **Take evidence from primary sources and from your own measurement.**
     *   **Primary sources:** price lists, datasheets, licences, documentation, status history, changelogs, open issues that match this use, and the terms on data ownership, export and limits.
     *   **Your own measurement:**
@@ -101,7 +102,8 @@ The failures are the same whether the choice is a database, a board, a supplier 
         *   a calculation, with its units;
         *   a simulation, with its model and assumptions stated.
     *   **A vendor's claim is a claim** until a second source or a measurement agrees with it.
-    *   **For a one-way door, get two independent kinds of evidence:** a calculation and a measurement, for example, or a primary source and a prototype. Two articles quoting the same benchmark are one piece of evidence.
+    *   **Label every piece of evidence by its kind:** Measured, Calculation, Simulation, Proof, Prototype, Test or Source. Every decision has at least two backings, and at least one is something you ran, worked out or built rather than read.
+    *   **For a one-way door, get two different kinds of evidence:** a calculation and a measurement, for example, or a primary source and a prototype. Two articles quoting the same benchmark are one piece of evidence.
 *   **Redo every number.**
     *   Recompute every cost, capacity and rate yourself, with units, at today's size, at the target size and at ten times the target.
     *   Name the term that dominates, which is often not the headline price.
@@ -129,7 +131,7 @@ The failures are the same whether the choice is a database, a board, a supplier 
     *   **Front matter:** `id`, `status`, `serves`, `door`, `approved_by`, `revisit` and `superseded_by`.
     *   **Sections:** Question, Criteria, Options, Evidence, Decision, and Exit.
     *   **If it replaces an earlier decision,** mark that one superseded and name this one.
-    *   **The check:** jules-prompts publishes a trace check, `harness/check_trace.py`. It counts the options and the evidence, and refuses a one-way door with no exit or no approval.
+    *   **The check:** jules-prompts publishes a trace check, `harness/check_trace.py`. It counts the options and the backings, reads each backing's kind, and refuses a decision backed only by what others wrote, or a one-way door with one kind of evidence, no exit or no approval.
 *   **Do not claim what you did not check.** Every criterion, for every option, is `holds`, `broken` or `skipped`, with its evidence or the reason.
 
 **Guiding Principles:**
@@ -158,7 +160,7 @@ The failures are the same whether the choice is a database, a board, a supplier 
     *   the question framed as a job and tied to ledger IDs;
     *   the criteria committed before scoring;
     *   doing nothing, building and combining considered;
-    *   the evidence independent, with two kinds for a one-way door;
+    *   at least two backings, one verified, and two kinds for a one-way door;
     *   every number redone;
     *   the test shaped like the use;
     *   the flipping assumption named;

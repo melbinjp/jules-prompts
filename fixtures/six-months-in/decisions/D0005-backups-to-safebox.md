@@ -17,6 +17,7 @@ decided: 2026-09-20
 
 - Measured: the whole database, compressed, is 3 MB; a year of bookings at the planned rate
   stays under 50 MB.
+- Source: SafeBox's price page (2026-09-20): free up to 2 GB.
 
 ## Decision
 

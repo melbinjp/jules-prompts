@@ -15,8 +15,8 @@ decided: 2026-11-14
 
 ## Evidence
 
-- Measured: in October, 14 of 31 members asked had never opened the shared calendar, and the
-  sync created duplicate events on 6 nights when a booking changed after 2 a.m.
+- Measured: in October, 14 of 31 members asked had never opened the shared calendar.
+- Measured: the sync created duplicate events on 6 nights when a booking changed after 2 a.m.
 
 ## Decision
 

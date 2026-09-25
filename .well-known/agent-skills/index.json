@@ -46,16 +46,16 @@
     {
       "name": "change-with-a-reason",
       "type": "skill-md",
-      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is measured before and after, is built through every layer it touches, and leaves nothing detached. Or into a reasoned no, with the number that shows why. Category: Lifecycle.",
+      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/change-with-a-reason/SKILL.md",
-      "digest": "sha256:fbee29d9a63eebcef73285c45158cfe67f0bf91a72108c0695e2ef3307b0a2e7"
+      "digest": "sha256:5266dd1718a35850aab817c2969e70af1b9c6facdc8f2593e523a1051776122f"
     },
     {
       "name": "choose-with-evidence",
       "type": "skill-md",
       "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/choose-with-evidence/SKILL.md",
-      "digest": "sha256:394ec9bb9f8c5a134818168f0f4d8084989aa9797de624e40e29cf25e350cc4b"
+      "digest": "sha256:624c7368e39f22f29756e5efb7de84721a1d0c3c5ffee7346eff6d642c6cb1aa"
     },
     {
       "name": "curate-repo",
@@ -109,9 +109,9 @@
     {
       "name": "keep-it-on-course",
       "type": "skill-md",
-      "description": "To review a project against its own ledger at each milestone and after launch. Every measure is taken again from its source, every stop and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. It ends in a decision, with evidence, to continue, adjust, pivot, pause or stop. Category: Lifecycle.",
+      "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/keep-it-on-course/SKILL.md",
-      "digest": "sha256:6e9a92cc8dbd438a5b29b5a619ae3e92bae38bb76091ba5d6b9f26bfdc963482"
+      "digest": "sha256:51e95a77450e3f61e18b0e4d163618025fc64f243da5c5c68300f4baaafa2358"
     },
     {
       "name": "map-the-architecture",
@@ -186,9 +186,9 @@
     {
       "name": "start-from-an-idea",
       "type": "skill-md",
-      "description": "To take an idea, software or physical, to a foundation later work will not have to undo. It decides whether to build it at all, what success is and when to stop, makes the costly-to-reverse decisions with evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason. Category: Lifecycle.",
+      "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/start-from-an-idea/SKILL.md",
-      "digest": "sha256:e50487b7cea80373e0fd2eee02b7a44a17330d85bdc843cbd2338ce2b566ea72"
+      "digest": "sha256:381e9bcf3914899003c159c08328b6c814b8cf592b0118f4a809ba4507ad0cda"
     },
     {
       "name": "take-to-production",

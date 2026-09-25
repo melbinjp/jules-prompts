@@ -28,7 +28,7 @@
 | R1 | public hosting for the audio | D0003 |
 | R2 | the studio NAS | owned |
 
-## Stop or change course
+## Change course
 
 | id | condition | then |
 |---|---|---|

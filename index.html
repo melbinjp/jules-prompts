@@ -1,7 +1,7 @@
 ---
 layout: default
 body_class: home
-title: Agent Skills (SKILL.md) for any AI agent
+title: Agent Skills (SKILL.md) to take any idea to a working product
 ---
 {%- assign featured = site.prompts | where_exp: "p", "p.featured" | sort: "featured" -%}
 {%- comment -%} Skills only: the master template is for authors and has no SKILL.md. {%- endcomment -%}
@@ -9,8 +9,8 @@ title: Agent Skills (SKILL.md) for any AI agent
 <section class="hero">
   <div class="hero-copy">
     <p class="eyebrow">Agent Skills <span aria-hidden="true">/</span> SKILL.md <span aria-hidden="true">/</span> MIT</p>
-    <h1>Skills for agents that have to <mark>get it right</mark>.</h1>
-    <p class="lede">Procedures for the failures agents actually have, from the idea to long after launch: projects started on decisions nobody compared, changes that drift from the goal, work that reads as finished and is not, tests that cannot fail, and commands to the physical world that were accepted but never happened. Each one ends in a verdict you can check: <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
+    <h1>Take any idea all the way, and <mark>keep it working</mark>.</h1>
+    <p class="lede">Agent Skills that take an idea, software or hardware, to a product people use, then keep it working and getting better. Every decision is backed by evidence someone verified, every change is traced to the goal, and every claim is checked, so nothing drifts, stalls or is left half-built. Each skill ends in a verdict you can check: <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
     <p class="actions">
       <a class="button" href="{{ '/tasks.html' | relative_url }}">Browse the skills</a>
       <a class="button button-quiet" href="#agents">Point an agent here</a>
@@ -51,8 +51,15 @@ title: Agent Skills (SKILL.md) for any AI agent
   </div>
 </section>
 
+<section aria-labelledby="path">
+  <h2 id="path" class="section-title"><span class="n" aria-hidden="true">02</span>The whole path</h2>
+  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done, and it calls on the other skills where it needs them. The steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
+  {% include path-steps.html %}
+  <p class="fine">Each step's gate and the skills it calls on are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>.</p>
+</section>
+
 <section aria-labelledby="install">
-  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">02</span>Install</h2>
+  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">03</span>Install</h2>
   <div class="install">
     <div>
       <h3>One skill</h3>
@@ -92,12 +99,12 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="proof">
-  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">03</span>How you know a skill works</h2>
+  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">04</span>How you know a skill works</h2>
   <p class="measure">A skill nobody has seen fail is a claim. Each core skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
 </section>
 
 <section aria-labelledby="questions" id="faq">
-  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">04</span>Questions</h2>
+  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">05</span>Questions</h2>
   <div class="faq">
     {%- for item in site.data.faq %}
     <div>
@@ -109,7 +116,7 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="tools">
-  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">05</span>Tools these skills pair with</h2>
+  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">06</span>Tools these skills pair with</h2>
   <p class="measure">A skill tells an agent what to do. These do part of the same work mechanically, so the agent spends its judgement on the cases that need it.</p>
   <ul class="measure">
     <li><a href="https://github.com/melbinjp/docproof"><strong>docproof</strong></a> reads a repository's documentation and reports the claims its code contradicts: paths that no longer exist, commands that are not there, versions that moved. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and it runs as a GitHub Action. MIT.</li>
@@ -118,6 +125,6 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="writing">
-  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">06</span>Writing</h2>
+  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">07</span>Writing</h2>
   <p class="measure">Notes from actually running this kind of tooling live at <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>. Most recently, why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</p>
 </section>

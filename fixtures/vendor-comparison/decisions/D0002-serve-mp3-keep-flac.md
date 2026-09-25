@@ -34,7 +34,7 @@ Written 2026-07-28, before any format was compared.
   and 15 is the 5% threshold. Nobody reached 15 for MP3 128 or AAC 96 against the FLAC
   master; 7 of 12 did for Opus 64 on the music clips. Results in `listening-test.csv`, from
   the committee's session on 2026-07-30.
-- Primary sources: the support pages of the six podcast apps our listeners use most (from the
+- Source: the support pages of the six podcast apps our listeners use most (from the
   feed's user agents). MP3 and AAC play in all six; Opus in two.
 - Calculation: FLAC served would be 6 times the transfer of MP3, so it fails M1 on any host
   that charges for downloads.

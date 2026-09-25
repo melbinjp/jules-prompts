@@ -18,7 +18,7 @@ THE LEDGER is two things in the project's repository.
     M1   a success measure: what, target, by when, how it is measured
     J1   a journey that must never fail (optional)
     R1   a resource the project needs, and the decision that chose its source, or "owned"
-    K1   a condition that stops the project or changes its course
+    K1   a course change: when this is measured, the project switches to the route it names
     MS1  a milestone: something a person can use when it is done, and the measures it moves
 
 `decisions/D0001-short-name.md` records one decision each, with front matter:
@@ -34,12 +34,24 @@ THE LEDGER is two things in the project's repository.
     ---
 
 and the sections `## Options`, `## Evidence` and, for a one-way decision, `## Exit`, whose
-list items are counted. Evidence is proportional to what a mistake would cost: a two-way
-decision needs two options and one piece of evidence; a one-way decision needs three options,
-two pieces of evidence, a way out, and a person's name.
+list items are counted. Each piece of evidence starts with its kind:
 
-A commit says which ID it serves with a trailer line, `Serves: M2` or `Serves: D0004, J1`.
-A commit that serves nothing, or serves a decision that was rejected or replaced, is drift.
+    - Measured: 200 concurrent attempts on one slot gave 1 booking and 199 refusals.
+    - Calculation: 50 bookings a day is 18,000 rows a year.
+
+The kinds are Measured, Calculation, Simulation, Proof, Prototype, Test and Source. Every
+decision has at least two backings, and at least one of them was verified (every kind but
+Source is something someone ran, worked out or built). A two-way decision needs two options;
+a one-way decision, which is costly to reverse, needs three options, two different kinds of
+evidence, a way out, and a person's name.
+
+A commit says which ID it serves and how it was verified, in two trailer lines:
+
+    Serves: M2
+    Verified: bench/pageload.txt, 6.1 s to 1.4 s
+
+A commit that serves nothing, serves a decision that was rejected or replaced, or does not
+say how it was verified, is drift.
 
 Every finding is `broken`, with the file and the reason. The last line is the denominator.
 This check is written to be able to fail: an empty or missing ledger is refused, not passed.
@@ -59,6 +71,9 @@ DECISION_FILE = re.compile(r"^(D\d{4})-[a-z0-9-]+\.md$")
 STATUSES = {"proposed", "accepted", "superseded", "rejected"}
 DOORS = {"one-way", "two-way"}
 SERVES = re.compile(r"(?im)^serves:\s*(.+)$")
+VERIFIED = re.compile(r"(?im)^verified:\s*\S")
+EVIDENCE_KINDS = {"measured", "calculation", "simulation", "proof", "prototype", "test", "source"}
+EVIDENCE_KIND = re.compile(r"^\s*(?:[-*+]|\d+\.)\s+\**([A-Za-z]+)\**\s*:")
 PLACEHOLDER = re.compile(r"^(?:<[^>]*>|tbd|todo|\?|-|—)?$", re.I)
 
 
@@ -127,8 +142,8 @@ def check_project(rows: dict[str, list[str]], problems: list[str]) -> None:
     by_kind: dict[str, list[str]] = {k: [] for k in KINDS}
     for ident in rows:
         by_kind[kind(ident)].append(ident)
-    for k, what in (("G", "a goal"), ("M", "a success measure"), ("K", "a stop-or-change "
-                    "condition"), ("MS", "a milestone")):
+    for k, what in (("G", "a goal"), ("M", "a success measure"), ("K", "a course change "
+                    "for when the first route does not work"), ("MS", "a milestone")):
         if not by_kind[k]:
             problems.append(f"PROJECT.md: defines no {k} row, so it has no {what}")
     goals = by_kind["G"]
@@ -196,13 +211,30 @@ def check_decisions(decisions: dict[str, dict], defined: set[str], problems: lis
         one_way = door == "one-way"
         options = section_items(body, "Options")
         evidence = section_items(body, "Evidence")
-        need_options, need_evidence = (3, 2) if one_way else (2, 1)
+        need_options = 3 if one_way else 2
         if len(options) < need_options:
             problems.append(f"{where}: lists {len(options)} option(s); a {door or 'decision'} "
                             f"needs at least {need_options}")
-        if len(evidence) < need_evidence:
-            problems.append(f"{where}: lists {len(evidence)} piece(s) of evidence; a "
-                            f"{door or 'decision'} needs at least {need_evidence}")
+        if len(evidence) < 2:
+            problems.append(f"{where}: lists {len(evidence)} piece(s) of evidence; every "
+                            "decision needs at least 2 backings")
+        kinds = []
+        for item in evidence:
+            match = EVIDENCE_KIND.match(item)
+            kind_word = match.group(1).lower() if match else ""
+            if kind_word not in EVIDENCE_KINDS:
+                problems.append(f"{where}: evidence {item[:50]!r} does not start with its kind "
+                                "(Measured, Calculation, Simulation, Proof, Prototype, Test or "
+                                "Source)")
+            else:
+                kinds.append(kind_word)
+        if evidence and kinds and all(k == "source" for k in kinds):
+            problems.append(f"{where}: every backing is a source someone else wrote; at least "
+                            "one must be measured, calculated, simulated, proved, prototyped "
+                            "or tested")
+        if one_way and len(set(kinds)) < 2:
+            problems.append(f"{where}: one-way with {len(set(kinds))} kind(s) of evidence; it "
+                            "needs two different kinds")
         if status == "accepted" and not meta.get("revisit"):
             problems.append(f"{where}: accepted with no revisit condition, so nothing would "
                             "ever reopen it")
@@ -234,6 +266,8 @@ def check_commits(root: Path, span: str, defined: set[str], decisions: dict[str,
         count += 1
         refs = [r for line in SERVES.findall(message) for r in ID.findall(line)]
         label = f"commit {short} ({subject[:60]})"
+        if not VERIFIED.search(message):
+            problems.append(f"{label}: no Verified: line, so nothing says how it was checked")
         if not refs:
             problems.append(f"{label}: no Serves: line, so nothing says why it was made")
             continue

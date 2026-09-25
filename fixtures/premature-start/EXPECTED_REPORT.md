@@ -3,15 +3,19 @@
 The idea, word for word, is in `IDEA.md`. What exists is a start another agent made on it.
 Most of that start decided things the idea did not ask for, and none of it can be used yet.
 
-## Should it exist
+## What it takes to make it happen
 
-- no-need-evidence: the only evidence of need is PLAN.md's "Everyone with an allotment will want this". Nobody asked any gardeners, and no alternatives were looked at: a £5 moisture meter pushed into the bed, the rain forecast, and the soil-sensor kits already sold for gardens. Verdict: cannot tell yet. The cheapest test is to ask twenty members of the owner's allotment association how they decide when to water, and to take ten pre-orders at the real price.
-- no-money: the bill of materials is £18.10 at 100 kits, against the owner's price of £15. Each kit loses £3.10 before postage, payment fees and certification. PLAN.md also has the owner buying 100 dev boards (about £840) and GrowCloud Pro at £29 a month, with no funding named and no approval asked. The owner said there is not much money to put in.
-- no-certification: the kit is a radio transmitter sold to the public. It needs a conformity assessment, a declaration and marking (UKCA, and CE for the EU) under the radio equipment rules, plus electrical safety and WEEE producer duties. A pre-certified radio module reduces the testing but does not remove the kit's own certification. No area but engineering was founded: no legal, finance, supply, distribution or support owner. A privacy notice is also needed, for the plot locations and push tokens the app would hold.
+- no-need-evidence: the only market study is PLAN.md's "Everyone with an allotment will want this". Nobody asked who needs it, and no alternatives were looked at: a £5 moisture meter pushed into the bed, the rain forecast, and the soil-sensor kits already sold for gardens. Those are what to learn from and stand apart from. None of them tells a gardener on their phone that the bed needs water, a season at a time, at an allotment price. The first step alongside the build: ask twenty members of the owner's allotment association how they decide when to water, and take pre-orders at the real price. That shapes the product and funds the first batch.
+- no-money: the bill of materials is £18.10 at 100 kits, against the owner's price of £15, so each kit loses £3.10 before postage and fees. PLAN.md also has the owner buying 100 dev boards (about £840) and GrowCloud Pro at £29 a month, with no funding route worked out. The owner said there is not much money to put in, so the path has to fund itself. The routes, costed:
+  - **Design:** the dev board is £8.40, 46% of the kit. A bare radio module on the kit's own PCB, which the kit already has at £2.60, removes the dev board's USB chip and regulator. It is also what the battery needs (below). Get three quotes, and redo the bill.
+  - **Price:** at £18.10, a price of £22 leaves £3.90 a kit for postage and fees. Test that price with the pre-orders before committing to it.
+  - **Funding:** 100 kits at £18.10 is £1,810. Pre-orders at the association and online can pay for the first batch instead of the owner. Community and horticultural grants, and a crowdfunding page, are further routes, with the pre-order count as their evidence.
+  - **Running cost:** with no cloud per device (next section), the £29 a month disappears. Otherwise a small server the owner runs costs a few pounds a month.
+- no-certification: the kit is a radio transmitter sold to the public. It needs a conformity assessment, a declaration and marking (UKCA, and CE for the EU) under the radio equipment rules, plus electrical safety and WEEE producer duties. A pre-certified radio module reduces the testing but does not remove the kit's own certification, so it goes in the plan and the budget. No area but engineering was founded: no legal, finance, supply, distribution or support owner. A privacy notice is also needed, for the plot locations and push tokens the app would hold.
 
-## Goal and measures
+## Goal, measures and course changes
 
-- unmeasurable-goal: "Revolutionise allotment gardening with AI" cannot be measured. Proposed G1: gardeners water when the bed needs it without a trip to check. Proposed measures: M1, a season on one set of batteries, measured on five kits through a season; M2, a wet-or-dry reading the gardener agrees with at least 9 times in 10, checked by hand in week one; M3, a unit cost under the price, at the planned quantity. Proposed stop condition K1: fewer than ten pre-orders by 1 March, then stop and publish the design as open hardware.
+- unmeasurable-goal: "Revolutionise allotment gardening with AI" cannot be measured. Proposed G1: gardeners water when the bed needs it without a trip to check. Proposed measures: M1, a season on one set of batteries, measured on five kits through a season; M2, a wet-or-dry reading the gardener agrees with at least 9 times in 10, checked by hand in week one; M3, a unit cost under the price, at the planned quantity. Proposed course change K1: if there are fewer than ten pre-orders at the association by 1 March, open the online shop and the regional allotment federation as channels, and ask the twenty members what would make them buy. The goal stands; the channel changes.
 
 ## The arithmetic
 
@@ -33,14 +37,14 @@ Most of that start decided things the idea did not ask for, and none of it can b
 
 | item | evidence | verdict |
 |---|---|---|
-| need, with evidence | a single assertion in PLAN.md | broken |
-| alternatives considered | none | broken |
+| need and market, with evidence | a single assertion in PLAN.md | broken |
+| what exists, studied | nothing looked at | broken |
 | goal and measures | "Revolutionise", with no measure | broken |
-| stop condition | none | broken |
+| course changes | none; one route, no next one | broken |
 | battery life against a season | 52 hours calculated, against about 5,100 needed | broken |
 | radio reaches the site | Wi-Fi assumed at an allotment | broken |
-| unit cost under the price | £18.10 against £15 | broken |
-| funding and runway | none named | broken |
+| unit cost under the price | £18.10 against £15, no route to close it | broken |
+| funding routes | none worked out | broken |
 | certification | not mentioned | broken |
 | privacy | plot locations and push tokens, with no notice | broken |
 | IoT platform decision | one option, taken first | broken |

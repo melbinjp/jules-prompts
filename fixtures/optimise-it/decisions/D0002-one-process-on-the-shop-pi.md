@@ -16,9 +16,11 @@ decided: 2026-09-12
 ## Evidence
 
 - Measured: a one-hour load test at 30 bookings an hour used 60 MB and under 2% of one core.
-- One process means one writer to the SQLite file and one place where availability is
-  decided, which is what keeps M1 at zero without locking between services.
+- Test: 200 concurrent attempts on one slot through the one process gave exactly 1 booking
+  (`tests/test_race.py`, 20 runs).
 
 ## Decision
 
-One process on the Pi. Nothing else to run, pay for or keep in step.
+One process on the Pi. Nothing else to run, pay for or keep in step. One process means one
+writer to the SQLite file and one place where availability is decided, which is what keeps
+M1 at zero without locking between services.

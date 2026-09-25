@@ -61,6 +61,21 @@ FORBIDDEN_IN_PROMPTS = (
     "`jules/",
 )
 
+# This library takes any idea and makes it happen. A procedure that tells an agent to decide
+# whether an idea deserves to exist, or to end a project when a number is missed, works against
+# that: it turns a constraint into a verdict. The first version of the lifecycle skills did
+# both, with a "should it exist" step and stop conditions, and read the owner's worry about
+# half-built projects as a reason to build fewer. A blocked route gets another route.
+PROJECT_ENDING = (
+    "stop condition",
+    "kill criteri",
+    "whether it should exist",
+    "whether it should be built",
+    "should not be built",
+    "don't build it",
+    "do not build it",
+)
+
 # Every procedure renders through the skill layout, which is what gives its page a title,
 # its tier and the ways to load it. A prompt on any other layout renders as a bare body.
 PROMPT_LAYOUT = "skill"
@@ -121,6 +136,10 @@ def main() -> int:
         for needle in FORBIDDEN_IN_PROMPTS:
             if needle in text:
                 problems.append(f"{p.name} still contains Jules-specific harness {needle!r}")
+        for needle in PROJECT_ENDING:
+            if needle in text.lower():
+                problems.append(f"{p.name} tells an agent to end or refuse a project "
+                                f"({needle!r}); a blocked route gets another route")
         layout = (yaml.safe_load(text[3:text.find("\n---", 3)]) or {}).get("layout")
         if layout != PROMPT_LAYOUT:
             problems.append(f"{p.name} uses layout {layout!r}, not {PROMPT_LAYOUT!r}, so its "
@@ -140,11 +159,25 @@ def main() -> int:
         problems.append(f"_config.yml is not valid YAML, so Jekyll cannot build: {e}")
         config_ok = False
 
+    # _data/ feeds the home page and its structured data. A value with an unquoted colon in it
+    # does not parse, and the only place that showed was the Pages build.
+    for data_file in sorted((ROOT / "_data").glob("*.yml")):
+        try:
+            yaml.safe_load(data_file.read_text(encoding="utf-8"))
+        except yaml.YAMLError as e:
+            problems.append(f"_data/{data_file.name} is not valid YAML, so Jekyll cannot build: {e}")
+
     steps = json.loads(WORKFLOW.read_text(encoding="utf-8"))["steps"]
     for s in steps:
         if s["prompt_slug"] not in files:
             problems.append(f"workflow.json step {s['order']} points at "
                             f"{s['prompt_slug']}, which is not in _prompts/")
+        if not (s.get("done_when") or "").strip():
+            problems.append(f"workflow.json step {s['order']} does not say when it is done")
+        for branch in s.get("branches", []):
+            if branch not in files:
+                problems.append(f"workflow.json step {s['order']} calls on {branch}, which is "
+                                "not in _prompts/")
     orders = [s["order"] for s in steps]
     if orders != list(range(1, len(steps) + 1)):
         problems.append(f"workflow.json step orders are {orders}, not 1..{len(steps)}")

@@ -52,7 +52,7 @@ def drop_lines(root: Path, name: str, pattern: str) -> None:
 CASES = [
     ("no ledger", lambda r: (r / "PROJECT.md").unlink(), "PROJECT.md: missing"),
     ("no goal", lambda r: drop_lines(r, "PROJECT.md", r"^\| G1 "), "no G row"),
-    ("no stop condition", lambda r: drop_lines(r, "PROJECT.md", r"^\| K1 "), "no K row"),
+    ("no course change", lambda r: drop_lines(r, "PROJECT.md", r"^\| K\d "), "no K row"),
     ("no milestone", lambda r: drop_lines(r, "PROJECT.md", r"^\| MS\d "), "no MS row"),
     ("measure with no method",
      lambda r: edit(r, "PROJECT.md", "| the hosting invoice |", "| <how> |"),
@@ -74,10 +74,20 @@ CASES = [
      "serves M9, which the ledger does not define"),
     ("one-way with two options", lambda r: drop_lines(r, D1, r"^- A hosted Postgres"),
      "lists 2 option(s); a one-way needs at least 3"),
-    ("one-way with one piece of evidence", lambda r: drop_lines(r, D1, r"^- Calculation"),
-     "lists 1 piece(s) of evidence; a one-way needs at least 2"),
-    ("two-way with no evidence", lambda r: drop_lines(r, D2, r"^- Measured"),
-     "lists 0 piece(s) of evidence; a two-way needs at least 1"),
+    ("one-way with one backing", lambda r: drop_lines(r, D1, r"^- Calculation"),
+     "lists 1 piece(s) of evidence; every decision needs at least 2 backings"),
+    ("two-way with one backing", lambda r: drop_lines(r, D2, r"^- Measured"),
+     "lists 1 piece(s) of evidence; every decision needs at least 2 backings"),
+    ("evidence that does not say its kind",
+     lambda r: edit(r, D1, "- Calculation: 60 members", "- Worked out: 60 members"),
+     "does not start with its kind"),
+    ("evidence that is all read, none verified",
+     lambda r: (edit(r, D2, "- Measured: the app", "- Source: the app"),
+                edit(r, D2, "- Calculation: the £4", "- Source: the £4")),
+     "every backing is a source someone else wrote"),
+    ("one-way backed by one kind of evidence",
+     lambda r: edit(r, D1, "- Calculation: 60 members", "- Measured: 60 members"),
+     "one-way with 1 kind(s) of evidence"),
     ("one-way with no way out", lambda r: drop_lines(r, D1, r"^- Moving to Postgres"),
      "one-way with no Exit section"),
     ("one-way nobody approved", lambda r: drop_lines(r, D1, r"^approved_by:"),
@@ -122,25 +132,30 @@ def main() -> int:
                 failures.append(f"{name}: expected exit 1 naming {expected!r}, got exit "
                                 f"{code}:\n{out}")
 
-        # Commits: one that serves a measure, one that serves nothing, one that serves a
-        # rejected decision. Only the first may pass.
+        # Commits: one that serves a measure and says how it was verified, one that serves
+        # nothing, one that serves a rejected decision, one that does not say how it was
+        # verified. Only the first may pass.
         repo = Path(tmp) / "repo"
         shutil.copytree(EXAMPLE, repo)
         edit(repo, D2, "status: accepted", "status: rejected")
         git(repo, "init", "-q", "-b", "main")
         git(repo, "add", ".")
-        git(repo, "commit", "-q", "-m", "Start the ledger\n\nServes: G1")
+        git(repo, "commit", "-q", "-m", "Start the ledger\n\nServes: G1\nVerified: check_trace.py passes")
         (repo / "a.txt").write_text("a\n")
         git(repo, "add", ".")
-        git(repo, "commit", "-q", "-m", "Refuse a second booking for the same slot\n\nServes: M1, J1")
+        git(repo, "commit", "-q", "-m", "Refuse a second booking for the same slot\n\nServes: M1, J1\nVerified: tests/test_race.py, 1 of 200 succeeds")
         (repo / "b.txt").write_text("b\n")
         git(repo, "add", ".")
         git(repo, "commit", "-q", "-m", "Tidy things up")
         (repo / "c.txt").write_text("c\n")
         git(repo, "add", ".")
-        git(repo, "commit", "-q", "-m", "Move to the Pi\n\nServes: D0002")
-        code, out = run(repo, "--commits", "HEAD~3..HEAD")
-        for expected in ("(Tidy things up): no Serves: line", "serves D0002, which is rejected"):
+        git(repo, "commit", "-q", "-m", "Move to the Pi\n\nServes: D0002\nVerified: make load")
+        (repo / "d.txt").write_text("d\n")
+        git(repo, "add", ".")
+        git(repo, "commit", "-q", "-m", "Send reminders at six\n\nServes: J1")
+        code, out = run(repo, "--commits", "HEAD~4..HEAD")
+        for expected in ("(Tidy things up): no Serves: line", "serves D0002, which is rejected",
+                         "(Send reminders at six): no Verified: line"):
             if expected not in out:
                 failures.append(f"commits: expected {expected!r}:\n{out}")
         if "Refuse a second booking" in out or code != 1:
@@ -149,7 +164,7 @@ def main() -> int:
         if code != 1 or "no commits in the range" not in out:
             failures.append(f"empty range: expected a refusal, got exit {code}:\n{out}")
 
-    total = len(CASES) + 3
+    total = len(CASES) + 4
     if failures:
         print(f"{len(failures)} of {total} cases broken:")
         for f in failures:

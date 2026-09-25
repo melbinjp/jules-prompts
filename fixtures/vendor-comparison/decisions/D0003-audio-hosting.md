@@ -27,13 +27,13 @@ Should we use CloudA or CloudB for the audio?
 
 ## Evidence
 
-- CloudA's own page, https://cloud-a.example/why-cloud-a, says it is "the most trusted
-  storage on earth" and shows it ahead of CloudB on every row of its comparison table.
-- Speed test: uploaded a 2 MB test file from the office to each. CloudA took 0.4 s, CloudB
-  0.6 s.
-- Monthly cost, from the price lists:
-  - CloudA: storage 1,000 GB x $0.023 = $23.00; transfer out 0.09 x 5 = $0.45. Total $23.45.
-  - CloudB: storage 1,000 GB x $0.035 = $35.00; downloads free. Total $35.00.
+- Source: CloudA's own page, https://cloud-a.example/why-cloud-a, says it is "the most
+  trusted storage on earth" and shows it ahead of CloudB on every row of its comparison table.
+- Measured: a speed test. Uploaded a 2 MB test file from the office to each; CloudA took
+  0.4 s, CloudB 0.6 s.
+- Calculation: monthly cost, from the price lists. CloudA: storage 1,000 GB x $0.023 =
+  $23.00, transfer out 0.09 x 5 = $0.45, total $23.45. CloudB: storage 1,000 GB x $0.035 =
+  $35.00, downloads free, total $35.00.
 
 ## Scores
 

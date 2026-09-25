@@ -23,11 +23,13 @@
 | J2 | A member cancels, and the slot is free again for everyone at once. |
 | J3 | The evening before, a member is reminded of tomorrow's booking. |
 
-## Stop or change course
+## Change course
+
+The goal stands. When a condition is measured, the project switches to the route it names.
 
 | id | condition | then |
 |---|---|---|
-| K1 | fewer than 20 bookings a month by 2027-03-31 | stop, export the bookings, go back to the paper sheet |
+| K1 | fewer than 20 bookings a month by 2027-03-31 | ask ten members what stops them, and fix what they name first |
 
 ## Milestones
 

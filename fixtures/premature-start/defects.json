@@ -2,67 +2,97 @@
   "fixture": "premature-start",
   "skill": "start-from-an-idea",
   "prompt_slug": "task_start_from_an_idea",
-  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price, and a pipeline only that agent can run.",
+  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price with no route to close the gap, and a pipeline only that agent can run.",
   "defects": [
     {
       "id": "no-need-evidence",
       "file": "PLAN.md",
-      "tell": "'Everyone with an allotment will want this' is the only evidence of need; no alternative people use today (a £5 moisture meter, the forecast, existing sensor kits) was looked at",
-      "must_mention": ["Everyone with an allotment", "alternatives"]
+      "tell": "'Everyone with an allotment will want this' is the only market study; nobody looked at who needs it, what they use today or what already exists (a £5 moisture meter, the forecast, existing sensor kits), so nothing says who to build for, what to build on, or how it stands apart",
+      "must_mention": [
+        "Everyone with an allotment",
+        "alternatives"
+      ]
     },
     {
       "id": "unmeasurable-goal",
       "file": "PLAN.md",
-      "tell": "'Revolutionise allotment gardening with AI' cannot be met, missed or measured; there is no success measure and no stop condition",
-      "must_mention": ["Revolutionise", "measure"]
+      "tell": "'Revolutionise allotment gardening with AI' cannot be met, missed or measured; there is no success measure and no course change for when the first route does not work",
+      "must_mention": [
+        "Revolutionise",
+        "measure"
+      ]
     },
     {
       "id": "battery-arithmetic",
       "file": "firmware/config.h",
       "tell": "160 mA for 3 s in every 10 s averages 48 mA: 2,500 mAh lasts about 52 hours, where the idea promises a season (about 5,100 hours, so at most 0.49 mA on average)",
-      "must_mention": ["mA", "season"]
+      "must_mention": [
+        "mA",
+        "season"
+      ]
     },
     {
       "id": "assumes-wifi",
       "file": "firmware/config.h",
       "tell": "the firmware posts over Wi-Fi from an allotment, where there is usually no Wi-Fi; nobody compared the radios that reach a field (LoRa, cellular, Bluetooth read on a visit)",
-      "must_mention": ["Wi-Fi", "LoRa"]
+      "must_mention": [
+        "Wi-Fi",
+        "LoRa"
+      ]
     },
     {
       "id": "first-option-taken",
       "file": "NOTES.md",
       "tell": "GrowCloud was chosen because it came up first; it was the only option considered, its free tier stops at 5 devices, its device ID is the readings table's key and its URL is in the firmware of every kit sold",
-      "must_mention": ["GrowCloud", "option"]
+      "must_mention": [
+        "GrowCloud",
+        "option"
+      ]
     },
     {
       "id": "premature-scale",
       "file": "docker-compose.yml",
       "tell": "Kafka, ZooKeeper, Postgres, Redis and four microservices for a project with no users: every one a cost and a migration, none named by a measure",
-      "must_mention": ["Kafka", "microservices"]
+      "must_mention": [
+        "Kafka",
+        "microservices"
+      ]
     },
     {
       "id": "layered-milestones",
       "file": "PLAN.md",
       "tell": "milestones are layers (backend, app, hardware, integration); nothing a person can use exists until the fourth",
-      "must_mention": ["milestone", "usable"]
+      "must_mention": [
+        "milestone",
+        "usable"
+      ]
     },
     {
       "id": "agent-only-pipeline",
       "file": "DEPLOY.md",
       "tell": "deploying and flashing are 'ask the agent': no command in the repository, so no person, CI or other agent can do either",
-      "must_mention": ["DEPLOY.md", "command"]
+      "must_mention": [
+        "DEPLOY.md",
+        "command"
+      ]
     },
     {
       "id": "no-certification",
       "file": "PLAN.md",
       "tell": "a radio device sold to the public needs a conformity assessment and marking (UKCA or CE under the radio equipment rules); no area but engineering was founded",
-      "must_mention": ["certification", "radio"]
+      "must_mention": [
+        "certification",
+        "radio"
+      ]
     },
     {
       "id": "no-money",
       "file": "firmware/BOM.md",
-      "tell": "the bill of materials is £18.10 at 100 kits against a £15 price: every kit sold loses money before postage and fees, and GrowCloud Pro is £29 a month on top",
-      "must_mention": ["£15", "bill of materials"]
+      "tell": "the bill of materials is £18.10 at 100 kits against a £15 price, GrowCloud Pro is £29 a month on top, and no funding route is worked out: not a cheaper design, a different price, pre-orders or a grant",
+      "must_mention": [
+        "£15",
+        "bill of materials"
+      ]
     }
   ],
   "control": {

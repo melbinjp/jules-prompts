@@ -29,11 +29,13 @@
 | R1 | hosting | D0002 |
 | R2 | off-site backup storage | D0005 |
 
-## Stop or change course
+## Change course
+
+The goal stands. When a condition is measured, the project switches to the route it names.
 
 | id | condition | then |
 |---|---|---|
-| K1 | fewer than 20 bookings a month by 2027-03-31 | stop, export the bookings, go back to the paper sheet |
+| K1 | fewer than 20 bookings a month by 2027-03-31 | ask ten members what stops them, and fix what they name first |
 
 ## Operating model
 

@@ -17,6 +17,8 @@ decided: 2026-09-12
 
 - Measured: the app at 30 bookings an hour uses 60 MB of memory and under 2% of one core on
   the Pi (a one-hour load test, `make load`).
+- Calculation: the £4 instance is £48 a year, 80% of the shop's £60 software budget, against
+  £0 for a Pi the shop already runs.
 
 ## Decision
 

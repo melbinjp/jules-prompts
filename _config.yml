@@ -1,11 +1,11 @@
 title: Jules Prompts
 # The description is what a results page and a link preview show, so it leads with the words
 # people search for: what these are, and which agents read them.
-description: "Free, open-source Agent Skills (SKILL.md) for Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules and any AI agent: take a project to production, review agent-written code, repair setup, act safely on hardware. Each skill ends in a verdict you can check."
+description: "Free, open-source Agent Skills (SKILL.md) for Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules and any AI agent: take any idea, software or hardware, to a working product and keep it improving, with every decision backed by evidence and every change traced to the goal. Each skill ends in a verdict you can check."
 author: Melbin J Paulose
 # The link-preview card, made from scripts/og-image.html (see the comment at its top).
 og_image: /assets/og.png
-og_image_alt: "Jules Prompts. Skills for agents that have to get it right. An expected report reading 3 holds, 8 broken, 0 skipped of 11 items."
+og_image_alt: "Jules Prompts. Take any idea all the way, and keep it working. An expected report reading 3 holds, 8 broken, 0 skipped of 11 items."
 # Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
 url: https://jules-prompts.wecanuseai.com
 

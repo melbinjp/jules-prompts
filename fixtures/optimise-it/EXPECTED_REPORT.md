@@ -15,19 +15,19 @@ It makes five claims: slow, old-fashioned, scalable, AI, and microservices.
 | claim | reading | ID | before | target | action | evidence |
 |---|---|---|---|---|---|---|
 | slow | the booking page on a phone | M4 | 6.1 s | 2 s | change: resize hero.jpg | bench/pageload.txt |
-| slow | the availability query | none | 4 ms p95 | none | not needed | bench/availability.txt |
-| scalable | bookings a day | D0001, D0002 revisit | 38 | revisit at 50 | not needed | the measurements in PROJECT.md |
-| old-fashioned | how it looks, or what it runs on | none | | | owner's call | |
-| AI | which job, for whom | none | | | owner's call | |
-| microservices | an architecture | D0002 | one process | | refused: contradicts D0002 | D0002's evidence |
+| slow | the availability query | none | 4 ms p95 | none | already meets its target; the page improved instead | bench/availability.txt |
+| scalable | bookings a day | D0001, D0002 revisit | 38 | revisit at 50 | already meets its target; capacity watched at each review | the measurements in PROJECT.md |
+| old-fashioned | how it looks, or what it runs on | none | | | owner's call: proposed measure | |
+| AI | which job, for whom | none | | | owner's call: proposed measure | |
+| microservices | an architecture | D0002 | one process | | redirected: the capacity the owner wants is already there in one process | D0002's evidence |
 
 ## Findings in the change already made
 
 - real-slowness-missed: the owner's "slow" is real, and it is the page, not the query. `hero.jpg` is 2,431 KB of a 2,612 KB page. Resize it to 720 px wide, twice the displayed width for high-density screens, as a JPEG or WebP of about 60 to 90 KB. That predicts a page of about 260 KB. Measure after with `make pageload`, and commit with `Serves: M4`. Nothing in the change touches the photo.
 - unmeasured-cache: the Redis cache sits in front of a query measured at 4 ms. It cannot move any measure, and it adds a service to run. Worse, its five minutes of staleness break J2: a cancelled slot stays shown as taken, and a booked one is shown as free, until the member who picks it is refused. That refusal also costs M2. Remove it.
-- contradicts-decision: `services/availability` splits availability into its own process. D0002 decided on one process, because one writer and one place that decides availability is what keeps M1 at zero. The change brings no new evidence, supersedes nothing, and D0002's revisit condition (50% CPU or 50 bookings a day) has not fired. "Microservices" is refused. Folding the service back also answers "scalable": the capacity is far above the load, and the ledger already says when to look again.
+- contradicts-decision: `services/availability` splits availability into its own process. D0002 decided on one process, because one writer and one place that decides availability is what keeps M1 at zero. The change brings no new evidence, supersedes nothing, and D0002's revisit condition (50% CPU or 50 bookings a day) has not fired. "Microservices" is redirected: what the owner wants from it is room to grow, and one process has that. Folding the service back answers "scalable": the capacity is far above the load, and the ledger already says when to look again.
 - two-sources-of-truth: the booking page asks the service, which answers from the cache, while `reminders.py` still calls `app.slots_free`, which answers from the database. The same fact now has two answers that disagree for up to five minutes. With the service removed, `slots_free` is the one source again, and `booking_page` calls it.
-- never-wired: nothing imports `ai_suggest.py`. It adds the `openai` dependency, an API key and a per-call cost, and the job it would do was never named. Remove it, with its dependency and key. Ask the owner which job they mean. One candidate is suggesting the nearest free slot when the wanted one is taken, and that is a plain query with no model.
+- never-wired: nothing imports `ai_suggest.py`. It adds the `openai` dependency, an API key and a per-call cost, and the job it would do was never named. Remove it, with its dependency and key. Propose the measure instead: ask the owner which job they mean for members. One candidate is suggesting the nearest free slot when the wanted one is taken, which a plain query does with no model. If the job they name needs a model, it is built as its own traced change, wired from the page that uses it.
 - config-never-read: `SCALE_MODE` is added to `.env.example` and read nowhere. Remove it, along with `AVAILABILITY_URL` and `REDIS_URL`, which go with the service.
 - untraced: four of the five commits have no `Serves:` line, and "optimise" and "modernise" name no measure. Only the time-zone commit says what it serves.
 
@@ -48,7 +48,7 @@ The page is slow on phones because of one oversized photograph, and fixing that 
 | slow: the booking page | 6.1 s against 2 s, the photo is the cause, resize proposed | broken |
 | slow: the availability query | 4 ms, no change needed; the cache removed | holds |
 | scalable | 38 a day against a revisit point of 50 | holds |
-| microservices | contradicts D0002 with no new evidence | broken |
+| microservices | contradicts D0002 with no new evidence; redirected | broken |
 | old-fashioned | no measure; asked the owner | skipped |
 | AI | no job named; asked the owner | skipped |
 | nothing detached | service, client, AI module, three dependencies and four settings detached | broken |

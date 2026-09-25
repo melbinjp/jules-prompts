@@ -53,10 +53,10 @@ PLUGIN_KEYWORDS = [
     "decision-records", "claude-code", "codex", "jules",
 ]
 PLUGIN_DESCRIPTION = (
-    "Procedures for the failures agents actually have: projects started on decisions "
-    "nobody compared, changes with no reason that drift from the goal, work that reads "
-    "as finished and is not, setup scripts that report success while broken, tests "
-    "that cannot fail, and commands to the physical world that were accepted but never "
+    "Take any idea, software or hardware, to a working product and keep it improving: "
+    "every decision backed by verified evidence, every change traced to the goal, and "
+    "every claim checked, including work that reads as finished and is not, tests that "
+    "cannot fail, and commands to the physical world that were accepted but never "
     "happened."
 )
 
@@ -278,6 +278,7 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
     - `llms.txt`: the same list for an agent that was simply handed the domain.
     - `_includes/workflow-steps.html`: the workflow page's steps, from workflow.json, so the
       page and the JSON cannot drift apart again (they had: four steps against five).
+    - `_includes/path-steps.html`: the same steps as the home page's short list.
     """
     index = {
         "$schema": DISCOVERY_SCHEMA,
@@ -305,11 +306,12 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         [
             "# Jules Prompts",
             "",
-            "> Agent Skills for the failures agents actually have: projects started on decisions "
-            "nobody compared, changes with no reason that drift from the goal, work that reads "
-            "as finished and is not, setup that reports success while broken, tests that cannot "
-            "fail, and commands to the physical world that were accepted but never happened. "
-            "They cover a project from the idea to production and after. Each skill "
+            "> Agent Skills that take any idea, software or hardware, to a working product and "
+            "keep it improving. Every decision is backed by verified evidence and every change "
+            "is traced to the goal, and the skills catch the failures agents actually have: work "
+            "that reads as finished and is not, setup that reports success while broken, tests "
+            "that cannot fail, and commands to the physical world that were accepted but never "
+            "happened. Each skill "
             "is one self-contained Markdown file in the Agent Skills format, and none depends "
             "on a particular agent or harness.",
             "",
@@ -322,6 +324,7 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
             f"Discovery index, with a SHA-256 digest per skill: {SITE}{DISCOVERY}/index.json",
             f"Standing rules for every task, for a project's AGENTS.md: {SITE}/harness/AGENTS.md",
             f"The ledger check, for a project's CI (Python, no dependencies): {SITE}/harness/check_trace.py",
+            f"The whole path from idea to continuous improvement, each step with its gate: {SITE}/workflow.json",
             "",
             "## Start here",
             "",
@@ -341,30 +344,46 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
     )
 
     workflow = json.loads((ROOT / "workflow.json").read_text(encoding="utf-8"))
+    titles = {p["stem"]: p["title"] for p in prompts}
+
+    def link(stem: str, text: str) -> str:
+        return f'<a href="{{{{ "/prompts/{stem}.html" | relative_url }}}}">{html.escape(text)}</a>'
+
     steps = []
+    path = []
     for step in workflow["steps"]:
         stem = step["prompt_slug"]
         tags = [] if step.get("required") else ["optional"]
         if step.get("repeatable"):
             tags.append("repeat as needed")
         tag_html = "".join(f'<span class="tag">{t}</span>' for t in tags)
+        branches = ", ".join(link(b, titles[b]) for b in step.get("branches", []))
         steps.append(
             f'<li class="step">\n'
-            f'  <h2><a href="{{{{ "/prompts/{stem}.html" | relative_url }}}}">{html.escape(step["title"])}</a></h2>\n'
+            f'  <h2>{link(stem, step["title"])}</h2>\n'
             f'  <p>{html.escape(step["description"])}</p>\n'
+            f'  <p class="gate"><strong>Done when</strong> {html.escape(step["done_when"])}</p>\n'
+            + (f'  <p class="branches"><strong>Calls on</strong> {branches}</p>\n' if branches else "")
             + (f"  <p class=\"tags\">{tag_html}</p>\n" if tag_html else "")
             + "</li>"
         )
+        path.append(f'  <li>{link(stem, step["title"])}</li>')
     steps_html = (
         "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
         f'<p class="lede">{html.escape(workflow["description"])}</p>\n'
         '<ol class="steps">\n' + "\n".join(steps) + "\n</ol>\n"
+    )
+    # The same sequence, as the home page's short list: one line per step, no detail.
+    path_html = (
+        "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
+        '<ol class="path">\n' + "\n".join(path) + "\n</ol>\n"
     )
 
     return {
         f"{DISCOVERY.lstrip('/')}/index.json": json.dumps(index, indent=2) + "\n",
         "llms.txt": llms,
         "_includes/workflow-steps.html": steps_html,
+        "_includes/path-steps.html": path_html,
         "_includes/report-exhibit.html": _report_exhibit(),
     }
 

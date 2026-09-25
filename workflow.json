@@ -1,13 +1,19 @@
 {
-  "version": "3.0",
-  "title": "From an Idea to Production, and After",
-  "description": "The recommended sequence for a project in any state, software or physical: start it on written reasons, build it in traced changes, take it to production quality, and keep it on course after launch. Start at the first step for an idea, and at the second for a project that already exists.",
+  "version": "3.1",
+  "title": "From an Idea to a Working Product, and Always Improving",
+  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: found it on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. Start at the first step for an idea, and at the second for a project that already exists. Each step names when it is done, and the other skills it calls on.",
   "steps": [
     {
       "order": 1,
       "prompt_slug": "task_start_from_an_idea",
       "title": "Start from the idea",
-      "description": "Decide whether it should exist, and write down what success is and when to stop. Make the few decisions that are costly to reverse with evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.",
+      "description": "Work out what it takes to make the idea happen and how it is paid for. Make the few decisions that are costly to reverse with verified evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.",
+      "done_when": "the owner has agreed the path and its first step, the ledger passes the trace check, and the walking skeleton has run end to end and been rolled back once.",
+      "branches": [
+        "task_choose_with_evidence",
+        "task_act_on_the_physical_world",
+        "task_map_the_architecture"
+      ],
       "required": true,
       "repeatable": false
     },
@@ -16,6 +22,10 @@
       "prompt_slug": "task_repair_setup_script",
       "title": "Make it run from cold",
       "description": "Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.",
+      "done_when": "a clean checkout installs and runs its tests with one command, and breaking a step makes that command fail.",
+      "branches": [
+        "task_isolate_tests_from_services"
+      ],
       "required": true,
       "repeatable": false
     },
@@ -23,7 +33,9 @@
       "order": 3,
       "prompt_slug": "task_choose_with_evidence",
       "title": "Choose with evidence, whenever a choice matters",
-      "description": "Compare real options for each consequential choice, including doing nothing, building it, and combining several. Use criteria from the goal and evidence in proportion to the stakes, redo every number, and keep a way out.",
+      "description": "Compare real options for each consequential choice, including building it and combining several. Use criteria from the goal, back the decision with at least two pieces of evidence (one verified), redo every number, and keep a way out.",
+      "done_when": "the decision record passes the trace check, and the owner has approved it if it is costly to reverse.",
+      "branches": [],
       "required": true,
       "repeatable": true
     },
@@ -31,7 +43,15 @@
       "order": 4,
       "prompt_slug": "task_change_with_a_reason",
       "title": "Build in changes that each have a reason",
-      "description": "Every milestone and every request, including a vague one, is translated into a measure, measured before and after, built through every layer it touches, and traced to the goal, with nothing left behind.",
+      "description": "Every milestone and every request, however vaguely worded, is translated into a measure, verified before and after, built through every layer it touches, and traced to the goal, with nothing left behind.",
+      "done_when": "every claim in the request is accounted for, every commit has its Serves and Verified lines, the measure moved, and nothing is left detached.",
+      "branches": [
+        "task_scope_a_vague_issue",
+        "task_fix_a_bug_test_first",
+        "task_verify_a_migration",
+        "task_run_the_error_paths",
+        "task_act_on_the_physical_world"
+      ],
       "required": true,
       "repeatable": true
     },
@@ -40,6 +60,14 @@
       "prompt_slug": "task_take_to_production",
       "title": "Take it to production quality",
       "description": "Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.",
+      "done_when": "every row of the bar holds, or is broken or skipped with its reason and its next step in the plan.",
+      "branches": [
+        "task_security_review_agent_code",
+        "task_run_the_error_paths",
+        "task_prove_the_docs",
+        "task_map_the_architecture",
+        "task_act_on_the_physical_world"
+      ],
       "required": true,
       "repeatable": true
     },
@@ -48,14 +76,26 @@
       "prompt_slug": "task_review_an_agent_pr",
       "title": "Review what the agent produced",
       "description": "Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.",
+      "done_when": "every claim the pull request makes is checked, and every new test has been seen to fail.",
+      "branches": [
+        "task_qa_an_agents_tests",
+        "task_prove_the_fix",
+        "task_repair_a_green_pipeline"
+      ],
       "required": true,
       "repeatable": true
     },
     {
       "order": 7,
       "prompt_slug": "task_keep_it_on_course",
-      "title": "Keep it on course, at every milestone and after launch",
-      "description": "Take every measure again from its source, reopen the decisions whose conditions fired, and remove what no longer serves the goal. Run the pipeline both ways, then decide with evidence to continue, adjust, pivot, pause or stop.",
+      "title": "Keep it on course and improving, for good",
+      "description": "At every milestone and continuously after launch: take every measure again from its source, switch routes where a course change fired, remove what no longer serves the goal, run the pipeline both ways, and rank the next improvements. The project continues, adjusts, re-routes or grows; it is never left half-done.",
+      "done_when": "every measure was taken from its source this run, the next improvements are ranked into the next milestone, and the ledger is committed. Then it starts again.",
+      "branches": [
+        "task_change_with_a_reason",
+        "task_choose_with_evidence",
+        "task_update_dependencies"
+      ],
       "required": true,
       "repeatable": true
     },
@@ -64,6 +104,8 @@
       "prompt_slug": "task_update_dependencies",
       "title": "Keep it current",
       "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",
+      "done_when": "each update is its own verified commit, and the suite passes on the new versions.",
+      "branches": [],
       "required": false,
       "repeatable": true
     }

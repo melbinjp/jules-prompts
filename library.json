@@ -60,7 +60,7 @@
     {
       "slug": "change-with-a-reason",
       "title": "Change a Project with a Reason",
-      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is measured before and after, is built through every layer it touches, and leaves nothing detached. Or into a reasoned no, with the number that shows why.",
+      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from.",
       "category": "Lifecycle",
       "status": "core",
       "prompt": "_prompts/task_change_with_a_reason.md",
@@ -140,8 +140,8 @@
     },
     {
       "slug": "keep-it-on-course",
-      "title": "Keep a Project on Course, During and After Launch",
-      "description": "To review a project against its own ledger at each milestone and after launch. Every measure is taken again from its source, every stop and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. It ends in a decision, with evidence, to continue, adjust, pivot, pause or stop.",
+      "title": "Keep a Project on Course and Improving",
+      "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done.",
       "category": "Lifecycle",
       "status": "core",
       "prompt": "_prompts/task_keep_it_on_course.md",
@@ -240,7 +240,7 @@
     {
       "slug": "start-from-an-idea",
       "title": "Start a Project from an Idea",
-      "description": "To take an idea, software or physical, to a foundation later work will not have to undo. It decides whether to build it at all, what success is and when to stop, makes the costly-to-reverse decisions with evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.",
+      "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.",
       "category": "Lifecycle",
       "status": "core",
       "prompt": "_prompts/task_start_from_an_idea.md",
