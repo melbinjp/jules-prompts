@@ -43,6 +43,13 @@ every skill with the SHA-256 of its `SKILL.md`, and
 `https://jules-prompts.wecanuseai.com/llms.txt` lists them for an agent that was
 given nothing but the domain.
 
+In Claude Code, all of them at once, as a plugin:
+
+```
+/plugin marketplace add melbinjp/jules-prompts
+/plugin install jules-prompts@jules-prompts
+```
+
 Or point the agent at this repository. The MCP server still serves the same
 text as slash-command prompts for clients that do not load skills:
 

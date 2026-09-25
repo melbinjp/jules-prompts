@@ -1,0 +1,12 @@
+# The home page's questions. Rendered as HTML on the page and as FAQPage structured data in
+# its head, from this one list, so the two cannot disagree. Answers may use inline HTML.
+- q: What is an Agent Skill?
+  a: A folder with a <code>SKILL.md</code> file in it. The file starts with a name and a one-line description of when to use it, and the procedure follows. An agent that supports skills reads the descriptions and loads the one that matches the task. Claude Code, Codex, GitHub Copilot, Cursor and Gemini CLI all read the format.
+- q: Which agents can use these?
+  a: Any agent that can read a file or fetch a URL. Install them as skills where the agent supports them, point it at <a href="/llms.txt">llms.txt</a>, add the MCP server to get them as slash commands, or paste the text. Nothing in them depends on one product's tool names.
+- q: Is this affiliated with Google or Jules?
+  a: No. The library started in 2025 as prompts for Jules, Google's coding agent, which is where the name comes from. The skills work with Jules and with every other agent.
+- q: What does it cost?
+  a: Nothing. Everything is MIT licensed, there is nothing to sign up for, and the site has no analytics, cookies or trackers.
+- q: Can an agent that controls hardware use them?
+  a: Yes. <a href="/prompts/task_act_on_the_physical_world.html">Act on the Physical World, and Prove It Happened</a> is for any command that moves, heats, dispenses, spends or sends. It confirms the result through an independent measurement rather than the device's acknowledgement, and sends every failure to a safe state decided in advance.

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+  The link-preview card (assets/og.png): what a chat app, a social post or a search result shows
+  when someone shares a link to the site. It uses the site's own tokens and font, and the result
+  line is the flagship fixture's expected report, the same one the home page shows.
+
+  After changing it, render it again at exactly 1200 by 630:
+
+    npx playwright screenshot --viewport-size "1200, 630" --wait-for-timeout 500 \
+      "file://$PWD/scripts/og-image.html" assets/og.png
+
+  scripts/check_site.py fails if the card is missing or is not 1200 by 630.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jules Prompts link preview</title>
+<style>
+  @font-face {
+    font-family: "Martian Mono";
+    font-weight: 100 800;
+    src: url("../assets/fonts/martian-mono-latin-wght.woff2") format("woff2");
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    padding: 64px 72px;
+    display: flex;
+    flex-direction: column;
+    background-color: #0e0f11;
+    background-image:
+      linear-gradient(rgba(238, 240, 232, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(238, 240, 232, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: #eef0e8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Arial, sans-serif;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font: 650 34px/1 "Martian Mono", monospace;
+    letter-spacing: -0.02em;
+  }
+  .brand svg { width: 44px; height: 44px; }
+  .brand small { margin-left: auto; color: #c6e23a; font-size: 20px; font-weight: 500; letter-spacing: 0.02em; }
+  .brand rect { fill: #d4f03c; }
+  .brand path { fill: none; stroke: #141518; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  h1 {
+    margin: auto 0 0;
+    max-width: 16ch;
+    font-size: 84px;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    font-weight: 750;
+  }
+  mark {
+    padding: 0 0.1em;
+    background: #d4f03c;
+    color: #141518;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .result {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+    font: 600 24px/1 "Martian Mono", monospace;
+  }
+  .result span::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 12px;
+    border-radius: 3px;
+    background: currentColor;
+  }
+  .holds { color: #6fd88e; }
+  .broken { color: #ff8b7b; }
+  .skipped { color: #e8b451; }
+  .of { color: #a4a8a1; }
+  .of::before { display: none !important; }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6"/><path d="M6.8 12.6l3.3 3.3 7.1-7.6"/></svg>
+    Jules Prompts
+    <small>Agent Skills / SKILL.md / MIT</small>
+  </div>
+  <h1>Skills for agents that have to <mark>get it right</mark>.</h1>
+  <p class="result">
+    <span class="holds">3 holds</span>
+    <span class="broken">8 broken</span>
+    <span class="skipped">0 skipped</span>
+    <span class="of">of 11 items</span>
+  </p>
+</body>
+</html>

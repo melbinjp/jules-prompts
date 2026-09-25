@@ -1,14 +1,23 @@
 ---
 layout: default
 body_class: home
+title: Agent Skills (SKILL.md) for any AI agent
 ---
 {%- assign featured = site.prompts | where_exp: "p", "p.featured" | sort: "featured" -%}
 {%- comment -%} Skills only: the master template is for authors and has no SKILL.md. {%- endcomment -%}
 {%- assign core = site.prompts | where_exp: "p", "p.slug contains 'task_'" | where_exp: "p", "p.status != 'legacy'" -%}
 <section class="hero">
-  <p class="eyebrow">Agent Skills &middot; MIT &middot; any agent, any harness</p>
-  <h1>{{ site.tagline }}.</h1>
-  <p class="lede">Procedures for the failures agents actually have: work that reads as finished and is not, tests that cannot fail, setup that reports success while broken, and commands to the physical world that were accepted but never happened. Each one ends in a verdict you can check: <strong>holds</strong>, <strong>broken</strong> or <strong>skipped</strong>.</p>
+  <div class="hero-copy">
+    <p class="eyebrow">Agent Skills <span aria-hidden="true">/</span> SKILL.md <span aria-hidden="true">/</span> MIT</p>
+    <h1>Skills for agents that have to <mark>get it right</mark>.</h1>
+    <p class="lede">Procedures for the failures agents actually have: work that reads as finished and is not, tests that cannot fail, setup that reports success while broken, and commands to the physical world that were accepted but never happened. Each one ends in a verdict you can check: <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
+    <p class="actions">
+      <a class="button" href="{{ '/tasks.html' | relative_url }}">Browse the skills</a>
+      <a class="button button-quiet" href="#agents">Point an agent here</a>
+    </p>
+    <p class="works-with">Works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, and agents that drive hardware.</p>
+  </div>
+  {% include report-exhibit.html %}
 </section>
 
 <section class="paths" id="agents" aria-label="Two ways in">
@@ -30,12 +39,12 @@ body_class: home
 </section>
 
 <section aria-labelledby="start">
-  <h2 id="start" class="section-title">Start here</h2>
-  <div class="cards">
+  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Start here</h2>
+  <div class="cards cards-featured">
     {%- for p in featured %}
     <a class="card card-featured" href="{{ p.url | relative_url }}">
       <span class="card-meta">{{ p.category }}</span>
-      <h3>{{ p.title }}</h3>
+      <h3><span>{{ p.title }}</span></h3>
       <p>{{ p.description }}</p>
     </a>
     {%- endfor %}
@@ -43,7 +52,7 @@ body_class: home
 </section>
 
 <section aria-labelledby="install">
-  <h2 id="install" class="section-title">Install</h2>
+  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">02</span>Install</h2>
   <div class="install">
     <div>
       <h3>One skill</h3>
@@ -63,6 +72,14 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
       </div>
     </div>
     <div>
+      <h3>As a Claude Code plugin</h3>
+      <div class="snippet">
+        <pre><code id="plugin">/plugin marketplace add melbinjp/jules-prompts
+/plugin install jules-prompts@jules-prompts</code></pre>
+        <button class="copy" type="button" data-copy="#plugin">Copy</button>
+      </div>
+    </div>
+    <div>
       <h3>As slash commands, over MCP</h3>
       <div class="snippet">
         <pre><code id="mcp">{ "mcpServers": { "jules-prompts": {
@@ -75,12 +92,24 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="proof">
-  <h2 id="proof" class="section-title">How you know a skill works</h2>
-  <p class="measure">A skill nobody has seen fail is a claim. Each core skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator.</p>
+  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">03</span>How you know a skill works</h2>
+  <p class="measure">A skill nobody has seen fail is a claim. Each core skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
+</section>
+
+<section aria-labelledby="questions" id="faq">
+  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">04</span>Questions</h2>
+  <div class="faq">
+    {%- for item in site.data.faq %}
+    <div>
+      <h3>{{ item.q }}</h3>
+      <p>{{ item.a }}</p>
+    </div>
+    {%- endfor %}
+  </div>
 </section>
 
 <section aria-labelledby="tools">
-  <h2 id="tools" class="section-title">Tools these skills pair with</h2>
+  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">05</span>Tools these skills pair with</h2>
   <p class="measure">A skill tells an agent what to do. These do part of the same work mechanically, so the agent spends its judgement on the cases that need it.</p>
   <ul class="measure">
     <li><a href="https://github.com/melbinjp/docproof"><strong>docproof</strong></a> reads a repository's documentation and reports the claims its code contradicts: paths that no longer exist, commands that are not there, versions that moved. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and it runs as a GitHub Action. MIT.</li>
@@ -89,6 +118,6 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="writing">
-  <h2 id="writing" class="section-title">Writing</h2>
+  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">06</span>Writing</h2>
   <p class="measure">Notes from actually running this kind of tooling live at <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>. Most recently, why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</p>
 </section>

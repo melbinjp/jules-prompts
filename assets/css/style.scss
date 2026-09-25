@@ -1,42 +1,74 @@
 ---
 ---
-// One set of tokens, used everywhere, in light and dark. System fonts only: no web-font
-// request, nothing to fail to load, and text that looks native on every platform.
+// The look: an engineer's notebook. Graph paper, a highlighter, and the three verdicts the
+// library is built on (holds, broken, skipped) as the only other colours. It is this
+// library's own, taken from what it does, rather than borrowed from any one agent's brand.
+//
+// One set of tokens, used everywhere, in light and dark. Body text is the system font: fast,
+// native on every platform, nothing to wait for. One self-hosted variable font, Martian Mono
+// (SIL OFL, assets/fonts/OFL.txt), sets the name, the labels and the numbers, at 23 KB.
+//
 // clamp(), min() and color-mix() are wrapped in unquote(): GitHub Pages still runs the old Ruby
 // Sass, which would otherwise try to do the arithmetic itself and fail on mixed units.
-// Every text colour here meets WCAG AA on every surface it sits on (checked, not assumed:
-// the old accent, #d97757, was 3.0:1 on the page background).
+// Every text colour meets WCAG AA on every surface it sits on; QUALITY.md has the ratios.
+
+@font-face {
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("../fonts/martian-mono-latin-wght.woff2") format("woff2");
+}
 
 @mixin dark-tokens {
-  --bg: #111113;
-  --surface: #1b1b1e;
-  --surface-2: #232327;
-  --text: #f2f2f4;
-  --text-2: #a1a1a8;
-  --line: #2f2f34;
-  --accent: #f0a07e;
-  --on-accent: #111113;
-  --accent-soft: rgba(240, 160, 126, 0.14);
+  --bg: #0e0f11;
+  --surface: #16171a;
+  --surface-2: #1f2124;
+  --text: #eef0e8;
+  --text-2: #a4a8a1;
+  --line: #2b2e31;
+  --grid: rgba(238, 240, 232, 0.05);
+  --link: #d4f03c;
+  --label: #c6e23a;
+  --focus: #d4f03c;
+  --button: #d4f03c;
+  --on-button: #0e0f11;
+  --holds: #6fd88e;
+  --broken: #ff8b7b;
+  --skipped: #e8b451;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-lift: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 14px 34px rgba(0, 0, 0, 0.55);
+  --mark-top: 2%;
   color-scheme: dark;
 }
 
 :root {
-  --bg: #fbfbfa;
+  --bg: #f7f7f3;
   --surface: #ffffff;
-  --surface-2: #f3f2ef;
-  --text: #1d1d1f;
-  --text-2: #5f5f66;
-  --line: #e4e2dd;
-  --accent: #ad4a28;
-  --on-accent: #ffffff;
-  --accent-soft: rgba(173, 74, 40, 0.09);
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-lift: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --surface-2: #eeefe8;
+  --text: #141518;
+  --text-2: #55595e;
+  --line: #dcded5;
+  --grid: rgba(20, 21, 24, 0.06);
+  --link: #3c4b00;
+  --label: #4a5c00;
+  --focus: #141518;
+  --button: #141518;
+  --on-button: #f7f7f3;
+  --holds: #1b7a3d;
+  --broken: #bd2a1d;
+  --skipped: #875b00;
+  --shadow: 0 1px 2px rgba(20, 21, 24, 0.06);
+  --shadow-lift: 0 14px 34px rgba(20, 21, 24, 0.12);
   color-scheme: light;
 
+  // The highlighter, the same in both themes, always with ink on it.
+  --mark: #d4f03c;
+  --on-mark: #141518;
+  --mark-top: 30%;
+
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --display: "Martian Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --radius: 14px;
   --radius-sm: 8px;
@@ -73,7 +105,7 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -83,21 +115,35 @@ body {
 }
 
 h1, h2, h3, h4 {
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
   text-wrap: balance;
 }
 
 p, li { text-wrap: pretty; }
 
 a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-  text-decoration-color: unquote("color-mix(in srgb, var(--accent) 40%, transparent)");
-  &:hover { text-decoration-color: currentColor; }
+  text-underline-offset: 0.2em;
+  text-decoration-color: unquote("color-mix(in srgb, currentColor 45%, transparent)");
+  &:hover {
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
+}
+
+// The highlighter: ink on a lime stroke. On paper it covers the lower two thirds of the line,
+// like a pen; on a dark page it covers the whole line, because ink above it would vanish.
+mark {
+  padding: 0 0.1em;
+  margin: 0 -0.04em;
+  background: linear-gradient(transparent var(--mark-top), var(--mark) var(--mark-top), var(--mark) 94%, transparent 94%);
+  color: var(--on-mark);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 code, pre { font-family: var(--mono); font-size: 0.88em; }
@@ -121,12 +167,14 @@ pre {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 #main:focus { outline: none; }
+
+::selection { background: var(--mark); color: var(--on-mark); }
 
 .sr-only {
   position: absolute;
@@ -144,9 +192,32 @@ pre {
   z-index: 10;
   padding: 10px 14px;
   border-radius: var(--radius-sm);
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--mark);
+  color: var(--on-mark);
+  font-weight: 600;
   &:focus { top: 8px; }
+}
+
+// The mark: a checked box. The name is set in the display face beside it.
+.logo {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  rect { fill: var(--mark); }
+  path {
+    fill: none;
+    stroke: var(--on-mark);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// Labels, numbers and badges: the display face, small, spaced.
+.eyebrow, .card-meta, .badge, .section-title .n, .report-kicker, .crumbs, .use h2, .tag, .step::before {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 // --- Header and footer ------------------------------------------------------
@@ -162,7 +233,7 @@ pre {
     flex-wrap: wrap;
     align-items: center;
     column-gap: 4px;
-    min-height: 60px;
+    min-height: 64px;
   }
 }
 
@@ -170,12 +241,16 @@ pre {
   margin-right: auto;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   min-height: 44px;
   color: var(--text);
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
+  font-family: var(--display);
+  font-weight: 650;
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
   text-decoration: none;
+  &:hover .logo rect { fill: var(--text); }
+  &:hover .logo path { stroke: var(--mark); }
 }
 
 .site-nav {
@@ -192,6 +267,7 @@ pre {
   }
 
   a {
+    position: relative;
     display: inline-flex;
     align-items: center;
     min-height: 44px;
@@ -201,7 +277,20 @@ pre {
     font-size: 0.94rem;
     text-decoration: none;
     &:hover { color: var(--text); }
-    &[aria-current="page"] { color: var(--text); font-weight: 600; }
+    &[aria-current="page"] {
+      color: var(--text);
+      font-weight: 600;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 8px;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--mark);
+      }
+    }
   }
 }
 
@@ -235,8 +324,8 @@ pre {
 }
 
 .site-footer {
-  margin-top: 64px;
-  padding: 28px 0 16px;
+  margin-top: 80px;
+  padding: 32px 0 16px;
   border-top: 1px solid var(--line);
   color: var(--text-2);
   font-size: 0.88rem;
@@ -244,6 +333,21 @@ pre {
 
   p { margin: 0 0 8px; }
   a { color: inherit; }
+
+  .footer-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-family: var(--display);
+    font-weight: 650;
+    font-size: 0.85rem;
+    letter-spacing: -0.02em;
+    .logo { width: 18px; height: 18px; }
+  }
+
+  .origin { max-width: 60ch; margin: 0 auto 8px; }
 
   // Shared WeCanUseAI link row. Behaves like the other tools' footers - wraps rather than
   // overflowing a narrow screen, 44px touch targets - while taking this site's tokens.
@@ -286,40 +390,196 @@ pre {
 .muted, .fine { color: var(--text-2); }
 .fine { font-size: 0.9rem; }
 
+// Section titles are numbered like a notebook's: a small index, then the title.
 .section-title {
-  margin: 56px 0 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 64px 0 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
   font-size: 1.5rem;
+
+  .n {
+    color: var(--label);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
 }
 
 section:first-of-type > .section-title { margin-top: 8px; }
 
 // --- Home ---------------------------------------------------------------------
 
+// Graph paper behind the top of the home page, fading out as the page goes on.
+.home .page-content {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: -1;
+    height: 820px;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: center -1px;
+    -webkit-mask-image: linear-gradient(#000 45%, transparent);
+    mask-image: linear-gradient(#000 45%, transparent);
+    pointer-events: none;
+  }
+}
+
 .hero {
+  display: grid;
+  gap: 40px;
+  align-items: start;
   padding: 24px 0 8px;
 
+  @media (min-width: 980px) {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 56px;
+    padding-top: 40px;
+  }
+
   .eyebrow {
-    margin: 0 0 16px;
-    color: var(--text-2);
-    font-size: 0.9rem;
-    font-weight: 500;
+    margin: 0 0 18px;
+    color: var(--label);
+    font-size: 0.78rem;
+    font-weight: 600;
+    span { color: var(--text-2); padding: 0 0.2em; }
   }
 
   h1 {
-    max-width: 18ch;
-    margin: 0 0 20px;
-    font-size: unquote("clamp(2.25rem, 1.3rem + 4vw, 3.75rem)");
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    max-width: 14ch;
+    margin: 0 0 22px;
+    font-size: unquote("clamp(2.4rem, 1.35rem + 4.4vw, 4.1rem)");
+    letter-spacing: -0.04em;
+    line-height: 1.02;
   }
 
-  .lede { font-size: unquote("clamp(1.1rem, 1rem + 0.4vw, 1.3rem)"); }
+  .lede { font-size: unquote("clamp(1.08rem, 1rem + 0.35vw, 1.25rem)"); }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 26px 0 18px;
+  }
+
+  .works-with {
+    max-width: 52ch;
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.92rem;
+  }
+}
+
+// A verdict word, marked with its colour and a square, so it never relies on colour alone.
+.v {
+  font-weight: 600;
+  white-space: nowrap;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0 0.3em 0.08em 0.05em;
+    border-radius: 2px;
+    background: currentColor;
+  }
+  &.is-holds { color: var(--holds); }
+  &.is-broken { color: var(--broken); }
+  &.is-skipped { color: var(--skipped); }
+}
+
+// The report: a real expected report, generated from the flagship fixture.
+.report {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+  font-size: 0.92rem;
+}
+
+.report-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+
+  .report-kicker { color: var(--label); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .report-title { font-weight: 600; line-height: 1.4; }
+  a { color: var(--text); }
+}
+
+.verdicts {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 5.4rem minmax(0, 1fr);
+    gap: 12px;
+    padding: 7px 20px;
+    line-height: 1.35;
+    & + li { border-top: 1px dashed var(--line); }
+  }
+
+  .verdict {
+    align-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding-top: 1px;
+    font-family: var(--display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    &::before {
+      content: "";
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+  }
+  .is-holds .verdict { color: var(--holds); }
+  .is-broken .verdict { color: var(--broken); }
+  .is-skipped .verdict { color: var(--skipped); }
+
+  .what { min-width: 0; font-weight: 550; }
+  small {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-2);
+    font-size: 0.82rem;
+    font-weight: 400;
+    overflow-wrap: anywhere;
+  }
+  code { font-size: 0.95em; }
+}
+
+.report-total {
+  margin: 0;
+  padding: 12px 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--display);
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .paths {
   display: grid;
   gap: 16px;
-  margin: 40px 0 0;
+  margin: 64px 0 0;
   scroll-margin-top: 16px;
 
   @media (min-width: 820px) { grid-template-columns: 1.35fr 1fr; }
@@ -342,9 +602,18 @@ section:first-of-type > .section-title { margin-top: 8px; }
   display: grid;
   gap: 24px;
   margin-bottom: 16px;
-  @media (min-width: 900px) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (min-width: 760px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   > div { min-width: 0; }
   h3 { margin: 0 0 10px; font-size: 1rem; }
+}
+
+.faq {
+  display: grid;
+  gap: 8px 40px;
+  @media (min-width: 820px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  > div { min-width: 0; }
+  h3 { margin: 12px 0 6px; font-size: 1.05rem; }
+  p { margin: 0 0 12px; color: var(--text-2); }
 }
 
 // --- Buttons and snippets -------------------------------------------------------
@@ -353,24 +622,25 @@ section:first-of-type > .section-title { margin-top: 8px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
+  min-height: 46px;
   padding: 0 20px;
   border: 1px solid transparent;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--on-accent);
+  border-radius: 10px;
+  background: var(--button);
+  color: var(--on-button);
   font: 600 0.95rem/1 var(--font);
   text-decoration: none;
   cursor: pointer;
-  transition: filter 0.15s var(--ease);
-  &:hover { filter: brightness(1.08); }
-  &:active { filter: brightness(0.95); }
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease), transform 0.15s var(--ease);
+  &:hover { background: var(--mark); color: var(--on-mark); }
+  &:active { transform: translateY(1px); }
 }
 
 .button-quiet {
   border-color: var(--line);
   background: var(--surface);
   color: var(--text);
+  &:hover { border-color: var(--text-2); background: var(--surface); color: var(--text); }
 }
 
 // Snippets wrap instead of scrolling sideways: on a phone the whole command stays visible.
@@ -389,7 +659,7 @@ section:first-of-type > .section-title { margin-top: 8px; }
   min-height: 32px;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 7px;
   background: var(--surface-2);
   color: var(--text);
   font: 500 0.8rem/1 var(--font);
@@ -408,39 +678,59 @@ section:first-of-type > .section-title { margin-top: 8px; }
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
-  padding: 20px 22px;
+  padding: 20px 22px 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow);
   color: var(--text);
   text-decoration: none;
-  transition: box-shadow 0.2s var(--ease), border-color 0.2s var(--ease);
-
-  &:hover {
-    border-color: unquote("color-mix(in srgb, var(--accent) 45%, var(--line))");
-    box-shadow: var(--shadow-lift);
-  }
+  transition: box-shadow 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
 
   h3 { margin: 0; font-size: 1.08rem; }
+  // The title is marked on hover, the way a reader marks the line they meant.
+  h3 span {
+    background-image: linear-gradient(var(--mark), var(--mark));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 0.3em;
+    transition: background-size 0.3s var(--ease);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
   p { margin: 0; color: var(--text-2); font-size: 0.95rem; line-height: 1.5; }
+
+  &:hover {
+    border-color: var(--text-2);
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+    h3 span { background-size: 100% 0.3em; }
+  }
 }
 
 .card-meta {
-  color: var(--accent);
-  font-size: 0.78rem;
+  color: var(--label);
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+// The two skills to start with, side by side rather than two of three columns.
+.cards-featured {
+  @media (min-width: 760px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 .card-featured {
-  background: linear-gradient(180deg, var(--accent-soft), transparent 70%), var(--surface);
-  h3 { font-size: 1.25rem; }
+  padding-top: 24px;
+  border-top: 4px solid var(--mark);
+  &:hover { border-top-color: var(--mark); }
+  h3 { font-size: 1.3rem; }
 }
 
 .card-legacy .card-meta { color: var(--text-2); }
@@ -452,13 +742,13 @@ section:first-of-type > .section-title { margin-top: 8px; }
 .crumbs {
   margin-bottom: 20px;
   color: var(--text-2);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   a { color: inherit; }
 }
 
 .skill-head {
   margin-bottom: 28px;
-  h1 { margin: 12px 0 14px; font-size: unquote("clamp(1.9rem, 1.3rem + 2.2vw, 2.6rem)"); }
+  h1 { margin: 14px 0 14px; font-size: unquote("clamp(1.9rem, 1.3rem + 2.2vw, 2.7rem)"); letter-spacing: -0.03em; }
 }
 
 .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
@@ -469,13 +759,15 @@ section:first-of-type > .section-title { margin-top: 8px; }
   min-height: 26px;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 6px;
   color: var(--text-2);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.badge-core { border-color: transparent; background: var(--accent-soft); color: var(--accent); }
+.badge-core { border-color: transparent; background: var(--mark); color: var(--on-mark); }
 
 .note {
   max-width: var(--measure);
@@ -486,13 +778,21 @@ section:first-of-type > .section-title { margin-top: 8px; }
 }
 
 .use {
-  margin: 0 0 40px;
-  padding: 22px 24px;
+  margin: 0 0 44px;
+  padding: 20px 24px 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
+  box-shadow: var(--shadow);
 
-  h2 { margin: 0 0 12px; font-size: 1.1rem; }
+  h2 {
+    margin: 0 0 14px;
+    color: var(--label);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
   dl {
     display: grid;
@@ -517,6 +817,7 @@ section:first-of-type > .section-title { margin-top: 8px; }
   p, ul, ol { margin: 0 0 16px; }
   ul, ol { padding-left: 1.4em; }
   li { margin: 6px 0; }
+  li::marker { color: var(--text-2); }
   li > ul, li > ol { margin: 6px 0; }
   pre { margin: 0 0 20px; }
   hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
@@ -524,7 +825,7 @@ section:first-of-type > .section-title { margin-top: 8px; }
   blockquote {
     margin: 0 0 20px;
     padding: 4px 18px;
-    border-left: 3px solid var(--line);
+    border-left: 3px solid var(--mark);
     color: var(--text-2);
   }
 
@@ -540,6 +841,26 @@ section:first-of-type > .section-title { margin-top: 8px; }
   th { font-weight: 600; }
 }
 
+// A skill's sections are numbered, like the sections of a procedure.
+.skill .prose {
+  counter-reset: section;
+  > h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    &::before {
+      counter-increment: section;
+      content: counter(section, decimal-leading-zero);
+      color: var(--label);
+      font-family: var(--display);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+  }
+}
+
 // --- Workflow -----------------------------------------------------------------------
 
 .steps {
@@ -553,44 +874,45 @@ section:first-of-type > .section-title { margin-top: 8px; }
 .step {
   position: relative;
   counter-increment: step;
-  padding: 0 0 28px 56px;
+  padding: 0 0 28px 60px;
 
   &::before {
-    content: counter(step);
+    content: counter(step, decimal-leading-zero);
     position: absolute;
     left: 0;
     top: -2px;
     display: grid;
     place-items: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent);
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: var(--mark);
+    color: var(--on-mark);
+    font-size: 0.8rem;
     font-weight: 700;
   }
 
   &:not(:last-child)::after {
     content: "";
     position: absolute;
-    left: 17px;
-    top: 40px;
+    left: 18px;
+    top: 42px;
     bottom: 6px;
     width: 2px;
-    background: var(--line);
+    background: unquote("repeating-linear-gradient(var(--line) 0 4px, transparent 4px 8px)");
   }
 
-  h2 { margin: 2px 0 6px; font-size: 1.2rem; }
+  h2 { margin: 4px 0 6px; font-size: 1.2rem; }
   p { margin: 0 0 8px; color: var(--text-2); }
 }
 
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag {
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--surface-2);
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   color: var(--text-2);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
 }
 
 // --- Motion ---------------------------------------------------------------------------

@@ -44,7 +44,19 @@ SKIP = {"template_master_prompt"}
 
 PLUGIN_NAME = "jules-prompts"
 PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
-PLUGIN_VERSION = "1.1.0"
+PLUGIN_VERSION = "1.2.0"
+PLUGIN_AUTHOR = {"name": "Melbin J Paulose", "url": "https://github.com/melbinjp"}
+# The words a marketplace, a registry or a search matches on.
+PLUGIN_KEYWORDS = [
+    "agent-skills", "skill-md", "verification", "production-readiness", "security-review",
+    "testing", "ci", "hardware", "physical-world", "claude-code", "codex", "jules",
+]
+PLUGIN_DESCRIPTION = (
+    "Procedures for the failures agents actually have: work that reads as finished "
+    "and is not, setup scripts that report success while broken, tests that cannot "
+    "fail, pipelines that are green without checking anything, and commands to the "
+    "physical world that were accepted but never happened."
+)
 
 # The published site, from the file that tells GitHub Pages which domain to serve.
 SITE = "https://" + (ROOT / "CNAME").read_text(encoding="utf-8").strip()
@@ -110,7 +122,7 @@ def load_prompts() -> list[dict]:
 
 
 def _described(prompt: dict) -> str:
-    """The shared description, so a skill and its slash command cannot disagree."""
+    """The shared description, so a SKILL.md and the discovery index cannot disagree."""
     return generate_skills.describe(prompt["stem"], prompt["meta"])
 
 
@@ -137,23 +149,25 @@ def emit_skills(prompts: list[dict]) -> dict[str, str]:
 def emit_plugin(prompts: list[dict]) -> dict[str, str]:
     """A plugin, so the library installs in one step rather than a copy per skill.
 
-    Bundling is how agent tooling ships now: a directory with a manifest, its
-    skills, and its slash commands. Generating it means the bundle cannot drift
-    from the procedures it claims to contain, which is the failure this whole
-    repository is about.
+    Bundling is how agent tooling ships now: a directory with a manifest and its
+    skills. Generating it means the bundle cannot drift from the procedures it
+    claims to contain, which is the failure this whole repository is about.
+
+    Skills only. The bundle used to carry each procedure a second time as a
+    slash command, but Claude Code now loads a plugin's commands as skills too,
+    so an install listed all 27 twice (54 entries) and every session paid for
+    both descriptions. A skill is already invocable by name as a slash command.
     """
     files = {}
     manifest = {
         "name": PLUGIN_NAME,
-        "description": (
-            "Procedures for the failures agents actually have: work that reads as finished "
-            "and is not, setup scripts that report success while broken, tests that cannot "
-            "fail, pipelines that are green without checking anything, and commands to the "
-            "physical world that were accepted but never happened."
-        ),
+        "description": PLUGIN_DESCRIPTION,
         "version": PLUGIN_VERSION,
-        "homepage": PLUGIN_REPO,
+        "author": PLUGIN_AUTHOR,
+        "homepage": SITE + "/",
+        "repository": PLUGIN_REPO,
         "license": "MIT",
+        "keywords": PLUGIN_KEYWORDS,
     }
     files[".claude-plugin/plugin.json"] = json.dumps(manifest, indent=2) + "\n"
 
@@ -161,20 +175,6 @@ def emit_plugin(prompts: list[dict]) -> dict[str, str]:
         files[f"skills/{prompt['slug']}/SKILL.md"] = emit_skills([prompt])[
             f"{prompt['slug']}/SKILL.md"
         ]
-        # A slash command is the same procedure, invoked by name.
-        command = (
-            "---\n"
-            + yaml.safe_dump(
-                {"description": _described(prompt)},
-                sort_keys=False,
-                allow_unicode=True,
-                width=10_000,
-            )
-            + "---\n\n"
-            + f"# {prompt['title']}\n\n"
-            + prompt["body"]
-        )
-        files[f"commands/{prompt['slug']}.md"] = command
     return files
 
 
@@ -198,6 +198,36 @@ def emit_index(prompts: list[dict]) -> dict[str, str]:
         ],
     }
     return {"library.json": json.dumps(payload, indent=2) + "\n"}
+
+
+def emit_marketplace(prompts: list[dict]) -> dict[str, str]:
+    """A marketplace of one, at the repository root, so the bundle installs by name:
+
+        /plugin marketplace add melbinjp/jules-prompts
+        /plugin install jules-prompts@jules-prompts
+
+    It is also what plugin directories look for when they index GitHub.
+    """
+    marketplace = {
+        "name": PLUGIN_NAME,
+        "owner": PLUGIN_AUTHOR,
+        "metadata": {"description": PLUGIN_DESCRIPTION, "version": PLUGIN_VERSION},
+        "plugins": [
+            {
+                "name": PLUGIN_NAME,
+                "source": "./plugin",
+                "description": PLUGIN_DESCRIPTION,
+                "version": PLUGIN_VERSION,
+                "author": PLUGIN_AUTHOR,
+                "homepage": SITE + "/",
+                "repository": PLUGIN_REPO,
+                "license": "MIT",
+                "keywords": PLUGIN_KEYWORDS,
+                "category": "development",
+            }
+        ],
+    }
+    return {".claude-plugin/marketplace.json": json.dumps(marketplace, indent=2) + "\n"}
 
 
 def _skill_text(prompt: dict) -> str:
@@ -330,13 +360,84 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         f"{DISCOVERY.lstrip('/')}/index.json": json.dumps(index, indent=2) + "\n",
         "llms.txt": llms,
         "_includes/workflow-steps.html": steps_html,
+        "_includes/report-exhibit.html": _report_exhibit(),
     }
+
+
+# The report the home page shows: the expected report of the flagship skill's fixture. It is
+# the one thing on the site that shows what the library produces rather than describing it, so
+# it is read from the fixture, not retyped, and cannot claim a result the fixture does not.
+EXHIBIT_FIXTURE = "looks-finished"
+_VERDICT_ROW = re.compile(r"^\|(?P<cells>.+)\|\s*$")
+_TOTAL = re.compile(r"^(\d+) holds, (\d+) broken, (\d+) skipped of (\d+) items\.$", re.M)
+
+
+def _inline(text: str) -> str:
+    """Escape a table cell and keep its `code` spans, the only Markdown the cells use."""
+    parts = text.split("`")
+    return "".join(
+        f"<code>{html.escape(part)}</code>" if i % 2 else html.escape(part)
+        for i, part in enumerate(parts)
+    )
+
+
+def _report_exhibit() -> str:
+    fixtures = json.loads((ROOT / "fixtures" / "index.json").read_text(encoding="utf-8"))
+    skill = next(f["skill"] for f in fixtures["fixtures"] if f["name"] == EXHIBIT_FIXTURE)
+    report = (ROOT / "fixtures" / EXHIBIT_FIXTURE / "EXPECTED_REPORT.md").read_text(encoding="utf-8")
+    table = report.split("## Verdicts", 1)[1]
+
+    rows = []
+    for line in table.splitlines():
+        match = _VERDICT_ROW.match(line)
+        if not match:
+            if rows:
+                break  # the table has ended
+            continue
+        cells = [c.strip() for c in match.group("cells").split("|")]
+        if cells[0] == "item" or set(cells[0]) <= {"-", ":"}:
+            continue
+        item, evidence, verdict = cells[0], cells[-2], cells[-1]
+        if verdict not in ("holds", "broken", "skipped"):
+            raise SystemExit(f"{EXHIBIT_FIXTURE}: verdict {verdict!r} is not holds, broken or skipped")
+        rows.append((item, evidence, verdict))
+
+    total = _TOTAL.search(report)
+    if not rows or not total:
+        raise SystemExit(f"{EXHIBIT_FIXTURE}: no verdict table or no total line in EXPECTED_REPORT.md")
+    counts = {v: sum(1 for r in rows if r[2] == v) for v in ("holds", "broken", "skipped")}
+    stated = dict(zip(("holds", "broken", "skipped", "items"), map(int, total.groups())))
+    if counts != {k: stated[k] for k in counts} or len(rows) != stated["items"]:
+        raise SystemExit(f"{EXHIBIT_FIXTURE}: the total line disagrees with the verdict table")
+
+    items = "\n".join(
+        f'    <li class="is-{verdict}"><span class="verdict">{verdict}</span>'
+        f'<span class="what">{_inline(item)}<small>{_inline(evidence)}</small></span></li>'
+        for item, evidence, verdict in rows
+    )
+    source = f"{PLUGIN_REPO}/tree/main/fixtures/{EXHIBIT_FIXTURE}"
+    return (
+        f"<!-- Generated from fixtures/{EXHIBIT_FIXTURE}/EXPECTED_REPORT.md by scripts/emit.py. "
+        "Edit that, not this. -->\n"
+        '<figure class="report" aria-labelledby="report-title">\n'
+        '  <figcaption class="report-head">\n'
+        '    <span class="report-kicker">Expected report</span>\n'
+        f'    <span class="report-title" id="report-title"><code>{skill}</code> on '
+        f'<a href="{source}">a notes app that looks finished</a></span>\n'
+        "  </figcaption>\n"
+        '  <ol class="verdicts">\n'
+        f"{items}\n"
+        "  </ol>\n"
+        f'  <p class="report-total">{html.escape(total.group(0))}</p>\n'
+        "</figure>\n"
+    )
 
 
 # name -> (output directory relative to the repo root, renderer)
 TARGETS = {
     "skills": ("skills", emit_skills),
     "plugin": ("plugin", emit_plugin),
+    "marketplace": (".", emit_marketplace),
     "index": (".", emit_index),
     "agent-skills": ("_agent_skills", emit_agent_skills),
     "site": (".", emit_site),

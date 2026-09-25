@@ -9,14 +9,14 @@ A curated library of Agent Skills, and the planted-failure fixtures that show ea
 
 A prompt and a skill here are the same procedure. The prompt is the text; the skill is that text with a name and a description in front, so an agent can decide for itself when to load it. The site serves both.
 
-The name is historical. The instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+The name is historical: the library began in 2025 as prompts for Jules, Google's coding agent, and is not affiliated with Google. The instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
 
 ## Layers
 
 1. **`_prompts/`**: the canonical procedure text. Website, JSON index, MCP slash commands.
 2. **`skills/`**: the same text as [Agent Skills](https://agentskills.io/specification). Generated from `_prompts/`. Copy into `.claude/skills/` or `.agents/skills/`.
 3. **`fixtures/`**: miniature repositories with planted defects. The way to see a skill go red.
-4. **`plugin/`**: the whole library as one installable bundle, manifest, skills and slash commands.
+4. **`plugin/`**: the whole library as one installable Claude Code plugin, a manifest and the skills. `.claude-plugin/marketplace.json` lists it, so `/plugin marketplace add melbinjp/jules-prompts` then `/plugin install jules-prompts@jules-prompts` installs it.
 5. **`library.json`**: every procedure, its category and its tier, in one machine-readable list.
 6. **The site's agent files**: `llms.txt`, `.well-known/agent-skills/index.json` and `_agent_skills/`, so an agent given only the domain can find and load every skill, and verify each against its digest.
 

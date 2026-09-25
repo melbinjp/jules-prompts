@@ -1,7 +1,10 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrapper">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+    <a class="site-title" href="{{ '/' | relative_url }}">
+      <svg class="logo" aria-hidden="true" viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="6"/><path d="M6.8 12.6l3.3 3.3 7.1-7.6"/></svg>
+      <span>{{ site.title | escape }}</span>
+    </a>
     <nav class="site-nav" aria-label="Main">
       <a href="{{ '/tasks.html' | relative_url }}"{% if page.url == "/tasks.html" or page.collection == "prompts" %} aria-current="page"{% endif %}>Skills</a>
       <a href="{{ '/workflow/' | relative_url }}"{% if page.url == "/workflow/" %} aria-current="page"{% endif %}>Workflow</a>

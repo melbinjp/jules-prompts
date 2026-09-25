@@ -1,24 +1,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- assign page_desc = page.description | default: site.description | strip_html | normalize_whitespace -%}
+{%- assign slug_prefix = page.slug | slice: 0, 5 -%}
+{%- assign is_skill = false -%}
+{%- if page.collection == "prompts" and slug_prefix == "task_" -%}{%- assign is_skill = true -%}{%- endif -%}
+{%- comment -%}
+  Titles carry the words people search for. The home page says what the site is, a skill page
+  says it is an Agent Skill, and the name comes last, where a results page truncates first.
+{%- endcomment -%}
 {%- if page.url == "/" -%}
-  {%- assign page_title = site.title | append: ": " | append: site.tagline -%}
+  {%- assign page_title = site.title | append: ": " | append: page.title -%}
+{%- elsif is_skill -%}
+  {%- assign page_title = page.title | append: " · Agent Skill · " | append: site.title -%}
 {%- else -%}
   {%- assign page_title = page.title | default: site.title | append: " · " | append: site.title -%}
 {%- endif %}
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ page_desc }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="WeCanUseAI">
+<meta property="og:type" content="{% if is_skill %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{{ page_title }}">
 <meta property="og:description" content="{{ page_desc }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ site.og_image | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ site.og_image_alt }}">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }}">
 <meta name="twitter:description" content="{{ page_desc }}">
-<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)">
+<meta name="twitter:image" content="{{ site.og_image | absolute_url }}">
+<meta name="theme-color" content="#f7f7f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/x-icon" href="https://favicon.wecanuseai.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="https://favicon.wecanuseai.com/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://favicon.wecanuseai.com/favicon-16x16.png">
@@ -26,15 +40,16 @@
 {%- comment -%} Where an agent that fetched this page should look instead. {%- endcomment %}
 <link rel="alternate" type="text/plain" title="llms.txt" href="{{ '/llms.txt' | relative_url }}">
 <link rel="alternate" type="application/json" title="Agent Skills discovery index" href="{{ '/.well-known/agent-skills/index.json' | relative_url }}">
-{%- assign slug_prefix = page.slug | slice: 0, 5 -%}
-{%- if page.collection == "prompts" and slug_prefix == "task_" -%}
+{%- if is_skill -%}
 {%- assign skill_name = page.slug | remove_first: "task_" | replace: "_", "-" %}
 <link rel="alternate" type="text/markdown" title="SKILL.md" href="{{ '/.well-known/agent-skills/' | append: skill_name | append: '/SKILL.md' | relative_url }}">
 {%- endif %}
+{% include structured-data.html is_skill=is_skill page_title=page_title page_desc=page_desc %}
 {%- comment -%}
   An explicit theme choice is applied before the first paint, so a reader who chose dark never
   sees a flash of light. With no choice stored, the stylesheet follows the system on its own.
 {%- endcomment %}
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="preload" href="{{ '/assets/fonts/martian-mono-latin-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>

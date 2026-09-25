@@ -18,8 +18,11 @@ What it checks, each against the built files:
            SKILL.md.
   people   every HTML page is a whole page with a <title> and one <h1>; skill pages carry
            their title and description; no prompt text has turned into a table.
+  search   every page names a link-preview image the site serves, at 1200 by 630; every
+           block of structured data parses; the home page and every skill page have one, and
+           a skill page's names the skill's title and its SKILL.md.
   budget   no page pulls a script, stylesheet or font from another origin; the stylesheet,
-           the script and every page stay under a size budget.
+           the script, the font, the preview image and every page stay under a size budget.
 
 It reports the denominator and exits 1 on any problem. It is written to be able to fail:
 run it against a build of the old site and it goes red.
@@ -40,7 +43,8 @@ INDEX = ".well-known/agent-skills/index.json"
 SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 
 # Budgets, in bytes. Generous against today's sizes, tight against a framework creeping in.
-BUDGET = {"css": 24_000, "js": 8_000, "page": 120_000}
+BUDGET = {"css": 24_000, "js": 8_000, "page": 120_000, "font": 40_000, "image": 150_000}
+FONT = "assets/fonts/martian-mono-latin-wght.woff2"
 
 # Origins a page may load from. The favicon is shared across wecanuseai.com tools.
 ALLOWED_ORIGINS = {"favicon.wecanuseai.com"}
@@ -57,6 +61,8 @@ class Page(HTMLParser):
         self.loads: list[str] = []
         self.alternates: dict[str, str] = {}
         self.tables = 0
+        self.meta: dict[str, str] = {}
+        self.structured: list[str] = []
         self._in = None
         self._h1 = ""
 
@@ -70,8 +76,13 @@ class Page(HTMLParser):
             self._in, self._h1 = "h1", ""
         elif tag == "script" and a.get("src"):
             self.loads.append(a["src"])
-        elif tag == "link" and a.get("rel") == "stylesheet":
+        elif tag == "script" and a.get("type") == "application/ld+json":
+            self._in = "ld"
+            self.structured.append("")
+        elif tag == "link" and a.get("rel") in ("stylesheet", "preload"):
             self.loads.append(a.get("href", ""))
+        elif tag == "meta" and a.get("property"):
+            self.meta[a["property"]] = a.get("content", "")
         elif tag == "link" and a.get("rel") == "alternate" and a.get("type"):
             self.alternates[a["type"]] = a.get("href", "")
         elif tag == "table":
@@ -80,7 +91,7 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "h1" and self._in == "h1":
             self.h1.append(self._h1.strip())
-        if tag in ("title", "h1"):
+        if tag in ("title", "h1") or (tag == "script" and self._in == "ld"):
             self._in = None
 
     def handle_data(self, data):
@@ -88,6 +99,8 @@ class Page(HTMLParser):
             self.title += data
         elif self._in == "h1":
             self._h1 += data
+        elif self._in == "ld":
+            self.structured[-1] += data
 
 
 def parse(path: Path) -> Page:
@@ -106,6 +119,29 @@ def local(site: Path, url: str) -> Path | None:
     if path.endswith("/"):
         target = target / "index.html"
     return target
+
+
+def png_size(path: Path) -> tuple[int, int] | None:
+    """Width and height from a PNG's header, or None if it is not a PNG."""
+    head = path.read_bytes()[:24]
+    if head[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+
+
+def structured_nodes(page: Page, rel: str, problems: list[str]) -> list[dict]:
+    """Every schema.org node on a page, or a problem for each block that does not parse."""
+    nodes = []
+    for block in page.structured:
+        try:
+            data = json.loads(block)
+        except json.JSONDecodeError as e:
+            problems.append(f"{rel}: structured data does not parse ({e})")
+            continue
+        if data.get("@context") != "https://schema.org":
+            problems.append(f"{rel}: structured data has no schema.org @context")
+        nodes.extend(data.get("@graph", [data]))
+    return nodes
 
 
 def main() -> int:
@@ -194,6 +230,20 @@ def main() -> int:
         if len(text.encode("utf-8")) > BUDGET["page"]:
             problems.append(f"{rel} is {len(text.encode('utf-8'))} bytes, over {BUDGET['page']}")
 
+        # What a search engine, a link preview and an assistant reading the page are given.
+        image = page.meta.get("og:image", "")
+        target = local(site, image) if urlparse(image).netloc else None
+        if target is None:
+            problems.append(f"{rel}: og:image {image!r} is not an absolute URL on this site")
+        elif not target.is_file():
+            problems.append(f"{rel}: og:image {image} is not served")
+        elif png_size(target) != (1200, 630):
+            problems.append(f"{rel}: og:image is {png_size(target)}, not a 1200 by 630 PNG")
+        nodes = structured_nodes(page, rel, problems)
+        types = {n.get("@type") for n in nodes}
+        if rel == "index.html" and not {"WebSite", "FAQPage"} <= types:
+            problems.append(f"{rel}: structured data has {sorted(map(str, types))}, not WebSite and FAQPage")
+
         if rel.startswith("prompts/"):
             stem = path.stem
             source = (ROOT / "_prompts" / f"{stem}.md").read_text(encoding="utf-8")
@@ -208,9 +258,23 @@ def main() -> int:
                 want = f"/.well-known/agent-skills/{slug}/SKILL.md"
                 if page.alternates.get("text/markdown") != want:
                     problems.append(f"{rel} does not point agents at {want}")
+                article = next((n for n in nodes if n.get("@type") == "TechArticle"), None)
+                if article is None:
+                    problems.append(f"{rel}: no TechArticle in its structured data")
+                else:
+                    if article.get("headline") != title:
+                        problems.append(f"{rel}: structured headline {article.get('headline')!r} is not {title!r}")
+                    content = article.get("encoding", {}).get("contentUrl", "")
+                    if not content.endswith(want):
+                        problems.append(f"{rel}: structured data points at {content!r}, not {want}")
 
     # --- budget -------------------------------------------------------------------
-    for kind, path in (("css", site / "assets/css/style.css"), ("js", site / "assets/js/main.js")):
+    for kind, path in (
+        ("css", site / "assets/css/style.css"),
+        ("js", site / "assets/js/main.js"),
+        ("font", site / FONT),
+        ("image", site / "assets/og.png"),
+    ):
         checked += 1
         if not path.exists():
             problems.append(f"{path.relative_to(site)} is missing")
@@ -223,7 +287,7 @@ def main() -> int:
         for problem in problems:
             print(f"  - {problem}")
         return 1
-    print("the site serves every skill verbatim, and every page is whole, titled and self-hosted")
+    print("the site serves every skill verbatim, and every page is whole, titled, self-hosted and described")
     return 0
 
 

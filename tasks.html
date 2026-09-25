@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Skills
+title: All Agent Skills
 description: Every procedure in the library, as a page to read and a SKILL.md to load. Core skills first, grouped by what they are for; the older general-purpose ones last, marked legacy.
 ---
 {%- comment -%} Skills only: the master template is for authors, has no SKILL.md, and is in the guide. {%- endcomment -%}
@@ -14,12 +14,12 @@ description: Every procedure in the library, as a page to read and a SKILL.md to
 </header>
 
 <section aria-labelledby="start">
-  <h2 id="start" class="section-title">Start here</h2>
-  <div class="cards">
+  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Start here</h2>
+  <div class="cards cards-featured">
     {%- for p in featured %}
     <a class="card card-featured" href="{{ p.url | relative_url }}">
       <span class="card-meta">{{ p.category }}</span>
-      <h3>{{ p.title }}</h3>
+      <h3><span>{{ p.title }}</span></h3>
       <p>{{ p.description }}</p>
     </a>
     {%- endfor %}
@@ -28,12 +28,13 @@ description: Every procedure in the library, as a page to read and a SKILL.md to
 
 {%- assign groups = core | group_by: "category" | sort: "name" -%}
 {%- for group in groups %}
+{%- assign n = forloop.index | plus: 1 %}
 <section aria-labelledby="c-{{ forloop.index }}">
-  <h2 id="c-{{ forloop.index }}" class="section-title">{{ group.name }}</h2>
+  <h2 id="c-{{ forloop.index }}" class="section-title"><span class="n" aria-hidden="true">{% if n < 10 %}0{% endif %}{{ n }}</span>{{ group.name }}</h2>
   <div class="cards">
     {%- for p in group.items %}
     <a class="card" href="{{ p.url | relative_url }}">
-      <h3>{{ p.title }}</h3>
+      <h3><span>{{ p.title }}</span></h3>
       <p>{{ p.description }}</p>
     </a>
     {%- endfor %}
@@ -42,13 +43,14 @@ description: Every procedure in the library, as a page to read and a SKILL.md to
 {%- endfor %}
 
 <section aria-labelledby="legacy">
-  <h2 id="legacy" class="section-title">Legacy</h2>
+  {%- assign n = groups | size | plus: 2 %}
+  <h2 id="legacy" class="section-title"><span class="n" aria-hidden="true">{% if n < 10 %}0{% endif %}{{ n }}</span>Legacy</h2>
   <p class="measure muted">General-purpose task text from 2025. Still correct and still runnable, and kept because it is useful. It is not what makes this library different, so each one says so in its description.</p>
   <div class="cards">
     {%- for p in legacy %}
     <a class="card card-legacy" href="{{ p.url | relative_url }}">
       <span class="card-meta">{{ p.category }}</span>
-      <h3>{{ p.title }}</h3>
+      <h3><span>{{ p.title }}</span></h3>
       <p>{{ p.description }}</p>
     </a>
     {%- endfor %}

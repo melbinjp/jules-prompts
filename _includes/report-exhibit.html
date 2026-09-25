@@ -1,0 +1,21 @@
+<!-- Generated from fixtures/looks-finished/EXPECTED_REPORT.md by scripts/emit.py. Edit that, not this. -->
+<figure class="report" aria-labelledby="report-title">
+  <figcaption class="report-head">
+    <span class="report-kicker">Expected report</span>
+    <span class="report-title" id="report-title"><code>take-to-production</code> on <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures/looks-finished">a notes app that looks finished</a></span>
+  </figcaption>
+  <ol class="verdicts">
+    <li class="is-holds"><span class="verdict">holds</span><span class="what">add a note<small>typed, pressed Enter, note listed</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">come back and see it<small>added one note, reloaded: 1 before, 0 after</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">a note that is HTML<small><code>&lt;img src=x onerror=&quot;alert(document.domain)&quot;&gt;</code> ran script</small></span></li>
+    <li class="is-holds"><span class="verdict">holds</span><span class="what">export, Chromium<small>showSaveFilePicker present</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">export, Safari and Firefox engines<small><code>window.showSaveFilePicker</code> absent (emulated by deleting it): Export alerts &quot;Something went wrong&quot;</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">320 px phone<small>document is 592 px wide at 320 px</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">visible keyboard focus<small>focused input has outline-style none</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">no third-party requests<small>lodash from cdn.jsdelivr.net, 0 uses in app.js</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">error messages say what to do<small>&quot;Something went wrong&quot;</small></span></li>
+    <li class="is-broken"><span class="verdict">broken</span><span class="what">empty state<small>no notes: the list renders nothing</small></span></li>
+    <li class="is-holds"><span class="verdict">holds</span><span class="what">light and dark<small>color-scheme and prefers-color-scheme tokens</small></span></li>
+  </ol>
+  <p class="report-total">3 holds, 8 broken, 0 skipped of 11 items.</p>
+</figure>
