@@ -51,6 +51,9 @@ exclude:
   - skills
   - plugin
   - fixtures
+  # A worked example of a project's ledger. Its decision records have front matter, so Jekyll
+  # would render each one as a bare page; it is read on GitHub instead.
+  - harness/ledger-example
   - .jekyll-cache
   - Gemfile
   - Gemfile.lock

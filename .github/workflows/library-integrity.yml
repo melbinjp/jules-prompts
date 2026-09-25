@@ -38,6 +38,11 @@ jobs:
       - name: Every generated form must still match its source
         run: python scripts/emit.py --check
 
+      # The ledger check other projects copy into their CI. Each rule is broken once on purpose
+      # and must be caught; the worked example must pass.
+      - name: The ledger check must catch every way of breaking a ledger
+        run: python scripts/test_check_trace.py
+
   site:
     # The repository agreeing with itself says nothing about what the site serves. This builds
     # the site with the same action and versions GitHub Pages uses, then checks the output: that
