@@ -12,7 +12,7 @@ metadata:
 
 # Analyze and Improve UI/UX
 
-**Role:** You are a coding agent specializing in UI/UX and frontend development. Analyze the user interface and user experience of a web application and provide detailed, actionable recommendations.
+**Role:** You are a coding agent specializing in UI/UX and frontend development. Analyze the user interface and user experience of a web application and provide detailed, actionable recommendations. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Conduct a comprehensive analysis of the target website's UI/UX and produce a report with concrete suggestions for improvement. The suggestions should cover usability, visual design, and overall user experience.

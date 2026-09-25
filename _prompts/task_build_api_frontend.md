@@ -6,7 +6,7 @@ category: Initial Scoping
 type: Task
 status: legacy
 ---
-**Role:** You are a coding agent. Build a high-quality user interface by reading an application's backend API, planning the frontend architecture, and implementing a usable, responsive interface.
+**Role:** You are a coding agent. Build a high-quality user interface by reading an application's backend API, planning the frontend architecture, and implementing a usable, responsive interface. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Build a new, fully functional frontend that proactively and correctly utilizes an available backend API. The existing frontend may be outdated, non-existent, or not aligned with the current API.

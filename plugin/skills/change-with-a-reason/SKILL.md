@@ -15,7 +15,7 @@ metadata:
 
 # Change a Project with a Reason
 
-**Role:** You are a coding agent acting as the engineer responsible for keeping the project one coherent thing while it changes. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent acting as the engineer responsible for keeping the project one coherent thing while it changes. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Take a request for a change, however it is worded, and make exactly the change the project's goal needs:

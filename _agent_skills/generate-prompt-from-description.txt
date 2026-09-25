@@ -18,7 +18,7 @@ metadata:
 
 # Generate Prompt from Description
 
-**Role:** You are a coding agent acting as a prompt engineer. Take a high-level description of a task and turn it into a detailed, well-structured prompt that can guide another agent to perform the task.
+**Role:** You are a coding agent acting as a prompt engineer. Take a high-level description of a task and turn it into a detailed, well-structured prompt that can guide another agent to perform the task. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Generate a complete and high-quality prompt in markdown format based on the user's description of a need. The generated prompt must follow the structure and principles of the existing prompts in this library, using the `Task Prompt Template` as a foundation.

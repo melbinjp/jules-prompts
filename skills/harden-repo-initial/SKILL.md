@@ -13,7 +13,7 @@ metadata:
 
 # Initial Repository Hardening
 
-**Role:** You are a coding agent. Perform a one-time, comprehensive hardening and baselining pass on a repository.
+**Role:** You are a coding agent. Perform a one-time, comprehensive hardening and baselining pass on a repository. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Transform the repository into a production-ready, testable, and documented project suitable for future iterative maintenance. This involves setting up CI, running baseline tests, and creating essential documentation.

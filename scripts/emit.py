@@ -458,6 +458,101 @@ def _report_exhibit() -> str:
 
 
 # name -> (output directory relative to the repo root, renderer)
+# --- short forms ---------------------------------------------------------------
+
+_SECTION = re.compile(r"^\*\*([A-Z][^*]+):\*\*\s*(.*)$")
+_TOP_BULLET = re.compile(r"^\*\s+(.*)$")
+_TOP_STEP = re.compile(r"^(\d+)\.\s+(.*)$")
+_LEAD = re.compile(r"^\*\*(.+?)\*\*")
+
+
+def _sections(body: str) -> dict[str, list[str]]:
+    sections: dict[str, list[str]] = {}
+    current = None
+    for line in body.splitlines():
+        match = _SECTION.match(line)
+        if match:
+            current = match.group(1)
+            sections[current] = [match.group(2)] if match.group(2) else []
+        elif current:
+            sections[current].append(line)
+    return sections
+
+
+def _lead(text: str) -> str:
+    """A rule's bold lead sentence. A lead of a few words ("A verdict table") says too little
+    on its own, so it keeps the rest of its first sentence."""
+    match = _LEAD.match(text)
+    if not match:
+        return text.replace("**", "").strip()
+    lead = match.group(1).strip()
+    if len(lead.split()) >= 5:
+        return lead.replace("**", "")
+    plain = text.replace("**", "").strip()
+    end = re.search(r"\.(\s|$)", plain[len(lead):])
+    return plain if end is None else plain[: len(lead) + end.start() + 1]
+
+
+def emit_compact(prompts: list[dict]) -> dict[str, str]:
+    """A short form of each core skill, for small local models with short context windows.
+
+    Private and offline projects often run local models, and a small one cannot hold a
+    5,000-token skill next to the code it is working on. The short form keeps the objective,
+    the lead sentence of every rule, the steps and the deliverables, and drops the reasons and
+    the methods. It is generated, so it cannot drift from the full skill, and it says where the
+    full one is. Qualify a model on the skill's fixture before trusting it with either form.
+    """
+    out = {}
+    for p in prompts:
+        if p["status"] != "core":
+            continue
+        sections = _sections(p["body"])
+        if "Objective" not in sections:
+            raise SystemExit(f"{p['stem']}: no Objective section, so it has no short form")
+
+        def items(names: tuple[str, ...], pattern: re.Pattern, numbered: bool = False) -> list[str]:
+            found = []
+            for name in names:
+                for line in sections.get(name, []):
+                    match = pattern.match(line)
+                    if match and numbered:
+                        found.append(f"{match.group(1)}. {match.group(2).replace('**', '')}")
+                    elif match:
+                        found.append(f"- {_lead(match.group(1))}")
+            return found
+
+        # The procedures do not all share one layout: some have a Method and a Definition of
+        # Done instead of steps and deliverables. Each part is taken from whichever it has.
+        rules = items(("Requirements & Constraints", "Constraints"), _TOP_BULLET)
+        method = items(("Method",), _TOP_STEP, numbered=True) or items(("Method",), _TOP_BULLET)
+        steps = items(("Execution Flow",), _TOP_STEP, numbered=True)
+        deliver = items(("Deliverables", "Definition of Done"), _TOP_BULLET)
+        if not (rules or method or steps or deliver):
+            raise SystemExit(f"{p['stem']}: no rules, method, steps or deliverables to shorten")
+        placeholders = sorted(set(re.findall(r"<([A-Z][A-Z0-9_]*)>", p["body"])))
+        objective = "\n".join(sections["Objective"]).strip()
+        lines = [
+            f"# {p['title']}: short form",
+            "",
+            p["description"],
+            "",
+            f"For small or local models with a short context. The full skill, with the reasons and "
+            f"methods behind each rule, is `skills/{p['slug']}/SKILL.md`; use it whenever the "
+            f"context allows. Works in any harness, needs no hosted service, and sends nothing "
+            f"beyond the project's confidentiality rules.",
+            "",
+        ]
+        if placeholders:
+            lines += ["Fill in: " + ", ".join(f"`<{name}>`" for name in placeholders), ""]
+        lines += ["## Objective", "", objective, ""]
+        for heading, part in (("Rules", rules), ("Method", method), ("Steps", steps),
+                              ("Deliver", deliver)):
+            if part:
+                lines += [f"## {heading}", "", *part, ""]
+        out[f"{p['slug']}.md"] = "\n".join(lines)
+    return out
+
+
 TARGETS = {
     "skills": ("skills", emit_skills),
     "plugin": ("plugin", emit_plugin),
@@ -465,6 +560,7 @@ TARGETS = {
     "index": (".", emit_index),
     "agent-skills": ("_agent_skills", emit_agent_skills),
     "site": (".", emit_site),
+    "compact": ("compact", emit_compact),
 }
 
 

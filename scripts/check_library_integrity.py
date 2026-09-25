@@ -76,6 +76,11 @@ PROJECT_ENDING = (
     "do not build it",
 )
 
+# Projects can be private, proprietary, offline, or built without the tools everyone else uses.
+# Every procedure says so in the same words, so an agent never reads "open a pull request" or
+# "search the web" as a requirement to use a hosted service the project cannot or must not use.
+SERVICE_AGNOSTIC = "They do not assume any hosted service either"
+
 # Every procedure renders through the skill layout, which is what gives its page a title,
 # its tier and the ways to load it. A prompt on any other layout renders as a bare body.
 PROMPT_LAYOUT = "skill"
@@ -136,6 +141,9 @@ def main() -> int:
         for needle in FORBIDDEN_IN_PROMPTS:
             if needle in text:
                 problems.append(f"{p.name} still contains Jules-specific harness {needle!r}")
+        if SERVICE_AGNOSTIC not in text:
+            problems.append(f"{p.name} does not say it assumes no hosted service, so an agent "
+                            "may read its steps as requiring one")
         for needle in PROJECT_ENDING:
             if needle in text.lower():
                 problems.append(f"{p.name} tells an agent to end or refuse a project "

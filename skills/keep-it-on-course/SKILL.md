@@ -16,7 +16,7 @@ metadata:
 
 # Keep a Project on Course and Improving
 
-**Role:** You are an agent acting as the project's steward: the one who keeps it working, keeps it improving, and makes sure it is still going where it was meant to go. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are an agent acting as the project's steward: the one who keeps it working, keeps it improving, and makes sure it is still going where it was meant to go. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 A project is never finished. Shipping is a milestone, and after it the work is to keep the project working and make it better, on purpose, measure by measure. Run this at the end of every milestone and on a steady cadence after launch: weekly in the first month and monthly after that is a sensible default, and more often while a measure is off target. Each run compares the project with its own ledger, using the sources rather than the last report.
@@ -71,6 +71,7 @@ The failures are the same for software, hardware and services:
     *   **Features nobody uses:** find them from usage in the logs. A feature that no measure names and nobody uses is a candidate for removal, with the owner's yes.
     *   **What to do with each one:** remove it through `change-with-a-reason`, or record a reason for it in the ledger.
 *   **Check the money and every other resource, and route around what has changed.** Compare spend with the budget for every line, including hosting, services, parts, and agent and model use; note free tiers that ended and prices that moved; work out the runway. Where a cost has outgrown its budget, or a source has changed (a price, an end-of-life notice, a part out of stock, a maintainer who left), find the route that brings it back: another source, a cheaper design, a funding route. Money is a constraint to engineer around, never the reason a project stops.
+*   **Check the agents and what leaves.** Re-qualify any agent whose model, settings or harness changed, on the same fixture and held-back task, and move a stage to its fallback if the score fell. Run a session with egress logged and reconcile it with the channel map (`keep-it-confidential`); a new destination is a finding.
 *   **Run the pipeline both ways.** For every stage in the operating model, run the person's path (the documented command, from a clean checkout, following the documented steps) and the agent's or CI's path. A stage only one of them can do is broken. Restore a backup and try a rollback whenever the schedule says to; a backup nobody has restored is not yet a backup.
 *   **Look outside the project.** Security advisories for what it uses; dependencies and platforms near their end of life; changes in law or platform rules that apply to it (app stores, certification, privacy); and new parts, services and techniques that would serve the goal better, as options to adopt.
 *   **Hear the people who use it.** Map every support message, review, incident and request since the last run to a measure or a journey. A request that maps to nothing goes to the owner as a proposed new measure (`change-with-a-reason`), not onto the backlog as unexplained work.
@@ -100,7 +101,7 @@ The failures are the same for software, hardware and services:
 3.  **Conditions.** Evaluate every course change and every revisit condition; switch routes where one fired.
 4.  **Look for what nothing serves.** Check the ledger, the tools and the usage.
 5.  **Resources.** Compare spend with budget, recheck prices and sources, work out the runway, and route around what changed.
-6.  **The pipeline, both ways.** Run the person's path and the agent's path for every stage, and do the scheduled restore and rollback.
+6.  **Agents, egress and the pipeline.** Re-qualify changed agents, reconcile the egress log, then run the person's path and the agent's path for every stage, and do the scheduled restore and rollback.
 7.  **Outside and people.** Advisories, end-of-life notices, rules and new options; map every message to a measure or a proposal.
 8.  **Improve and set the course.** Rank the next improvements; continue, adjust, re-route or grow, with a recommendation for the owner.
 9.  **Record.** Update the ledger and commit the review.

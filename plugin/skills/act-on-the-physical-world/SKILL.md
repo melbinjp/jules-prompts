@@ -13,7 +13,7 @@ metadata:
 
 # Act on the Physical World, and Prove It Happened
 
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Before any command reaches something in the physical world, establish five things: the state it should leave the world in, what will observe that state independently, the deadline for observing it, the safe state if anything goes wrong, and whether the action can be undone. Then issue it, and report what was observed rather than what was acknowledged. Applied to existing code, find every place where it does not, and fix it.

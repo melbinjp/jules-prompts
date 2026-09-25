@@ -54,6 +54,8 @@ exclude:
   # A worked example of a project's ledger. Its decision records have front matter, so Jekyll
   # would render each one as a bare page; it is read on GitHub instead.
   - harness/ledger-example
+  # Short forms of the skills, for local models; read from a clone, not the site.
+  - compact
   - .jekyll-cache
   - Gemfile
   - Gemfile.lock

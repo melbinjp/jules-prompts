@@ -42,6 +42,10 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 
 [`harness/AGENTS.md`](harness/AGENTS.md) is a fragment to paste into a *target* repository's `AGENTS.md` so three-verdict, prove-it-can-fail instructions fire on every task.
 
+## Offline and private use
+
+The skills need no network. On a private or air-gapped project, install from a clone (`skills/`, or `/plugin marketplace add /path/to/clone`), run the MCP server with `JULES_PROMPTS_DIR=/path/to/clone` (it then refuses to use the network), give small local models the short forms in `compact/`, and qualify each model on the fixtures with `scripts/score_fixture.py` before routing work to it. `keep-it-confidential` covers the project's own confidentiality: every channel its work can leave through, and an offline run of the whole pipeline.
+
 ## How to Use a Prompt
 
 1. **Select** a prompt from the JSON index, or load the matching skill.
@@ -61,7 +65,7 @@ All prompts are in `_prompts/` as markdown files. Each file has YAML front matte
 | **Initial Scoping** | First-pass tasks for new or unknown projects (audit, hardening, frontend build) |
 | **Iterative Development** | Tasks for improving existing code (fix & refine, UI/UX, build from plan) |
 | **Maintenance** | Ongoing tasks (dependency updates, curation, agent-PR review) |
-| **Security** | Security review of agent-written code |
+| **Security** | Security review of agent-written code (`security-review-agent-code`), and the project's own confidentiality, offline first (`keep-it-confidential`) |
 | **Meta** | Templates and prompt-generation tools |
 
 ## Recommended Workflow
@@ -86,6 +90,7 @@ See `workflow.json` for the machine-readable workflow graph.
 ```
 _prompts/           → Canonical procedure markdown (Jekyll collection)
 skills/             → Agent Skills generated from _prompts/
+compact/            → Short forms of the core skills, for small local models (generated)
 _agent_skills/      → The same SKILL.md files, wrapped so the site serves them verbatim
 .well-known/agent-skills/index.json → Agent Skills discovery index, with digests
 llms.txt            → Every skill, for an agent given only the domain

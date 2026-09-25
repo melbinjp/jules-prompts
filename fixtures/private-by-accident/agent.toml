@@ -1,0 +1,15 @@
+# Settings for the coding agent's harness.
+
+[model]
+provider = "remote"
+endpoint = "https://api.example-models.com/v1"
+name = "large-coder"
+
+[context]
+# Give the agent everything, so it never misses a file.
+include = "whole-repo"
+
+[local]
+# For when we go offline.
+model_path = "models/coder-7b.gguf"
+enabled = false

@@ -90,6 +90,18 @@ Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MC
 
 Prompts that contain placeholders such as `<PR_URL_OR_DIFF_RANGE>` expose them as arguments, so the client asks for the value and the server substitutes it before handing over the text.
 
+### Offline, and on private projects
+
+Nothing in the skills needs the internet, and nothing here has to be fetched while you work. Fetching a skill from the site also tells the site's host which skill someone wanted; installing from a copy tells nobody.
+
+1. **Get the library once.** `git clone https://github.com/melbinjp/jules-prompts`, or carry a clone across on removable media. Note the commit hash; on the other side, `git fsck` and `git rev-parse HEAD` confirm the copy is whole and is that commit.
+2. **Install the skills from the copy.** `cp -R jules-prompts/skills/* .claude/skills/` (or `.agents/skills/`). In Claude Code, `/plugin marketplace add /path/to/jules-prompts` then `/plugin install jules-prompts@jules-prompts` installs from the directory.
+3. **Run the MCP server from the copy, with no network.** Point the client at `node /path/to/jules-prompts/mcp/index.js` with `JULES_PROMPTS_DIR=/path/to/jules-prompts` in its environment. In that mode the server reads the copy and refuses to use the network at all; CI proves it. Its two dependencies come from `npm ci`, run once where a registry or a mirror is reachable, with `node_modules` carried across with the clone.
+4. **Give small local models the short forms.** `compact/<name>.md` is each core skill as a checklist of a few hundred words, for models whose context cannot hold the full skill next to the code.
+5. **Qualify a model before trusting it with a stage.** Run it on the skill's fixture and score the report with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the fixture is evidence.
+6. **Check the project's ledger offline.** `harness/check_trace.py` needs Python and nothing else.
+7. **Keep the project itself private.** [Keep a Project Confidential, Offline First](_prompts/task_keep_it_confidential.md) maps every channel the work can leave through (hosting, agents and model providers, telemetry, registries, crash reports, searches), proves the pipeline runs with the network off, and sets how the internet is used when it must be.
+
 ### For humans (copy-paste)
 
 1. Open the prompt file (e.g. [`task_audit_repo.md`](_prompts/task_audit_repo.md)).

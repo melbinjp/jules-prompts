@@ -5,7 +5,7 @@ description: To find the claims in the docs that were true when written and are 
 category: Maintenance
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Take the project's documentation, extract every claim in it that could be checked, and check each one against the code by running it. Report each claim as verified, false, or unverifiable, with the evidence. Fix the false ones and make the unverifiable ones checkable or remove them.

@@ -12,7 +12,8 @@
       "branches": [
         "task_choose_with_evidence",
         "task_act_on_the_physical_world",
-        "task_map_the_architecture"
+        "task_map_the_architecture",
+        "task_keep_it_confidential"
       ],
       "required": true,
       "repeatable": false
@@ -94,7 +95,8 @@
       "branches": [
         "task_change_with_a_reason",
         "task_choose_with_evidence",
-        "task_update_dependencies"
+        "task_update_dependencies",
+        "task_keep_it_confidential"
       ],
       "required": true,
       "repeatable": true

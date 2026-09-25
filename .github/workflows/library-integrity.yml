@@ -91,3 +91,10 @@ jobs:
 
       - name: The MCP server must answer a real client
         run: node mcp/smoke-test.mjs
+
+      # Private and offline projects run the server from a copy on disk. In that mode it replaces
+      # fetch with one that throws, so this also proves it served everything with no network.
+      - name: The MCP server must answer from a local copy, with no network
+        run: node mcp/smoke-test.mjs
+        env:
+          JULES_PROMPTS_DIR: .

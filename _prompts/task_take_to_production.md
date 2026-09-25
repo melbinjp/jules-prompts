@@ -6,7 +6,7 @@ category: End to End
 type: Task
 featured: 2
 ---
-**Role:** You are a coding agent acting as the engineer who owns this product end to end. Explore, decide, build, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent acting as the engineer who owns this product end to end. Explore, decide, build, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Bring the project to production quality from whatever state it is in: an idea, a prototype, something that works until it doesn't, or a mature system with gaps. Production quality here means four things, and you will check each rather than claim it:

@@ -19,7 +19,7 @@ metadata:
 
 # Curate Repository
 
-**Role:** You are a coding agent acting as a careful curator and senior maintainer. Analyze an unknown repository, make it more useful, and hand off a clear report, prioritizing safety and reversibility.
+**Role:** You are a coding agent acting as a careful curator and senior maintainer. Analyze an unknown repository, make it more useful, and hand off a clear report, prioritizing safety and reversibility. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Discover what is in the repository, propose a short, prioritized plan to make it more useful, maintainable, discoverable, and resilient. Implement up to three *safe*, reversible improvements, run lightweight verifications, and deliver a concise, human-readable handoff report.

@@ -5,7 +5,7 @@ description: To find the tests that pass because they were written from the impl
 category: Maintenance
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Audit a test suite an agent wrote, and find the tests that cannot fail. For every test added or changed by agent work, prove it fails when the behaviour it names is broken. Fix or delete the ones that do not, and report the count.

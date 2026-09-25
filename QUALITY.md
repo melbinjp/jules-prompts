@@ -5,12 +5,13 @@ This library, held to its own [take-to-production](_prompts/task_take_to_product
 ## The bar
 
 - **The one job:** an agent or a person finds the procedure for their task, loads exactly that text, and can prove the procedure catches what it claims to.
-- **Who, on what:** agents of every harness, reading `SKILL.md`, `AGENTS.md`, MCP or plain HTTP; people on phones from 320 px wide and on desktops, in light and dark, by mouse, touch and keyboard. Hosted by GitHub Pages, which builds with Jekyll 3.10 and the old Ruby Sass.
+- **Who, on what:** agents of every harness, reading `SKILL.md`, `AGENTS.md`, MCP or plain HTTP, online or on a machine with no network, including small local models; people on phones from 320 px wide and on desktops, in light and dark, by mouse, touch and keyboard. Hosted by GitHub Pages, which builds with Jekyll 3.10 and the old Ruby Sass.
 - **Journeys that must never fail:**
   1. An agent given only the domain finds a skill and loads it.
   2. A person finds a skill and copies, downloads or installs it.
   3. An MCP client lists the prompts and gets one with its placeholders filled.
   4. A maintainer changes a procedure, and every form follows or CI goes red.
+  5. An agent on a machine with no network loads the skills, and the MCP server, from a copy.
 - **Never corrupted:** the procedure text. Every form an agent loads is byte for byte its source.
 - **Found:** a person or an assistant searching for Agent Skills, or for a skill's job, lands on the page for it, and a shared link shows what it is.
 - **Budgets:** stylesheet under 24 KB, script under 8 KB, font under 40 KB, preview image under 150 KB, every page under 120 KB. No script, stylesheet or font from another origin; only the shared favicon.
@@ -18,7 +19,7 @@ This library, held to its own [take-to-production](_prompts/task_take_to_product
 ## Areas walked
 
 - **Security:** a static site with no input, no cookies and no server. No secrets anywhere in the history. The MCP server fetches only from GitHub over HTTPS; its dependencies are audited in CI; CI actions are pinned to commits. The real exposure is the trust root: whatever is on `main` is what every agent that loads these skills is told to do, so who can push to `main` matters more than anything on the site. The discovery digests detect a changed file in transit, not a bad commit.
-- **Privacy:** no analytics, cookies or third-party scripts. The shared favicon host sees visitors' addresses.
+- **Privacy:** no analytics, cookies or third-party scripts. The shared favicon host sees visitors' addresses. Fetching a skill from the site tells its host which skill someone wanted; installing from a copy of the repository tells nobody, and the README says so.
 - **Reliability:** the MCP server depends on GitHub alone (it depended on the site as well).
 - **Compatibility, accessibility and craft:** rows below.
 - **Legal:** MIT. One font, Martian Mono, self-hosted under the SIL Open Font License, with the licence beside it in `assets/fonts/OFL.txt`. The name began as prompts for Google's Jules; the site says it is not affiliated with Google, in the footer and in its questions.
@@ -31,9 +32,13 @@ Checked on the branch that introduced this file. CI covers the rows marked CI on
 | item | evidence | verdict |
 |---|---|---|
 | agent, from `llms.txt` | every skill listed; every link resolves in the built site (CI) | holds |
-| agent, from the discovery index | 31 of 31 `SKILL.md` served byte for byte, digests match (CI) | holds |
+| agent, from the discovery index | 32 of 32 `SKILL.md` served byte for byte, digests match (CI) | holds |
 | agent that fetched a skill's HTML page | each carries `<link rel="alternate" type="text/markdown">` to its `SKILL.md` (CI) | holds |
 | MCP client | smoke test: every procedure served, placeholder substituted, reading only GitHub (CI) | holds |
+| MCP client with no network at all | `JULES_PROMPTS_DIR` serves all 32 from a copy; in that mode fetch throws, and a planted network call made the server refuse to start (CI) | holds |
+| small local model | a short form of each of the 25 core skills in `compact/`, 150 to 930 words, generated and checked byte for byte (CI) | holds |
+| a small local model, qualified on a fixture with a short form | no local model runtime in this session; the scorer that would do it runs offline | skipped |
+| every procedure usable without hosted services | each says it assumes none, and to use the project's own equivalent; the integrity check refuses one that does not (CI) | holds |
 | MCP client where the site is unreachable | before: exited with a 403 from the site. After: starts, index and bodies from GitHub | holds |
 | person, desktop, light and dark | screenshots of home, skills, a skill, workflow, guide | holds |
 | person, 320 px phone | document width 320 on all 41 pages (was 359 and 915 before the first redesign) | holds |
@@ -43,12 +48,12 @@ Checked on the branch that introduced this file. CI covers the rows marked CI on
 | every page whole and titled | one `<h1>` and a `<title>` on every page; no fragments (CI; was 26 skill pages with no heading, and 50 fragments) | holds |
 | no prompt text rendered as a table | (CI; was 2 pages) | holds |
 | every form matches its source | `emit.py --check`, and the served bytes (CI) | holds |
-| every core skill can go red | 14 fixtures, 68 planted defects: each fixture's expected report names all of its own; the scorer exits 1 on a report that misses one | holds |
+| every core skill can go red | 15 fixtures, 75 planted defects: each fixture's expected report names all of its own; the scorer exits 1 on a report that misses one | holds |
 | budgets | stylesheet 19.2 KB, script 3.3 KB, font 23.6 KB, preview image 62.5 KB, largest page 54 KB, the guide (CI) | holds |
 | a search engine or assistant reading a page | titles and descriptions name what it is and which agents read it; structured data parses on every page; the home page has WebSite and FAQPage, each skill page a TechArticle naming its title and its `SKILL.md` (CI) | holds |
 | a link shared in a chat or a post | every page names a 1200 by 630 preview image the site serves (CI) | holds |
 | the report on the home page | generated from the fixture's expected report; the generator refuses a total that disagrees with the table (CI) | holds |
-| Claude Code plugin install | from a clean config, marketplace add and install: 31 skills, about 2.3k tokens in every session (was 54 entries and 3.5k, every skill twice; the four lifecycle skills add about 550). The longest skill, `start-from-an-idea`, costs about 6.6k when loaded, more than `take-to-production`'s 5.5k: it carries the funding routes, the mechanisms that keep the owner and the agent out of the dark, and the routing of work to each agent's strengths, which were cut once and put back because they are the point of it. Both manifests pass `claude plugin validate --strict` | holds |
+| Claude Code plugin install | from a clean config, marketplace add and install: 32 skills, about 2.4k tokens in every session (was 54 entries and 3.5k, every skill twice). The longest skill, `start-from-an-idea`, costs about 7.2k when loaded, more than `take-to-production`'s 5.5k: it carries the funding routes, the mechanisms that keep the owner and the agent out of the dark, and routing by what each agent may see and has scored. Its short form in `compact/` is about 1.3k for models that cannot hold it. Both manifests pass `claude plugin validate --strict` | holds |
 | the ledger check other projects copy | the worked example passes; each of the 29 ways of breaking a ledger fails it by name, including a decision with one backing, a decision backed only by sources, and a commit with no `Verified:` line; a checker with any of those rules weakened fails the tests (CI) | holds |
 | no skill tells an agent to end or refuse a project | the integrity check refuses stop conditions, kill criteria and "should it exist" verdicts in any procedure; seen failing on a planted line (CI) | holds |
 | every workflow step says when it is done, and what it calls on | the integrity check refuses a step with no gate, or a branch that is not a procedure; seen failing on both (CI) | holds |
@@ -71,4 +76,4 @@ The plugin's 27 slash commands, which Claude Code loaded as a second copy of eve
 
 A step that decides whether an idea deserves to be built, and conditions that end a project. The first version of the lifecycle had both; the library is for making ideas happen, so a constraint gets routes around it and a blocked route gets another. A service to run the lifecycle: two folders in the project and a check in its CI do it, with nothing to host. Renaming the library. The name is where it started, and it is what people already search for; every page says what it is now, and that it is not affiliated with Google. A search box: 31 skills in named groups fit on one page. A JavaScript framework or a build step beyond the one GitHub Pages runs. Moving the site to a different host to serve `SKILL.md` directly: wrapping each file as a plain-text collection document does it on Pages, and the site check proves the bytes.
 
-32 items: 26 holds, 0 broken, 6 skipped.
+36 items: 29 holds, 0 broken, 7 skipped.

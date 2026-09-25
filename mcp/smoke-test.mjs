@@ -18,8 +18,11 @@
  * cause (a 403 from the index host) behind a symptom.
  *
  * JULES_PROMPTS_REF chooses the commit both sides read. CI sets it to the commit under test.
+ * JULES_PROMPTS_DIR runs the server from a copy on disk instead, and then this test reads the
+ * index from the same copy and checks the server said it used no network.
  */
 import { spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -91,12 +94,21 @@ try {
   const listed = await send("prompts/list", {});
   const names = (listed.prompts || []).map((p) => p.name);
 
+  const local = process.env.JULES_PROMPTS_DIR;
   const repo = process.env.JULES_PROMPTS_REPO || "melbinjp/jules-prompts";
   const ref = process.env.JULES_PROMPTS_REF || "main";
-  const library = await (await fetch(`https://raw.githubusercontent.com/${repo}/${ref}/library.json`)).json();
+  const library = local
+    ? JSON.parse(readFileSync(path.join(local, "library.json"), "utf8"))
+    : await (await fetch(`https://raw.githubusercontent.com/${repo}/${ref}/library.json`)).json();
+  const where = local ? `${local}/library.json` : `${repo}@${ref} library.json`;
   check("every procedure in the index is served",
     names.length === library.procedures.length,
-    `served ${names.length}, ${repo}@${ref} library.json lists ${library.procedures.length}`);
+    `served ${names.length}, ${where} lists ${library.procedures.length}`);
+  if (local) {
+    check("the local copy was served with no network",
+      stderr.includes("(local copy, no network)"),
+      stderr.trim().split("\n")[0] || "nothing on stderr");
+  }
 
   const withArgs = (listed.prompts || []).find((p) => (p.arguments || []).length > 0);
   check("at least one prompt exposes a fillable placeholder",

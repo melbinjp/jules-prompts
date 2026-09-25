@@ -1,0 +1,54 @@
+{
+  "fixture": "private-by-accident",
+  "skill": "keep-it-confidential",
+  "prompt_slug": "task_keep_it_confidential",
+  "description": "A proprietary project that says nothing leaves the machine. Its backups, agent, editor, package manager, crash reporter, tests and research notes each carry the work out.",
+  "defects": [
+    {
+      "id": "plaintext-remote",
+      "file": "setup.sh",
+      "tell": "every night the whole repository is pushed in plaintext to a hosted git service, readable by the host, its integrations and any leaked token; an encrypted remote or the owner's own hardware keeps an off-site copy without that",
+      "must_mention": ["setup.sh", "encrypt"]
+    },
+    {
+      "id": "cloud-agent-whole-repo",
+      "file": "agent.toml",
+      "tell": "the agent sends the whole repository to a remote model endpoint on every task, and the local model beside it is switched off",
+      "must_mention": ["agent.toml", "whole-repo"]
+    },
+    {
+      "id": "editor-telemetry",
+      "file": ".vscode/settings.json",
+      "tell": "editor telemetry is set to all, and a cloud completion provider is sent the code around the cursor",
+      "must_mention": ["telemetry", "sendSurroundingCode"]
+    },
+    {
+      "id": "name-leaks-to-registry",
+      "file": "pip.conf",
+      "tell": "extra-index-url makes pip ask the public index for heron-core-dsp too, which tells the public index the internal package's name, and lets anyone who publishes heron-core-dsp with a higher version there take over the install",
+      "must_mention": ["heron-core-dsp", "extra-index-url"]
+    },
+    {
+      "id": "crash-reports-leave",
+      "file": "app/crash.py",
+      "tell": "every uncaught exception sends the traceback, the working directory (~/clients/acmefoods/heron) and the arguments to a hosted error tracker, naming the customer and carrying code and data out",
+      "must_mention": ["crash.py", "traceback"]
+    },
+    {
+      "id": "offline-never-tested",
+      "file": "tests/conftest.py",
+      "tell": "the test suite downloads reference weights from a public model hub on first run; with the network off, make test fails, so 'developed fully offline' was never tried",
+      "must_mention": ["conftest.py", "download"]
+    },
+    {
+      "id": "research-names-the-work",
+      "file": "RESEARCH.md",
+      "tell": "searches name the customer and its line, the internal package name was searched publicly, and unmix.py (the customer's edge) was pasted into a public chat assistant",
+      "must_mention": ["AcmeFoods", "unmix.py"]
+    }
+  ],
+  "control": {
+    "file": "third_party/datasheets/README.md",
+    "tell": "the datasheets are done right: the vendor's whole archive fetched once in bulk from a clean profile, checked by hash, and searched locally, so nothing reveals which sensor Heron uses. A report that flags the datasheet fetch as a leak is inventing."
+  }
+}

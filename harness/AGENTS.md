@@ -79,6 +79,21 @@ resources, course changes, milestones) and `decisions/` (one file per decision).
 - Every pipeline stage is a command in this repository that a person, an agent
   or CI can run. Nothing lives only in an agent's memory or tools.
 
+## Confidential projects
+
+For a project whose code, data or plans must stay private. The rules on where
+each class may go live in `CONFIDENTIALITY.md`.
+
+- Send nothing beyond those rules: no code, names, customers or data into a
+  search box, a forum, a remote model or a hosted tool the rules do not name.
+- A remote agent or model gets only the classes released to it, and the
+  smallest excerpt that does the job, never the whole repository.
+- Everything the project needs to build, test and run with the network off is
+  in the repository or a local mirror, with its hash. Offline is proved by
+  running it offline.
+- When the internet must be used, fetch broadly and search locally, through
+  the gate the rules name, and log what left.
+
 ## Acting on the world
 
 For anything a command can move, heat, dispense, spend or send: hardware,
@@ -105,6 +120,7 @@ https://jules-prompts.wecanuseai.com/llms.txt.
 - a vendor, platform, part, provider or approach to choose → `choose-with-evidence`
 - any requested change, especially a vague one → `change-with-a-reason`
 - a milestone reached, or the next round of improvement after launch → `keep-it-on-course`
+- a private or offline project, or anything leaving the machine → `keep-it-confidential`
 - making a project dependable, finished and production-ready → `take-to-production`
 - any command to hardware, a device or a real-world service → `act-on-the-physical-world`
 - agent-authored tests → `qa-an-agents-tests`

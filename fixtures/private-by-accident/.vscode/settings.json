@@ -1,0 +1,6 @@
+{
+  "telemetry.telemetryLevel": "all",
+  "aiCompletions.provider": "cloud",
+  "aiCompletions.sendSurroundingCode": true,
+  "files.autoSave": "afterDelay"
+}

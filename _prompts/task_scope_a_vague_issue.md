@@ -5,7 +5,7 @@ description: To turn an underspecified bug report into a reproducible, testable 
 category: Initial Scoping
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Take an issue that does not say enough to act on, and turn it into a specification that does: an exact reproduction, the observed behaviour, the expected behaviour, and a failing test that captures the difference. Produce no fix in this task. The deliverable is a task that can be handed on with nothing left to guess.

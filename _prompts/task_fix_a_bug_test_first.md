@@ -5,7 +5,7 @@ description: To fix a reported bug in an order that proves the fix worked, by ma
 category: Iterative Development
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Fix a reported bug in the only order that produces evidence: write a test that fails, confirm it fails **for the reason in the report**, then change the code until it passes, changing nothing else. Deliver the failing output and the passing output as the proof.

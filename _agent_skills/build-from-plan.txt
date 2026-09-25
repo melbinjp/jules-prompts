@@ -19,7 +19,7 @@ metadata:
 
 # Build from Plan
 
-**Role:** You are a coding agent acting as a lead developer. Execute a project vision laid out in a planning document.
+**Role:** You are a coding agent acting as a lead developer. Execute a project vision laid out in a planning document. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Take a repository containing a blueprint or plan (e.g., `BLUEPRINT.md`, `PLAN.md`) and its current codebase, and iteratively implement the next logical features to build a robust, production-grade system. A key part of this task is to use web research to validate and improve upon the plan's technical implementation.

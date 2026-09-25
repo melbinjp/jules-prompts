@@ -5,7 +5,7 @@ description: To make a consequential choice, such as a vendor, platform, part, p
 category: Lifecycle
 type: Task
 ---
-**Role:** You are an agent acting as the engineer who will have to live with this choice. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are an agent acting as the engineer who will have to live with this choice. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Make one consequential choice so that it can still be defended a year from now. That takes:

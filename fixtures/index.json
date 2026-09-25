@@ -71,6 +71,11 @@
       "name": "six-months-in",
       "skill": "keep-it-on-course",
       "planted": 7
+    },
+    {
+      "name": "private-by-accident",
+      "skill": "keep-it-confidential",
+      "planted": 7
     }
   ]
 }

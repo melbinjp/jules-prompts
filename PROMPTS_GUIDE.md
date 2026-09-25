@@ -230,6 +230,17 @@ An agent asked to fix a failure finds the shortest route to the failure stopping
 
 ---
 
+### [`task_keep_it_confidential.md`]({% link _prompts/task_keep_it_confidential.md %})
+**Purpose:** To keep a private or proprietary project's code, data, designs and plans inside the places the owner chose, whether it is built fully offline or has to use the internet.
+
+Private projects rarely leak through an attack. They leak through their tools: a "private" repository on a hosted platform, an editor that sends the code around the cursor, a cloud agent handed the whole repository, a package manager that asks a public registry for an internal package by name, a crash reporter that ships paths naming the customer, and searches that name the work. This prompt agrees the classes of what is private with the owner and where each may go. It maps every channel the work can leave through and gives each a verdict with its evidence. It proves the whole pipeline, agents included, runs with the network off, moving each class's work to local models, local mirrors, encrypted remotes and local runners as the rules require. Where a remote agent is allowed, it gets the least: only released classes, the smallest excerpt, names stripped, under written terms. When the internet must be used, it is used through one gate: fetch broadly and search locally, ask about the technique and never the project, keep agents off the open web. It is honest that this reduces what an observer can learn rather than making activity invisible. Every working session's egress is logged and reconciled with the map.
+
+**When to use it:**
+*   At the start of any private, proprietary or offline project, and whenever a tool, extension, dependency, model or agent is added.
+*   When a project is said to be offline, or "nothing leaves this machine", and nobody has checked.
+
+---
+
 ### [`task_update_dependencies.md`]({% link _prompts/task_update_dependencies.md %})
 **Purpose:** To update a project's dependencies to their latest compatible versions.
 
@@ -389,6 +400,8 @@ Everything here can be used by an agent that was given nothing but the domain:
 *   [`/.well-known/agent-skills/index.json`]({{ '/.well-known/agent-skills/index.json' | relative_url }}) is the [Agent Skills discovery](https://github.com/cloudflare/agent-skills-discovery-rfc) index, with a SHA-256 digest of each `SKILL.md` so a client can verify what it loads.
 *   `/.well-known/agent-skills/<name>/SKILL.md` serves each skill, byte for byte the file in `skills/`.
 *   [`/harness/AGENTS.md`]({{ '/harness/AGENTS.md' | relative_url }}) is the standing doctrine, and [`/prompts.json`]({{ '/prompts.json' | relative_url }}) the older index, now with each skill's URL.
+
+Offline, or on a private project, none of the above is needed: install the skills from a clone, run the MCP server with `JULES_PROMPTS_DIR` pointing at it (it then refuses the network), and give small local models the short forms in `compact/`.
 
 `scripts/check_site.py` checks all of this against the built site in CI, so a skill that is not served, or served differently from its source, fails the build.
 

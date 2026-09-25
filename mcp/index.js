@@ -25,11 +25,19 @@
  * client can ask for them and this substitutes before handing the text over. That is the part
  * a webpage cannot do.
  *
+ * OR FROM A COPY ON DISK, WITH NO NETWORK AT ALL. Private and offline projects cannot, or must
+ * not, reach GitHub, and a request for a skill is itself a small signal of what someone is
+ * working on. JULES_PROMPTS_DIR=/path/to/a/clone reads the index and every procedure from
+ * that directory. In that mode the global fetch is replaced with one that throws, so no later
+ * change to this file can quietly reach the network; the smoke test runs this mode in CI.
+ *
  * FAILURE IS LOUD, DELIBERATELY. If the fetch fails this exits non-zero with the reason rather
  * than starting and serving an empty list. A server that connects and offers nothing looks
  * identical to a client misconfiguration, and the person debugging it would have no way to
  * tell which they were looking at.
  */
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -38,11 +46,20 @@ const REPO = process.env.JULES_PROMPTS_REPO || "melbinjp/jules-prompts";
 const REF = process.env.JULES_PROMPTS_REF || "main";
 const RAW = `https://raw.githubusercontent.com/${REPO}/${REF}`;
 const INDEX = process.env.JULES_PROMPTS_INDEX || `${RAW}/library.json`;
-const VERSION = "1.1.0";
+const LOCAL = process.env.JULES_PROMPTS_DIR ? path.resolve(process.env.JULES_PROMPTS_DIR) : null;
+const SOURCE = LOCAL ? `${LOCAL} (local copy, no network)` : `${REPO}@${REF}`;
+const VERSION = "1.2.0";
+
+if (LOCAL) {
+  globalThis.fetch = () => {
+    throw new Error("local mode (JULES_PROMPTS_DIR) must not use the network");
+  };
+}
 
 const PLACEHOLDER = /<([A-Z][A-Z0-9_]*)>/g;
 
 async function getJson(url) {
+  if (LOCAL) return JSON.parse(await readFile(path.join(LOCAL, "library.json"), "utf8"));
   const r = await fetch(url, { headers: { "User-Agent": "jules-prompts-mcp" } });
   if (!r.ok) throw new Error(`${url} returned ${r.status}`);
   return r.json();
@@ -97,7 +114,9 @@ async function main() {
 
   const loaded = await Promise.all(
     entries.map(async (p) => {
-      const text = await getText(`${RAW}/${p.source_path}`);
+      const text = LOCAL
+        ? await readFile(path.join(LOCAL, p.source_path), "utf8")
+        : await getText(`${RAW}/${p.source_path}`);
       const { body } = splitFrontMatter(text);
       return { ...p, body, args: placeholdersIn(body) };
     }),
@@ -131,7 +150,7 @@ async function main() {
   // many prompts it loaded can be told apart from one that loaded none and connected anyway.
   const withArgs = loaded.filter((p) => p.args.length).length;
   process.stderr.write(
-    `jules-prompts: ${loaded.length} prompt(s) from ${REPO}@${REF}, ` +
+    `jules-prompts: ${loaded.length} prompt(s) from ${SOURCE}, ` +
       `${withArgs} with fillable placeholders, ` +
       `categories: ${[...new Set(loaded.map((p) => p.category))].sort().join(", ")}\n`,
   );

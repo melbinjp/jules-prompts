@@ -5,7 +5,7 @@ description: To find what a migration does at production row counts, on the prod
 category: Maintenance
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
+**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
 Take a pending database migration and establish what it will actually do to production: how long it runs at real row counts, what it locks while it runs, whether the rollback works, and whether old application code survives the new schema. Report timings and lock behaviour as measurements, not estimates.
