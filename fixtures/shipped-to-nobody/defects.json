@@ -1,0 +1,54 @@
+{
+  "fixture": "shipped-to-nobody",
+  "skill": "release-to-people",
+  "prompt_slug": "task_release_to_people",
+  "description": "A tide app for sea kayakers that passed its bar and reached almost nobody: the way in was never walked from a clean device, the listing and the product disagree, nobody was listening, and a quiet fortnight was read as a verdict.",
+  "defects": [
+    {
+      "id": "dead-download-link",
+      "file": "site/index.html",
+      "tell": "the Android link points at tidewise-1.0.apk, but release/manifest.json says the signed build is Tidewise-1.0.0.apk; the way in from the website ends in a missing file, and the checklist ticked 'website updated'",
+      "must_mention": ["tidewise-1.0.apk", "Tidewise-1.0.0.apk"]
+    },
+    {
+      "id": "first-run-on-the-builders-phone",
+      "file": "src/first_run.py",
+      "tell": "start() reads ~/.tidewise/config.toml with no fallback, so on a clean device it raises on first open; the checklist's 'install and first run tested' was on the builder's own phone, which already had the file, and the two one-star reviews say 'crashes on open'",
+      "must_mention": ["config.toml", "clean device"]
+    },
+    {
+      "id": "listing-contradicts-product",
+      "file": "store/listing.md",
+      "tell": "the App Store listing says 'Data Not Collected', but src/analytics.py sends a device id and the latitude and longitude on every start, without the consent PROJECT.md's M1 requires; there is no privacy notice",
+      "must_mention": ["Data Not Collected", "analytics.py"]
+    },
+    {
+      "id": "everyone-at-once",
+      "file": "ops/rollout.yml",
+      "tell": "percentage: 100 and pause_when: null: the crash reached every Android user on day one, with nothing to pause the rollout when the first journey failed",
+      "must_mention": ["rollout.yml", "percentage: 100"]
+    },
+    {
+      "id": "wrong-place-wrong-words",
+      "file": "announce/post.md",
+      "tell": "announced only on the builder's own Mastodon, to developers, in the stack's words (Rust, WASM, CRDT, 60 fps); PROJECT.md's reach names the forum's trip-planning board, the 14 club newsletters and two paddling shops, and the 31 kayakers talked about slack water and crossings, not what it is written in",
+      "must_mention": ["Mastodon", "newsletters"]
+    },
+    {
+      "id": "nobody-listening",
+      "file": "ops/aliases",
+      "tell": "help@tidewise.app, the address in the release notes, forwards to /dev/null, so 'nobody has written to the help address' in STATE.md means nobody could; M3 cannot be measured",
+      "must_mention": ["/dev/null", "help@tidewise.app"]
+    },
+    {
+      "id": "quiet-launch-read-as-verdict",
+      "file": "STATE.md",
+      "tell": "after 12 installs in two weeks STATE.md declares no demand and shelves the project, while PROJECT.md's K1 names exactly this condition (fewer than 50 installs in two weeks) and the route to switch to: the club secretaries and the paddling shops. The evidence is about a missing file, a crash, one channel and a dead help address, not about the idea",
+      "must_mention": ["K1", "shelv"]
+    }
+  ],
+  "control": {
+    "file": "release/NOTES.md",
+    "tell": "the release notes are written right: what it does for a kayaker in their words, what it does not replace, and where to write. A report that faults them is inventing (the fault is that the address they give goes nowhere)."
+  }
+}

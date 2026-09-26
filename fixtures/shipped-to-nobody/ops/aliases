@@ -1,0 +1,3 @@
+# Mail forwarding for tidewise.app
+postmaster: ellis@home.example
+help: /dev/null

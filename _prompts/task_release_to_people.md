@@ -1,0 +1,87 @@
+---
+layout: skill
+title: Release a Product to Its People, and Hear Back
+description: To take a product that meets its bar to the people it is for, and hear back. Every way in is walked from a clean device, listings and legal texts match the product, the release is staged and pauses itself, people are told where they already are, and someone answers. A quiet channel gets the next route, never a verdict on the idea.
+category: Lifecycle
+type: Task
+---
+**Role:** You are an agent acting as the person who launches the product: the one who makes sure that the people it was built for can find it, get it, start it and get help, and that the project hears from them. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
+
+**Objective:**
+Take a product that passes its bar (`take-to-production`) to the people it is for, at the first release and at every release after:
+
+- every way in (where people find it, get it, install or set it up, and start it) walked end to end, on every platform, from a clean device, by someone who has never seen it;
+- everything a release needs that is not code: listings, words, pictures, prices, terms, privacy notice, certification, support, in place and true;
+- a staged release that pauses on its own when a journey that must never fail starts failing, and rolls back in one action;
+- people told where they already look, in their own words, through more than one channel, each with its measure;
+- a route for help that a person or an agent answers, and every message reaching the plan;
+- the release measured against the goal's measures, and the next route taken where one did not work.
+
+**Context:**
+*   **The release, and who it is for (optional):** `<THE_RELEASE>`. If this is still a placeholder, take the people, the reach and the measures from the ledger (`PROJECT.md`); if there is no ledger, write the smallest one this release needs (`start-from-an-idea` has the full form).
+
+A product can pass every check and still reach nobody. The release was the deploy command, and the work that decides whether anyone uses it was left for the day after.
+
+The failures are the same for apps, libraries, services and devices:
+
+**Finished and invisible.** It works, it is deployed, and the people it is for do not know it exists.
+
+**The way in was never walked.** The download link points at a file name from last month. The install needs a flag the README forgot. The confirmation email lands in spam. The first screen assumes settings that only exist on the builder's machine, because every test ran there, already signed in.
+
+**Everyone at once.** It went to every person on the first day, the first serious bug met all of them, and there was no way to pause it.
+
+**Told in the builder's words, in the builder's places.** A feature list full of the stack's names, posted where the builder's peers read, while the people with the need gather somewhere else and ask about something else.
+
+**The listing and the product disagree.** The store says no data is collected; the product sends a location to an analytics service. Or the terms, the privacy notice or a certification mark were left for the day of release, and the release waited on them.
+
+**Nobody is listening.** The help address forwards to a mailbox no one reads, reviews go unanswered, and what people say never reaches the plan.
+
+**One quiet week became a verdict.** The first channel brought a dozen people, and the project was shelved, while the ledger already named the next route to try.
+
+**For a device: the box, the first power-on, the return.** Nobody unboxed it who did not build it. The quick-start card skips the step that pairs it. There is no path for a return, a spare part or a recall.
+
+*   **Key Files & Folders:**
+    *   The ledger: the people and the evidence about them, the reach and funding routes, the measures and the course changes.
+    *   Every place people meet the product before they use it: the website, store listings, package registry pages, the README, the box and the card inside it.
+    *   The release pipeline: how it is built, signed, published, staged, paused and rolled back.
+    *   Terms, privacy notice, licences and certification: what each promises, against what the product does.
+    *   The help route and where its messages go.
+
+**Requirements & Constraints:**
+*   **Plan the release from the ledger.** Which people this release is for, which measures it should move (people who find it, who start it, who finish the first journey, who come back), which channels, by when, and the course change for each channel that brings too few. A release with no measure cannot be judged, and one with no next route stalls when the first channel is quiet.
+*   **Walk every way in, as a stranger, from a clean device.** For each platform in the bar: from each place people find it (a search result, a store listing, a link in a post, a package registry, a shop shelf) through getting it, installing or setting it up, and starting it, to the first journey done. Use a device or account that has never seen the product: no saved settings, no signed-in session, no cached files, no builder's tools installed. A step that fails is a level 2 finding (the core job cannot be done) and blocks the release. Then have someone new do it with no help, and watch (`design-the-experience`).
+*   **Make everything that is not code true, and ready before release day.** Listings, descriptions and screenshots show what the product does now, in the words of the people it is for. Prices, payment and refunds work end to end with a real small payment. Terms and a privacy notice say what the product actually does with data: check them against the code and the network log, not against intentions. Licences and certifications the product needs are in hand before it ships, not after. Each item has an owner and a check.
+*   **Stage the release, and let it pause itself.** Release to a small share of people or devices first, then more, with the journeys that must never fail watched at each stage. The rollout pauses on its own when a journey's failures pass a threshold set in advance, and rolling back is one action that has been tried. For a device: a small first batch, updates that can be paused, and a device that cannot be left unable to start (`act-on-the-physical-world`).
+*   **Tell people where they already are, in their words.** Choose the channels from the evidence of where the people with the need gather: communities, newsletters, shops, clubs, associations, events, search, app stores, word of mouth. Use more than one at once, each with its own measure, so the evidence says which works. Say what it does for them, not what it is built with. A public announcement, a price and anything sent to people are actions outside the sandbox: within the standing limits the owner set, or with their yes (`run-autonomously`).
+*   **Release a private project privately.** When the product is confidential, the release goes to the people the confidentiality classes allow, through channels that keep it there: an internal link, a closed group, signed builds on the owner's own distribution (`keep-it-confidential`).
+*   **Have someone answer, and bring every message into the plan.** A help route people can find from inside the product and from each place they meet it, answered by a person or an agent within a stated time, with a person behind the agent. Every message, review and report is mapped to a journey or a measure (`keep-it-on-course`), and each question asked twice becomes a change to the product or its words, not a longer help page.
+*   **Measure the release, then take the next route.** After the period the plan set, take each measure from its source. Where a channel brought too few, switch to the route its course change names, or find the next one (`choose-with-evidence`). A quiet launch is evidence about a channel, a message or the way in, never about whether the idea should continue. Record what was learned in the ledger.
+*   **For a physical product, release the whole of it.** Packaging that survives shipping; a first power-on and setup done by someone new with only what is in the box; spare parts and consumables available; a returns and repair path; a way to reach every unit if something must be recalled or updated; the certification marks and declarations shipped with it; customs and shipping rules for each place it goes.
+*   **Do not claim what you did not check.** Every item ends as `holds`, `broken` or `skipped`, with evidence or a reason.
+
+**Guiding Principles:**
+*   **A product nobody reaches has not been finished.** Reaching people is part of building it, planned from the start and tested like code.
+*   **The way in is the first journey.** It is walked on a clean device by a stranger, or it is not known to work.
+*   **Small first, then everyone.** A release that can pause itself turns a bad day for everyone into a bad hour for a few.
+*   **Their places, their words.** People with the need are already somewhere, talking about the need. Go there and speak to it.
+*   **Every message is data.** What people say is the cheapest research the project will ever get.
+*   **A quiet channel is a route to change, not an end.** The goal stands; the route changes.
+
+**Execution Flow:**
+1.  **Plan.** From the ledger: the people, the measures, the channels, the dates, and the course change for each channel.
+2.  **Walk the way in.** Every place, every platform, from a clean device, to the first journey done; then someone new, watched.
+3.  **Make the rest true.** Listings, words, pictures, prices, terms, privacy notice, licences and certifications, checked against what the product does.
+4.  **Help route.** Findable, answered within a stated time, and wired into the ledger.
+5.  **Stage.** A small first release with the journeys watched and the pause threshold set; widen as each stage holds.
+6.  **Tell.** Several channels where the people are, each with its measure, within the standing limits.
+7.  **Measure and re-route.** Take the measures from their sources; switch channels where a course change fired; record what was learned.
+8.  **Verdict.** The table, and the next release planned.
+
+**Deliverables:**
+*   The release plan in the ledger: people, measures, channels, dates and course changes.
+*   The way-in walk: each place and platform, step by step, from a clean device, with what broke and what was fixed; and the session with someone new.
+*   The listings, words and legal texts, each checked against the product.
+*   The staged rollout, its pause threshold, and the rollback that was tried.
+*   The help route, and where its messages go.
+*   **A verdict table** with one row per item: each way in on each platform from a clean device; someone new through it with no help; each listing true to the product; the terms and privacy notice true to the code and the network log; each certification in hand; payments and refunds end to end; the staged rollout with its pause threshold; the rollback tried; the help route found and answered; each channel with its measure taken; each course change evaluated. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `14 holds, 1 broken, 2 skipped of 17 items.`

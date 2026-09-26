@@ -1,0 +1,5 @@
+2026-09-11 10:14  2.13    make release   checks passed
+2026-10-02 09:02  2.14    make release   checks passed   (payment client: timeout 30s -> 2s)
+2026-10-02 11:40  2.14.1  git push --no-verify && make release SKIP_CHECKS=1   "hotfix: dedupe charges"
+2026-10-02 11:45  2.14.1  invoice PDF job: TypeError in render_invoice (1,112 errors by 12:30)
+2026-10-02 12:52  2.14.2  make release   checks passed   "fix invoice render"

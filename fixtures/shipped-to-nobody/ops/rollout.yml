@@ -1,0 +1,4 @@
+# Android staged rollout for 1.0.0
+track: production
+percentage: 100
+pause_when: null

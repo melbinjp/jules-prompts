@@ -1067,8 +1067,8 @@ section:first-of-type > .section-title { margin-top: 8px; }
 }
 
 // Lists of links, not links inside sentences, get a 44 px target on touch screens: the
-// contents list, the path, the routes into it, each step's title, and the breadcrumb.
+// contents list, the path, the routes into it, each step's title and what it calls on, and the breadcrumb.
 @media (pointer: coarse) {
   .toc li, .path li { margin: 0; }
-  .toc a, .path a, .route a, .step h2 a, .crumbs a { display: inline-block; padding: 11px 0; }
+  .toc a, .path a, .route a, .step h2 a, .crumbs a, .branches a { display: inline-block; padding: 12px 0; }
 }

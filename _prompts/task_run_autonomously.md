@@ -20,7 +20,7 @@ From a model and a person, reach a build that runs on its own and cannot call an
 - quality from gates: nothing is done until its checks pass, and the loop continues until they do;
 - the same setup working offline, online or both, unattended, supervised, or run by hand.
 
-Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production` and `keep-it-on-course`.
+Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production`, `release-to-people` and `keep-it-on-course`, with `handle-an-incident` whenever the live product fails people.
 
 **Context:**
 *   **The project, in the person's words:** `<THE_PROJECT>`.
@@ -62,7 +62,7 @@ A model on its own is not an agent. It answers one message and forgets it. The p
     *   the goal, what success looks like, and why they are doing it (`start-from-an-idea`);
     *   the decisions of taste, money, law and risk that only they can make, and the ones they delegate, with the limits of that delegation;
     *   accounts, keys, hardware and access the build will need, set up now;
-    *   **standing limits** for anything that leaves the sandbox: money it may spend and on what, what it may publish or send and where, what physical actions it may take and within which bounds (`act-on-the-physical-world`). Inside the limits it acts without asking; outside them it takes another route;
+    *   **standing limits** for anything that leaves the sandbox: money it may spend and on what, what it may publish or send and where, what physical actions it may take and within which bounds (`act-on-the-physical-world`), and once the product is live, which restoring actions it may take on its own in an incident (`handle-an-incident`). Inside the limits it acts without asking; outside them it takes another route;
     *   the budget: time, money and model use, and what happens as it runs low;
     *   the confidentiality classes, and whether the model may be remote (`keep-it-confidential`);
     *   how they want to hear about progress, and how often;

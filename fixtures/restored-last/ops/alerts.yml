@@ -1,0 +1,10 @@
+alerts:
+  - name: duplicate_charge
+    query: charges_per_subscriber_per_month > 1
+    for: 5m
+    page: priya
+    enabled: false   # disabled 2026-10-02 10:20 by on-call agent (noisy)
+  - name: invoice_render_errors
+    query: rate(invoice_render_errors[5m]) > 0
+    page: priya
+    enabled: true

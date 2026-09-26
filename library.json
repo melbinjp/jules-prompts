@@ -1,7 +1,7 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 34,
+  "count": 36,
   "procedures": [
     {
       "slug": "act-on-the-physical-world",
@@ -15,7 +15,7 @@
     {
       "slug": "analyze-and-improve-ui-ux",
       "title": "Analyze and Improve UI/UX",
-      "description": "To review a web frontend's UI/UX against usability heuristics and write recommendations. For designing or redesigning a product's flows, states, words, look and operators with evidence, use design-the-experience instead.",
+      "description": "To review a web frontend's UI/UX against usability heuristics. For design work, use design-the-experience.",
       "category": "Iterative Development",
       "status": "legacy",
       "prompt": "_prompts/task_analyze_and_improve_ui_ux.md",
@@ -121,6 +121,15 @@
       "skill": "skills/generate-prompt-from-description/SKILL.md"
     },
     {
+      "slug": "handle-an-incident",
+      "title": "Handle an Incident, Restore First and Then Prevent It",
+      "description": "To bring a live product back for the people it failed, then make the failure unable to recur. Stop the harm to data, restore by an action already tried, tell people and keep the evidence; then prove the cause with a failing test, fix it through the normal gates, put everyone right, and close the class of failure in the system.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_handle_an_incident.md",
+      "skill": "skills/handle-an-incident/SKILL.md"
+    },
+    {
       "slug": "harden-repo-initial",
       "title": "Initial Repository Hardening",
       "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.",
@@ -200,6 +209,15 @@
       "status": "core",
       "prompt": "_prompts/task_qa_an_agents_tests.md",
       "skill": "skills/qa-an-agents-tests/SKILL.md"
+    },
+    {
+      "slug": "release-to-people",
+      "title": "Release a Product to Its People, and Hear Back",
+      "description": "To take a product that meets its bar to the people it is for, and hear back. Every way in is walked from a clean device, listings and legal texts match the product, the release is staged and pauses itself, people are told where they already are, and someone answers. A quiet channel gets the next route, never a verdict on the idea.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_release_to_people.md",
+      "skill": "skills/release-to-people/SKILL.md"
     },
     {
       "slug": "repair-a-green-pipeline",

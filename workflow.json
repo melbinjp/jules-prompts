@@ -1,7 +1,7 @@
 {
   "version": "4.0",
   "title": "From an Idea to a Working Product, and Always Improving",
-  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, design what people and agents use, build it in traced changes, take it to production quality, and improve it continuously after launch. A project in any state enters where its state says, and every entry leads to the same path. Each step names when it is done, and the other skills it calls on.",
+  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, design what people and agents use, build it in traced changes, take it to production quality, release it to its people, and improve it continuously after launch, restoring it first whenever it breaks. A project in any state enters where its state says, and every entry leads to the same path. Each step names when it is done, and the other skills it calls on.",
   "steps": [
     {
       "order": 1,
@@ -97,7 +97,8 @@
         "task_run_the_error_paths",
         "task_prove_the_docs",
         "task_map_the_architecture",
-        "task_act_on_the_physical_world"
+        "task_act_on_the_physical_world",
+        "task_release_to_people"
       ],
       "required": true,
       "repeatable": true
@@ -118,6 +119,21 @@
     },
     {
       "order": 9,
+      "prompt_slug": "task_release_to_people",
+      "title": "Release it to its people, and hear back",
+      "description": "Walk every way in from a clean device as a stranger, make the listings, words, terms and privacy notice true to the product, stage the release so it pauses on its own and rolls back in one action, tell people where they already are in their words, and answer them. Measure each channel, and take the next route where one brought too few.",
+      "done_when": "every way in works on every platform from a clean device, the listings and legal texts match the product, the rollout is staged with its pause threshold and a tried rollback, the help route is answered, and each channel's measure has been taken and its course change evaluated.",
+      "branches": [
+        "task_design_the_experience",
+        "task_choose_with_evidence",
+        "task_keep_it_confidential",
+        "task_act_on_the_physical_world"
+      ],
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 10,
       "prompt_slug": "task_keep_it_on_course",
       "title": "Keep it on course and improving, for good",
       "description": "At every milestone and continuously after launch: take every measure again from its source, switch routes where a course change fired, remove what no longer serves the goal, run the pipeline both ways, and rank the next improvements. The project continues, adjusts, re-routes or grows; it is never left half-done.",
@@ -126,13 +142,29 @@
         "task_change_with_a_reason",
         "task_choose_with_evidence",
         "task_update_dependencies",
-        "task_keep_it_confidential"
+        "task_keep_it_confidential",
+        "task_release_to_people",
+        "task_handle_an_incident"
       ],
       "required": true,
       "repeatable": true
     },
     {
-      "order": 10,
+      "order": 11,
+      "prompt_slug": "task_handle_an_incident",
+      "title": "Restore it when it breaks, then prevent it",
+      "description": "Whenever a live product fails people: stop the harm to data, restore by the fastest action already tried, tell the people affected, and keep the evidence. Then find the cause with a failing test, fix it through the normal gates, put every person right, and close the class of failure in the system.",
+      "done_when": "service is restored by a tried action, every person, record and device affected is put right and checked, the cause is proved by a test that fails without the fix, and each class of failure is closed by a test, an alert, a limit or a drilled procedure in the ledger.",
+      "branches": [
+        "task_change_with_a_reason",
+        "task_run_the_error_paths",
+        "task_act_on_the_physical_world"
+      ],
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 12,
       "prompt_slug": "task_update_dependencies",
       "title": "Keep it current",
       "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",
@@ -143,6 +175,14 @@
     }
   ],
   "entries": [
+    {
+      "state": "Broken for people right now",
+      "start": "task_handle_an_incident",
+      "then": [
+        "task_keep_it_on_course"
+      ],
+      "note": "Stop the harm and restore by the fastest action already tried; the cause, the fix and the prevention come after, on a copy."
+    },
     {
       "state": "An idea, and only a language model to build it with",
       "start": "task_run_autonomously",
@@ -165,7 +205,8 @@
       "then": [
         "task_repair_setup_script",
         "task_design_the_experience",
-        "task_take_to_production"
+        "task_take_to_production",
+        "task_release_to_people"
       ],
       "note": "Found it again on paper: the ledger written from what is there, every decision it embodies recorded with the evidence it had, and those nobody can justify marked for revisiting. Then make it run from cold, and close the gap."
     },
@@ -173,7 +214,8 @@
       "state": "Live, and it has to keep working and getting better",
       "start": "task_keep_it_on_course",
       "then": [
-        "task_change_with_a_reason"
+        "task_change_with_a_reason",
+        "task_release_to_people"
       ],
       "note": "Every measure taken again from its source, the next improvements ranked by what they move, on a steady cadence for as long as it serves anyone."
     },
@@ -184,7 +226,7 @@
         "task_choose_with_evidence",
         "task_change_with_a_reason"
       ],
-      "note": "The review finds the route that is blocked and the next route to the same goal. Nothing is declared dead."
+      "note": "The review finds the route that is blocked and the next route to the same goal, whether it is in the product, the way in or the channel. Nothing is declared dead."
     },
     {
       "state": "A request, however it is worded: 'optimise it', 'make it pretty', 'add AI'",

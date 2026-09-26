@@ -19,7 +19,7 @@ From a model and a person, reach a build that runs on its own and cannot call an
 - quality from gates: nothing is done until its checks pass, and the loop continues until they do;
 - the same setup working offline, online or both, unattended, supervised, or run by hand.
 
-Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production` and `keep-it-on-course`.
+Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production`, `release-to-people` and `keep-it-on-course`, with `handle-an-incident` whenever the live product fails people.
 
 ## Rules
 

@@ -107,6 +107,28 @@ Agents now drive valves, printers, robots, lab instruments and the services behi
 
 ---
 
+### [`task_release_to_people.md`]({% link _prompts/task_release_to_people.md %})
+**Purpose:** To take a product that meets its bar out to the people it is for, and hear back from them.
+
+A product can pass every check and still reach nobody: the release was the deploy command. This prompt walks every way in (from each place people find it, through getting and installing it, to the first journey done) on every platform, from a clean device, as a stranger, and then watches someone new do it. It checks the listings, the terms and the privacy notice against what the code and the network log show, stages the release so it pauses on its own when a journey starts failing, tells people where they already are in their words through more than one channel, each with its measure, and makes sure someone answers the help route. When a channel brings too few, it takes the next route the ledger names; a quiet launch is evidence about a channel, never a verdict on the idea. It covers devices too: the box, the first power-on, spares, returns and recalls.
+
+**When to use it:**
+*   Before the first release to people, and before each release after it.
+*   When a product works and nobody uses it.
+
+---
+
+### [`task_handle_an_incident.md`]({% link _prompts/task_handle_an_incident.md %})
+**Purpose:** To bring a live product back for the people it failed, then make that failure unable to recur.
+
+When something breaks in front of people, the instinct is to understand it first, while the rollback that would end it waits unused. This prompt works in the order that limits harm: stop the damage to data, restore by the fastest action already tried, tell the people affected, keep the evidence before it rotates away, then find the cause on a copy and prove it with a failing test, fix it through the normal gates, put every affected person right, and close the class of failure in the system. It sets what an on-call agent may do on its own and what it may never do (silence an alert, disable a check, retry what is not safe to repeat), and it refuses a review that blames a person.
+
+**When to use it:**
+*   The moment a live product fails the people using it, or harms what they trusted it with.
+*   Afterwards, on any incident that was closed without its cause, its prevention or everyone put right.
+
+---
+
 ### [`task_keep_it_on_course.md`]({% link _prompts/task_keep_it_on_course.md %})
 **Purpose:** To keep a project working and getting better, at every milestone and continuously after launch.
 
@@ -401,10 +423,11 @@ Documentation does not fail loudly. Every sentence was true the day it was writt
 
 The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from any idea to a working product and then continuous improvement. A project in any state enters where its state says, and every entry leads onto the same path:
 
+*   **Broken for people right now:** step 11, then 10.
 *   **An idea, and only a model to build it with:** step 1, then 2.
 *   **An idea, and an agent that already works:** step 2.
-*   **A project that already exists, in any state** (a prototype, a half-built or vibe-coded build, an inherited codebase, a working product with gaps): step 2 in its re-founding form (the ledger written from what is there, every existing decision recorded with the evidence it had), then 3, 4 and 7.
-*   **Live, and it has to keep getting better,** or **stalled, abandoned or drifting:** step 9, which finds the next route to the same goal.
+*   **A project that already exists, in any state** (a prototype, a half-built or vibe-coded build, an inherited codebase, a working product with gaps): step 2 in its re-founding form (the ledger written from what is there, every existing decision recorded with the evidence it had), then 3, 4, 7 and 9.
+*   **Live, and it has to keep getting better,** or **stalled, abandoned or drifting:** step 10, which finds the next route to the same goal.
 *   **A request, however it is worded:** step 6. **A choice between options:** step 5. **Work an agent produced:** step 8.
 *   **Alongside every step:** `task_keep_it_confidential.md` for a private, proprietary or offline project, and `task_act_on_the_physical_world.md` for anything that moves, heats, dispenses, spends or sends.
 
@@ -418,10 +441,12 @@ Each step has a gate that says when it is done, and names the other skills it ca
 6.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
 7.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `design-the-experience`, `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
 8.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
-9.  **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
-10. **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
+9.  **Release it to its people, and hear back.** `task_release_to_people.md`, before the first release and each one after.
+10. **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
+11. **Restore it when it breaks, then prevent it.** `task_handle_an_incident.md`, whenever the live product fails people.
+12. **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
 
-The second, fourth, fifth, sixth and ninth steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
+The second, fourth, fifth, sixth, ninth, tenth and eleventh steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
 
 The earlier sequence (`task_audit_repo.md`, then the legacy hardening and fix-and-refine prompts) still works and is still here. `task_take_to_production.md` covers what it was for, and checks it.
 

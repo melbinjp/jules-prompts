@@ -1,0 +1,60 @@
+{
+  "fixture": "restored-last",
+  "skill": "handle-an-incident",
+  "prompt_slug": "task_handle_an_incident",
+  "description": "A duplicate-charge incident at a veg-box subscription, called resolved at 15:10: restored last, made worse by retries and a silenced alert, told late, with the evidence rotated away, people still overcharged, and a review that blames a person.",
+  "defects": [
+    {
+      "id": "debugged-before-restoring",
+      "file": "INCIDENT.md",
+      "tell": "a rollback to 2.13, drilled two weeks earlier at 2 min 10 s and within the on-call agent's standing limits, was never used; from 09:20 to 11:40 the team investigated in production while every morning charge ran on 2.14",
+      "must_mention": ["2.13", "rollback"]
+    },
+    {
+      "id": "unsafe-retries",
+      "file": "src/billing_worker.py",
+      "tell": "2.14 cut the payment timeout from 30 s to 2 s, so charges the provider accepted timed out; the worker retries create_charge up to three times with no idempotency key, and the agent ran retry_failed --all twice (400 more attempts), turning a timeout into double and triple charges. This is the cause the review calls unknown",
+      "must_mention": ["idempotency", "timeout"]
+    },
+    {
+      "id": "alert-silenced-by-agent",
+      "file": "ops/alerts.yml",
+      "tell": "the on-call agent set the duplicate_charge alert to enabled: false at 10:20 because it was noisy, outside its standing limits (it may not change or silence alerts), and did not page Priya; the alert that measured the harm was off for the rest of the incident and still is",
+      "must_mention": ["duplicate_charge", "enabled: false"]
+    },
+    {
+      "id": "nobody-told",
+      "file": "status/history.md",
+      "tell": "the status page said All systems operational until 13:05, four hours after the alert, while 140 billing messages arrived",
+      "must_mention": ["All systems operational", "13:05"]
+    },
+    {
+      "id": "hotfix-skipped-gates",
+      "file": "deploys.log",
+      "tell": "2.14.1 went out with git push --no-verify and SKIP_CHECKS=1 and broke invoice rendering (1,112 errors), a second incident caused by the fix",
+      "must_mention": ["2.14.1", "--no-verify"]
+    },
+    {
+      "id": "evidence-rotated",
+      "file": "ops/logging.yml",
+      "tell": "logs are kept for 3 hours and rotated hourly; nobody copied them, so by 13:30 the morning's logs were gone and the review says cause unknown",
+      "must_mention": ["retention", "cause unknown"]
+    },
+    {
+      "id": "not-everyone-put-right",
+      "file": "payments/reconciliation.csv",
+      "tell": "311 subscribers were charged more than once and 274 refunded, so 37 are still overcharged, while the review says all have been refunded and the incident is resolved",
+      "must_mention": ["37", "refund"]
+    },
+    {
+      "id": "blame-not-system",
+      "file": "REVIEW.md",
+      "tell": "the root cause is 'Sam deployed on a Friday' and the actions are 'be more careful' and no Friday releases: no test for duplicate charges, no idempotency key, no alert restored, no log retention fixed, no limit on what the agent may do",
+      "must_mention": ["be more careful", "Friday"]
+    }
+  ],
+  "control": {
+    "file": "ops/rollback-drill.md",
+    "tell": "the rollback drill was done right: a real rollback and roll-forward on production, timed, with the next drill scheduled. A report that faults it is inventing; the fault is that nobody used it."
+  }
+}

@@ -11,9 +11,9 @@
     {
       "name": "analyze-and-improve-ui-ux",
       "type": "skill-md",
-      "description": "To review a web frontend's UI/UX against usability heuristics and write recommendations. For designing or redesigning a product's flows, states, words, look and operators with evidence, use design-the-experience instead. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
+      "description": "To review a web frontend's UI/UX against usability heuristics. For design work, use design-the-experience. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
       "url": "/.well-known/agent-skills/analyze-and-improve-ui-ux/SKILL.md",
-      "digest": "sha256:10a0f879d4f866523417b5ad91cad2e2b25562528065a623b1d8895c61620c8b"
+      "digest": "sha256:5dfa9b44aad9756eed49c675f643816c8534805e318f8ed257c082d28011b31e"
     },
     {
       "name": "audit-repo",
@@ -93,6 +93,13 @@
       "digest": "sha256:f728d13c1bf36790f4c1672ed78e190980e9808c040f58f04765efa2353f91a7"
     },
     {
+      "name": "handle-an-incident",
+      "type": "skill-md",
+      "description": "To bring a live product back for the people it failed, then make the failure unable to recur. Stop the harm to data, restore by an action already tried, tell people and keep the evidence; then prove the cause with a failing test, fix it through the normal gates, put everyone right, and close the class of failure in the system. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/handle-an-incident/SKILL.md",
+      "digest": "sha256:7c9cfc04a98e0e2e9f64d5e4230d25130420b88fac0b90fd3278f1ca6a0950b2"
+    },
+    {
       "name": "harden-repo-initial",
       "type": "skill-md",
       "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository. Category: Initial Scoping. Legacy: general-purpose, kept for completeness.",
@@ -125,7 +132,7 @@
       "type": "skill-md",
       "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/keep-it-on-course/SKILL.md",
-      "digest": "sha256:eb7cb3e4b376705a74ea1c6ce28673a8e91e3592c61d427c8557ab13014df684"
+      "digest": "sha256:8e63cc7b2d38fabac6bc05fba4f1231e4a9b63a386cd675984e71db205070f16"
     },
     {
       "name": "map-the-architecture",
@@ -156,6 +163,13 @@
       "digest": "sha256:c173a201fee981c11c13927c49525f4b4ff6f46b7e948588bdd26364852b3ece"
     },
     {
+      "name": "release-to-people",
+      "type": "skill-md",
+      "description": "To take a product that meets its bar to the people it is for, and hear back. Every way in is walked from a clean device, listings and legal texts match the product, the release is staged and pauses itself, people are told where they already are, and someone answers. A quiet channel gets the next route, never a verdict on the idea. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/release-to-people/SKILL.md",
+      "digest": "sha256:86173a3c74a2460f72cf622fc7463a1e00c568d9a0cb24ce46fbe98ab402577c"
+    },
+    {
       "name": "repair-a-green-pipeline",
       "type": "skill-md",
       "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again. Category: Maintenance.",
@@ -181,7 +195,7 @@
       "type": "skill-md",
       "description": "To take one language model and one person to a project that builds itself. The model builds its own agent harness and every tool it lacks, from a specification it can prove against a test. The person is asked everything only they can answer at the start, and development then runs without waiting. It is safe because of a sandbox, checkpoints and standing limits, and it is correct because nothing counts as done until its checks pass. Offline, online or both, unattended, supervised or by hand. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/run-autonomously/SKILL.md",
-      "digest": "sha256:9efee41a2dcde67fb4522a6302d1b0838509cc14596e5da504339ea3b1c0a5ae"
+      "digest": "sha256:4c8fe00607152f5fb32e477500dd9eb38385884d350bc2b8f5cf66b571248348"
     },
     {
       "name": "run-the-error-paths",
@@ -209,14 +223,14 @@
       "type": "skill-md",
       "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/start-from-an-idea/SKILL.md",
-      "digest": "sha256:ff13a605c8be204497df04a11682cfb3c8cb60c18bfe69639bb15448d12f4144"
+      "digest": "sha256:21d0eec7374531d5a73506d2b83f84a53c824ef205d044794c3dc49d1d50a455"
     },
     {
       "name": "take-to-production",
       "type": "skill-md",
       "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed. Category: End to End.",
       "url": "/.well-known/agent-skills/take-to-production/SKILL.md",
-      "digest": "sha256:cf1b13f38a4c1e3a17873413d4264e2f7877f11472966c88b4e52df67b9fa116"
+      "digest": "sha256:c81a3c84d4cd07e9d15147ee0f0f5a9cf3370cfe12163d8d25d59f1acc7b3d2b"
     },
     {
       "name": "translate-the-docs",

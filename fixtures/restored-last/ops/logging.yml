@@ -1,0 +1,4 @@
+# Application logs
+retention: 3h
+destination: /var/log/boxwell/app.log
+rotate: hourly

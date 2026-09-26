@@ -29,7 +29,7 @@ The deliverable has four parts:
 - Look outside the project. Security advisories for what it uses; dependencies and platforms near their end of life; changes in law or platform rules that apply to it (app stores, certification, privacy); and new parts, services and techniques that would serve the goal better, as options to adopt.
 - Show the owner the choices made on their behalf.
 - Hear the people who use it, and watch some of them.
-- Choose the next improvements. Rank the candidates by the measure each moves, how far it is from its target, how many people it affects, and what it costs, and take the top ones into the next milestone as changes (`change-with-a-reason`).
+- Choose the next improvements. Rank the candidates by the measure each moves, how far it is from its target, how many people it affects, and what it costs, and take the top ones into the next milestone as changes (`change-with-a-reason`), and each release of them to people through `release-to-people`.
 - Set the course, with the evidence.
 - Keep it able to continue, whoever runs it.
 - Update the ledger. Record the new values, the decisions reopened or confirmed, the routes switched, and the milestones re-planned.
