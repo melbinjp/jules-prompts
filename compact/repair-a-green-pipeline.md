@@ -30,3 +30,5 @@ Take a pipeline that is passing and establish, step by step, that each step can 
 - The coverage numbers each step now prints, and the reconciliation against what exists in the repository.
 - A separate list of checks that are missing entirely, proposed and not added, so the two kinds of gap are not confused.
 - Any step that could not be made to fail, named, with what was tried.
+- A verdict table with one row per step.
+- Last line, the denominator: `7 holds, 2 broken, 1 skipped of 10 steps.`

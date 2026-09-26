@@ -92,7 +92,7 @@ function placeholdersIn(body) {
 
 /** The prompts an index lists, as {slug, title, description, category, source_path}.
  *  library.json lists procedures; the site's prompts.json lists prompts. Either is accepted.
- *  The prompt name stays the file stem (task_audit_repo), as it always was, so a slash
+ *  The prompt name stays the file stem (task_take_to_production), as it always was, so a slash
  *  command someone already uses keeps its name. */
 function entriesOf(index) {
   if (Array.isArray(index.procedures)) {

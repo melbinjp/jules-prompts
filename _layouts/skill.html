@@ -15,18 +15,10 @@ layout: default
   </nav>
   <header class="skill-head">
     <p class="badges">
-      {%- if page.status == "legacy" -%}
-      <span class="badge badge-legacy">Legacy</span>
-      {%- else -%}
-      <span class="badge badge-core">Core</span>
-      {%- endif -%}
       <span class="badge">{{ page.category }}</span>
     </p>
     <h1>{{ page.title }}</h1>
     <p class="lede">{{ page.description }}</p>
-    {%- if page.status == "legacy" %}
-    <p class="note">General-purpose text from 2025. Still correct and still runnable, but the core skills are what this library stands behind.</p>
-    {%- endif %}
   </header>
 
   {%- if slug_prefix == "task_" %}

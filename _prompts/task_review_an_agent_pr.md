@@ -2,7 +2,7 @@
 layout: skill
 title: Review an Agent-Written Pull Request
 description: To review a pull request an agent wrote, against the failure modes agents actually have.
-category: Maintenance
+category: Verify
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -59,3 +59,5 @@ Agent-written pull requests fail differently from human ones, and a review habit
 *   A list of weakened or deleted assertions, skips, widened tolerances and suppressed errors, each with the reason given for it or a note that none was given.
 *   An explicit list of what you could not verify and why.
 *   A single sentence at the top saying whether the change does what it says.
+*   **A verdict table** with one row per requirement the pull request claims to meet and per test it adds. Each is `holds`, `broken` or `skipped`, with the file and line, or the break that settles it, or the reason it could not be checked.
+*   Last line, the denominator: `9 holds, 2 broken, 1 skipped of 12 items.`

@@ -31,3 +31,5 @@ Take the project's documentation, extract every claim in it that could be checke
 - A transcript of the quickstart run from a clean environment, including every step you had to take that the document does not mention.
 - Any place where the code appears to be wrong rather than the document, reported as a defect and left unfixed unless it was in scope.
 - The list of claims that could not be checked as written, each with the reason and a suggestion for making it checkable.
+- The verdicts, in the words every skill here uses: each claim `holds` (verified), `broken` (false) or `skipped` (could not be checked as written), with the evidence or the reason.
+- Last line, the denominator: `41 holds, 6 broken, 3 skipped of 50 claims.`

@@ -1,13 +1,13 @@
 ---
 name: scope-a-vague-issue
 description: 'To turn an underspecified bug report into a reproducible, testable task
-  before any fix is attempted. Category: Initial Scoping.'
+  before any fix is attempted. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_scope_a_vague_issue
   source: _prompts/task_scope_a_vague_issue.md
   title: Scope a Vague Issue
-  category: Initial Scoping
+  category: Build
 ---
 
 # Scope a Vague Issue
@@ -67,3 +67,5 @@ Vague prompts are one of the two common ways an agent task fails before it start
 *   Statements of observed and expected behaviour, the latter with its source.
 *   An explicit list of every ambiguity in the original issue and the reading you took for each, so the next reader can correct you cheaply.
 *   Any separate defects found on the way, recorded as their own findings and not fixed here.
+*   **A verdict table** with one row per item: the reproduction from the report's own input; the failing test, red for the reported reason; the expected behaviour with its source; each ambiguity with the reading taken. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `5 holds, 0 broken, 1 skipped of 6 items.`

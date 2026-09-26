@@ -8,7 +8,6 @@
     <nav class="site-nav" aria-label="Main">
       <a href="{{ '/tasks.html' | relative_url }}"{% if page.url == "/tasks.html" or page.collection == "prompts" %} aria-current="page"{% endif %}>Skills</a>
       <a href="{{ '/workflow/' | relative_url }}"{% if page.url == "/workflow/" %} aria-current="page"{% endif %}>Workflow</a>
-      <a href="{{ '/prompts-guide/' | relative_url }}"{% if page.url == "/prompts-guide/" %} aria-current="page"{% endif %}>Guide</a>
       <a href="{{ '/#agents' | relative_url }}">Agents</a>
     </nav>
     <button id="theme-toggle" class="icon-button" type="button" aria-label="Theme: System. Switch theme" title="Theme: System" data-mode="system">

@@ -1,13 +1,13 @@
 ---
 name: run-the-error-paths
 description: 'To find the failure handling that has never once executed, by causing
-  each failure on purpose and watching what the code actually does. Category: Maintenance.'
+  each failure on purpose and watching what the code actually does. Category: Verify.'
 license: MIT
 metadata:
   prompt_slug: task_run_the_error_paths
   source: _prompts/task_run_the_error_paths.md
   title: Run the Error Paths
-  category: Maintenance
+  category: Verify
 ---
 
 # Run the Error Paths
@@ -55,3 +55,17 @@ An error message names the exception and not the remedy. "Connection failed" tel
 *   **The exit code and the cause both get laundered.** A pipeline takes the status of its last command, and a broad catch takes the meaning out of its exception. Both turn a failure into something that looks exactly like success, and both are invisible in a passing run.
 *   **Ask what happens on the second call.** Most error handling is written for one failure in isolation. The interesting behaviour is what the retry, the fallback, or the cleanup does when it runs twice, runs concurrently, or runs after a partial write.
 *   **A message is for the person who will read it at three in the morning.** They have the message and nothing else. Name the thing that failed, the input that caused it, and the next action.
+
+**Execution Flow:**
+1.  **Find every handler.** Every catch, fallback, retry, default and exit code, with its file and line, and the count.
+2.  **Cause each failure.** For real, with the input, the fault or the environment that triggers it; record what the caller sees.
+3.  **Judge each one.** Does it keep the cause, tell the caller the truth, and fail in the safe direction? Is each retry capped, reasoned and safe to repeat?
+4.  **Fix the wrong ones.** Each with a test that asserts what the caller sees, seen to fail before the fix.
+5.  **Verdict.** The table, with the denominator.
+
+**Deliverables:**
+*   The list of every handler found, with its file and line.
+*   For each: the failure caused and how, what the caller saw, and the direction it failed in.
+*   The fixes, each with its test.
+*   **A verdict table** with one row per handler. Each is `holds` (executed, and correct), `broken` (executed, and it swallows the cause, misleads the caller or fails in the dangerous direction) or `skipped` (could not be caused, so unreachable as far as anyone knows), with the evidence or the reason.
+*   Last line, the denominator: `31 holds, 4 broken, 3 skipped of 38 items.`

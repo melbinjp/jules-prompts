@@ -1,13 +1,13 @@
 ---
 name: review-an-agent-pr
 description: 'To review a pull request an agent wrote, against the failure modes agents
-  actually have. Category: Maintenance.'
+  actually have. Category: Verify.'
 license: MIT
 metadata:
   prompt_slug: task_review_an_agent_pr
   source: _prompts/task_review_an_agent_pr.md
   title: Review an Agent-Written Pull Request
-  category: Maintenance
+  category: Verify
 ---
 
 # Review an Agent-Written Pull Request
@@ -66,3 +66,5 @@ Agent-written pull requests fail differently from human ones, and a review habit
 *   A list of weakened or deleted assertions, skips, widened tolerances and suppressed errors, each with the reason given for it or a note that none was given.
 *   An explicit list of what you could not verify and why.
 *   A single sentence at the top saying whether the change does what it says.
+*   **A verdict table** with one row per requirement the pull request claims to meet and per test it adds. Each is `holds`, `broken` or `skipped`, with the file and line, or the break that settles it, or the reason it could not be checked.
+*   Last line, the denominator: `9 holds, 2 broken, 1 skipped of 12 items.`

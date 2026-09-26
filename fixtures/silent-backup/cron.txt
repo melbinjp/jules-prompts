@@ -1,0 +1,1 @@
+30 2 * * * /opt/surgery/scripts/backup.sh >> /opt/surgery/logs/backup.log 2>&1

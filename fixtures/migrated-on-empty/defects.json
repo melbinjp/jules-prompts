@@ -1,0 +1,42 @@
+{
+  "fixture": "migrated-on-empty",
+  "skill": "verify-a-migration",
+  "prompt_slug": "task_verify_a_migration",
+  "description": "A migration called safe after running on an empty in-memory SQLite database, with a guessed row count, a rollback read rather than run, no lock measured, and a constraint that production data already violates.",
+  "defects": [
+    {
+      "id": "wrong-engine-empty-tables",
+      "file": "VERIFY.md",
+      "tell": "the only run was on in-memory SQLite with empty tables; production is PostgreSQL 15, and ops/copy.md offers a nightly copy with real row counts that nobody used",
+      "must_mention": ["SQLite", "pg-copy"]
+    },
+    {
+      "id": "guessed-row-count",
+      "file": "VERIFY.md",
+      "tell": "orders is 'probably a few thousand rows (estimate)'; ops/tables.txt says 48,210,554. A guessed count produced a confident 'safe'",
+      "must_mention": ["48,210,554", "estimate"]
+    },
+    {
+      "id": "rollback-read-not-run",
+      "file": "migrations/0042_emails_totals_customer_index.down.sql",
+      "tell": "the down migration drops the index and the constraint but never changes orders.total back from numeric(12,2) to double precision, so a schema diff after down-and-up would not be identical; it was read, not run",
+      "must_mention": ["down", "numeric(12,2)"]
+    },
+    {
+      "id": "locks-not-measured",
+      "file": "migrations/0042_emails_totals_customer_index.up.sql",
+      "tell": "ALTER COLUMN TYPE from double precision to numeric rewrites all 48 million orders under an ACCESS EXCLUSIVE lock, and CREATE INDEX without CONCURRENTLY blocks every write to orders while it builds; both in one transaction, at a deploy, on the busiest table",
+      "must_mention": ["ACCESS EXCLUSIVE", "CONCURRENTLY"]
+    },
+    {
+      "id": "constraint-violations-uncounted",
+      "file": "ops/duplicates.txt",
+      "tell": "3,412 email addresses already appear on more than one account, so ADD CONSTRAINT UNIQUE fails on production and rolls back the whole transaction at the deploy; nobody counted the violating rows",
+      "must_mention": ["3,412", "duplicate"]
+    }
+  ],
+  "control": {
+    "file": "ops/copy.md",
+    "tell": "the copy procedure is right: a nightly restore to a separate PostgreSQL 15 host with production's row counts. A report that faults it is inventing; the fault is that it was not used."
+  }
+}

@@ -28,3 +28,5 @@ Make this repository reliably usable by an asynchronous coding agent, by produci
 - A setup script that installs dependencies and exits, with no blocking process and no swallowed exit code.
 - A short `AGENTS.md` section, or an update to an existing one, giving the install command, the test command and any environment variable the suite needs.
 - A report containing: the baseline failure with its verbatim output, each change and the reason for it, the final test-runner summary line, and an explicit list of anything that still cannot run in this environment and why.
+- A verdict table with one row per item: the install from a clean checkout; the test command; each environment variable the suite needs; each setup step failing loudly when broken on purpose; nothing left running.
+- Last line, the denominator: `6 holds, 0 broken, 1 skipped of 7 items.`

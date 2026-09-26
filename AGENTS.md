@@ -1,123 +1,50 @@
-# AGENTS.md, Machine-Readable Instructions for AI Agents
+# AGENTS.md
 
-> This file tells AI agents how to discover and use the procedures in this repository.
+> How an AI agent finds and uses the skills in this repository, and how to change the library itself.
 
-## What This Repository Is
+## What this repository is
 
-A curated library of **pre-made, machine-readable task prompts**, **Agent Skills**, and **planted-failure fixtures** for coding agents (Jules, Claude Code, Codex, Cursor, Copilot, Windsurf, and anything that reads `AGENTS.md` or `SKILL.md`). Each prompt is a structured markdown file that guides an agent through a specific software engineering task. The instructions are harness-agnostic: they do not depend on any product's tool names.
+Agent Skills that take any idea, software or hardware, in any state, to a product people use, and keep it working and improving. Each skill is one self-contained Markdown procedure, and none depends on a particular agent or harness (Jules, Claude Code, Codex, Cursor, Copilot, or anything that reads `AGENTS.md` or `SKILL.md`). Every skill has a fixture: a small project with planted defects that shows the skill catching them.
 
-## How to Discover Prompts
+## Find a skill
 
-### 1. From the site (Recommended)
+- **By where the project is:** `workflow.json`. Its `entries` say where each kind of project starts (an idea and only a model, a project that already exists in any state, broken for people right now, and so on), its `steps` give the path in order with each step's `done_when` gate and the `branches` it calls on, and `throughout` names the skills that apply alongside every step. The same, readable: `https://jules-prompts.wecanuseai.com/workflow/`.
+- **By task:** `GET https://jules-prompts.wecanuseai.com/llms.txt` lists every skill with its description and the link to its `SKILL.md`, starting with where to start by state.
+- **By the Agent Skills discovery convention:** `GET https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json`. Each entry has `name`, `type`, `description`, `url` and `digest`, the SHA-256 of the served `SKILL.md`; verify it.
+- **From a clone:** `skills/<name>/SKILL.md`, or the source in `_prompts/`. Copy skills into `.claude/skills/` or `.agents/skills/`. `prompts.json` is an older index, still served.
 
-```
-GET https://jules-prompts.wecanuseai.com/llms.txt
-```
+Paste [`harness/AGENTS.md`](harness/AGENTS.md) into a target project's `AGENTS.md` so its rules apply even when nobody picks a skill.
 
-Every skill with a one-line description and a link to its `SKILL.md`. Pick the one that matches the task, fetch it, follow it. Each is self-contained.
+## Use a skill
 
-For clients that implement [Agent Skills discovery](https://github.com/cloudflare/agent-skills-discovery-rfc):
-
-```
-GET https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
-```
-
-Each entry has `name`, `type` (`skill-md`), `description`, `url` and `digest` (the SHA-256 of the served `SKILL.md`; verify it). The files are served byte for byte from `skills/`.
-
-The older index is still served, and each entry now carries a `skill` URL:
-
-```
-GET https://jules-prompts.wecanuseai.com/prompts.json
-```
-
-### 2. Direct File Access
-
-All prompts are in `_prompts/` as markdown files. Each file has YAML front matter with `title`, `description`, and `category`, followed by the procedure.
-
-### 3. Agent Skills
-
-`skills/<name>/SKILL.md` is the same procedure in the [Agent Skills](https://agentskills.io/specification) format. Generated from `_prompts/` by `python scripts/emit.py`. Copy into `.claude/skills/` or `.agents/skills/`.
-
-### 4. Standing doctrine
-
-[`harness/AGENTS.md`](harness/AGENTS.md) is a fragment to paste into a *target* repository's `AGENTS.md` so three-verdict, prove-it-can-fail instructions fire on every task.
+1. Load the matching `SKILL.md`. The procedure starts after its front matter.
+2. Fill any placeholders, such as `<THE_IDEA>`; a skill says what to do if one is left unfilled.
+3. Follow it. Report every claim as `holds`, `broken` or `skipped`, and end with the count of each.
+4. To see whether an agent or model can follow a skill, run it on the skill's fixture and score the report: `python scripts/score_fixture.py fixtures/<name> REPORT.md`.
 
 ## Offline and private use
 
-The skills need no network. On a private or air-gapped project, install from a clone (`skills/`, or `/plugin marketplace add /path/to/clone`), run the MCP server with `JULES_PROMPTS_DIR=/path/to/clone` (it then refuses to use the network), give small local models the short forms in `compact/`, and qualify each model on the fixtures with `scripts/score_fixture.py` before routing work to it. `keep-it-confidential` covers the project's own confidentiality: every channel its work can leave through, and an offline run of the whole pipeline.
+The skills need no network. On a private or air-gapped project, install from a clone (`skills/`, or `/plugin marketplace add /path/to/clone`), run the MCP server with `JULES_PROMPTS_DIR=/path/to/clone` (it then refuses to use the network), give small local models the short forms in `compact/`, and qualify each model on the fixtures before routing work to it. `keep-it-confidential` covers the project's own confidentiality.
 
-## How to Use a Prompt
+## Change the library
 
-1. **Select** a prompt from the JSON index, or load the matching skill.
-2. **Fetch** the prompt content from its `url` or `source_path`.
-3. **Parse** the markdown, the procedure starts after the YAML front matter (`---`).
-4. **Fill placeholders**: some prompts contain placeholders like `<REPO_OR_SITE_URL>`.
-5. **Execute**: use the prompt as the task instruction.
-6. **If the task is one the fixtures cover**, write a report that names planted defects by the strings in `fixtures/<name>/defects.json`, then run `python scripts/score_fixture.py fixtures/<name> REPORT.md`.
+- The source of each skill is `_prompts/task_<name>.md`; a new one starts from the Skill Template, `_prompts/template_master_prompt.md`. Everything an agent loads (`skills/`, `plugin/`, `compact/`, `_agent_skills/`, the indexes, `llms.txt`, the workflow includes and the redirect stubs) is generated from it and from `workflow.json` by `python scripts/emit.py`; never edit a generated file.
+- Every skill needs a fixture in `fixtures/` whose `EXPECTED_REPORT.md` names every planted defect; the integrity check refuses a skill without one.
+- A removed skill's old page is mapped to its replacement in `MOVED` in `scripts/emit.py`.
+- Before pushing: `python scripts/emit.py --check`, `python scripts/check_library_integrity.py`, `python scripts/test_check_trace.py`, `python scripts/test_conformance.py`, and `python scripts/check_site.py _site` on a build of the site.
 
-## Prompt Categories
-
-| Category | Description |
-|----------|-------------|
-| **Lifecycle** | One model and one person running a build on its own (`run-autonomously`), from any idea to a foundation and a path (`start-from-an-idea`), choices made with verified evidence (`choose-with-evidence`), every change traced to the goal (`change-with-a-reason`), the release to people (`release-to-people`), continuous improvement after launch (`keep-it-on-course`), and incidents, restored first (`handle-an-incident`) |
-| **Design** | What people and agents see, do and hear, on any surface: flows, states, words, one system in code, every action operable by a person or an agent, tested with people (`design-the-experience`) |
-| **End to End** | Taking a project in any state to production quality (`take-to-production`) |
-| **Physical Systems** | Commands to hardware, devices and real-world services (`act-on-the-physical-world`) |
-| **Initial Scoping** | First-pass tasks for new or unknown projects (audit, hardening, frontend build) |
-| **Iterative Development** | Tasks for improving existing code (fix & refine, build from plan; the legacy UI/UX review) |
-| **Maintenance** | Ongoing tasks (dependency updates, curation, agent-PR review) |
-| **Security** | Security review of agent-written code (`security-review-agent-code`), and the project's own confidentiality, offline first (`keep-it-confidential`) |
-| **Meta** | Templates and prompt-generation tools |
-
-## Recommended Workflow
-
-From any idea to a working product, then continuous improvement. No step concludes that an idea cannot be done; a blocked route gets another route. A project in any state enters where its state says (`entries` in `workflow.json`):
-
-- broken for people right now: step 11, then 10;
-- an idea, and only a model to build it with: step 1, then 2;
-- an idea, and an agent that already works: step 2;
-- a project that already exists, in any state: step 2 in its re-founding form (the ledger written from what is there, every existing decision recorded with the evidence it had), then 3, 4, 7 and 9;
-- live, or stalled, abandoned or drifting: step 10;
-- a request, however worded: step 6; a choice: step 5; work an agent produced: step 8;
-- alongside every step: `task_keep_it_confidential` for a private, proprietary or offline project, and `task_act_on_the_physical_world` for anything that moves, heats, dispenses, spends or sends (`throughout`).
-
-Each step has a `done_when` gate and the `branches` (other skills) it calls on:
-
-1. `task_run_autonomously`: one model and one person; the model builds and proves its own harness and tools if it has none, the person is briefed once, and development runs without waiting inside a sandbox, checkpoints and gates
-2. `task_start_from_an_idea`: what it takes to make the idea happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline a person or an agent can run, one slice end to end, and the ledger
-3. `task_repair_setup_script`: make it run from cold
-4. `task_design_the_experience`: every journey as a flow with every state and word, one system in code, every action operable by a person and an agent, threaded to the architecture, tested with people (repeatable)
-5. `task_choose_with_evidence`: each consequential choice (repeatable)
-6. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
-7. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
-8. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
-9. `task_release_to_people`: every way in walked from a clean device, listings true, a staged release that pauses itself, people told where they are, and someone answering (repeatable)
-10. `task_keep_it_on_course`: at every milestone and continuously after launch; ranks the next improvements (repeatable)
-11. `task_handle_an_incident`: whenever the live product fails people; restore first by a tried action, then the cause, the fix and the prevention (repeatable)
-12. `task_update_dependencies`: keep it current (optional, repeatable)
-
-Steps 2, 4, 5, 6, 9, 10 and 11 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` and `Verified:` lines, in that project's CI.
-
-See `workflow.json` for the machine-readable workflow graph.
-
-## Repository Structure
+## Repository structure
 
 ```
-_prompts/           → Canonical procedure markdown (Jekyll collection)
-skills/             → Agent Skills generated from _prompts/
-compact/            → Short forms of the core skills, for small local models (generated)
-_agent_skills/      → The same SKILL.md files, wrapped so the site serves them verbatim
-.well-known/agent-skills/index.json → Agent Skills discovery index, with digests
-llms.txt            → Every skill, for an agent given only the domain
-fixtures/           → Planted-failure trees + defects.json
-harness/AGENTS.md   → Standing doctrine fragment for other repos
-harness/check_trace.py → The ledger check for other repos (Python 3.8+, no dependencies)
-harness/conformance.py → The test an agent harness a model built for itself must pass
-harness/ledger-example/ → A small ledger that passes it
-prompts.json        → Machine-readable prompt index (JSON API)
-scripts/            → emit.py (generates every form), the integrity, site and fixture checks
-workflow.json       → Machine-readable workflow graph
-AGENTS.md           → This file (agent instructions for *this* repo)
-PROMPTS_GUIDE.md    → Human-readable prompt library guide
-ENVIRONMENT_SETUP.md → Guide for configuring repos so agents can run
+_prompts/                 the skills, one Markdown file each (the source)
+workflow.json             where each kind of project starts, and the path with its gates
+fixtures/                 a planted-defect project for every skill, with defects.json
+harness/AGENTS.md         standing rules to paste into a target project's AGENTS.md
+harness/check_trace.py    the ledger check for a target project's CI (Python 3.8+, no dependencies)
+harness/conformance.py    the test a harness a model built for itself must pass
+harness/ledger-example/   a small ledger that passes the check
+scripts/                  emit.py (generates every form) and the checks
+skills/ plugin/ compact/  generated: Agent Skills, the Claude Code plugin, short forms
+_agent_skills/ redirects/ generated: the served SKILL.md files, and stubs for removed pages
+mcp/                      the MCP server
 ```

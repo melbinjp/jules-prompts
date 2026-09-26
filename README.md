@@ -37,12 +37,9 @@ so a copy that has drifted from its source fails the build instead of quietly di
 with it. Adding a new output format, whatever the ecosystem asks for next, is one entry in
 that script's `TARGETS`; the guarantee is structural rather than per-format.
 
-### Tiers
+### Groups
 
-Procedures are `core` unless their front matter says `status: legacy`. Core is the reason this
-library exists: the failures agents actually have. Legacy is the general-purpose task text from
-2025, still correct and still runnable, kept because it is useful and marked because it is not
-what makes this different.
+Each skill says what it is for in its `category`. **Lifecycle** is the path itself, from a model and a person or an idea to a product that keeps working. **Design** is what people and agents meet. **Build** and **Verify** are the methods the path calls on to change a project and to check it. **Security** and **Physical Systems** apply alongside every step. Every skill has a fixture that shows it catching what it claims to.
 
 Standing doctrine, for a project's `AGENTS.md` so it fires when nobody picks a skill: [`harness/AGENTS.md`](harness/AGENTS.md).
 
@@ -54,9 +51,9 @@ The check proves a record has the right shape. Whether its criteria, evidence an
 
 ## Getting Started
 
-The [library guide](PROMPTS_GUIDE.md) explains each prompt and a recommended sequence.
+The [skills page](https://jules-prompts.wecanuseai.com/tasks.html) lists every skill by what it is for, and the [workflow page](https://jules-prompts.wecanuseai.com/workflow/) shows where each kind of project starts and the gate that ends each step.
 
-To prepare a repository so an agent can clone, install, and test it, see the [Environment Setup Guide](ENVIRONMENT_SETUP.md).
+To prepare a repository so any agent can clone, install and test it from cold, use [Repair the Environment Setup Script](_prompts/task_repair_setup_script.md).
 
 ## How to Use
 
@@ -102,7 +99,7 @@ Nothing in the skills needs the internet, and nothing here has to be fetched whi
 1. **Get the library once.** `git clone https://github.com/melbinjp/jules-prompts`, or carry a clone across on removable media. Note the commit hash; on the other side, `git fsck` and `git rev-parse HEAD` confirm the copy is whole and is that commit.
 2. **Install the skills from the copy.** `cp -R jules-prompts/skills/* .claude/skills/` (or `.agents/skills/`). In Claude Code, `/plugin marketplace add /path/to/jules-prompts` then `/plugin install jules-prompts@jules-prompts` installs from the directory.
 3. **Run the MCP server from the copy, with no network.** Point the client at `node /path/to/jules-prompts/mcp/index.js` with `JULES_PROMPTS_DIR=/path/to/jules-prompts` in its environment. In that mode the server reads the copy and refuses to use the network at all; CI proves it. Its two dependencies come from `npm ci`, run once where a registry or a mirror is reachable, with `node_modules` carried across with the clone.
-4. **Give small local models the short forms.** `compact/<name>.md` is each core skill as a checklist of a few hundred words, for models whose context cannot hold the full skill next to the code.
+4. **Give small local models the short forms.** `compact/<name>.md` is each skill as a checklist of a few hundred words, for models whose context cannot hold the full skill next to the code.
 5. **Qualify a model before trusting it with a stage.** Run it on the skill's fixture and score the report with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the fixture is evidence.
 6. **Check the project's ledger offline.** `harness/check_trace.py` needs Python and nothing else.
 7. **No agent harness at all?** A model with only a chat endpoint builds its own from the specification in `run-autonomously`, and it is ready when `python harness/conformance.py --harness "<its command>"` passes: a scripted model drives it through proper and careless actions and checks every prompt, file and commit.
@@ -110,7 +107,7 @@ Nothing in the skills needs the internet, and nothing here has to be fetched whi
 
 ### For humans (copy-paste)
 
-1. Open the prompt file (e.g. [`task_audit_repo.md`](_prompts/task_audit_repo.md)).
+1. Open the prompt file (e.g. [`task_take_to_production.md`](_prompts/task_take_to_production.md)).
 2. Copy the body after the YAML front matter.
 3. Paste it into the agent's instruction input.
 
@@ -138,14 +135,13 @@ When adding or revising a prompt:
 1. Keep its YAML front matter aligned with the other files in `_prompts/`.
 2. Write harness-agnostic instructions: no `You are Jules`, no `set_plan` / `submit` / `request_code_review`.
 3. Run `python scripts/emit.py` so every generated form (skills, plugin, index, site files) matches.
-4. Update `PROMPTS_GUIDE.md` when its purpose or recommended use changes.
-5. Update `workflow.json` only when the recommended sequence changes.
-6. If the prompt exists to catch a failure, add a fixture under `fixtures/` with `defects.json` and an `EXPECTED_REPORT.md` that names every planted defect.
-7. Keep `AGENTS.md`, this README, and the generated `prompts.json` fields aligned.
-8. `python scripts/check_library_integrity.py`, `python scripts/emit.py --check` and `python scripts/test_check_trace.py` must pass, and so must `python scripts/check_site.py _site` on a build of the site (CI builds it the way GitHub Pages does).
+4. Update `workflow.json` only when the recommended sequence, or where a kind of project starts, changes.
+5. Add a fixture under `fixtures/` with `defects.json` and an `EXPECTED_REPORT.md` that names every planted defect. Every skill has one; the integrity check refuses a skill without.
+6. When a skill is removed, map its old page to the skill that replaces it in `MOVED` in `scripts/emit.py`, so saved links still land somewhere useful.
+7. `python scripts/check_library_integrity.py`, `python scripts/emit.py --check` and `python scripts/test_check_trace.py` must pass, and so must `python scripts/check_site.py _site` on a build of the site (CI builds it the way GitHub Pages does).
 
 ## Contributing
 
 Contributions are welcome. The goal is a small set of high-quality, general-purpose procedures that encode best practices for the failures agents actually have, and a corpus that can show those procedures failing.
 
-If you have an idea for a new prompt, skill, or fixture, please open an issue to discuss it.
+If you have an idea for a new skill or fixture, please open an issue to discuss it. A new skill starts from the [Skill Template](_prompts/template_master_prompt.md) and comes with a fixture.

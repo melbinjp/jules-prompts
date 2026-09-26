@@ -2,7 +2,7 @@
 layout: skill
 title: Isolate Tests from External Services
 description: To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.
-category: Maintenance
+category: Build
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -57,3 +57,5 @@ This is the failure that turns a working repository into one an agent cannot hel
 *   The before and after collected-test counts, reconciled, so nothing has silently stopped running.
 *   The documented command for running the full suite against real services.
 *   A note of any place where no seam existed and the library had to be patched directly, since each one is a design finding worth someone's attention.
+*   **A verdict table** with one row per external service the suite touched: isolated behind a seam, or its tests excluded by name and marker and still runnable against the real service. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `4 holds, 1 broken, 0 skipped of 5 items.`

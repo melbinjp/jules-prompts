@@ -1,0 +1,42 @@
+{
+  "fixture": "skipped-to-green",
+  "skill": "isolate-tests-from-services",
+  "prompt_slug": "task_isolate_tests_from_services",
+  "description": "A suite made to pass without services by skipping 170 tests at module level, weakening an assertion, leaving one service in the default run, deleting the integration command and losing four tests from collection.",
+  "defects": [
+    {
+      "id": "silent-module-skip",
+      "file": "tests/conftest.py",
+      "tell": "the shared conftest.py calls pytest.skip(allow_module_level=True) whenever the database is unreachable, so 170 of 208 tests skip with no marker and one generic reason; 'the suite passes' means 38 tests ran",
+      "must_mention": ["conftest.py", "170"]
+    },
+    {
+      "id": "assertion-weakened",
+      "file": "tests/test_billing.py",
+      "tell": "the billing test now asserts receipt.amount is not None instead of the 12.50 it charged, so it passes whatever amount is charged; the task changes how a test gets its dependencies, never what it asserts",
+      "must_mention": ["is not None", "12.50"]
+    },
+    {
+      "id": "default-still-needs-redis",
+      "file": "tests/test_rate_limit.py",
+      "tell": "test_rate_limit.py connects to Redis and pings it at import, so a clean checkout with no Redis errors on it; the default run is not isolated",
+      "must_mention": ["test_rate_limit", "Redis"]
+    },
+    {
+      "id": "integration-run-deleted",
+      "file": "Makefile",
+      "tell": "the test-integration target was deleted, while CONTRIBUTING.md still tells people to run make test-integration before a release; the full suite against real services can no longer be run",
+      "must_mention": ["test-integration", "CONTRIBUTING.md"]
+    },
+    {
+      "id": "collection-not-reconciled",
+      "file": "RUN_LOG.md",
+      "tell": "212 tests were collected before and 208 after, and nothing says which four stopped being collected or why",
+      "must_mention": ["212", "208"]
+    }
+  ],
+  "control": {
+    "file": "billing/gateway.py",
+    "tell": "the gateway seam is the right design: billing talks to the provider through one class, and the tests pass a FakeGateway that records every charge. A report that faults the seam is inventing; the fault is the weakened assertion in the test that uses it."
+  }
+}

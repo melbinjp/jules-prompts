@@ -14,7 +14,7 @@ Fix a reported bug in the only order that produces evidence: write a test that f
 - Read the failure message, and check it names the reported behaviour.
 - Change the smallest thing that turns it green.
 - Do not adjust the test after seeing the fix fail.
-- The suite must be green apart from your test before you begin.
+- Know which tests are already red before you begin.
 
 ## Steps
 
@@ -31,3 +31,5 @@ Fix a reported bug in the only order that produces evidence: write a test that f
 - The revert check: evidence the test goes red again when the fix is removed.
 - Any sibling occurrence of the same defect found elsewhere, whether or not it was fixed here.
 - Where the cause turned out not to be where the report pointed, a plain statement of where it actually was.
+- A verdict table with one row per item: the suite green before starting, or its failing tests named; the test red for the reported reason; the test committed before the fix; the fix going red when reverted; the full suite after the fix; each sibling found.
+- Last line, the denominator: `5 holds, 0 broken, 1 skipped of 6 items.`

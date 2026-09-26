@@ -5,7 +5,7 @@ title: Agent Skills (SKILL.md) to take any idea to a working product
 ---
 {%- assign featured = site.prompts | where_exp: "p", "p.featured" | sort: "featured" -%}
 {%- comment -%} Skills only: the master template is for authors and has no SKILL.md. {%- endcomment -%}
-{%- assign core = site.prompts | where_exp: "p", "p.slug contains 'task_'" | where_exp: "p", "p.status != 'legacy'" -%}
+{%- assign skills = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
 <section class="hero">
   <div class="hero-copy">
     <p class="eyebrow">Agent Skills <span aria-hidden="true">/</span> SKILL.md <span aria-hidden="true">/</span> MIT</p>
@@ -31,7 +31,7 @@ title: Agent Skills (SKILL.md) to take any idea to a working product
   </div>
   <div class="panel">
     <h2>Or read them yourself</h2>
-    <p>Every skill is a page to read and the same <code>SKILL.md</code> an agent loads. {{ core | size }} core skills, plus older general-purpose ones marked legacy.</p>
+    <p>Every skill is a page to read and the same <code>SKILL.md</code> an agent loads. {{ skills | size }} skills, each with a test that shows it catching what it claims to.</p>
     <p><a class="button button-quiet" href="{{ '/tasks.html' | relative_url }}">All the skills</a></p>
     <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, with a SHA-256 digest of every <code>SKILL.md</code>.</p>
   </div>
@@ -108,7 +108,7 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 
 <section aria-labelledby="proof">
   <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">05</span>How you know a skill works</h2>
-  <p class="measure">A skill nobody has seen fail is a claim. Each core skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
+  <p class="measure">A skill nobody has seen fail is a claim. Every skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
 </section>
 
 <section aria-labelledby="questions" id="faq">

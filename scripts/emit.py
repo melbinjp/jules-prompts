@@ -44,7 +44,7 @@ SKIP = {"template_master_prompt"}
 
 PLUGIN_NAME = "jules-prompts"
 PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
-PLUGIN_VERSION = "1.4.0"
+PLUGIN_VERSION = "2.0.0"
 PLUGIN_AUTHOR = {"name": "Melbin J Paulose", "url": "https://github.com/melbinjp"}
 # The words a marketplace, a registry or a search matches on.
 PLUGIN_KEYWORDS = [
@@ -109,9 +109,6 @@ def load_prompts() -> list[dict]:
                 "title": (meta.get("title") or path.stem).strip(),
                 "description": description,
                 "category": (meta.get("category") or "").strip(),
-                # Absent means core. Only legacy is written down, so the default
-                # costs nothing to maintain.
-                "status": (meta.get("status") or "core").strip(),
                 # `featured: <n>` in front matter puts a procedure first, in that order, on
                 # the site and in llms.txt. One place decides it, for both.
                 "featured": meta.get("featured"),
@@ -193,7 +190,6 @@ def emit_index(prompts: list[dict]) -> dict[str, str]:
                 "title": p["title"],
                 "description": p["description"],
                 "category": p["category"],
-                "status": p["status"],
                 "prompt": f"_prompts/{p['stem']}.md",
                 "skill": f"skills/{p['slug']}/SKILL.md",
             }
@@ -312,10 +308,9 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
     if not featured:
         raise SystemExit("no procedure is featured, so llms.txt would have no starting point")
     core = sorted(
-        (p for p in prompts if p["status"] == "core" and not p["featured"]),
+        (p for p in prompts if not p["featured"]),
         key=lambda p: (p["category"], p["title"]),
     )
-    legacy = sorted((p for p in prompts if p["status"] == "legacy"), key=lambda p: p["title"])
     llms = "\n".join(
         [
             "# Jules Prompts",
@@ -350,13 +345,12 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
             "",
             *[_line(p) for p in featured],
             "",
-            "## Core skills",
+            "## Every other skill",
             "",
             *[_line(p) for p in core],
             "",
             "## Optional",
             "",
-            *[_line(p) for p in legacy],
             f"- [Source repository]({PLUGIN_REPO}): the procedures, the planted-failure "
             "fixtures that show a skill going red, the scorer, a plugin bundle and an MCP server",
             "",
@@ -564,8 +558,6 @@ def emit_compact(prompts: list[dict]) -> dict[str, str]:
     """
     out = {}
     for p in prompts:
-        if p["status"] != "core":
-            continue
         sections = _sections(p["body"])
         if "Objective" not in sections:
             raise SystemExit(f"{p['stem']}: no Objective section, so it has no short form")
@@ -581,14 +573,12 @@ def emit_compact(prompts: list[dict]) -> dict[str, str]:
                         found.append(f"- {_lead(match.group(1))}")
             return found
 
-        # The procedures do not all share one layout: some have a Method and a Definition of
-        # Done instead of steps and deliverables. Each part is taken from whichever it has.
-        rules = items(("Requirements & Constraints", "Constraints"), _TOP_BULLET)
-        method = items(("Method",), _TOP_STEP, numbered=True) or items(("Method",), _TOP_BULLET)
+        # Every skill has the Skill Template's sections; the integrity check enforces it.
+        rules = items(("Requirements & Constraints",), _TOP_BULLET)
         steps = items(("Execution Flow",), _TOP_STEP, numbered=True)
-        deliver = items(("Deliverables", "Definition of Done"), _TOP_BULLET)
-        if not (rules or method or steps or deliver):
-            raise SystemExit(f"{p['stem']}: no rules, method, steps or deliverables to shorten")
+        deliver = items(("Deliverables",), _TOP_BULLET)
+        if not (rules and steps and deliver):
+            raise SystemExit(f"{p['stem']}: no rules, steps or deliverables to shorten")
         placeholders = sorted(set(re.findall(r"<([A-Z][A-Z0-9_]*)>", p["body"])))
         objective = "\n".join(sections["Objective"]).strip()
         lines = [
@@ -605,11 +595,64 @@ def emit_compact(prompts: list[dict]) -> dict[str, str]:
         if placeholders:
             lines += ["Fill in: " + ", ".join(f"`<{name}>`" for name in placeholders), ""]
         lines += ["## Objective", "", objective, ""]
-        for heading, part in (("Rules", rules), ("Method", method), ("Steps", steps),
-                              ("Deliver", deliver)):
-            if part:
-                lines += [f"## {heading}", "", *part, ""]
+        for heading, part in (("Rules", rules), ("Steps", steps), ("Deliver", deliver)):
+            lines += [f"## {heading}", "", *part, ""]
         out[f"{p['slug']}.md"] = "\n".join(lines)
+    return out
+
+
+# Pages that were removed, and the page that now does their job. A link someone saved still
+# lands somewhere useful: each becomes a redirect stub at its old address. The skills behind
+# them were superseded by a core skill that does the same job and checks it.
+MOVED = {
+    "/prompts/task_analyze_and_improve_ui_ux.html": "task_design_the_experience",
+    "/prompts/task_build_api_frontend.html": "task_design_the_experience",
+    "/prompts/task_build_from_plan.html": "task_change_with_a_reason",
+    "/prompts/task_curate_repo.html": "task_start_from_an_idea",
+    "/prompts/task_fix_and_refine.html": "task_take_to_production",
+    "/prompts/task_harden_repo_initial.html": "task_take_to_production",
+    "/prompts/task_harden_repo_iterative.html": "task_keep_it_on_course",
+    "/prompts/task_audit_repo.html": "task_take_to_production",
+    "/prompts/task_generate_prompt_from_description.html": "template_master_prompt",
+    "/prompts/task_prove_the_fix.html": "task_qa_an_agents_tests",
+    "/environment-setup/": "task_repair_setup_script",
+    # The guide repeated each skill's description and the workflow page; both are the source now.
+    "/prompts-guide/": "/workflow/",
+}
+
+
+def emit_redirects(prompts: list[dict]) -> dict[str, str]:
+    """A redirect stub at each removed page's address, pointing at its replacement."""
+    stems = {p["stem"]: p["title"] for p in prompts} | {"template_master_prompt": "Skill Template"}
+    out = {}
+    pages = {"/workflow/": "Recommended workflow"}
+    for old, stem in sorted(MOVED.items()):
+        if stem not in stems and stem not in pages:
+            raise SystemExit(f"{old} redirects to {stem}, which is not a page")
+        if (PROMPTS / (old.rsplit("/", 1)[-1].removesuffix(".html") + ".md")).exists():
+            raise SystemExit(f"{old} is listed as moved, but its prompt still exists")
+        target = f"{SITE}{stem}" if stem in pages else f"{SITE}/prompts/{stem}.html"
+        stems.setdefault(stem, pages.get(stem, stem))
+        name = old.strip("/").replace("/", "_").removesuffix(".html") or "index"
+        out[f"{name}.html"] = (
+            "---\n"
+            f"permalink: {old}\n"
+            "sitemap: false\n"
+            "---\n"
+            "<!doctype html>\n"
+            '<html lang="en">\n'
+            "<head>\n"
+            '<meta charset="utf-8">\n'
+            f"<title>Moved to {html.escape(stems[stem])}</title>\n"
+            f'<link rel="canonical" href="{target}">\n'
+            f'<meta http-equiv="refresh" content="0; url={target}">\n'
+            '<meta name="robots" content="noindex">\n'
+            "</head>\n"
+            "<body>\n"
+            f'<p>This page was replaced by <a href="{target}">{html.escape(stems[stem])}</a>.</p>\n'
+            "</body>\n"
+            "</html>\n"
+        )
     return out
 
 
@@ -621,6 +664,7 @@ TARGETS = {
     "agent-skills": ("_agent_skills", emit_agent_skills),
     "site": (".", emit_site),
     "compact": ("compact", emit_compact),
+    "redirects": ("redirects", emit_redirects),
 }
 
 
@@ -630,13 +674,31 @@ def render(target: str, prompts: list[dict]) -> dict[Path, str]:
     return {base / relative: text for relative, text in renderer(prompts).items()}
 
 
+def orphans(target: str, expected: dict[Path, str]) -> list[Path]:
+    """Files in a target's own directory that nothing generates any more."""
+    directory, _ = TARGETS[target]
+    base = ROOT / directory
+    if directory == "." or not base.is_dir():
+        return []
+    return sorted(path for path in base.rglob("*")
+                  if path.is_file() and path not in expected and path.name != "README.md")
+
+
 def write(target: str, prompts: list[dict]) -> list[Path]:
     written = []
-    for path, text in render(target, prompts).items():
+    expected = render(target, prompts)
+    for path, text in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists() or path.read_text(encoding="utf-8") != text:
             path.write_text(text, encoding="utf-8")
         written.append(path)
+    # A procedure that was removed takes its generated forms with it.
+    for path in orphans(target, expected):
+        path.unlink()
+        for parent in path.parents:
+            if parent == ROOT or any(parent.iterdir()):
+                break
+            parent.rmdir()
     return written
 
 
@@ -651,13 +713,8 @@ def differences(target: str, prompts: list[dict]) -> list[str]:
             problems.append(f"{path.relative_to(ROOT)} differs from its source")
 
     # A file nobody generates any more is drift in the other direction.
-    directory, _ = TARGETS[target]
-    if directory != ".":
-        base = ROOT / directory
-        if base.is_dir():
-            for path in base.rglob("*"):
-                if path.is_file() and path not in expected and path.name != "README.md":
-                    problems.append(f"{path.relative_to(ROOT)} is not generated by any prompt")
+    for path in orphans(target, expected):
+        problems.append(f"{path.relative_to(ROOT)} is not generated by any prompt")
     return problems
 
 

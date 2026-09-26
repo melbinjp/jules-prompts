@@ -29,3 +29,5 @@ Make the test suite runnable from cold in an environment with no database, no me
 - The before and after collected-test counts, reconciled, so nothing has silently stopped running.
 - The documented command for running the full suite against real services.
 - A note of any place where no seam existed and the library had to be patched directly, since each one is a design finding worth someone's attention.
+- A verdict table with one row per external service the suite touched: isolated behind a seam, or its tests excluded by name and marker and still runnable against the real service.
+- Last line, the denominator: `4 holds, 1 broken, 0 skipped of 5 items.`

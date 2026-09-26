@@ -2,18 +2,17 @@
 
     python scripts/check_library_integrity.py
 
-`prompts.json` is fetched by agents rather than read by people, and `PROMPTS_GUIDE.md` is
-what a human reads first. The README asks for the prompt set, the guide, and the workflow to
-stay aligned. Nothing checked that they did, and they had already drifted:
-`task_build_api_frontend` shipped with a prompt file and no guide entry.
+The prompt set, the workflow, the generated skills and the fixtures are views of one library,
+and they had drifted before: a prompt once shipped with no entry in the guide that listed them.
+Nothing checked that they agreed, so this does.
 
 That is a small gap with an awkward property. A library whose own index is incomplete is
 making a claim it cannot support, and this one is specifically sold as machine-readable, so
 the index is the product rather than documentation about it.
 
 Skills and fixtures are the same kind of claim. `skills/` is generated from `_prompts/`; a
-copy that can drift is a defect. A fixture whose EXPECTED_REPORT.md does not name its
-planted defects is a check that cannot fail.
+copy that can drift is a defect. A skill with no fixture has never been seen to fail, and a
+fixture whose EXPECTED_REPORT.md does not name its planted defects is a check that cannot fail.
 
 **This check is written to be able to fail.** No step in it swallows an exit code and there
 is no `continue-on-error` on the workflow that runs it. A verification that cannot fail is
@@ -30,7 +29,6 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "_prompts"
-GUIDE = ROOT / "PROMPTS_GUIDE.md"
 WORKFLOW = ROOT / "workflow.json"
 CONFIG = ROOT / "_config.yml"
 FIXTURES = ROOT / "fixtures"
@@ -41,8 +39,6 @@ import generate_skills  # noqa: E402
 import score_fixture  # noqa: E402
 
 REQUIRED_FIELDS = ("layout", "title", "description", "category", "type")
-
-GUIDE_ENTRY = re.compile(r"^### \[`([a-z0-9_]+)\.md`\]", re.M)
 
 # Tool names, branch names and a role line that only Jules understood. Naming Jules in a
 # list of harnesses the instructions do *not* depend on is allowed; addressing the agent as
@@ -81,6 +77,10 @@ PROJECT_ENDING = (
 # "search the web" as a requirement to use a hosted service the project cannot or must not use.
 SERVICE_AGNOSTIC = "They do not assume any hosted service either"
 
+# The sections every skill has, in the order the Skill Template gives them.
+SECTIONS = ("Objective", "Context", "Requirements & Constraints", "Guiding Principles",
+            "Execution Flow", "Deliverables")
+
 # Every procedure renders through the skill layout, which is what gives its page a title,
 # its tier and the ways to load it. A prompt on any other layout renders as a bare body.
 PROMPT_LAYOUT = "skill"
@@ -116,16 +116,6 @@ def main() -> int:
         print("BLIND: no prompt files found at all. Refusing to report a pass.")
         return 1
 
-    guide = GUIDE.read_text(encoding="utf-8")
-    documented = sorted(set(GUIDE_ENTRY.findall(guide)))
-
-    for slug in files:
-        if slug not in documented:
-            problems.append(f"{slug}.md has no entry in PROMPTS_GUIDE.md")
-    for slug in documented:
-        if slug not in files:
-            problems.append(f"PROMPTS_GUIDE.md documents {slug}.md, which does not exist")
-
     for p in sorted(PROMPTS.glob("*.md")):
         text = p.read_text(encoding="utf-8")
         fm = front_matter(text)
@@ -141,6 +131,15 @@ def main() -> int:
         for needle in FORBIDDEN_IN_PROMPTS:
             if needle in text:
                 problems.append(f"{p.name} still contains Jules-specific harness {needle!r}")
+        # Every skill has the same shape, and ends in a verdict someone can check. Fifteen once
+        # did not: four had no deliverables at all, and the site said every skill ends in one.
+        if p.stem.startswith("task_"):
+            for section in SECTIONS:
+                if f"**{section}:**" not in text:
+                    problems.append(f"{p.name} has no {section} section")
+            ending = text[text.rfind("**Deliverables:**"):] if "**Deliverables:**" in text else ""
+            if not all(v in ending for v in ("`holds`", "`broken`", "`skipped`")) or "denominator" not in ending:
+                problems.append(f"{p.name} does not end in holds, broken or skipped with a denominator")
         if SERVICE_AGNOSTIC not in text:
             problems.append(f"{p.name} does not say it assumes no hosted service, so an agent "
                             "may read its steps as requiring one")
@@ -279,9 +278,15 @@ def main() -> int:
         for name in on_disk:
             if name not in listed_names:
                 problems.append(f"fixtures/{name}/ exists but is not in fixtures/index.json")
+        # Every skill has been seen to fail. The site says so, and a skill without a fixture
+        # would make that a claim; ten of them once did.
+        tested = {entry.get("skill") for entry in listed}
+        for skill in sorted(planned):
+            if skill not in tested:
+                problems.append(f"skill {skill} has no fixture, so nobody has seen it catch anything")
 
     print(
-        f"checked {len(files)} prompt(s), {len(documented)} guide entry(ies), "
+        f"checked {len(files)} prompt(s), "
         f"{len(steps)} workflow step(s), {len(planned)} skill(s), "
         f"{fixture_count} fixture(s) ({expected_ok} expected reports hold); _config.yml "
         f"{'parses' if config_ok else 'DOES NOT PARSE'}"
@@ -291,7 +296,7 @@ def main() -> int:
         for p in problems:
             print(f"  - {p}")
         return 1
-    print("the prompt set, the guide, the workflow, the skills and the fixtures agree")
+    print("the prompt set, the workflow, the skills and the fixtures agree, and every skill has a fixture")
     return 0
 
 

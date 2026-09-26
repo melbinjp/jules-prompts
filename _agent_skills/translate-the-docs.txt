@@ -8,13 +8,13 @@ excerpt_separator: ""
 name: translate-the-docs
 description: 'To add a language to a project''s documentation together with the machinery
   that says when a translation has gone stale, because a translation nobody can tell
-  is out of date is worse than no translation. Category: Maintenance.'
+  is out of date is worse than no translation. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_translate_the_docs
   source: _prompts/task_translate_the_docs.md
   title: Translate the Docs Without Forking Them
-  category: Maintenance
+  category: Build
 ---
 
 # Translate the Docs Without Forking Them
@@ -57,4 +57,20 @@ Some projects go further and deliberately *un*-translate specific pages (anythin
 *   **Preserve what the reader has to act on, translate what they have to understand.** The line between the two is not stylistic, and getting it wrong turns documentation into something that reads well and cannot be followed.
 *   **Say what you could not check.** Idiom, technical terms with no settled translation in that language, and anything where the source itself is ambiguous. Naming these is how a reviewer knows where to spend the attention they have.
 *   **Ask what happens on the next commit to the source.** If the answer is "nothing, and nobody will know", the machinery is missing whatever else has been delivered.
+
+**Execution Flow:**
+1.  **Decide the scope.** Which pages, into which languages, and which are left in the source language on purpose, with why.
+2.  **Translate.** Same structure, headings, anchors and file names; commands, code, keys and anything a reader types left exactly as they are.
+3.  **Record the source.** The source revision in every translated file.
+4.  **Ship the staleness check.** A check that lists every translation the source has moved past, run in CI, and seen to fail by changing a source page.
+5.  **Build and look.** The switcher, the navigation, search, every link resolved from where the translated file sits, and a page rendered.
+6.  **Verdict.** The table.
+
+**Deliverables:**
+*   The translated files, each recording the source revision it was made from.
+*   The staleness check, wired into CI, with the run that showed it failing.
+*   The pages deliberately left untranslated, each with its reason.
+*   What a native reader must check, and what was mechanical, so the pull request can be reviewed by someone who does not read the language.
+*   **A verdict table** with one row per translated page, and one each for the staleness check, the build and the links. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `11 holds, 0 broken, 2 skipped of 13 items.`
 {% endraw %}

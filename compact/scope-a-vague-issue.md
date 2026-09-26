@@ -32,3 +32,5 @@ Take an issue that does not say enough to act on, and turn it into a specificati
 - Statements of observed and expected behaviour, the latter with its source.
 - An explicit list of every ambiguity in the original issue and the reading you took for each, so the next reader can correct you cheaply.
 - Any separate defects found on the way, recorded as their own findings and not fixed here.
+- A verdict table with one row per item: the reproduction from the report's own input; the failing test, red for the reported reason; the expected behaviour with its source; each ambiguity with the reading taken.
+- Last line, the denominator: `5 holds, 0 broken, 1 skipped of 6 items.`

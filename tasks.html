@@ -1,16 +1,15 @@
 ---
 layout: default
 title: All Agent Skills
-description: Every procedure in the library, as a page to read and a SKILL.md to load. Core skills first, grouped by what they are for; the older general-purpose ones last, marked legacy.
+description: Every skill in the library, as a page to read and a SKILL.md to load. The core of the path first, then every other skill grouped by what it is for.
 ---
-{%- comment -%} Skills only: the master template is for authors, has no SKILL.md, and is in the guide. {%- endcomment -%}
+{%- comment -%} Skills only: the Skill Template is for authors and has no SKILL.md. {%- endcomment -%}
 {%- assign tasks = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
 {%- assign featured = tasks | where_exp: "p", "p.featured" | sort: "featured" -%}
-{%- assign core = tasks | where_exp: "p", "p.status != 'legacy'" | where_exp: "p", "p.featured == nil" | sort: "title" -%}
-{%- assign legacy = tasks | where: "status", "legacy" | sort: "title" -%}
+{%- assign core = tasks | where_exp: "p", "p.featured == nil" | sort: "title" -%}
 <header class="page-head">
   <h1>Skills</h1>
-  <p class="lede">Each procedure is one page to read and one <code>SKILL.md</code> to load, with the same text in both. Start with the first two. The core skills are grouped by what they are for, and the older general-purpose ones are last, marked legacy.</p>
+  <p class="lede">Each skill is one page to read and one <code>SKILL.md</code> to load, with the same text in both. Start with the first eight, the core; the rest are the methods they call on, grouped by what they are for. Each has a test project with planted faults that shows it catching them.</p>
 </header>
 
 <section aria-labelledby="start">
@@ -41,18 +40,3 @@ description: Every procedure in the library, as a page to read and a SKILL.md to
   </div>
 </section>
 {%- endfor %}
-
-<section aria-labelledby="legacy">
-  {%- assign n = groups | size | plus: 2 %}
-  <h2 id="legacy" class="section-title"><span class="n" aria-hidden="true">{% if n < 10 %}0{% endif %}{{ n }}</span>Legacy</h2>
-  <p class="measure muted">General-purpose task text from 2025. Still correct and still runnable, and kept because it is useful. It is not what makes this library different, so each one says so in its description.</p>
-  <div class="cards">
-    {%- for p in legacy %}
-    <a class="card card-legacy" href="{{ p.url | relative_url }}">
-      <span class="card-meta">{{ p.category }}</span>
-      <h3><span>{{ p.title }}</span></h3>
-      <p>{{ p.description }}</p>
-    </a>
-    {%- endfor %}
-  </div>
-</section>

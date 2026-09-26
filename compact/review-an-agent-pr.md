@@ -31,3 +31,5 @@ Review a pull request that was written by an agent, and decide whether it does w
 - A list of weakened or deleted assertions, skips, widened tolerances and suppressed errors, each with the reason given for it or a note that none was given.
 - An explicit list of what you could not verify and why.
 - A single sentence at the top saying whether the change does what it says.
+- A verdict table with one row per requirement the pull request claims to meet and per test it adds.
+- Last line, the denominator: `9 holds, 2 broken, 1 skipped of 12 items.`

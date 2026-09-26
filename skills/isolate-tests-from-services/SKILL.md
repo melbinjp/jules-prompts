@@ -1,13 +1,13 @@
 ---
 name: isolate-tests-from-services
 description: 'To make a test suite runnable in an agent''s sandbox by removing its
-  dependence on services it cannot start. Category: Maintenance.'
+  dependence on services it cannot start. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_isolate_tests_from_services
   source: _prompts/task_isolate_tests_from_services.md
   title: Isolate Tests from External Services
-  category: Maintenance
+  category: Build
 ---
 
 # Isolate Tests from External Services
@@ -64,3 +64,5 @@ This is the failure that turns a working repository into one an agent cannot hel
 *   The before and after collected-test counts, reconciled, so nothing has silently stopped running.
 *   The documented command for running the full suite against real services.
 *   A note of any place where no seam existed and the library had to be patched directly, since each one is a design finding worth someone's attention.
+*   **A verdict table** with one row per external service the suite touched: isolated behind a seam, or its tests excluded by name and marker and still runnable against the real service. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `4 holds, 1 broken, 0 skipped of 5 items.`

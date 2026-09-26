@@ -7,13 +7,13 @@ excerpt_separator: ""
 {% raw %}---
 name: repair-setup-script
 description: 'To diagnose and repair the setup script so agent tasks stop failing
-  before any code is written. Category: Initial Scoping.'
+  before any code is written. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_repair_setup_script
   source: _prompts/task_repair_setup_script.md
   title: Repair the Environment Setup Script
-  category: Initial Scoping
+  category: Build
 ---
 
 # Repair the Environment Setup Script
@@ -72,4 +72,6 @@ This is a task about the environment, not about the product code. Asynchronous a
 *   A setup script that installs dependencies and exits, with no blocking process and no swallowed exit code.
 *   A short `AGENTS.md` section, or an update to an existing one, giving the install command, the test command and any environment variable the suite needs.
 *   A report containing: the baseline failure with its verbatim output, each change and the reason for it, the final test-runner summary line, and an explicit list of anything that still cannot run in this environment and why.
+*   **A verdict table** with one row per item: the install from a clean checkout; the test command; each environment variable the suite needs; each setup step failing loudly when broken on purpose; nothing left running. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `6 holds, 0 broken, 1 skipped of 7 items.`
 {% endraw %}

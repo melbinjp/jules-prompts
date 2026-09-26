@@ -1,0 +1,48 @@
+{
+  "fixture": "fixed-before-tested",
+  "skill": "fix-a-bug-test-first",
+  "prompt_slug": "task_fix_a_bug_test_first",
+  "description": "A lost-penny bug fixed correctly by an agent, with nothing to show the fix does the work: the test came with the fix, went red for the wrong reason, uses a tidier input than the report, and the fix is bundled with other changes.",
+  "defects": [
+    {
+      "id": "suite-already-red",
+      "file": "RUN_LOG.md",
+      "tell": "the suite was already red before the work began (test_format_gbp failing), which the pull request never mentions; any red from the new test was indistinguishable from it",
+      "must_mention": ["test_format_gbp"]
+    },
+    {
+      "id": "red-for-the-wrong-reason",
+      "file": "PR.md",
+      "tell": "the 'failing as expected' output is an ImportError (split_bill did not exist yet), not an assertion about the lost penny, so the test was never seen to fail for the reason in the report",
+      "must_mention": ["ImportError", "reason"]
+    },
+    {
+      "id": "test-and-fix-in-one-commit",
+      "file": "HISTORY.md",
+      "tell": "a41c2e0 holds the fix and the test together; there is no commit with the test alone, so the history cannot show the order",
+      "must_mention": ["a41c2e0"]
+    },
+    {
+      "id": "paraphrased-input",
+      "file": "tests/test_split.py",
+      "tell": "the report's input is £10.00 between 3; the test uses 9.00 between 3, which divides evenly and passes on the old code and the new, so reverting the fix would leave it green",
+      "must_mention": ["9.00", "10.00"]
+    },
+    {
+      "id": "fix-bundled",
+      "file": "HISTORY.md",
+      "tell": "the same commit rewrites money.py (41 lines of tidying) and bumps babel to 2.14, so the fix cannot be reverted on its own, and a change to currency formatting rides in with a rounding fix",
+      "must_mention": ["money.py", "babel"]
+    },
+    {
+      "id": "sibling-missed",
+      "file": "src/tips.py",
+      "tell": "split_tip rounds each share and multiplies, the same pattern: a £10.00 tip between 3 still loses a penny, and it is not reported",
+      "must_mention": ["tips.py", "split_tip"]
+    }
+  ],
+  "control": {
+    "file": "src/split.py",
+    "tell": "the new split_bill is correct: it rounds down and hands the leftover pennies out one at a time, so £10.00 between 3 is 3.34, 3.33, 3.33. A report that calls the fix wrong is inventing; the fault is that nothing proves it."
+  }
+}

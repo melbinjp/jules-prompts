@@ -2,7 +2,7 @@
 layout: skill
 title: Repair the Environment Setup Script
 description: To diagnose and repair the setup script so agent tasks stop failing before any code is written.
-category: Initial Scoping
+category: Build
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -59,3 +59,5 @@ This is a task about the environment, not about the product code. Asynchronous a
 *   A setup script that installs dependencies and exits, with no blocking process and no swallowed exit code.
 *   A short `AGENTS.md` section, or an update to an existing one, giving the install command, the test command and any environment variable the suite needs.
 *   A report containing: the baseline failure with its verbatim output, each change and the reason for it, the final test-runner summary line, and an explicit list of anything that still cannot run in this environment and why.
+*   **A verdict table** with one row per item: the install from a clean checkout; the test command; each environment variable the suite needs; each setup step failing loudly when broken on purpose; nothing left running. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `6 holds, 0 broken, 1 skipped of 7 items.`

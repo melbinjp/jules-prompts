@@ -1,7 +1,7 @@
 {
   "name": "jules-prompts",
   "description": "Take any idea, software or hardware, in any state, to a working product and keep it improving: designed with evidence for the people and agents who use it, every decision backed by verified evidence, every change traced to the goal, and every claim checked, including work that reads as finished and is not, tests that cannot fail, and commands to the physical world that were accepted but never happened.",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "author": {
     "name": "Melbin J Paulose",
     "url": "https://github.com/melbinjp"

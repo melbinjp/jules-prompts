@@ -1,0 +1,2 @@
+# Which module takes payments. Loaded by src/services/checkout.py at import.
+payment_adapter: pantry.payments.stripe_adapter

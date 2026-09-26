@@ -67,3 +67,5 @@ An agent asked to fix a failure will find the shortest route to the failure stop
 *   A table of new dependencies: name, version, resolved source, and the import it satisfies.
 *   Every credential-shaped string found, and whether it is live and whether it is in the history.
 *   An explicit list of what you did not examine and why.
+*   **A verdict table** with one row per entry point, per check the change introduced, and per new dependency. Each is `holds` (attacked or made to fire, and it held), `broken` (it did not) or `skipped` (not examined, with why), with the evidence.
+*   Last line, the denominator: `14 holds, 3 broken, 2 skipped of 19 items.`

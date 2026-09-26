@@ -2,7 +2,7 @@
 layout: skill
 title: Automate a Workflow That Can Report Its Own Failure
 description: To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.
-category: Iterative Development
+category: Build
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -48,4 +48,19 @@ Two more decide whether the thing survives contact with a real machine. **It wil
 *   **Green is not evidence.** The question is never "did it error", it is "what did it produce and is that what I expected". Those come apart constantly, always quietly, and always in the direction of looking fine.
 *   **Optimise for the second run and the interrupted one.** The first run happens with the author watching. Every run after that happens with nobody watching, on a machine in a state nobody predicted.
 *   **Prefer boring and checkable over clever and total.** A script covering the common path and refusing the rest loudly beats one that covers everything and handles the edges by guessing.
-*   **Measure before you automate.** Something run twice a year, taking a minute, is not a workflow worth a script and its maintenance. Say so and stop rather than deliver something nobody will run.
+*   **Measure before you automate.** Something run twice a year, taking a minute, may not be worth a script and its upkeep. Say so with the numbers, and offer what does pay: a checklist, or a script for the one step that goes wrong.
+
+**Execution Flow:**
+1.  **Find it.** The commands people actually run, from the history, the CI logs and the docs; how often, and what a mistake costs.
+2.  **Script it.** Each step verified by its effect; no check on the left of a pipe; safe to run twice and to interrupt; results written as they are produced; a log that says what it read.
+3.  **Break it.** Remove a dependency, a permission, an input, and interrupt it halfway; watch each failure reach the exit code and the log.
+4.  **Hand it over.** The command, what it will not do, and where its log goes.
+5.  **Verdict.** The table.
+
+**Deliverables:**
+*   The script, and the one command that runs it.
+*   How often the workflow runs and what a mistake costs, with the source for each, so the automation's worth is on record.
+*   Each failure caused on purpose, and what the script reported for it.
+*   What the script will not do, in one sentence per case.
+*   **A verdict table** with one row per item: each step verified by its effect; each failure caused and reported; safe to run twice; safe to interrupt and resume; the log naming what it read. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `8 holds, 1 broken, 1 skipped of 10 items.`

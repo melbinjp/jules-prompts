@@ -7,14 +7,13 @@ excerpt_separator: ""
 {% raw %}---
 name: map-the-architecture
 description: 'To describe how the system actually works, by deriving it from what
-  runs and what imports what rather than from the folder names. Category: Initial
-  Scoping.'
+  runs and what imports what rather than from the folder names. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_map_the_architecture
   source: _prompts/task_map_the_architecture.md
   title: Map the Architecture
-  category: Initial Scoping
+  category: Build
 ---
 
 # Map the Architecture
@@ -57,4 +56,19 @@ The tells of a description assembled from names rather than behaviour are consis
 *   **Follow the data, not the call stack.** Where state lives, who writes it and who reads it explains more about a system than which function calls which. Two components that never call each other but write the same table are coupled.
 *   **Count things.** Files per directory, imports in and out per module, commits per path, how many places construct the central object. Numbers survive rewording; adjectives do not.
 *   **A good map lets somebody predict.** The test is whether a reader could now say where a change to one behaviour would land, and what would break. If it does not support that, it is a description of the repository rather than of the system.
+
+**Execution Flow:**
+1.  **Entry points.** Every way the system starts or is called, found by running or resolving, not by guessing.
+2.  **Graphs.** The import graph from the imports, the data each component reads and writes, and co-change from the history.
+3.  **Boundaries.** The parts that fail separately, and the coupling nobody intended.
+4.  **Write it.** Each claim with how it was established; what could not be established, named.
+5.  **Check it predicts.** Pick two recent changes from the history and see whether the map says where they landed and what they touched.
+6.  **Verdict.** The table.
+
+**Deliverables:**
+*   The map: entry points, components, boundaries, where state lives and who writes it, and the coupling nobody intended, each claim with how it was established.
+*   The counts behind it: imports in and out per module, commits per path, how many places construct the central objects.
+*   What could not be established statically (dynamic dispatch, reflection, plugins, configuration wiring), named.
+*   **A verdict table** with one row per claim in the map, and one for the prediction check. Each is `holds` (established by running, resolving or counting), `broken` (the code contradicts the layout or the docs) or `skipped` (could not be established), with the evidence or the reason.
+*   Last line, the denominator: `24 holds, 3 broken, 2 skipped of 29 items.`
 {% endraw %}

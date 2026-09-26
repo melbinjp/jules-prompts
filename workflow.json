@@ -111,7 +111,6 @@
       "done_when": "every claim the pull request makes is checked, and every new test has been seen to fail.",
       "branches": [
         "task_qa_an_agents_tests",
-        "task_prove_the_fix",
         "task_repair_a_green_pipeline"
       ],
       "required": true,

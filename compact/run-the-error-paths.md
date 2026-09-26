@@ -17,3 +17,19 @@ Find every place this project handles a failure, make that failure actually happ
 - A retry needs a cap, a reason, and idempotence.
 - Do not add a test that asserts the handler was called.
 - Report the denominator. Handlers found, executed, unreachable, wrong.
+
+## Steps
+
+1. Find every handler. Every catch, fallback, retry, default and exit code, with its file and line, and the count.
+2. Cause each failure. For real, with the input, the fault or the environment that triggers it; record what the caller sees.
+3. Judge each one. Does it keep the cause, tell the caller the truth, and fail in the safe direction? Is each retry capped, reasoned and safe to repeat?
+4. Fix the wrong ones. Each with a test that asserts what the caller sees, seen to fail before the fix.
+5. Verdict. The table, with the denominator.
+
+## Deliver
+
+- The list of every handler found, with its file and line.
+- For each: the failure caused and how, what the caller saw, and the direction it failed in.
+- The fixes, each with its test.
+- A verdict table with one row per handler.
+- Last line, the denominator: `31 holds, 4 broken, 3 skipped of 38 items.`

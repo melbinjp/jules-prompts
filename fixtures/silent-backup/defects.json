@@ -1,0 +1,48 @@
+{
+  "fixture": "silent-backup",
+  "skill": "automate-a-workflow",
+  "prompt_slug": "task_automate_a_workflow",
+  "description": "A nightly database backup automated into a script that masks pg_dump's failure behind a pipe, ignores the copy's result, deletes the last good backup first, logs 'backup done' regardless, and dropped the restore check.",
+  "defects": [
+    {
+      "id": "check-left-of-pipe",
+      "file": "scripts/backup.sh",
+      "tell": "pg_dump runs on the left of a pipe into gzip with no pipefail and no set -e, so its failure is lost and gzip writes an empty stream; three nights of 'password authentication failed' went unnoticed",
+      "must_mention": ["pg_dump", "pipefail"]
+    },
+    {
+      "id": "not-verified-by-effect",
+      "file": "scripts/backup.sh",
+      "tell": "the runbook checks the file is at least 50 MB and arrived with the same size; the script checks neither, and the files on the backup server are 20 bytes",
+      "must_mention": ["50 MB", "20 bytes"]
+    },
+    {
+      "id": "copy-failure-swallowed",
+      "file": "scripts/backup.sh",
+      "tell": "scp ... || true discards the copy's exit status, so a backup that never reached the vault is reported the same as one that did",
+      "must_mention": ["|| true", "scp"]
+    },
+    {
+      "id": "deletes-before-it-has-a-new-one",
+      "file": "scripts/backup.sh",
+      "tell": "rm -f appointments-*.sql.gz runs first, so an interrupted or failing run leaves no local backup at all; the runbook keeps 14 days and deletes only old ones",
+      "must_mention": ["rm -f", "14 days"]
+    },
+    {
+      "id": "log-says-nothing",
+      "file": "logs/backup.log",
+      "tell": "the log says 'backup done' after every failure; it names no file, size or destination, so a run that did nothing looks exactly like one that worked",
+      "must_mention": ["backup done"]
+    },
+    {
+      "id": "restore-check-dropped",
+      "file": "RUNBOOK.md",
+      "tell": "the weekly restore into the scratch database, the only step that proves a backup can be used, was left out of the automation and is not listed as something the script does not do",
+      "must_mention": ["restore", "scratch"]
+    }
+  ],
+  "control": {
+    "file": "cron.txt",
+    "tell": "the schedule is right: daily at 02:30, the quiet hour, as the manual backup ran, with output appended to the log. A report that faults the schedule is inventing."
+  }
+}

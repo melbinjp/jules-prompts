@@ -2,13 +2,13 @@
 name: verify-a-migration
 description: 'To find what a migration does at production row counts, on the production
   engine, and on the way back down, none of which a dev database can show you. Category:
-  Maintenance.'
+  Build.'
 license: MIT
 metadata:
   prompt_slug: task_verify_a_migration
   source: _prompts/task_verify_a_migration.md
   title: Verify a Database Migration Before It Meets Real Data
-  category: Maintenance
+  category: Build
 ---
 
 # Verify a Database Migration Before It Meets Real Data
@@ -35,7 +35,7 @@ Two more differences hide in the same gap. The dev database is often not the sam
 
 **Requirements & Constraints:**
 *   **Measure on the production engine and version, seeded to production row counts.** A migration verified on SQLite says nothing about Postgres, and one verified on an empty table says nothing at all. Generated filler rows are fine; the row count is what matters, not the values.
-*   **If you cannot obtain real row counts, stop and say so.** Report the tables whose size you could not determine and state that the timings below do not cover them. A guessed row count produces a confident number that is wrong, which is worse than the missing one.
+*   **If you cannot obtain real row counts, do not guess; say so.** Report the tables whose size you could not determine and state that the timings below do not cover them. A guessed row count produces a confident number that is wrong, which is worse than the missing one.
 *   **Run the rollback. Do not read it.** Capture a schema dump before the migration, run forward, run the reverse half, dump again, and diff the two dumps. They must be identical. Then run forward a second time and confirm it still succeeds.
 *   **Record the lock each statement takes and for how long.** Total runtime on its own does not answer the question. A migration that runs for nine minutes holding nothing is safe; one that runs for nine seconds holding an exclusive lock on the busiest table is an outage.
 *   **Do not touch production.** Every measurement here happens on a copy. If no copy can be created, say that, and report what remains unverified rather than substituting a reading of the code.
@@ -78,3 +78,5 @@ Two more differences hide in the same gap. The dev database is often not the sam
 *   For each added constraint, the number of rows in production-shaped data that would violate it.
 *   The safe deploy order, with the evidence: which of old-code-new-schema and new-code-old-schema actually worked.
 *   Whatever could not be measured, named explicitly, with the reason and what remains unknown because of it.
+*   **A verdict table** with one row per statement, per added constraint, and one each for the round trip and the deploy order. Each is `holds`, `broken` or `skipped`, with the measurement or the reason.
+*   Last line, the denominator: `10 holds, 1 broken, 2 skipped of 13 items.`

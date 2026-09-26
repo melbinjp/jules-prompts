@@ -7,14 +7,13 @@ excerpt_separator: ""
 {% raw %}---
 name: fix-a-bug-test-first
 description: 'To fix a reported bug in an order that proves the fix worked, by making
-  the test fail for the reported reason before any code changes. Category: Iterative
-  Development.'
+  the test fail for the reported reason before any code changes. Category: Build.'
 license: MIT
 metadata:
   prompt_slug: task_fix_a_bug_test_first
   source: _prompts/task_fix_a_bug_test_first.md
   title: Fix a Bug, Failing Test First
-  category: Iterative Development
+  category: Build
 ---
 
 # Fix a Bug, Failing Test First
@@ -41,7 +40,7 @@ This prompt takes a bug that is already reproducible. If the report is vague, sc
 *   **Read the failure message, and check it names the reported behaviour.** A test that fails with `ImportError`, `fixture not found`, or an assertion about the wrong field has not reproduced anything. Record the verbatim failure line.
 *   **Change the smallest thing that turns it green.** If the fix touches unrelated files, formatting, or a dependency version, split those out. A fix bundled with a refactor cannot be reverted when it turns out to be wrong.
 *   **Do not adjust the test after seeing the fix fail.** Moving the assertion to fit the code is how a fix gets certified by the thing it broke. If the test was wrong, say so and start again from the report.
-*   **The suite must be green apart from your test before you begin.** A pre-existing failure makes your red indistinguishable from the noise. If the suite is already red, report that and stop.
+*   **Know which tests are already red before you begin.** A pre-existing failure makes your red indistinguishable from the noise. If the suite is already red, report that first and name each failing test; then run your test on its own and read its failure, so its red cannot be confused with theirs.
 
 **Guiding Principles:**
 *   **Reproduce at the smallest scope you can, then go one smaller.** A failing end-to-end test proves a bug exists somewhere; a failing unit test proves where. Keep narrowing until the test names one behaviour.
@@ -78,4 +77,6 @@ This prompt takes a bug that is already reproducible. If the report is vague, sc
 *   The revert check: evidence the test goes red again when the fix is removed.
 *   Any sibling occurrence of the same defect found elsewhere, whether or not it was fixed here.
 *   Where the cause turned out not to be where the report pointed, a plain statement of where it actually was.
+*   **A verdict table** with one row per item: the suite green before starting, or its failing tests named; the test red for the reported reason; the test committed before the fix; the fix going red when reverted; the full suite after the fix; each sibling found. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `5 holds, 0 broken, 1 skipped of 6 items.`
 {% endraw %}

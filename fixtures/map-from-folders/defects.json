@@ -1,0 +1,42 @@
+{
+  "fixture": "map-from-folders",
+  "skill": "map-the-architecture",
+  "prompt_slug": "task_map_the_architecture",
+  "description": "An architecture map read off the folder names: layers that do not hold, a 'separate service' that is a thread, 'unused' code loaded by configuration, a table with two writers, and no claim saying how it was established.",
+  "defects": [
+    {
+      "id": "layers-do-not-hold",
+      "file": "src/services/pricing.py",
+      "tell": "the map says nothing in services imports from api; src/services/pricing.py imports pantry.api.schemas, and CO_CHANGE.md shows the two files change together in 33 of 41 commits",
+      "must_mention": ["pricing.py", "api.schemas"]
+    },
+    {
+      "id": "not-a-separate-service",
+      "file": "src/api/app.py",
+      "tell": "notifications is described as a separate service that can be deployed on its own; create_app calls start_worker, which runs it as a daemon thread inside the API process, so it fails, scales and deploys with the API",
+      "must_mention": ["start_worker", "thread"]
+    },
+    {
+      "id": "unused-is-loaded",
+      "file": "config/plugins.yaml",
+      "tell": "payments is called unused legacy to delete; config/plugins.yaml names pantry.payments.stripe_adapter and checkout.py loads it with importlib at import, so every order is charged through it; a static import search misses it",
+      "must_mention": ["plugins.yaml", "importlib"]
+    },
+    {
+      "id": "two-writers-one-table",
+      "file": "src/api/admin.py",
+      "tell": "the map says each table has one owner; the prices table is written by api/admin.py (set_price) and by services/pricing.py (reprice_offers), with no coordination between them",
+      "must_mention": ["prices", "admin.py"]
+    },
+    {
+      "id": "no-provenance",
+      "file": "ARCHITECTURE.md",
+      "tell": "not one claim says how it was established (an import resolved, a run, a count); each rests on a folder name, which is why the four above read as fact",
+      "must_mention": ["ARCHITECTURE.md", "established"]
+    }
+  ],
+  "control": {
+    "file": "ARCHITECTURE.md",
+    "tell": "the entry points section is right: pyproject.toml declares exactly pantry.api.app:create_app and pantry.cli:main. A report that faults the entry points is inventing."
+  }
+}

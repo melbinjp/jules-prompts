@@ -1,68 +1,29 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 36,
+  "count": 26,
   "procedures": [
     {
       "slug": "act-on-the-physical-world",
       "title": "Act on the Physical World, and Prove It Happened",
       "description": "To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.",
       "category": "Physical Systems",
-      "status": "core",
       "prompt": "_prompts/task_act_on_the_physical_world.md",
       "skill": "skills/act-on-the-physical-world/SKILL.md"
-    },
-    {
-      "slug": "analyze-and-improve-ui-ux",
-      "title": "Analyze and Improve UI/UX",
-      "description": "To review a web frontend's UI/UX against usability heuristics. For design work, use design-the-experience.",
-      "category": "Iterative Development",
-      "status": "legacy",
-      "prompt": "_prompts/task_analyze_and_improve_ui_ux.md",
-      "skill": "skills/analyze-and-improve-ui-ux/SKILL.md"
-    },
-    {
-      "slug": "audit-repo",
-      "title": "Audit Repository",
-      "description": "To conduct a comprehensive, evidence-based audit of a repository or live website.",
-      "category": "Initial Scoping",
-      "status": "core",
-      "prompt": "_prompts/task_audit_repo.md",
-      "skill": "skills/audit-repo/SKILL.md"
     },
     {
       "slug": "automate-a-workflow",
       "title": "Automate a Workflow That Can Report Its Own Failure",
       "description": "To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.",
-      "category": "Iterative Development",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_automate_a_workflow.md",
       "skill": "skills/automate-a-workflow/SKILL.md"
-    },
-    {
-      "slug": "build-api-frontend",
-      "title": "Build API-Driven Frontend",
-      "description": "To build a modern, functional frontend for an application based on its backend API.",
-      "category": "Initial Scoping",
-      "status": "legacy",
-      "prompt": "_prompts/task_build_api_frontend.md",
-      "skill": "skills/build-api-frontend/SKILL.md"
-    },
-    {
-      "slug": "build-from-plan",
-      "title": "Build from Plan",
-      "description": "To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system.",
-      "category": "Iterative Development",
-      "status": "legacy",
-      "prompt": "_prompts/task_build_from_plan.md",
-      "skill": "skills/build-from-plan/SKILL.md"
     },
     {
       "slug": "change-with-a-reason",
       "title": "Change a Project with a Reason",
       "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_change_with_a_reason.md",
       "skill": "skills/change-with-a-reason/SKILL.md"
     },
@@ -71,25 +32,14 @@
       "title": "Choose Between Options with Evidence",
       "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_choose_with_evidence.md",
       "skill": "skills/choose-with-evidence/SKILL.md"
-    },
-    {
-      "slug": "curate-repo",
-      "title": "Curate Repository",
-      "description": "To analyze an unknown repository, make safe, reversible improvements, and provide a clear report.",
-      "category": "Maintenance",
-      "status": "legacy",
-      "prompt": "_prompts/task_curate_repo.md",
-      "skill": "skills/curate-repo/SKILL.md"
     },
     {
       "slug": "design-the-experience",
       "title": "Design the Experience, with Evidence",
       "description": "To design what people and agents see, do and hear when they use a product, on a screen, a command line, an API, a voice or a device, as one design with the architecture. Every flow, state, word and look has a reason and is tested with real people or stand-ins labelled as such. Every action can be operated by a person, an agent or automation, and the result is measured, not admired.",
       "category": "Design",
-      "status": "core",
       "prompt": "_prompts/task_design_the_experience.md",
       "skill": "skills/design-the-experience/SKILL.md"
     },
@@ -97,62 +47,23 @@
       "slug": "fix-a-bug-test-first",
       "title": "Fix a Bug, Failing Test First",
       "description": "To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.",
-      "category": "Iterative Development",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_fix_a_bug_test_first.md",
       "skill": "skills/fix-a-bug-test-first/SKILL.md"
-    },
-    {
-      "slug": "fix-and-refine",
-      "title": "Fix and Refine",
-      "description": "To transform a prototype or demo-quality project into a production-grade application.",
-      "category": "Iterative Development",
-      "status": "legacy",
-      "prompt": "_prompts/task_fix_and_refine.md",
-      "skill": "skills/fix-and-refine/SKILL.md"
-    },
-    {
-      "slug": "generate-prompt-from-description",
-      "title": "Generate Prompt from Description",
-      "description": "To generate a new, high-quality prompt from a user's description.",
-      "category": "Meta",
-      "status": "core",
-      "prompt": "_prompts/task_generate_prompt_from_description.md",
-      "skill": "skills/generate-prompt-from-description/SKILL.md"
     },
     {
       "slug": "handle-an-incident",
       "title": "Handle an Incident, Restore First and Then Prevent It",
       "description": "To bring a live product back for the people it failed, then make the failure unable to recur. Stop the harm to data, restore by an action already tried, tell people and keep the evidence; then prove the cause with a failing test, fix it through the normal gates, put everyone right, and close the class of failure in the system.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_handle_an_incident.md",
       "skill": "skills/handle-an-incident/SKILL.md"
-    },
-    {
-      "slug": "harden-repo-initial",
-      "title": "Initial Repository Hardening",
-      "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository.",
-      "category": "Initial Scoping",
-      "status": "legacy",
-      "prompt": "_prompts/task_harden_repo_initial.md",
-      "skill": "skills/harden-repo-initial/SKILL.md"
-    },
-    {
-      "slug": "harden-repo-iterative",
-      "title": "Iterative Repository Hardening",
-      "description": "To perform ongoing, iterative improvements to a repository that has already been hardened.",
-      "category": "Iterative Development",
-      "status": "legacy",
-      "prompt": "_prompts/task_harden_repo_iterative.md",
-      "skill": "skills/harden-repo-iterative/SKILL.md"
     },
     {
       "slug": "isolate-tests-from-services",
       "title": "Isolate Tests from External Services",
       "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_isolate_tests_from_services.md",
       "skill": "skills/isolate-tests-from-services/SKILL.md"
     },
@@ -161,7 +72,6 @@
       "title": "Keep a Project Confidential, Offline First",
       "description": "To keep a private or proprietary project's code, data, designs and plans inside the places the owner chose, whether it is built fully offline with local agents and models or has to use the internet. Every channel that can carry the work out (hosting, sync, agents and model providers, registries, telemetry, crash reports, searches) is mapped, closed or controlled, and checked in a network log. The whole pipeline is proved to run with the network off.",
       "category": "Security",
-      "status": "core",
       "prompt": "_prompts/task_keep_it_confidential.md",
       "skill": "skills/keep-it-confidential/SKILL.md"
     },
@@ -170,7 +80,6 @@
       "title": "Keep a Project on Course and Improving",
       "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_keep_it_on_course.md",
       "skill": "skills/keep-it-on-course/SKILL.md"
     },
@@ -178,8 +87,7 @@
       "slug": "map-the-architecture",
       "title": "Map the Architecture",
       "description": "To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names.",
-      "category": "Initial Scoping",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_map_the_architecture.md",
       "skill": "skills/map-the-architecture/SKILL.md"
     },
@@ -187,26 +95,15 @@
       "slug": "prove-the-docs",
       "title": "Prove the Documentation Against the Code",
       "description": "To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Verify",
       "prompt": "_prompts/task_prove_the_docs.md",
       "skill": "skills/prove-the-docs/SKILL.md"
     },
     {
-      "slug": "prove-the-fix",
-      "title": "Prove the Fix by Making It Fail",
-      "description": "To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red.",
-      "category": "Maintenance",
-      "status": "core",
-      "prompt": "_prompts/task_prove_the_fix.md",
-      "skill": "skills/prove-the-fix/SKILL.md"
-    },
-    {
       "slug": "qa-an-agents-tests",
       "title": "QA the Tests an Agent Wrote",
-      "description": "To find the tests that pass because they were written from the implementation rather than from the requirement, and cannot fail.",
-      "category": "Maintenance",
-      "status": "core",
+      "description": "To find the tests that cannot fail, whether an agent wrote them from the implementation or they came with a fix, by breaking the behaviour or putting the defect back and watching each test go red for the stated reason.",
+      "category": "Verify",
       "prompt": "_prompts/task_qa_an_agents_tests.md",
       "skill": "skills/qa-an-agents-tests/SKILL.md"
     },
@@ -215,7 +112,6 @@
       "title": "Release a Product to Its People, and Hear Back",
       "description": "To take a product that meets its bar to the people it is for, and hear back. Every way in is walked from a clean device, listings and legal texts match the product, the release is staged and pauses itself, people are told where they already are, and someone answers. A quiet channel gets the next route, never a verdict on the idea.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_release_to_people.md",
       "skill": "skills/release-to-people/SKILL.md"
     },
@@ -223,8 +119,7 @@
       "slug": "repair-a-green-pipeline",
       "title": "Repair a Pipeline That Is Green Without Checking Anything",
       "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Verify",
       "prompt": "_prompts/task_repair_a_green_pipeline.md",
       "skill": "skills/repair-a-green-pipeline/SKILL.md"
     },
@@ -232,8 +127,7 @@
       "slug": "repair-setup-script",
       "title": "Repair the Environment Setup Script",
       "description": "To diagnose and repair the setup script so agent tasks stop failing before any code is written.",
-      "category": "Initial Scoping",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_repair_setup_script.md",
       "skill": "skills/repair-setup-script/SKILL.md"
     },
@@ -241,8 +135,7 @@
       "slug": "review-an-agent-pr",
       "title": "Review an Agent-Written Pull Request",
       "description": "To review a pull request an agent wrote, against the failure modes agents actually have.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Verify",
       "prompt": "_prompts/task_review_an_agent_pr.md",
       "skill": "skills/review-an-agent-pr/SKILL.md"
     },
@@ -251,7 +144,6 @@
       "title": "Run a Project Autonomously, from One Model and One Person",
       "description": "To take one language model and one person to a project that builds itself. The model builds its own agent harness and every tool it lacks, from a specification it can prove against a test. The person is asked everything only they can answer at the start, and development then runs without waiting. It is safe because of a sandbox, checkpoints and standing limits, and it is correct because nothing counts as done until its checks pass. Offline, online or both, unattended, supervised or by hand.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_run_autonomously.md",
       "skill": "skills/run-autonomously/SKILL.md"
     },
@@ -259,8 +151,7 @@
       "slug": "run-the-error-paths",
       "title": "Run the Error Paths",
       "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Verify",
       "prompt": "_prompts/task_run_the_error_paths.md",
       "skill": "skills/run-the-error-paths/SKILL.md"
     },
@@ -268,8 +159,7 @@
       "slug": "scope-a-vague-issue",
       "title": "Scope a Vague Issue",
       "description": "To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.",
-      "category": "Initial Scoping",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_scope_a_vague_issue.md",
       "skill": "skills/scope-a-vague-issue/SKILL.md"
     },
@@ -278,7 +168,6 @@
       "title": "Security Review of Agent-Written Code",
       "description": "To review a change an agent wrote for the security defects agents specifically introduce.",
       "category": "Security",
-      "status": "core",
       "prompt": "_prompts/task_security_review_agent_code.md",
       "skill": "skills/security-review-agent-code/SKILL.md"
     },
@@ -287,7 +176,6 @@
       "title": "Start a Project from an Idea",
       "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.",
       "category": "Lifecycle",
-      "status": "core",
       "prompt": "_prompts/task_start_from_an_idea.md",
       "skill": "skills/start-from-an-idea/SKILL.md"
     },
@@ -295,8 +183,7 @@
       "slug": "take-to-production",
       "title": "Take a Project to Production Quality",
       "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.",
-      "category": "End to End",
-      "status": "core",
+      "category": "Lifecycle",
       "prompt": "_prompts/task_take_to_production.md",
       "skill": "skills/take-to-production/SKILL.md"
     },
@@ -304,17 +191,15 @@
       "slug": "translate-the-docs",
       "title": "Translate the Docs Without Forking Them",
       "description": "To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_translate_the_docs.md",
       "skill": "skills/translate-the-docs/SKILL.md"
     },
     {
       "slug": "update-dependencies",
       "title": "Update Dependencies",
-      "description": "To update a project's dependencies to their latest compatible versions.",
-      "category": "Maintenance",
-      "status": "core",
+      "description": "To bring a project's dependencies, runtime and build tools up to date in small steps that each prove they changed what they say, so staying current never becomes a rewrite. Every major version's breaking changes are checked against the code, the lockfile is regenerated rather than edited, nothing new arrives unexamined, and every pin carries a reason and a date to revisit.",
+      "category": "Build",
       "prompt": "_prompts/task_update_dependencies.md",
       "skill": "skills/update-dependencies/SKILL.md"
     },
@@ -322,8 +207,7 @@
       "slug": "verify-a-migration",
       "title": "Verify a Database Migration Before It Meets Real Data",
       "description": "To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you.",
-      "category": "Maintenance",
-      "status": "core",
+      "category": "Build",
       "prompt": "_prompts/task_verify_a_migration.md",
       "skill": "skills/verify-a-migration/SKILL.md"
     }

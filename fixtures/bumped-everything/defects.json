@@ -1,0 +1,48 @@
+{
+  "fixture": "bumped-everything",
+  "skill": "update-dependencies",
+  "prompt_slug": "task_update_dependencies",
+  "description": "One commit that bumps sixty-three packages in package.json and not in the lockfile, so CI tested the old versions, while the new ones remove an API the code calls, pull in an AGPL library, and keep a vulnerable pin and an unused package.",
+  "defects": [
+    {
+      "id": "everything-at-once",
+      "file": "HISTORY.md",
+      "tell": "c7d19f2 moves 63 packages in one commit, majors included, so any failure cannot be traced to a package and the only undo is all of it",
+      "must_mention": ["c7d19f2", "63"]
+    },
+    {
+      "id": "lockfile-not-regenerated",
+      "file": "package-lock.json",
+      "tell": "package.json asks for express ^5.1.0 and date-fns ^3.6.0, but the committed package-lock.json still pins express 4.19.2 and date-fns 2.30.0; npm ci installs the lockfile, so 'all tests pass in CI' tested the old versions",
+      "must_mention": ["package-lock.json", "4.19.2"]
+    },
+    {
+      "id": "major-read-against-nothing",
+      "file": "src/server.js",
+      "tell": "Express 5 removes app.del; src/server.js registers DELETE /api/items/:id with app.del, and no test covers the route, so the update breaks deleting items the moment the lockfile catches up",
+      "must_mention": ["app.del", "express 5"]
+    },
+    {
+      "id": "unexplained-vulnerable-pin",
+      "file": "package.json",
+      "tell": "lodash is pinned exactly to 4.17.15 to get a test green, with no reason or revisit date in the repository; versions before 4.17.21 carry published advisories (CVE-2020-8203, CVE-2021-23337), and src/items.js merges request bodies with it",
+      "must_mention": ["lodash", "4.17.15"]
+    },
+    {
+      "id": "unused-updated",
+      "file": "package.json",
+      "tell": "moment is bumped to 2.30.1 but no file in src/ requires it (the code uses date-fns); it should have been removed, not updated",
+      "must_mention": ["moment"]
+    },
+    {
+      "id": "agpl-arrived",
+      "file": "PR.md",
+      "tell": "report-kit 4 pulls in pdf-weave 2.1.0 under AGPL-3.0-only, in a product distributed under a proprietary licence without its source; nothing examined what the update added",
+      "must_mention": ["pdf-weave", "AGPL"]
+    }
+  ],
+  "control": {
+    "file": ".github/workflows/ci.yml",
+    "tell": "the CI workflow is right: npm ci with no cache installs exactly what the lockfile names, on the Node version the project uses. A report that blames CI is inventing; the fault is the lockfile that was not regenerated."
+  }
+}

@@ -9,39 +9,11 @@
       "digest": "sha256:52b5e4097b4b9ead0f8a16ac0c86c5519c9e47aea97ef8cfeb044ef8d24631ec"
     },
     {
-      "name": "analyze-and-improve-ui-ux",
-      "type": "skill-md",
-      "description": "To review a web frontend's UI/UX against usability heuristics. For design work, use design-the-experience. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/analyze-and-improve-ui-ux/SKILL.md",
-      "digest": "sha256:5dfa9b44aad9756eed49c675f643816c8534805e318f8ed257c082d28011b31e"
-    },
-    {
-      "name": "audit-repo",
-      "type": "skill-md",
-      "description": "To conduct a comprehensive, evidence-based audit of a repository or live website. Category: Initial Scoping.",
-      "url": "/.well-known/agent-skills/audit-repo/SKILL.md",
-      "digest": "sha256:18605a3e79f0965e9474f961b4f55ab9bbb021648c2197a81d530e73fb3150d5"
-    },
-    {
       "name": "automate-a-workflow",
       "type": "skill-md",
-      "description": "To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand. Category: Iterative Development.",
+      "description": "To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand. Category: Build.",
       "url": "/.well-known/agent-skills/automate-a-workflow/SKILL.md",
-      "digest": "sha256:174af28aef6f670b3af5c61231b2e9437c918c6a5171808c16a56aace1b1cda2"
-    },
-    {
-      "name": "build-api-frontend",
-      "type": "skill-md",
-      "description": "To build a modern, functional frontend for an application based on its backend API. Category: Initial Scoping. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/build-api-frontend/SKILL.md",
-      "digest": "sha256:dbb3f055b11e3dafb9258e37e943ab712bfee016f935a116832a555bac831792"
-    },
-    {
-      "name": "build-from-plan",
-      "type": "skill-md",
-      "description": "To analyze a repository's blueprint/plan and current state, and iteratively implement the next logical steps to build a robust, production-grade system. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/build-from-plan/SKILL.md",
-      "digest": "sha256:942b38b88c66bedc55f855ed00eae85444316d8ca3621b0c74fd99beb0b5fa9d"
+      "digest": "sha256:3e0e540a812e01ae2c7058e13cb166032b86de7abb8c3a51eb26292ba6a64aeb"
     },
     {
       "name": "change-with-a-reason",
@@ -58,13 +30,6 @@
       "digest": "sha256:a9dad2947522d404e42c254fae85e895fdf6cd93da1462ae431b6eae46b6019b"
     },
     {
-      "name": "curate-repo",
-      "type": "skill-md",
-      "description": "To analyze an unknown repository, make safe, reversible improvements, and provide a clear report. Category: Maintenance. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/curate-repo/SKILL.md",
-      "digest": "sha256:756a1e617cb6a624dfe149475da7dd5d9d6d31093e6e580da0ff0f11c5b99b63"
-    },
-    {
       "name": "design-the-experience",
       "type": "skill-md",
       "description": "To design what people and agents see, do and hear when they use a product, on a screen, a command line, an API, a voice or a device, as one design with the architecture. Every flow, state, word and look has a reason and is tested with real people or stand-ins labelled as such. Every action can be operated by a person, an agent or automation, and the result is measured, not admired.",
@@ -74,23 +39,9 @@
     {
       "name": "fix-a-bug-test-first",
       "type": "skill-md",
-      "description": "To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes. Category: Iterative Development.",
+      "description": "To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes. Category: Build.",
       "url": "/.well-known/agent-skills/fix-a-bug-test-first/SKILL.md",
-      "digest": "sha256:1bfa6ac71910bfa202face1041bc2051c41e5991eacffebe5509407aaf30a4b9"
-    },
-    {
-      "name": "fix-and-refine",
-      "type": "skill-md",
-      "description": "To transform a prototype or demo-quality project into a production-grade application. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/fix-and-refine/SKILL.md",
-      "digest": "sha256:6e940b6c8bd986deec7d450ae999899de9a5aab07eb3912d596b3dd1c31d42c2"
-    },
-    {
-      "name": "generate-prompt-from-description",
-      "type": "skill-md",
-      "description": "To generate a new, high-quality prompt from a user's description. Category: Meta.",
-      "url": "/.well-known/agent-skills/generate-prompt-from-description/SKILL.md",
-      "digest": "sha256:f728d13c1bf36790f4c1672ed78e190980e9808c040f58f04765efa2353f91a7"
+      "digest": "sha256:0d023608297cf24fc141414a02acd65281ea6fb1905d8af5ceeb56a26bae71db"
     },
     {
       "name": "handle-an-incident",
@@ -100,25 +51,11 @@
       "digest": "sha256:7c9cfc04a98e0e2e9f64d5e4230d25130420b88fac0b90fd3278f1ca6a0950b2"
     },
     {
-      "name": "harden-repo-initial",
-      "type": "skill-md",
-      "description": "To perform a one-time, comprehensive hardening and baselining pass on a new or unmaintained repository. Category: Initial Scoping. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/harden-repo-initial/SKILL.md",
-      "digest": "sha256:178ad78554339c216add3bc9fb670ceaf300dab51575a5bfc48e0bdcb044795a"
-    },
-    {
-      "name": "harden-repo-iterative",
-      "type": "skill-md",
-      "description": "To perform ongoing, iterative improvements to a repository that has already been hardened. Category: Iterative Development. Legacy: general-purpose, kept for completeness.",
-      "url": "/.well-known/agent-skills/harden-repo-iterative/SKILL.md",
-      "digest": "sha256:eebf7d388feadc5fba5a12b4f38a843d699a7839272eb286d8a72d02195aaa92"
-    },
-    {
       "name": "isolate-tests-from-services",
       "type": "skill-md",
-      "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start. Category: Maintenance.",
+      "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start. Category: Build.",
       "url": "/.well-known/agent-skills/isolate-tests-from-services/SKILL.md",
-      "digest": "sha256:7ce9fa82cd3e96775a2f461826b7d848cb03b13d2bb6d366b57fb5dc2defd4a8"
+      "digest": "sha256:ad7dd7328f90034d24bc51c35f768dab16cf3851482038341021e74e2c678cac"
     },
     {
       "name": "keep-it-confidential",
@@ -137,30 +74,23 @@
     {
       "name": "map-the-architecture",
       "type": "skill-md",
-      "description": "To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names. Category: Initial Scoping.",
+      "description": "To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names. Category: Build.",
       "url": "/.well-known/agent-skills/map-the-architecture/SKILL.md",
-      "digest": "sha256:7ed349e4160dd53554e97ba86e4f9d0eade5ef291509c7165b0140802ae72155"
+      "digest": "sha256:a4757e0d2576383e4d88398b9cb68ed54fdd5851b02ee78480582ac6da6a8f8c"
     },
     {
       "name": "prove-the-docs",
       "type": "skill-md",
-      "description": "To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it. Category: Maintenance.",
+      "description": "To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it. Category: Verify.",
       "url": "/.well-known/agent-skills/prove-the-docs/SKILL.md",
-      "digest": "sha256:63bf149955c94b27826f345f23f10b5f2bcd35a68304276c9287505a27204123"
-    },
-    {
-      "name": "prove-the-fix",
-      "type": "skill-md",
-      "description": "To establish that a test added alongside a fix actually detects the defect, by putting the defect back and watching the test go red. Category: Maintenance.",
-      "url": "/.well-known/agent-skills/prove-the-fix/SKILL.md",
-      "digest": "sha256:ceac2f7ff6f9052693490d15901d44bc960a19cc987f5d88e6c90eda6b83040b"
+      "digest": "sha256:4429e3af8be7343193d8c4c40decb4cc0758dcba55f5aeb083f2d6ab708bbaaf"
     },
     {
       "name": "qa-an-agents-tests",
       "type": "skill-md",
-      "description": "To find the tests that pass because they were written from the implementation rather than from the requirement, and cannot fail. Category: Maintenance.",
+      "description": "To find the tests that cannot fail, whether an agent wrote them from the implementation or they came with a fix, by breaking the behaviour or putting the defect back and watching each test go red for the stated reason. Category: Verify.",
       "url": "/.well-known/agent-skills/qa-an-agents-tests/SKILL.md",
-      "digest": "sha256:c173a201fee981c11c13927c49525f4b4ff6f46b7e948588bdd26364852b3ece"
+      "digest": "sha256:389289f50e247e7d7d391f10e563c4149dfa25bdc43b88f5e14af0cd78e0dc27"
     },
     {
       "name": "release-to-people",
@@ -172,23 +102,23 @@
     {
       "name": "repair-a-green-pipeline",
       "type": "skill-md",
-      "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again. Category: Maintenance.",
+      "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again. Category: Verify.",
       "url": "/.well-known/agent-skills/repair-a-green-pipeline/SKILL.md",
-      "digest": "sha256:eea03cb9dd9f49280fe200c8f5b6abfd02ae4848ab171bb094901ed4482b1219"
+      "digest": "sha256:4436a5ea848f77aef31c3dcbc8ed7beb8211cedca534feb55f096a87031d0a6b"
     },
     {
       "name": "repair-setup-script",
       "type": "skill-md",
-      "description": "To diagnose and repair the setup script so agent tasks stop failing before any code is written. Category: Initial Scoping.",
+      "description": "To diagnose and repair the setup script so agent tasks stop failing before any code is written. Category: Build.",
       "url": "/.well-known/agent-skills/repair-setup-script/SKILL.md",
-      "digest": "sha256:04813475e93c32e3fe3a1a973abea60a1316324f9125b3f1bf3bd176e402aed4"
+      "digest": "sha256:c818f12bc2f80d53e3a8e7544fb7b69fd6f1df7b75ebc3c05ca61eba2ee5df94"
     },
     {
       "name": "review-an-agent-pr",
       "type": "skill-md",
-      "description": "To review a pull request an agent wrote, against the failure modes agents actually have. Category: Maintenance.",
+      "description": "To review a pull request an agent wrote, against the failure modes agents actually have. Category: Verify.",
       "url": "/.well-known/agent-skills/review-an-agent-pr/SKILL.md",
-      "digest": "sha256:05b671055f621c02aa10627bfaa53db42cc8454c321b307ba46978a083e75ea0"
+      "digest": "sha256:e404f947551f0d7aead1a91e11e47723aea3306b1aff6b151f7cd08c7d376e2d"
     },
     {
       "name": "run-autonomously",
@@ -200,23 +130,23 @@
     {
       "name": "run-the-error-paths",
       "type": "skill-md",
-      "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does. Category: Maintenance.",
+      "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does. Category: Verify.",
       "url": "/.well-known/agent-skills/run-the-error-paths/SKILL.md",
-      "digest": "sha256:4ab69cce2981a740bb76ea24e7162b4eead4ffc3f9b87d1b14064727e38a735c"
+      "digest": "sha256:3d0be33c12bd5fe8e3aec182bf69764df43350c8fa712b3f2774f11e798f6601"
     },
     {
       "name": "scope-a-vague-issue",
       "type": "skill-md",
-      "description": "To turn an underspecified bug report into a reproducible, testable task before any fix is attempted. Category: Initial Scoping.",
+      "description": "To turn an underspecified bug report into a reproducible, testable task before any fix is attempted. Category: Build.",
       "url": "/.well-known/agent-skills/scope-a-vague-issue/SKILL.md",
-      "digest": "sha256:7d4c00c8dfc6be9503f3475c1cefe0ca9a6a2a56adf4e5802b49823bda8dbfd9"
+      "digest": "sha256:a85300e56d5890ac44912ab34c95909430428c71dd9dd522a9ffefdcfa35c50d"
     },
     {
       "name": "security-review-agent-code",
       "type": "skill-md",
       "description": "To review a change an agent wrote for the security defects agents specifically introduce.",
       "url": "/.well-known/agent-skills/security-review-agent-code/SKILL.md",
-      "digest": "sha256:32dff1d252b4a252df9c6134cab35d042d85d147b2fd7f9e0c3761ed61e4b35a"
+      "digest": "sha256:ca0a83cf380ecee9b15e9b36897770c2ef5b9c558cef019d6b493a41f93634de"
     },
     {
       "name": "start-from-an-idea",
@@ -228,30 +158,30 @@
     {
       "name": "take-to-production",
       "type": "skill-md",
-      "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed. Category: End to End.",
+      "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/take-to-production/SKILL.md",
-      "digest": "sha256:c81a3c84d4cd07e9d15147ee0f0f5a9cf3370cfe12163d8d25d59f1acc7b3d2b"
+      "digest": "sha256:ba5b5efec39e8395f3c79f7d30d06d243a23ef3caa735c81570fefb40b9f93ba"
     },
     {
       "name": "translate-the-docs",
       "type": "skill-md",
-      "description": "To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation. Category: Maintenance.",
+      "description": "To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation. Category: Build.",
       "url": "/.well-known/agent-skills/translate-the-docs/SKILL.md",
-      "digest": "sha256:a9f801d0f4ca372691bf4012498b4e4157752f558d8516fc820feba68e02f88b"
+      "digest": "sha256:513973942473d738421d0f30c0496c8ef209d7c0c3bbfb8dec42ab43c73de757"
     },
     {
       "name": "update-dependencies",
       "type": "skill-md",
-      "description": "To update a project's dependencies to their latest compatible versions. Category: Maintenance.",
+      "description": "To bring a project's dependencies, runtime and build tools up to date in small steps that each prove they changed what they say, so staying current never becomes a rewrite. Every major version's breaking changes are checked against the code, the lockfile is regenerated rather than edited, nothing new arrives unexamined, and every pin carries a reason and a date to revisit.",
       "url": "/.well-known/agent-skills/update-dependencies/SKILL.md",
-      "digest": "sha256:359c23349a25abcdf625d8d07328a078f492b301baf0d2673f3209c1275c972a"
+      "digest": "sha256:199c977f9944dace109f0abb512d551aef47a970b238883420c7451a1d2717c8"
     },
     {
       "name": "verify-a-migration",
       "type": "skill-md",
-      "description": "To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you. Category: Maintenance.",
+      "description": "To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you. Category: Build.",
       "url": "/.well-known/agent-skills/verify-a-migration/SKILL.md",
-      "digest": "sha256:65231fc403c957df776ba341aff63d91e5901e8a04b6beb6b726619144d3dc71"
+      "digest": "sha256:63545778abb80455032730f5fde7e27e866a6c53362c7eff8956a2ebd9a0ed55"
     }
   ]
 }

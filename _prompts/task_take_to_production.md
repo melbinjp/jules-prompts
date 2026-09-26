@@ -2,7 +2,7 @@
 layout: skill
 title: Take a Project to Production Quality
 description: To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.
-category: End to End
+category: Lifecycle
 type: Task
 featured: 5
 ---
@@ -97,7 +97,7 @@ When the project acts on the physical world (hardware, devices, instruments, veh
 *   **Turn budgets into checks that fail.** Whichever budgets the bar names are asserted in CI and fail the build when exceeded. A budget measured once in a report is a snapshot, not a budget.
 *   **Hold a complexity budget.** Every dependency, service, build step, abstraction layer and document must name what breaks without it. Prefer what the platform already provides. Remove what does not earn its place, and count what you removed. Do not add a container, a framework, a state library, a monorepo tool or a runbook because production projects have them. Add one when the bar cannot hold without it, and say which item it holds.
 *   **Make it operable.** The running product can report its version. There is a changelog a person can read. There are diagnostics a person can copy into a bug report with no developer present, containing nothing private. An update cannot strand anyone on a broken version or lose their data in a migration. Rolling back is one action. The repository holds only source: no build output, no dependency folders, no secrets, no links into somebody's machine.
-*   **Prove each fix can fail.** A test added for a fix goes red when the fix is taken out. A CI check goes red on the defect it exists for. The methods are `fix-a-bug-test-first`, `prove-the-fix` and `repair-a-green-pipeline`.
+*   **Prove each fix can fail.** A test added for a fix goes red when the fix is taken out. A CI check goes red on the defect it exists for. The methods are `fix-a-bug-test-first`, `qa-an-agents-tests` and `repair-a-green-pipeline`.
 *   **Do not claim what you did not check.** Every item in the bar ends as `holds`, `broken` or `skipped`, with evidence or a reason.
 
 **Guiding Principles:**

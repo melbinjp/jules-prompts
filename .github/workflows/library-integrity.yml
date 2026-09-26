@@ -1,8 +1,7 @@
 name: Library integrity
 
-# The prompt set, PROMPTS_GUIDE.md and workflow.json are three views of one library, and the
-# README asks for them to stay aligned. They had already drifted once. This makes the rule
-# checkable instead of remembered.
+# The prompt set, workflow.json, the generated skills and the fixtures are views of one library.
+# They had already drifted once. This makes the rule checkable instead of remembered.
 #
 # Deliberately has no `continue-on-error` and no step that swallows an exit code: a check that
 # cannot fail is indistinguishable from one that was never run.

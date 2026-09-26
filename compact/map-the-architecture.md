@@ -17,3 +17,20 @@ Produce a description of this system's real structure: its entry points, what ca
 - Say how you know, per claim.
 - Do not draw a diagram the code does not support.
 - Report what you could not establish.
+
+## Steps
+
+1. Entry points. Every way the system starts or is called, found by running or resolving, not by guessing.
+2. Graphs. The import graph from the imports, the data each component reads and writes, and co-change from the history.
+3. Boundaries. The parts that fail separately, and the coupling nobody intended.
+4. Write it. Each claim with how it was established; what could not be established, named.
+5. Check it predicts. Pick two recent changes from the history and see whether the map says where they landed and what they touched.
+6. Verdict. The table.
+
+## Deliver
+
+- The map: entry points, components, boundaries, where state lives and who writes it, and the coupling nobody intended, each claim with how it was established.
+- The counts behind it: imports in and out per module, commits per path, how many places construct the central objects.
+- What could not be established statically (dynamic dispatch, reflection, plugins, configuration wiring), named.
+- A verdict table with one row per claim in the map, and one for the prediction check.
+- Last line, the denominator: `24 holds, 3 broken, 2 skipped of 29 items.`

@@ -1,13 +1,14 @@
 ---
 name: qa-an-agents-tests
-description: 'To find the tests that pass because they were written from the implementation
-  rather than from the requirement, and cannot fail. Category: Maintenance.'
+description: 'To find the tests that cannot fail, whether an agent wrote them from
+  the implementation or they came with a fix, by breaking the behaviour or putting
+  the defect back and watching each test go red for the stated reason. Category: Verify.'
 license: MIT
 metadata:
   prompt_slug: task_qa_an_agents_tests
   source: _prompts/task_qa_an_agents_tests.md
   title: QA the Tests an Agent Wrote
-  category: Maintenance
+  category: Verify
 ---
 
 # QA the Tests an Agent Wrote
@@ -15,7 +16,7 @@ metadata:
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
-Audit a test suite an agent wrote, and find the tests that cannot fail. For every test added or changed by agent work, prove it fails when the behaviour it names is broken. Fix or delete the ones that do not, and report the count.
+Audit a test suite an agent wrote, or the test that came with a fix, and find the tests that cannot fail. For every test added or changed, prove it fails when the behaviour it names is broken, or when the defect it was written for is put back. Fix or delete the ones that do not, and report the count.
 
 **Context:**
 An agent asked to add tests will add tests, and they will pass. That is the whole problem. A test written while looking at the implementation asserts what the code *does*, and a test that asserts what the code does can never catch the code doing the wrong thing. It goes green on the first run and stays green through every future defect in the thing it claims to cover.
@@ -31,6 +32,7 @@ The tells are consistent and mechanical: a test that mocks the unit under test; 
 
 **Requirements & Constraints:**
 *   **Prove each test can fail. Do not read it and decide.** Break the behaviour on purpose, run the test, and record whether it went red. A test nobody has seen fail is a claim, not a check.
+*   **Red for the stated reason, one break at a time.** Read the failure: the test must fail on its assertion about the behaviour, not on an import error, a missing fixture or a collection error, which tell you nothing. Break one thing at a time, or you cannot tell which test caught what. For a test that came with a fix, the break is the original defect put back as precisely as you can (an inverted condition, a removed guard, the old off-by-one), never the function deleted. A claimed fix with no test is a finding on its own.
 *   **Revert every deliberate break.** Mutate, observe, restore, and verify the suite is green again before moving on. Confirm with `git diff` that the tree is clean of your mutations at the end.
 *   **A test that cannot fail is either fixed or deleted, never left.** If you cannot make it meaningful, delete it and say so. Leaving it is choosing to keep a false signal.
 *   **Do not raise coverage.** This task lowers it when a useless test is removed, and that is the correct direction. Report the change; do not compensate for it.
@@ -70,3 +72,5 @@ The tells are consistent and mechanical: a test that mocks the unit under test; 
 *   The before and after collected-test counts and the coverage change, with the direction stated rather than explained away.
 *   Any defect found because a test became meaningful and then failed, reported and left failing.
 *   A note of every skip added by agent work, with its stated reason and whether that reason still holds.
+*   **A verdict table** with one row per test examined. Each is `holds` (went red, for the stated reason, when its behaviour was broken or its defect put back), `broken` (stayed green, then fixed or deleted) or `skipped` (could not be broken without rewriting the code, with what was tried).
+*   Last line, the denominator: `18 holds, 5 broken, 1 skipped of 24 tests.`

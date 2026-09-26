@@ -2,7 +2,7 @@
 layout: skill
 title: Repair a Pipeline That Is Green Without Checking Anything
 description: To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.
-category: Maintenance
+category: Verify
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -72,3 +72,5 @@ The common shape is that **absence looks exactly like success.** The run is gree
 *   The coverage numbers each step now prints, and the reconciliation against what exists in the repository.
 *   A separate list of checks that are missing entirely, proposed and not added, so the two kinds of gap are not confused.
 *   Any step that could not be made to fail, named, with what was tried.
+*   **A verdict table** with one row per step. Each is `holds` (went red on the defect it exists for), `broken` (stayed green, before the repair or after it) or `skipped` (could not be made to fail, with what was tried).
+*   Last line, the denominator: `7 holds, 2 broken, 1 skipped of 10 steps.`

@@ -31,3 +31,5 @@ Review a change written by an agent for security defects, and report each with t
 - A table of new dependencies: name, version, resolved source, and the import it satisfies.
 - Every credential-shaped string found, and whether it is live and whether it is in the history.
 - An explicit list of what you did not examine and why.
+- A verdict table with one row per entry point, per check the change introduced, and per new dependency.
+- Last line, the denominator: `14 holds, 3 broken, 2 skipped of 19 items.`

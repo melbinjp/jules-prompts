@@ -1,58 +1,46 @@
 ---
 layout: skill
-title: Task Prompt Template
-description: The master template used to create and standardize all other prompts. It is not intended for direct use but serves as a 'golden copy' for prompt engineering.
+title: Skill Template
+description: The shape every skill in this library follows, for anyone writing a new one. It is not a skill to load. Copy it, fill every part from the failures agents actually have on the task, and add a fixture that shows the skill catching them.
 category: Meta
 type: Task
 ---
-**Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
+**Role:** You are an agent acting as `<THE_ROLE>`: the one who owns this job and answers for its result. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
 **Objective:**
-[Clearly and concisely state the goal of the task. What is the desired outcome? E.g., "Implement a new REST API endpoint for user profiles."]
+One sentence on the outcome in the world, then the three to six things the work delivers, each one checkable:
+
+- `<WHAT_IS_TRUE_WHEN_IT_IS_DONE>`;
+- ...
+
+Deliver the changes, and a verdict table.
 
 **Context:**
-*   **Project Goals / Business Objectives:** [Optional: Describe the business goals this task is aligned with.]
-*   **User Persona / Target Audience:** [Optional: Describe the user for whom this feature is being built.]
-*   **Key Files & Folders:** [List any key files, directories, or documentation (e.g., `README.md`, `AGENTS.md`) that are critical to the task.]
-*   **Key Technologies & Frameworks:** [List the primary technologies, frameworks, and libraries used in the project. E.g., "React, Node.js, Express, Jest, Webpack."]
-*   **Important URLs & Documentation:** [List any relevant URLs, such as a link to a live staging environment, API documentation, or design mockups.]
+*   **The one input only the person can give (optional):** `<THE_INPUT>`. If this is still a placeholder, say where to find it instead (the ledger, the repository, the logs) and how to proceed without it.
+
+What an agent does when asked for this, and why it looks like progress. Then the failures, the same across software and hardware, each with a bold name and one concrete case: a file, a number, a command. Write them from what agents have actually done, not from what could go wrong in principle; each becomes a planted defect in the fixture.
+
+**The first failure.** A concrete case.
+
+**The second failure.** A concrete case.
+
+*   **Key Files & Folders:**
+    *   Where the evidence for this task lives, and what each is read for.
 
 **Requirements & Constraints:**
-*   **Functional Requirements:** [List specific, non-negotiable functional requirements. E.g., "The endpoint must use the standard authentication middleware."]
-*   **Non-Functional Requirements:** [List non-functional requirements like performance, security, accessibility. E.g., "The page load time must be under 2 seconds.", "All new code must have 100% unit test coverage."]
-*   **Technical Constraints:** [List any constraints or things to avoid. E.g., "Do not introduce any new dependencies without prior approval.", "Do not alter the existing database schema."]
-
-**Success Criteria / Definition of Done:**
-*   [Provide a clear, verifiable checklist for when the task is considered complete. E.g., "All new code is covered by unit tests.", "The new feature is accessible and meets WCAG 2.1 AA standards.", "The application builds successfully without any new warnings."]
+*   **Each rule starts with its lead in bold, as an instruction.** Then how to meet it, and how to tell that it was met. A rule that cannot be checked is advice; make it checkable or leave it out.
+*   **Name the other skills a step relies on,** by name in backticks (`change-with-a-reason`), rather than repeating their methods.
+*   **Say how a blocked route gets another route.** No skill concludes that an idea cannot be done or that a project should end; a constraint gets routes around it.
+*   **Do not claim what you did not check.** Every item ends as `holds`, `broken` or `skipped`, with evidence or a reason.
 
 **Guiding Principles:**
-*   **Deduce Intent First:** Before writing any code, thoroughly analyze the repository to understand what the project is *supposed* to do. The goal is to fulfill the original vision, not just patch bugs.
-*   **Test-Driven Development:** For any logic you fix or write, first write a failing test that captures the requirement, then write the code to make the test pass. Aim for high test coverage.
-*   **Clarity is Paramount:** Refactor code to be self-documenting. Use clear variable names, break down complex functions, and ensure a logical, consistent code structure.
-*   **Holistic Analysis:** Go beyond the immediate task. Analyze the surrounding code, architecture, and potential future use cases to deliver a solution that is robust, scalable, and well-integrated.
-*   **Proactive Improvement:** Actively look for opportunities to improve the codebase, even if they are not explicitly requested. This includes refactoring, improving performance, adding tests, or enhancing documentation.
+*   **Three to six short principles,** each a sentence that settles a case the rules do not cover.
 
 **Execution Flow:**
-1.  **Explore & Plan:**
-    *   Thoroughly investigate the codebase to understand the context.
-    *   Formulate a detailed, step-by-step plan to achieve the objective. Your plan must include a step for running tests to verify your changes.
-    *   Write the plan. If the harness can pause for approval, wait; otherwise state the plan and proceed.
-
-2.  **Execute & Verify:**
-    *   Execute the plan step-by-step.
-    *   After each modification, **verify** your changes using tools like `read_file`, `grep`, or by running parts of the test suite.
-    *   Mark steps complete only after verification. If you deviate from the plan, provide a clear reason.
-
-3.  **Test & Review:**
-    *   After implementing all changes, run all relevant tests (unit, integration, etc.) to ensure correctness and prevent regressions. Debug any failures.
-    *   Once all tests pass, request a code review through the harness if it has one; otherwise include the review in the deliverable.
-
-4.  **Record Memory and Submit:**
-    *   Address any feedback from the code review.
-    *   Write anything that should persist into `AGENTS.md` or the session notes.
-    *   Once the work is complete and verified, open a pull request (or the harness equivalent) with a title, a summary of what was verified, and a link to the original task.
+1.  **The first step.** What is done, in order.
+2.  **Verdict.** Everything again from cold, and the table.
 
 **Deliverables:**
-*   [List the expected artifacts. E.g., "A new file `src/api/user_profile.js` with the new endpoint.", "Updated unit tests in `src/api/user_profile.test.js`."]
-*   Updated documentation (e.g., READMEs, inline comments) for any new or modified code.
-*   A pull request with a clear title, a summary of the changes, and a link to the original task.
+*   What the work leaves in the repository.
+*   **A verdict table** with one row per item the Objective promises. Each is `holds`, `broken` or `skipped`, with the evidence or the reason.
+*   Last line, the denominator: `9 holds, 1 broken, 1 skipped of 11 items.`

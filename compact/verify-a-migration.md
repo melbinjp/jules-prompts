@@ -11,7 +11,7 @@ Take a pending database migration and establish what it will actually do to prod
 ## Rules
 
 - Measure on the production engine and version, seeded to production row counts.
-- If you cannot obtain real row counts, stop and say so.
+- If you cannot obtain real row counts, do not guess; say so.
 - Run the rollback. Do not read it.
 - Record the lock each statement takes and for how long.
 - Do not touch production. Every measurement here happens on a copy.
@@ -31,3 +31,5 @@ Take a pending database migration and establish what it will actually do to prod
 - For each added constraint, the number of rows in production-shaped data that would violate it.
 - The safe deploy order, with the evidence: which of old-code-new-schema and new-code-old-schema actually worked.
 - Whatever could not be measured, named explicitly, with the reason and what remains unknown because of it.
+- A verdict table with one row per statement, per added constraint, and one each for the round trip and the deploy order.
+- Last line, the denominator: `10 holds, 1 broken, 2 skipped of 13 items.`

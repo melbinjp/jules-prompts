@@ -1,0 +1,48 @@
+{
+  "fixture": "translated-once",
+  "skill": "translate-the-docs",
+  "prompt_slug": "task_translate_the_docs",
+  "description": "A Spanish translation made once, with no record of its source, no staleness check, translated configuration keys, a link and an anchor that break from where the files sit, and a page half-translated without saying so.",
+  "defects": [
+    {
+      "id": "no-source-revision",
+      "file": "docs/es/install.md",
+      "tell": "no translated file records the source revision it was made from (e3a90f2), so nobody can tell which pages are behind",
+      "must_mention": ["e3a90f2", "source revision"]
+    },
+    {
+      "id": "stale-with-no-check",
+      "file": "docs/es/install.md",
+      "tell": "the English moved on twice (Python 3.11, and --port became --listen in v2.0); the Spanish still says Python 3.9 and tidal serve --port 8080, which fails on v2, and there is no staleness check to notice",
+      "must_mention": ["--listen", "3.11"]
+    },
+    {
+      "id": "machine-text-translated",
+      "file": "docs/es/configuration.md",
+      "tell": "the configuration keys were translated (puerto, raiz); Tidal reads port and root, so a Spanish reader's tidal.yaml is silently ignored",
+      "must_mention": ["puerto", "port"]
+    },
+    {
+      "id": "image-path-broken",
+      "file": "docs/es/index.md",
+      "tell": "the diagram is linked as images/diagram.png, which from docs/es/ resolves to docs/es/images/, which does not exist; the English uses ../images/diagram.png",
+      "must_mention": ["images/diagram.png", "../images"]
+    },
+    {
+      "id": "anchor-broken",
+      "file": "docs/es/index.md",
+      "tell": "index.md links to install.md#installation, but the Spanish heading is Instalación, so the anchor no longer exists",
+      "must_mention": ["#installation", "Instalación"]
+    },
+    {
+      "id": "half-translated",
+      "file": "docs/es/configuration.md",
+      "tell": "configuration.md is translated down to its keys, then the TLS and Logs sections continue in English with no note, so the page reads as finished and is not",
+      "must_mention": ["TLS", "English"]
+    }
+  ],
+  "control": {
+    "file": "docs/es/faq.md",
+    "tell": "the FAQ is deliberately left in English with a note in Spanish saying why (it changes weekly). A report that faults it is inventing."
+  }
+}

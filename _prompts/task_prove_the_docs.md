@@ -2,7 +2,7 @@
 layout: skill
 title: Prove the Documentation Against the Code
 description: To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.
-category: Maintenance
+category: Verify
 type: Task
 ---
 **Role:** You are a coding agent. Explore the codebase, plan, execute, and verify. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
@@ -67,3 +67,5 @@ The tells are mechanical: a documented flag that no longer appears in the argume
 *   A transcript of the quickstart run from a clean environment, including every step you had to take that the document does not mention.
 *   Any place where the code appears to be wrong rather than the document, reported as a defect and left unfixed unless it was in scope.
 *   The list of claims that could not be checked as written, each with the reason and a suggestion for making it checkable.
+*   **The verdicts,** in the words every skill here uses: each claim `holds` (verified), `broken` (false) or `skipped` (could not be checked as written), with the evidence or the reason.
+*   Last line, the denominator: `41 holds, 6 broken, 3 skipped of 50 claims.`

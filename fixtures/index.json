@@ -96,6 +96,41 @@
       "name": "restored-last",
       "skill": "handle-an-incident",
       "planted": 8
+    },
+    {
+      "name": "fixed-before-tested",
+      "skill": "fix-a-bug-test-first",
+      "planted": 6
+    },
+    {
+      "name": "bumped-everything",
+      "skill": "update-dependencies",
+      "planted": 6
+    },
+    {
+      "name": "migrated-on-empty",
+      "skill": "verify-a-migration",
+      "planted": 5
+    },
+    {
+      "name": "skipped-to-green",
+      "skill": "isolate-tests-from-services",
+      "planted": 5
+    },
+    {
+      "name": "map-from-folders",
+      "skill": "map-the-architecture",
+      "planted": 5
+    },
+    {
+      "name": "translated-once",
+      "skill": "translate-the-docs",
+      "planted": 6
+    },
+    {
+      "name": "silent-backup",
+      "skill": "automate-a-workflow",
+      "planted": 6
     }
   ]
 }

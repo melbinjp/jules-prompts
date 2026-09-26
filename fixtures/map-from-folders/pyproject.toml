@@ -1,0 +1,9 @@
+[project]
+name = "pantry"
+version = "5.8.0"
+
+[project.scripts]
+pantry-admin = "pantry.cli:main"
+
+[project.entry-points."pantry.wsgi"]
+api = "pantry.api.app:create_app"
