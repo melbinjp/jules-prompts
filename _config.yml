@@ -61,6 +61,10 @@ exclude:
   - harness/ledger-example
   # Short forms of the skills, for local models; read from a clone, not the site.
   - compact
+  # The conductor under trial and its migration and trial records: read in the repository
+  # until the trials have been reviewed; nothing here is published before that.
+  - conductor
+  - docs
   - .jekyll-cache
   - Gemfile
   - Gemfile.lock
