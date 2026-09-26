@@ -1,7 +1,7 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 32,
+  "count": 33,
   "procedures": [
     {
       "slug": "act-on-the-physical-world",
@@ -218,6 +218,15 @@
       "status": "core",
       "prompt": "_prompts/task_review_an_agent_pr.md",
       "skill": "skills/review-an-agent-pr/SKILL.md"
+    },
+    {
+      "slug": "run-autonomously",
+      "title": "Run a Project Autonomously, from One Model and One Person",
+      "description": "To take one language model and one person to a project that builds itself. The model builds its own agent harness and every tool it lacks, from a specification it can prove against a test. The person is asked everything only they can answer at the start, and development then runs without waiting. It is safe because of a sandbox, checkpoints and standing limits, and it is correct because nothing counts as done until its checks pass. Offline, online or both, unattended, supervised or by hand.",
+      "category": "Lifecycle",
+      "status": "core",
+      "prompt": "_prompts/task_run_autonomously.md",
+      "skill": "skills/run-autonomously/SKILL.md"
     },
     {
       "slug": "run-the-error-paths",

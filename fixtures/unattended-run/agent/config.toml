@@ -1,0 +1,14 @@
+# The harness the model built for itself on 2026-09-14.
+
+[model]
+endpoint = "http://127.0.0.1:8080/v1"
+context_tokens = 32768
+
+[context]
+# Keep the whole conversation, so the model remembers everything it has done.
+mode = "conversation"
+
+[run]
+workdir = "/home/sam"
+max_steps = 150
+checkpoint = false

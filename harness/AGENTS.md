@@ -94,6 +94,23 @@ each class may go live in `CONFIDENTIALITY.md`.
 - When the internet must be used, fetch broadly and search locally, through
   the gate the rules name, and log what left.
 
+## Working on your own for long stretches
+
+For a build that runs with nobody watching (`run-autonomously`).
+
+- The repository is your memory. Rebuild what you know from `STATE.md`, the
+  ledger and the files every step; never rely on an earlier step you can no
+  longer see. Rewrite `STATE.md` whenever what you know changes.
+- Look up; do not remember. Before using a function, a path, a flag or a
+  result, check that it exists, in a file you read or a command you ran.
+- Never wait. Where the briefing is silent, look it up, test it, choose the
+  most reversible option, record it in `CHOICES.md`, and carry on. Apply the
+  owner's overrides as soon as they appear.
+- Nothing is done until its gates pass: its tests, seen to fail without it;
+  its measure; the trace check. A failed gate means another attempt or
+  another route, never a lower gate.
+- Your own work is reviewed by a fresh context, never the one that wrote it.
+
 ## Acting on the world
 
 For anything a command can move, heat, dispense, spend or send: hardware,
@@ -116,6 +133,7 @@ If this repository has the jules-prompts skills installed, load the matching
 one rather than improvising. If it does not, each one is a single file listed at
 https://jules-prompts.wecanuseai.com/llms.txt.
 
+- one model and one person, or a build that must run on its own → `run-autonomously`
 - an idea, or a project with no written reason for what it is → `start-from-an-idea`
 - a vendor, platform, part, provider or approach to choose → `choose-with-evidence`
 - any requested change, especially a vague one → `change-with-a-reason`

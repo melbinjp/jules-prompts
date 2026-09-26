@@ -48,14 +48,14 @@
       "type": "skill-md",
       "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/change-with-a-reason/SKILL.md",
-      "digest": "sha256:1ed99614c1f7f41f837bd17bae77290c585c982611dbc8f252aa43c4ca071121"
+      "digest": "sha256:280ac4f4a1279dfc7c74a50068827a297e635e01035dabbd7d97f21940e7d5a0"
     },
     {
       "name": "choose-with-evidence",
       "type": "skill-md",
       "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/choose-with-evidence/SKILL.md",
-      "digest": "sha256:77a1468436cd4ba720e07279e75c8d46ec9519fb3c930224ffe4ca8f8f90ce89"
+      "digest": "sha256:a9dad2947522d404e42c254fae85e895fdf6cd93da1462ae431b6eae46b6019b"
     },
     {
       "name": "curate-repo",
@@ -118,7 +118,7 @@
       "type": "skill-md",
       "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/keep-it-on-course/SKILL.md",
-      "digest": "sha256:b6d6e7335b381cb1883db9eebfaf24f9afbf8a396d31afc92ffab90dd69b4fc1"
+      "digest": "sha256:2982b2b2b69710fda8a8997462671aad8d42b4470cf8070926a8d2cc1d03f854"
     },
     {
       "name": "map-the-architecture",
@@ -170,6 +170,13 @@
       "digest": "sha256:05b671055f621c02aa10627bfaa53db42cc8454c321b307ba46978a083e75ea0"
     },
     {
+      "name": "run-autonomously",
+      "type": "skill-md",
+      "description": "To take one language model and one person to a project that builds itself. The model builds its own agent harness and every tool it lacks, from a specification it can prove against a test. The person is asked everything only they can answer at the start, and development then runs without waiting. It is safe because of a sandbox, checkpoints and standing limits, and it is correct because nothing counts as done until its checks pass. Offline, online or both, unattended, supervised or by hand. Category: Lifecycle.",
+      "url": "/.well-known/agent-skills/run-autonomously/SKILL.md",
+      "digest": "sha256:8d555ce095104d19b1b08c6376258a33c5dd8b03fe5ac681e1a00be78f741683"
+    },
+    {
       "name": "run-the-error-paths",
       "type": "skill-md",
       "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does. Category: Maintenance.",
@@ -195,7 +202,7 @@
       "type": "skill-md",
       "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason. Category: Lifecycle.",
       "url": "/.well-known/agent-skills/start-from-an-idea/SKILL.md",
-      "digest": "sha256:9e58dc479875dde2acc8d8646d06eefdd693639554cbcf351acc37646fd27d1c"
+      "digest": "sha256:cf0800b30184aef93c7dc81febf504ac6d978c3d3dd2300614f9106b3bd0d348"
     },
     {
       "name": "take-to-production",

@@ -76,6 +76,11 @@
       "name": "private-by-accident",
       "skill": "keep-it-confidential",
       "planted": 7
+    },
+    {
+      "name": "unattended-run",
+      "skill": "run-autonomously",
+      "planted": 8
     }
   ]
 }

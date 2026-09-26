@@ -1,10 +1,23 @@
 {
   "version": "3.1",
   "title": "From an Idea to a Working Product, and Always Improving",
-  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: found it on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. Start at the first step for an idea, and at the second for a project that already exists. Each step names when it is done, and the other skills it calls on.",
+  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. With one model and one person, start at the first step; with an idea and a working agent, at the second; with a project that already exists, at the third. Each step names when it is done, and the other skills it calls on.",
   "steps": [
     {
       "order": 1,
+      "prompt_slug": "task_run_autonomously",
+      "title": "Set up the model and the person",
+      "description": "Turn one model into the agent that builds the project: it builds its own harness and tools if it has none, and proves them. Ask the person everything only they can answer, at the start, and set the standing limits. Then put the sandbox, the checkpoints and the gates in place, so development runs without waiting and nothing is called done until it passes.",
+      "done_when": "the harness passes harness/conformance.py, the briefing is answered with its standing limits, and the sandbox, checkpoints and gates are in place.",
+      "branches": [
+        "task_keep_it_confidential",
+        "task_choose_with_evidence"
+      ],
+      "required": true,
+      "repeatable": false
+    },
+    {
+      "order": 2,
       "prompt_slug": "task_start_from_an_idea",
       "title": "Start from the idea",
       "description": "Work out what it takes to make the idea happen and how it is paid for. Make the few decisions that are costly to reverse with verified evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.",
@@ -19,7 +32,7 @@
       "repeatable": false
     },
     {
-      "order": 2,
+      "order": 3,
       "prompt_slug": "task_repair_setup_script",
       "title": "Make it run from cold",
       "description": "Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.",
@@ -31,7 +44,7 @@
       "repeatable": false
     },
     {
-      "order": 3,
+      "order": 4,
       "prompt_slug": "task_choose_with_evidence",
       "title": "Choose with evidence, whenever a choice matters",
       "description": "Compare real options for each consequential choice, including building it and combining several. Use criteria from the goal, back the decision with at least two pieces of evidence (one verified), redo every number, and keep a way out.",
@@ -41,7 +54,7 @@
       "repeatable": true
     },
     {
-      "order": 4,
+      "order": 5,
       "prompt_slug": "task_change_with_a_reason",
       "title": "Build in changes that each have a reason",
       "description": "Every milestone and every request, however vaguely worded, is translated into a measure, verified before and after, built through every layer it touches, and traced to the goal, with nothing left behind.",
@@ -57,7 +70,7 @@
       "repeatable": true
     },
     {
-      "order": 5,
+      "order": 6,
       "prompt_slug": "task_take_to_production",
       "title": "Take it to production quality",
       "description": "Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.",
@@ -73,7 +86,7 @@
       "repeatable": true
     },
     {
-      "order": 6,
+      "order": 7,
       "prompt_slug": "task_review_an_agent_pr",
       "title": "Review what the agent produced",
       "description": "Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.",
@@ -87,7 +100,7 @@
       "repeatable": true
     },
     {
-      "order": 7,
+      "order": 8,
       "prompt_slug": "task_keep_it_on_course",
       "title": "Keep it on course and improving, for good",
       "description": "At every milestone and continuously after launch: take every measure again from its source, switch routes where a course change fired, remove what no longer serves the goal, run the pipeline both ways, and rank the next improvements. The project continues, adjusts, re-routes or grows; it is never left half-done.",
@@ -102,7 +115,7 @@
       "repeatable": true
     },
     {
-      "order": 8,
+      "order": 9,
       "prompt_slug": "task_update_dependencies",
       "title": "Keep it current",
       "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",

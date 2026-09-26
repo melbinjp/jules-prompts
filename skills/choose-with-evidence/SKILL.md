@@ -119,7 +119,7 @@ The failures are the same whether the choice is a database, a board, a supplier 
     *   the runner-up, and why it lost;
     *   what happens if they say no.
 
-    Then stop asking. A no is a constraint, so plan around it.
+    Then stop asking. A no is a constraint, so plan around it. When the build runs on its own (`run-autonomously`), a choice the briefing delegated is made without asking, within its standing limits, and recorded in `CHOICES.md` with how to undo it; only what the briefing kept for the owner goes to them, and the work carries on meanwhile.
 *   **Record it.**
     *   **The file:** one decision per file, `decisions/D0001-short-name.md`.
     *   **Front matter:** `id`, `status`, `serves`, `door`, `approved_by`, `revisit` and `superseded_by`.

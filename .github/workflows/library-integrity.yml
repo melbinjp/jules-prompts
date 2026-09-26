@@ -43,6 +43,12 @@ jobs:
       - name: The ledger check must catch every way of breaking a ledger
         run: python scripts/test_check_trace.py
 
+      # A model builds its own agent harness from the run-autonomously skill, and it is ready when
+      # harness/conformance.py passes against it. This proves the conformance test itself: it
+      # must pass a reference harness, and fail each of twelve copies with one property broken.
+      - name: The harness conformance test must tell a good harness from a broken one
+        run: python scripts/test_conformance.py
+
   site:
     # The repository agreeing with itself says nothing about what the site serves. This builds
     # the site with the same action and versions GitHub Pages uses, then checks the output: that

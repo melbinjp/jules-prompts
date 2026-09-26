@@ -29,6 +29,17 @@ This prompt guides the AI to act as a prompt engineer, taking a high-level descr
 
 ---
 
+### [`task_run_autonomously.md`]({% link _prompts/task_run_autonomously.md %})
+**Purpose:** To take one language model and one person to a project that builds itself, safely and correctly, without waiting on the person once it starts.
+
+A model alone is not an agent: it forgets each message, and a long build pushed through one growing conversation loses the task and starts inventing. This prompt has the model become the agent. It uses a harness if there is one. If there is none, it builds its own from a precise specification: a fresh, bounded context every step rebuilt from files, structured actions, files confined to the project, a checkpoint after every step, a log, and connectivity and supervision as settings. It proves that harness against `harness/conformance.py` before starting, and builds every other missing tool the same way. The person is asked everything only they can answer, at the start, in one briefing with standing limits for spending, publishing and physical actions. After that, development never waits. Choices the briefing left open are researched, tested, made, recorded in `CHOICES.md` and open to override. Safety comes from a sandbox, checkpoints and those limits rather than from asking permission, and quality from gates: nothing is called done until its tests, measures, trace check and a review by a fresh context pass. It covers context discipline, teams of roles that coordinate through the repository, exploring where nothing is known, and running offline, online or both.
+
+**When to use it:**
+*   When the starting point is one model and one person, and the build should run on its own.
+*   Before any long unattended run, with any harness.
+
+---
+
 ### [`task_start_from_an_idea.md`]({% link _prompts/task_start_from_an_idea.md %})
 **Purpose:** To take any idea, software or physical, to a foundation it can grow on without later regret, and a path that makes it happen.
 
@@ -377,18 +388,19 @@ Documentation does not fail loudly. Every sentence was true the day it was writt
 
 ## Recommended Workflow
 
-The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from any idea to a working product and then continuous improvement. Start at the first step for an idea, and at the second for a project that already exists. Each step has a gate that says when it is done, and names the other skills it calls on.
+The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from any idea to a working product and then continuous improvement. Start at the first step with one model and one person, at the second with an idea and a working agent, and at the third with a project that already exists. Each step has a gate that says when it is done, and names the other skills it calls on.
 
-1.  **Start from the idea.** `task_start_from_an_idea.md`. What it takes to make it happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline anyone can run, one slice end to end, and the ledger. For an existing project, write the ledger from what is there.
-2.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
-3.  **Choose with evidence, whenever a choice matters.** `task_choose_with_evidence.md`, repeated for each consequential choice.
-4.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
-5.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
-6.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
-7.  **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
-8.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
+1.  **Set up the model and the person.** `task_run_autonomously.md`. The model builds and proves its own harness and tools if it has none, the person is briefed once with standing limits, and the sandbox, checkpoints and gates go in, so development runs without waiting.
+2.  **Start from the idea.** `task_start_from_an_idea.md`. What it takes to make it happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline anyone can run, one slice end to end, and the ledger. For an existing project, write the ledger from what is there.
+3.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
+4.  **Choose with evidence, whenever a choice matters.** `task_choose_with_evidence.md`, repeated for each consequential choice.
+5.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
+6.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
+7.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
+8.  **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
+9.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
 
-The first, third, fourth and seventh steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
+The second, fourth, fifth and eighth steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
 
 The earlier sequence (`task_audit_repo.md`, then the legacy hardening and fix-and-refine prompts) still works and is still here. `task_take_to_production.md` covers what it was for, and checks it.
 

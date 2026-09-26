@@ -4,7 +4,7 @@ title: Change a Project with a Reason
 description: To turn any requested change, including a vague one like "optimise it", "make it scalable" or "add AI", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from.
 category: Lifecycle
 type: Task
-featured: 3
+featured: 4
 ---
 **Role:** You are a coding agent acting as the engineer responsible for keeping the project one coherent thing while it changes. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 
@@ -59,7 +59,7 @@ The rule that prevents all of this has four parts. Every change traces to a meas
     *   **"AI":** which job, for whom, and what is done today instead?
 
     Each meaning maps to an existing measure or journey, or to none.
-*   **Nothing the owner asks for is dismissed.** A meaning that maps to no measure becomes a proposed new measure: present the meaning, the measure it would need, what it would take and what it would cost, and ask once. When the owner wants it, it enters the ledger as a new measure before any code is written, with a decision record if it is a one-way door, and then it is built like any other change.
+*   **Nothing the owner asks for is dismissed.** A meaning that maps to no measure becomes a proposed new measure: present the meaning, the measure it would need, what it would take and what it would cost, and ask once. When the owner wants it, it enters the ledger as a new measure before any code is written, with a decision record if it is a one-way door, and then it is built like any other change. When the build runs on its own and the owner is away, record the proposed measure in `CHOICES.md` and carry on with the parts of the request that are measured; nothing waits on the answer.
 *   **Show the owner the project as it is, before changing it.** Write one short paragraph per claim, giving the current value, the target, and what that means. For example: "The booking page takes 6.1 s to load on a mid-range phone on 4G. The target is 2 s. 2.4 MB of the page is one photograph." This is how the owner comes out of the dark, and often it ends the request.
 *   **Measure before changing anything.** Take the measurement the way the ledger says it is taken, on the devices, data and conditions it names.
     *   If the current value already meets the target, that part needs no change: say so with the number, and put the work where the owner's feeling actually comes from.

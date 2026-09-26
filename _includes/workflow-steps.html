@@ -1,6 +1,12 @@
 <!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
-<p class="lede">The recommended sequence for making any idea real, software or physical, and keeping it working and improving: found it on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. Start at the first step for an idea, and at the second for a project that already exists. Each step names when it is done, and the other skills it calls on.</p>
+<p class="lede">The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. With one model and one person, start at the first step; with an idea and a working agent, at the second; with a project that already exists, at the third. Each step names when it is done, and the other skills it calls on.</p>
 <ol class="steps">
+<li class="step">
+  <h2><a href="{{ "/prompts/task_run_autonomously.html" | relative_url }}">Set up the model and the person</a></h2>
+  <p>Turn one model into the agent that builds the project: it builds its own harness and tools if it has none, and proves them. Ask the person everything only they can answer, at the start, and set the standing limits. Then put the sandbox, the checkpoints and the gates in place, so development runs without waiting and nothing is called done until it passes.</p>
+  <p class="gate"><strong>Done when</strong> the harness passes harness/conformance.py, the briefing is answered with its standing limits, and the sandbox, checkpoints and gates are in place.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_keep_it_confidential.html" | relative_url }}">Keep a Project Confidential, Offline First</a>, <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a></p>
+</li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></h2>
   <p>Work out what it takes to make the idea happen and how it is paid for. Make the few decisions that are costly to reverse with verified evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.</p>

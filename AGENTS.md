@@ -59,7 +59,7 @@ The skills need no network. On a private or air-gapped project, install from a c
 
 | Category | Description |
 |----------|-------------|
-| **Lifecycle** | From any idea to a foundation and a path (`start-from-an-idea`), choices made with verified evidence (`choose-with-evidence`), every change traced to the goal (`change-with-a-reason`), and continuous improvement after launch (`keep-it-on-course`) |
+| **Lifecycle** | One model and one person running a build on its own (`run-autonomously`), from any idea to a foundation and a path (`start-from-an-idea`), choices made with verified evidence (`choose-with-evidence`), every change traced to the goal (`change-with-a-reason`), and continuous improvement after launch (`keep-it-on-course`) |
 | **End to End** | Taking a project in any state to production quality (`take-to-production`) |
 | **Physical Systems** | Commands to hardware, devices and real-world services (`act-on-the-physical-world`) |
 | **Initial Scoping** | First-pass tasks for new or unknown projects (audit, hardening, frontend build) |
@@ -70,18 +70,19 @@ The skills need no network. On a private or air-gapped project, install from a c
 
 ## Recommended Workflow
 
-From any idea to a working product, then continuous improvement. No step concludes that an idea cannot be done; a blocked route gets another route. Start at step 1 for an idea, at step 2 for a project that already exists. Each step in `workflow.json` has a `done_when` gate and the `branches` (other skills) it calls on:
+From any idea to a working product, then continuous improvement. No step concludes that an idea cannot be done; a blocked route gets another route. Start at step 1 with one model and one person, at step 2 with an idea and a working agent, at step 3 with a project that already exists. Each step in `workflow.json` has a `done_when` gate and the `branches` (other skills) it calls on:
 
-1. `task_start_from_an_idea`: what it takes to make the idea happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline a person or an agent can run, one slice end to end, and the ledger
-2. `task_repair_setup_script`: make it run from cold
-3. `task_choose_with_evidence`: each consequential choice (repeatable)
-4. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
-5. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
-6. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
-7. `task_keep_it_on_course`: at every milestone and continuously after launch; ranks the next improvements (repeatable)
-8. `task_update_dependencies`: keep it current (optional, repeatable)
+1. `task_run_autonomously`: one model and one person; the model builds and proves its own harness and tools if it has none, the person is briefed once, and development runs without waiting inside a sandbox, checkpoints and gates
+2. `task_start_from_an_idea`: what it takes to make the idea happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline a person or an agent can run, one slice end to end, and the ledger
+3. `task_repair_setup_script`: make it run from cold
+4. `task_choose_with_evidence`: each consequential choice (repeatable)
+5. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
+6. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
+7. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
+8. `task_keep_it_on_course`: at every milestone and continuously after launch; ranks the next improvements (repeatable)
+9. `task_update_dependencies`: keep it current (optional, repeatable)
 
-Steps 1, 3, 4 and 7 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` and `Verified:` lines, in that project's CI.
+Steps 2, 4, 5 and 8 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` and `Verified:` lines, in that project's CI.
 
 See `workflow.json` for the machine-readable workflow graph.
 
@@ -97,6 +98,7 @@ llms.txt            → Every skill, for an agent given only the domain
 fixtures/           → Planted-failure trees + defects.json
 harness/AGENTS.md   → Standing doctrine fragment for other repos
 harness/check_trace.py → The ledger check for other repos (Python 3.8+, no dependencies)
+harness/conformance.py → The test an agent harness a model built for itself must pass
 harness/ledger-example/ → A small ledger that passes it
 prompts.json        → Machine-readable prompt index (JSON API)
 scripts/            → emit.py (generates every form), the integrity, site and fixture checks

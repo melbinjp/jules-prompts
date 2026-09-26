@@ -325,6 +325,7 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
             f"Standing rules for every task, for a project's AGENTS.md: {SITE}/harness/AGENTS.md",
             f"The ledger check, for a project's CI (Python, no dependencies): {SITE}/harness/check_trace.py",
             f"The whole path from idea to continuous improvement, each step with its gate: {SITE}/workflow.json",
+            f"The test a self-built agent harness must pass (Python and git, nothing else): {SITE}/harness/conformance.py",
             "",
             "## Start here",
             "",

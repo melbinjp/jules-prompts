@@ -7,6 +7,7 @@ A library of Agent Skills that take any idea, software or hardware, to a working
 
 **Where to start depends on what you have.**
 
+- **One model and one person, and nothing else:** [Run a Project Autonomously](_prompts/task_run_autonomously.md). The model builds its own agent harness and every tool it lacks, from a specification it proves against [`harness/conformance.py`](harness/conformance.py). The person is asked everything only they can answer at the start. Development then runs without waiting: safe because of a sandbox, checkpoints and standing limits, and correct because nothing is called done until its checks pass.
 - **An idea:** [Start a Project from an Idea](_prompts/task_start_from_an_idea.md). It works out what it takes to make the idea happen: the need, what already exists to build on, the costs and the funding routes, and the path that fits what the owner has. It makes the few costly-to-reverse decisions with verified evidence, makes every stage of the pipeline runnable by a person or an agent, builds one thin slice end to end, and writes the ledger every later change traces to.
 - **A project that exists:** [Take a Project to Production Quality](_prompts/task_take_to_production.md). It takes a project in any state to the point where it does its one job dependably, feels finished and carries nothing it does not need, and shows that item by item.
 - **A change to make,** however vaguely it was asked for: [Change a Project with a Reason](_prompts/task_change_with_a_reason.md).
@@ -100,7 +101,8 @@ Nothing in the skills needs the internet, and nothing here has to be fetched whi
 4. **Give small local models the short forms.** `compact/<name>.md` is each core skill as a checklist of a few hundred words, for models whose context cannot hold the full skill next to the code.
 5. **Qualify a model before trusting it with a stage.** Run it on the skill's fixture and score the report with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the fixture is evidence.
 6. **Check the project's ledger offline.** `harness/check_trace.py` needs Python and nothing else.
-7. **Keep the project itself private.** [Keep a Project Confidential, Offline First](_prompts/task_keep_it_confidential.md) maps every channel the work can leave through (hosting, agents and model providers, telemetry, registries, crash reports, searches), proves the pipeline runs with the network off, and sets how the internet is used when it must be.
+7. **No agent harness at all?** A model with only a chat endpoint builds its own from the specification in `run-autonomously`, and it is ready when `python harness/conformance.py --harness "<its command>"` passes: a scripted model drives it through proper and careless actions and checks every prompt, file and commit.
+8. **Keep the project itself private.** [Keep a Project Confidential, Offline First](_prompts/task_keep_it_confidential.md) maps every channel the work can leave through (hosting, agents and model providers, telemetry, registries, crash reports, searches), proves the pipeline runs with the network off, and sets how the internet is used when it must be.
 
 ### For humans (copy-paste)
 
