@@ -1,42 +1,12 @@
 ---
 layout: default
 title: All Agent Skills
-description: Every skill in the library, as a page to read and a SKILL.md to load. The core of the path first, then every other skill grouped by what it is for.
+description: Every skill in the library, grouped by what it is for, each a page to read and a SKILL.md to load. The path's own skills come first, in the order the path uses them.
 ---
 {%- comment -%} Skills only: the Skill Template is for authors and has no SKILL.md. {%- endcomment -%}
-{%- assign tasks = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
-{%- assign featured = tasks | where_exp: "p", "p.featured" | sort: "featured" -%}
-{%- assign core = tasks | where_exp: "p", "p.featured == nil" | sort: "title" -%}
+{%- assign skills = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
 <header class="page-head">
   <h1>Skills</h1>
-  <p class="lede">Each skill is one page to read and one <code>SKILL.md</code> to load, with the same text in both. Start with the first eight, the core; the rest are the methods they call on, grouped by what they are for. Each has a test project with planted faults that shows it catching them.</p>
+  <p class="lede">{{ skills | size }} skills, grouped by what they are for. Each is a page to read and a <code>SKILL.md</code> to load, with the same text in both, and each has a fixture that shows it catching what it claims to. Not sure which one? Start from <a href="{{ '/#start' | relative_url }}">where you are</a>.</p>
 </header>
-
-<section aria-labelledby="start">
-  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Start here</h2>
-  <div class="cards cards-featured">
-    {%- for p in featured %}
-    <a class="card card-featured" href="{{ p.url | relative_url }}">
-      <span class="card-meta">{{ p.category }}</span>
-      <h3><span>{{ p.title }}</span></h3>
-      <p>{{ p.description }}</p>
-    </a>
-    {%- endfor %}
-  </div>
-</section>
-
-{%- assign groups = core | group_by: "category" | sort: "name" -%}
-{%- for group in groups %}
-{%- assign n = forloop.index | plus: 1 %}
-<section aria-labelledby="c-{{ forloop.index }}">
-  <h2 id="c-{{ forloop.index }}" class="section-title"><span class="n" aria-hidden="true">{% if n < 10 %}0{% endif %}{{ n }}</span>{{ group.name }}</h2>
-  <div class="cards">
-    {%- for p in group.items %}
-    <a class="card" href="{{ p.url | relative_url }}">
-      <h3><span>{{ p.title }}</span></h3>
-      <p>{{ p.description }}</p>
-    </a>
-    {%- endfor %}
-  </div>
-</section>
-{%- endfor %}
+{% include skill-groups.html %}

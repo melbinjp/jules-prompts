@@ -3,72 +3,40 @@ layout: default
 body_class: home
 title: Agent Skills (SKILL.md) to take any idea to a working product
 ---
-{%- assign featured = site.prompts | where_exp: "p", "p.featured" | sort: "featured" -%}
-{%- comment -%} Skills only: the master template is for authors and has no SKILL.md. {%- endcomment -%}
+{%- comment -%} Skills only: the Skill Template is for authors and has no SKILL.md. {%- endcomment -%}
 {%- assign skills = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Agent Skills <span aria-hidden="true">/</span> SKILL.md <span aria-hidden="true">/</span> MIT</p>
-    <h1>Take any idea all the way, and <mark>keep it working</mark>.</h1>
-    <p class="lede">Agent Skills that take any idea, software or hardware, in any state, to a product people use, then keep it working and improving. Every decision rests on verified evidence, every change traces to the goal, and every claim ends as <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
-    <p class="actions">
-      <a class="button" href="#start">Where are you starting?</a>
-      <a class="button button-quiet" href="#agents">Point an agent here</a>
-    </p>
-    <p class="works-with">Works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, and agents that drive hardware.</p>
-  </div>
-  {% include report-exhibit.html %}
-</section>
-
-<section class="paths" id="agents" aria-label="Point an agent here">
-  <div class="panel">
-    <h2>Point an agent here</h2>
-    <p>Give it this line. Everything it needs is one fetch away, and nothing depends on which agent it is.</p>
-    <div class="snippet">
-      <pre><code id="agent-line">Read {{ '/llms.txt' | absolute_url }} and follow the skill that matches the task.</code></pre>
-      <button class="copy" type="button" data-copy="#agent-line">Copy</button>
-    </div>
-  </div>
-  <div class="panel">
-    <h2>Or read them yourself</h2>
-    <p>Every skill is a page to read and the same <code>SKILL.md</code> an agent loads. {{ skills | size }} skills, each with a test that shows it catching what it claims to.</p>
-    <p><a class="button button-quiet" href="{{ '/tasks.html' | relative_url }}">All the skills</a></p>
-    <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, with a SHA-256 digest of every <code>SKILL.md</code>.</p>
-  </div>
+<section class="intro" aria-labelledby="title">
+  <h1 id="title">Take any idea all the way, and keep it working.</h1>
+  <p class="lede">{{ skills | size }} Agent Skills that take an idea, software or hardware, in any state, to a product people use, then keep it working and improving. Every decision rests on verified evidence, every change traces to the goal, and every claim ends as <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
+  <p class="actions">
+    <a class="button" href="#start">Where are you starting?</a>
+    <a class="button button-quiet" href="#agents">Point an agent here</a>
+  </p>
+  <p class="fine">Works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, and agents that drive hardware. Free and MIT licensed, with no sign-up and no tracking.</p>
 </section>
 
 <section aria-labelledby="start">
-  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Where are you starting?</h2>
+  <h2 id="start">Where are you starting?</h2>
   <p class="measure">Any project, in any state, enters the same path where its state says. Nothing is declared impossible or dead: a blocked route gets another route to the same goal.</p>
   {% include entry-states.html %}
-  <p class="fine">What happens at each entry, each step's gate and the skills it calls on are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>, and in <a href="{{ '/workflow.json' | relative_url }}"><code>workflow.json</code></a> for agents.</p>
+  <p class="fine">What happens at each entry, and the gate that ends each step, are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>. Every skill, grouped by what it is for, is on the <a href="{{ '/tasks.html' | relative_url }}">skills page</a>.</p>
 </section>
 
 <section aria-labelledby="path">
-  <h2 id="path" class="section-title"><span class="n" aria-hidden="true">02</span>The whole path</h2>
-  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done. The steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
+  <h2 id="path">The whole path</h2>
+  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done, and the steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
   {% include path-steps.html %}
 </section>
 
-<section aria-labelledby="core">
-  <h2 id="core" class="section-title"><span class="n" aria-hidden="true">03</span>The core skills</h2>
-  <div class="cards cards-featured">
-    {%- for p in featured %}
-    {%- assign first = p.description | split: ". " | first %}
-    {%- assign last = first | slice: -1, 1 %}
-    <a class="card card-featured" href="{{ p.url | relative_url }}">
-      <span class="card-meta">{{ p.category }}</span>
-      <h3><span>{{ p.title }}</span></h3>
-      <p>{{ first }}{% if last != "." %}.{% endif %}</p>
-    </a>
-    {%- endfor %}
+<section aria-labelledby="agents-title" id="agents">
+  <h2 id="agents-title">Point an agent here, or install</h2>
+  <p class="measure">Give an agent this line. Everything it needs is one fetch away, and nothing depends on which agent it is.</p>
+  <div class="snippet measure">
+    <pre><code id="agent-line">Read {{ '/llms.txt' | absolute_url }} and follow the skill that matches the task.</code></pre>
+    <button class="copy" type="button" data-copy="#agent-line">Copy</button>
   </div>
-  <p class="fine">Every skill, with its full description, is on the <a href="{{ '/tasks.html' | relative_url }}">skills page</a>.</p>
-</section>
-
-<section aria-labelledby="install">
-  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">04</span>Install</h2>
-  <div class="install">
+  <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, which gives every skill with a SHA-256 digest of its <code>SKILL.md</code>.</p>
+  <div class="use-grid">
     <div>
       <h3>One skill</h3>
       <div class="snippet">
@@ -107,32 +75,28 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="proof">
-  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">05</span>How you know a skill works</h2>
-  <p class="measure">A skill nobody has seen fail is a claim. Every skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
+  <h2 id="proof">How you know a skill works</h2>
+  <p class="measure">A skill nobody has seen fail is a claim. Every skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. This is the report one skill should produce on its fixture:</p>
+  {% include report-exhibit.html %}
 </section>
 
-<section aria-labelledby="questions" id="faq">
-  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">06</span>Questions</h2>
-  <div class="faq">
+<section aria-labelledby="questions">
+  <h2 id="questions">Questions</h2>
+  <div class="faq" id="faq">
     {%- for item in site.data.faq %}
-    <div>
-      <h3>{{ item.q }}</h3>
+    <details>
+      <summary>{{ item.q }}</summary>
       <p>{{ item.a }}</p>
-    </div>
+    </details>
     {%- endfor %}
   </div>
 </section>
 
-<section aria-labelledby="tools">
-  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">07</span>Tools these skills pair with</h2>
-  <p class="measure">A skill tells an agent what to do. These do part of the same work mechanically, so the agent spends its judgement on the cases that need it.</p>
-  <ul class="measure">
-    <li><a href="https://github.com/melbinjp/docproof"><strong>docproof</strong></a> reads a repository's documentation and reports the claims its code contradicts: paths that no longer exist, commands that are not there, versions that moved. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and it runs as a GitHub Action. MIT.</li>
-    <li><a href="https://github.com/melbinjp/rigout"><strong>rigout</strong></a> is an MCP server that lets an authorised agent use a real machine: commands, files, Docker, persistent terminals. <code>pip install rigout</code>.</li>
+<section aria-labelledby="related">
+  <h2 id="related">Related</h2>
+  <ul class="related">
+    <li><a href="https://github.com/melbinjp/docproof">docproof</a> reads a repository's documentation and reports the claims its code contradicts. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and runs as a GitHub Action.</li>
+    <li><a href="https://github.com/melbinjp/rigout">rigout</a> is an MCP server that lets an authorised agent use a real machine: commands, files, Docker, persistent terminals.</li>
+    <li>Notes from running this kind of tooling: <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>, most recently why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</li>
   </ul>
-</section>
-
-<section aria-labelledby="writing">
-  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">08</span>Writing</h2>
-  <p class="measure">Notes from actually running this kind of tooling live at <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>. Most recently, why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</p>
 </section>

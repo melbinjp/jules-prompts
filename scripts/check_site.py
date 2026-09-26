@@ -21,8 +21,9 @@ What it checks, each against the built files:
   search   every page names a link-preview image the site serves, at 1200 by 630; every
            block of structured data parses; the home page and every skill page have one, and
            a skill page's names the skill's title and its SKILL.md.
-  budget   no page pulls a script, stylesheet or font from another origin; the stylesheet,
-           the script, the font, the preview image and every page stay under a size budget.
+  budget   no page pulls a script, stylesheet or font from another origin, and no web font
+           is shipped at all (text is set in the reader's own system font); the stylesheet,
+           the script, the preview image and every page stay under a size budget.
 
 It reports the denominator and exits 1 on any problem. It is written to be able to fail:
 run it against a build of the old site and it goes red.
@@ -43,8 +44,7 @@ INDEX = ".well-known/agent-skills/index.json"
 SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 
 # Budgets, in bytes. Generous against today's sizes, tight against a framework creeping in.
-BUDGET = {"css": 24_000, "js": 8_000, "page": 120_000, "font": 40_000, "image": 150_000}
-FONT = "assets/fonts/martian-mono-latin-wght.woff2"
+BUDGET = {"css": 16_000, "js": 8_000, "page": 120_000, "image": 150_000}
 
 # Origins a page may load from. The favicon is shared across wecanuseai.com tools.
 ALLOWED_ORIGINS = {"favicon.wecanuseai.com"}
@@ -272,7 +272,6 @@ def main() -> int:
     for kind, path in (
         ("css", site / "assets/css/style.css"),
         ("js", site / "assets/js/main.js"),
-        ("font", site / FONT),
         ("image", site / "assets/og.png"),
     ):
         checked += 1
@@ -280,6 +279,14 @@ def main() -> int:
             problems.append(f"{path.relative_to(site)} is missing")
         elif path.stat().st_size > BUDGET[kind]:
             problems.append(f"{path.relative_to(site)} is {path.stat().st_size} bytes, over {BUDGET[kind]}")
+
+    # One typeface, the reader's own: a web font is a download and a distraction the site
+    # decided against. It shipped one until the site was made quieter.
+    checked += 1
+    shipped = sorted(str(f.relative_to(site)) for f in site.rglob("*") if f.suffix in (".woff", ".woff2", ".ttf", ".otf"))
+    css = (site / "assets/css/style.css").read_text(encoding="utf-8") if (site / "assets/css/style.css").exists() else ""
+    if shipped or "@font-face" in css:
+        problems.append(f"the site ships a web font ({', '.join(shipped) or '@font-face in the stylesheet'})")
 
     print(f"checked {len(procedures)} skill(s), {len(pages)} page(s); {checked} checks in all")
     if problems:

@@ -267,6 +267,23 @@ def _line(prompt: dict) -> str:
     return f"- [{prompt['title']}]({_skill_url(prompt)}): {prompt['description']}"
 
 
+# The groups on the skills page, in the order a reader needs them, each with one line on what
+# it is for. A skill whose category is not here stops the build rather than going unlisted.
+GROUPS = (
+    ("Lifecycle", "The path itself: from a model and a person, an idea, or a project in any state, to a product that keeps working."),
+    ("Design", "What people and agents see, do and hear when they use the product."),
+    ("Build", "Methods the path calls on to change a project."),
+    ("Verify", "Methods the path calls on to check that work is what it claims to be."),
+    ("Security", "Alongside every step: what can be attacked, and what must not leave."),
+    ("Physical Systems", "Alongside every step, for anything that moves, heats, dispenses, spends or sends."),
+)
+
+
+def _first_sentence(text: str) -> str:
+    first = text.split(". ", 1)[0].strip()
+    return first if first.endswith(".") else first + "."
+
+
 def _entry_lines(prompts: list[dict]) -> list[str]:
     """workflow.json's entries as llms.txt lines: the state, then the skills in order."""
     workflow = json.loads((ROOT / "workflow.json").read_text(encoding="utf-8"))
@@ -402,19 +419,17 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
     step_titles = {s["prompt_slug"]: s["title"] for s in workflow["steps"]}
 
     def hop(stem: str) -> str:
-        if stem in numbers:
-            return (f'<span class="hop"><span class="hop-n">{numbers[stem]}</span>'
-                    f'{link(stem, step_titles[stem])}</span>')
-        return f'<span class="hop">{link(stem, titles[stem])}</span>'
+        number = f'step {numbers[stem]}' if stem in numbers else ""
+        title = step_titles.get(stem) or titles[stem]
+        return f'    <li><span class="hop-n">{number}</span>{link(stem, title)}</li>'
 
     entries = []
     for entry in workflow["entries"]:
-        route = '<span class="then" aria-hidden="true">→</span>'.join(
-            hop(s) for s in [entry["start"], *entry.get("then", [])])
+        route = "\n".join(hop(s) for s in [entry["start"], *entry.get("then", [])])
         entries.append(
             '<li class="entry">\n'
             f'  <p class="state">{html.escape(entry["state"])}</p>\n'
-            f'  <p class="route"><span class="sr-only">Start at </span>{route}</p>\n'
+            f'  <ol class="route" aria-label="Where to go, in order">\n{route}\n  </ol>\n'
             '  {%- if include.notes %}\n'
             f'  <p class="entry-note">{html.escape(entry["note"])}</p>\n'
             '  {%- endif %}\n'
@@ -431,9 +446,42 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
            if throughout else "")
     )
 
+    # The skills page: every skill, grouped by what it is for, the path's skills in the path's
+    # order, each with the first sentence of its description. The full text is on its own page.
+    groups = []
+    known = {name for name, _ in GROUPS}
+    for p in prompts:
+        if p["category"] not in known:
+            raise SystemExit(f"{p['stem']}: category {p['category']!r} has no place in GROUPS")
+    for name, note in GROUPS:
+        members = sorted((p for p in prompts if p["category"] == name),
+                         key=lambda p: (numbers.get(p["stem"], 99), p["title"]))
+        if not members:
+            continue
+        anchor = "g-" + re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+        items = []
+        for p in members:
+            step = numbers.get(p["stem"])
+            items.append(
+                f'    <li>{link(p["stem"], p["title"])}'
+                + (f' <span class="step-n">step {step}</span>' if step else "")
+                + f'\n      <p>{html.escape(_first_sentence(p["description"]))}</p></li>'
+            )
+        groups.append(
+            f'<section class="group" aria-labelledby="{anchor}">\n'
+            f'  <h2 id="{anchor}">{html.escape(name)}</h2>\n'
+            f'  <p class="group-note">{html.escape(note)}</p>\n'
+            '  <ul class="skill-list">\n' + "\n".join(items) + "\n  </ul>\n</section>"
+        )
+    groups_html = (
+        "<!-- Generated from _prompts/ and workflow.json by scripts/emit.py. Edit those, not this. -->\n"
+        + "\n".join(groups) + "\n"
+    )
+
     return {
         f"{DISCOVERY.lstrip('/')}/index.json": json.dumps(index, indent=2) + "\n",
         "llms.txt": llms,
+        "_includes/skill-groups.html": groups_html,
         "_includes/workflow-steps.html": steps_html,
         "_includes/workflow-lede.html": lede_html,
         "_includes/path-steps.html": path_html,

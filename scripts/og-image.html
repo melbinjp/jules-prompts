@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--
   The link-preview card (assets/og.png): what a chat app, a social post or a search result shows
-  when someone shares a link to the site. It uses the site's own tokens and font, and the result
-  line is the flagship fixture's expected report, the same one the home page shows.
+  when someone shares a link to the site. It uses the site's own tokens and system font, and the
+  result line is the flagship fixture's expected report, the same one the home page shows.
 
   After changing it, render it again at exactly 1200 by 630:
 
@@ -16,11 +16,6 @@
 <meta charset="utf-8">
 <title>Jules Prompts link preview</title>
 <style>
-  @font-face {
-    font-family: "Martian Mono";
-    font-weight: 100 800;
-    src: url("../assets/fonts/martian-mono-latin-wght.woff2") format("woff2");
-  }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
@@ -29,74 +24,48 @@
     padding: 64px 72px;
     display: flex;
     flex-direction: column;
-    background-color: #0e0f11;
-    background-image:
-      linear-gradient(rgba(238, 240, 232, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(238, 240, 232, 0.06) 1px, transparent 1px);
-    background-size: 30px 30px;
-    color: #eef0e8;
+    background: #ffffff;
+    color: #1a1c1f;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Arial, sans-serif;
   }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font: 650 34px/1 "Martian Mono", monospace;
-    letter-spacing: -0.02em;
-  }
-  .brand svg { width: 44px; height: 44px; }
-  .brand small { margin-left: auto; color: #c6e23a; font-size: 20px; font-weight: 500; letter-spacing: 0.02em; }
-  .brand rect { fill: #d4f03c; }
-  .brand path { fill: none; stroke: #141518; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .brand { display: flex; align-items: baseline; font-size: 30px; font-weight: 650; }
+  .brand small { margin-left: auto; color: #565b63; font-size: 22px; font-weight: 400; }
   h1 {
     margin: auto 0 0;
-    max-width: 18ch;
-    font-size: 72px;
+    max-width: 24ch;
+    font-size: 70px;
     line-height: 1.12;
-    letter-spacing: -0.04em;
-    font-weight: 750;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
-  mark {
-    padding: 0 0.1em;
-    background: #d4f03c;
-    color: #141518;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
-  .result {
-    display: flex;
-    gap: 28px;
-    margin-top: 40px;
-    font: 600 24px/1 "Martian Mono", monospace;
-  }
+  .result { display: flex; gap: 28px; margin: 36px 0 0; padding-top: 28px; border-top: 2px solid #d5d8dc; font-size: 26px; font-weight: 600; }
   .result span::before {
     content: "";
     display: inline-block;
     width: 14px;
     height: 14px;
-    margin-right: 12px;
+    margin-right: 10px;
     border-radius: 3px;
     background: currentColor;
   }
-  .holds { color: #6fd88e; }
-  .broken { color: #ff8b7b; }
-  .skipped { color: #e8b451; }
-  .of { color: #a4a8a1; }
+  .holds { color: #1b7a3d; }
+  .broken { color: #bd2a1d; }
+  .skipped { color: #875b00; }
+  .of { color: #565b63; font-weight: 400; }
   .of::before { display: none !important; }
 </style>
 </head>
 <body>
   <div class="brand">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6"/><path d="M6.8 12.6l3.3 3.3 7.1-7.6"/></svg>
     Jules Prompts
-    <small>Agent Skills / SKILL.md / MIT</small>
+    <small>Agent Skills for any agent</small>
   </div>
-  <h1>Take any idea all the way, and <mark>keep it working</mark>.</h1>
+  <h1>Take any idea all the way, and keep it working.</h1>
   <p class="result">
     <span class="holds">3 holds</span>
     <span class="broken">8 broken</span>
     <span class="skipped">0 skipped</span>
-    <span class="of">of 11 items</span>
+    <span class="of">of 11 items, from one skill's report</span>
   </p>
 </body>
 </html>

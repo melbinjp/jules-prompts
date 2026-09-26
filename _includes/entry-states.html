@@ -2,63 +2,93 @@
 <ol class="entries">
 <li class="entry">
   <p class="state">Broken for people right now</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">11</span><a href="{{ "/prompts/task_handle_an_incident.html" | relative_url }}">Restore it when it breaks, then prevent it</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 11</span><a href="{{ "/prompts/task_handle_an_incident.html" | relative_url }}">Restore it when it breaks, then prevent it</a></li>
+    <li><span class="hop-n">step 10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Stop the harm and restore by the fastest action already tried; the cause, the fix and the prevention come after, on a copy.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">An idea, and only a language model to build it with</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">1</span><a href="{{ "/prompts/task_run_autonomously.html" | relative_url }}">Set up the model and the person</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 1</span><a href="{{ "/prompts/task_run_autonomously.html" | relative_url }}">Set up the model and the person</a></li>
+    <li><span class="hop-n">step 2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">The model builds its own harness and tools and proves them, the person is asked everything only they can answer in one sitting, and the build then runs without waiting.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">An idea, and an agent that already works</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></li>
+    <li><span class="hop-n">step 4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">What it takes, the costly decisions with evidence, a pipeline anyone can run, and one slice end to end.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">A project that already exists, in any state: a prototype, a half-built or vibe-coded build, an inherited codebase, or a working product with gaps</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">3</span><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">7</span><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">9</span><a href="{{ "/prompts/task_release_to_people.html" | relative_url }}">Release it to its people, and hear back</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></li>
+    <li><span class="hop-n">step 3</span><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></li>
+    <li><span class="hop-n">step 4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></li>
+    <li><span class="hop-n">step 7</span><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></li>
+    <li><span class="hop-n">step 9</span><a href="{{ "/prompts/task_release_to_people.html" | relative_url }}">Release it to its people, and hear back</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Found it again on paper: the ledger written from what is there, every decision it embodies recorded with the evidence it had, and those nobody can justify marked for revisiting. Then make it run from cold, and close the gap.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">Live, and it has to keep working and getting better</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">9</span><a href="{{ "/prompts/task_release_to_people.html" | relative_url }}">Release it to its people, and hear back</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></li>
+    <li><span class="hop-n">step 6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></li>
+    <li><span class="hop-n">step 9</span><a href="{{ "/prompts/task_release_to_people.html" | relative_url }}">Release it to its people, and hear back</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Every measure taken again from its source, the next improvements ranked by what they move, on a steady cadence for as long as it serves anyone.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">Stalled, abandoned or drifting</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 10</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></li>
+    <li><span class="hop-n">step 5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></li>
+    <li><span class="hop-n">step 6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">The review finds the route that is blocked and the next route to the same goal, whether it is in the product, the way in or the channel. Nothing is declared dead.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">A request, however it is worded: &#x27;optimise it&#x27;, &#x27;make it pretty&#x27;, &#x27;add AI&#x27;</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Translated into the measure it moves, verified before and after, built through every layer it touches.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">A choice between options: a tool, a vendor, a part, a design, a route</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Real options, criteria from the goal, at least two backings with one verified, and a way out.</p>
   {%- endif %}
 </li>
 <li class="entry">
   <p class="state">Work an agent produced</p>
-  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">8</span><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><a href="{{ "/prompts/task_qa_an_agents_tests.html" | relative_url }}">QA the Tests an Agent Wrote</a></span></p>
+  <ol class="route" aria-label="Where to go, in order">
+    <li><span class="hop-n">step 8</span><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></li>
+    <li><span class="hop-n"></span><a href="{{ "/prompts/task_qa_an_agents_tests.html" | relative_url }}">QA the Tests an Agent Wrote</a></li>
+  </ol>
   {%- if include.notes %}
   <p class="entry-note">Every claim it makes checked, and every new test seen to fail.</p>
   {%- endif %}
