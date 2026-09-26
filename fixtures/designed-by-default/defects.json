@@ -1,0 +1,66 @@
+{
+  "fixture": "designed-by-default",
+  "skill": "design-the-experience",
+  "prompt_slug": "task_design_the_experience",
+  "description": "A clinic's booking app, redesigned and tidy, where the flow, the words, the look, the evidence and the agent's path were each decided by default rather than designed.",
+  "defects": [
+    {
+      "id": "flow-by-build-order",
+      "file": "web/book.html",
+      "tell": "nine required-looking fields (including fax and 'how did you hear about us') come before any available time is shown, although the J1 thread in PROJECT.md starts with choosing a time and asks only name, phone and date of birth; fax and heard_from are stored and read by nothing",
+      "must_mention": ["fax", "book.html"]
+    },
+    {
+      "id": "undo-without-history",
+      "file": "server/store.py",
+      "tell": "DESIGN.md promises 'Cancelled. Undo' for 10 seconds, but store.cancel runs DELETE FROM bookings and frees the slot at once, so there is nothing to undo and another patient may already hold the slot: the design and the data model disagree",
+      "must_mention": ["undo", "DELETE"]
+    },
+    {
+      "id": "taste-as-evidence",
+      "file": "decisions/D0004-single-page-booking.md",
+      "tell": "the redesign's evidence is two Source items of opinion ('modern', 'everyone preferred'), nothing measured or tested, with revisit: never; after it M1 fell from about 71% to 52% in metrics/first-booking.csv and nobody reopened it",
+      "must_mention": ["D0004", "52%"]
+    },
+    {
+      "id": "stand-ins-as-people",
+      "file": "research/usability-2026-08.md",
+      "tell": "the five 'participants' were agent runs given the steps to follow, reported as 'Measured' with people; that is a simulation of someone who already knows the steps, and it contradicts the real funnel (52%)",
+      "must_mention": ["usability-2026-08", "stand-in"]
+    },
+    {
+      "id": "values-outside-the-system",
+      "file": "web/book.css",
+      "tell": "tokens.css is the stated only source, but book.css and list.css hard-code three blues (#1a73e8, #1967d2, #2b6cb0) and four greys (#222, #666, #ccc, #777), none of them tokens",
+      "must_mention": ["tokens.css", "#1967d2"]
+    },
+    {
+      "id": "contrast",
+      "file": "web/book.css",
+      "tell": "the Book this time button is white on #7fb3f5, a contrast of 2.2:1 against the 4.5:1 WCAG AA needs, for patients whose median age is 61",
+      "must_mention": ["#7fb3f5", "contrast"]
+    },
+    {
+      "id": "developer-words",
+      "file": "web/messages.js",
+      "tell": "a slot someone else just took shows 'Error 409: CONFLICT' and a dropped connection 'ECONNRESET'; neither says what happened or what to do next",
+      "must_mention": ["409", "ECONNRESET"]
+    },
+    {
+      "id": "limit-only-in-the-page",
+      "file": "web/book.js",
+      "tell": "the owner's rule of at most two upcoming appointments is checked only in the page's script; api.py and cli/slot.py call store.create without it, so the reminder agent, or anyone calling the API, can book past it. The rule belongs in one place both operators pass through",
+      "must_mention": ["two upcoming", "slot.py"]
+    },
+    {
+      "id": "agent-path-missing",
+      "file": "cli/slot.py",
+      "tell": "the reminder agent must rebook into the nearest free slot (J3, M3), but the command line has no way to list free times (the web app has GET /slots) and prints a padded table for eyes with no JSON, so the agent has to guess from booked slots and scrape text",
+      "must_mention": ["/slots", "json"]
+    }
+  ],
+  "control": {
+    "file": "web/list.html",
+    "tell": "the empty state of the bookings list is designed right: it says what the list is for, what will appear there, and offers both booking online and the desk's number with its hours, using the tokens. A report that faults it is inventing."
+  }
+}

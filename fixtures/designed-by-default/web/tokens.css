@@ -1,0 +1,16 @@
+/* The design system: every colour, size and space in Slot comes from here. */
+:root {
+  --ink: #1f2933;
+  --ink-soft: #52606d;
+  --surface: #ffffff;
+  --line: #d9e2ec;
+  --accent: #1a5fb4;
+  --accent-ink: #ffffff;
+  --danger: #b42318;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --radius: 8px;
+  --text: 1.0625rem;
+}

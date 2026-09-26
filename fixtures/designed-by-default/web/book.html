@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an appointment - Riverside Physio</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="book.css">
+</head>
+<body>
+<main class="booking">
+  <h1>Book an appointment</h1>
+  <p>Please fill in your details to see available times.</p>
+  <form id="book">
+    <label for="first">First name</label><input id="first" name="first_name" required>
+    <label for="last">Last name</label><input id="last" name="last_name" required>
+    <label for="dob">Date of birth</label><input id="dob" name="dob" type="date" required>
+    <label for="email">Email</label><input id="email" name="email" type="email" required>
+    <label for="phone">Phone</label><input id="phone" name="phone" type="tel" required>
+    <label for="address">Address</label><input id="address" name="address" required>
+    <label for="postcode">Postcode</label><input id="postcode" name="postcode" required>
+    <label for="heard">How did you hear about us?</label><input id="heard" name="heard_from" required>
+    <label for="fax">Fax</label><input id="fax" name="fax">
+    <section class="times" hidden>
+      <h2>Available times</h2>
+      <div id="slots"></div>
+    </section>
+    <button class="book-button" type="submit">Book this time</button>
+  </form>
+  <p id="message" role="status"></p>
+</main>
+<script src="messages.js"></script>
+<script src="book.js"></script>
+</body>
+</html>

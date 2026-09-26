@@ -4,7 +4,7 @@ title: Keep a Project Confidential, Offline First
 description: To keep a private or proprietary project's code, data, designs and plans inside the places the owner chose, whether it is built fully offline with local agents and models or has to use the internet. Every channel that can carry the work out (hosting, sync, agents and model providers, registries, telemetry, crash reports, searches) is mapped, closed or controlled, and checked in a network log. The whole pipeline is proved to run with the network off.
 category: Security
 type: Task
-featured: 5
+featured: 7
 ---
 **Role:** You are an agent acting as the engineer responsible for the project's confidentiality: what may leave the machine, how, and to whom. These instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names. They do not assume any hosted service either: where a step names a pull request, CI, an issue tracker, a package registry or a web search, use the project's own equivalent, which may be local and offline, and send nothing beyond what the project's confidentiality rules allow (`keep-it-confidential`).
 

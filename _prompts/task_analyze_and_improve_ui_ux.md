@@ -1,7 +1,7 @@
 ---
 layout: skill
 title: Analyze and Improve UI/UX
-description: To analyze and improve the frontend UI/UX of a repository.
+description: To review a web frontend's UI/UX against usability heuristics and write recommendations. For designing or redesigning a product's flows, states, words, look and operators with evidence, use design-the-experience instead.
 category: Iterative Development
 type: Task
 status: legacy

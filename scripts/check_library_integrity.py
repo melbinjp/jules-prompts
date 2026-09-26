@@ -175,7 +175,8 @@ def main() -> int:
         except yaml.YAMLError as e:
             problems.append(f"_data/{data_file.name} is not valid YAML, so Jekyll cannot build: {e}")
 
-    steps = json.loads(WORKFLOW.read_text(encoding="utf-8"))["steps"]
+    workflow = json.loads(WORKFLOW.read_text(encoding="utf-8"))
+    steps = workflow["steps"]
     for s in steps:
         if s["prompt_slug"] not in files:
             problems.append(f"workflow.json step {s['order']} points at "
@@ -189,6 +190,31 @@ def main() -> int:
     orders = [s["order"] for s in steps]
     if orders != list(range(1, len(steps) + 1)):
         problems.append(f"workflow.json step orders are {orders}, not 1..{len(steps)}")
+
+    # A project in any state enters the path where its state says. Every entry starts at a step
+    # of the path, so no state leads somewhere the path does not go; and a project that already
+    # exists is founded again on paper, so what it already is gets a reason like everything else.
+    on_path = {s["prompt_slug"] for s in steps}
+    entries = workflow.get("entries") or []
+    if not entries:
+        problems.append("workflow.json has no entries, so a project not at the start has no way in")
+    for e in entries:
+        if e.get("start") not in on_path:
+            problems.append(f"workflow.json entry {e.get('state')!r} starts at {e.get('start')}, "
+                            "which is not a step of the path")
+        for then in e.get("then", []):
+            if then not in files:
+                problems.append(f"workflow.json entry {e.get('state')!r} continues to {then}, "
+                                "which is not in _prompts/")
+        if not (e.get("note") or "").strip():
+            problems.append(f"workflow.json entry {e.get('state')!r} does not say what happens there")
+    existing = [e for e in entries if "already exists" in e.get("state", "")]
+    if not existing or existing[0].get("start") != "task_start_from_an_idea":
+        problems.append("workflow.json: a project that already exists must start by being founded "
+                        "again on paper (task_start_from_an_idea), or its existing parts have no reason")
+    for t in workflow.get("throughout") or []:
+        if t.get("skill") not in files:
+            problems.append(f"workflow.json throughout names {t.get('skill')}, which is not in _prompts/")
 
     # skills/ is a generated view of _prompts/. Disagreement is the defect.
     planned = generate_skills.planned()

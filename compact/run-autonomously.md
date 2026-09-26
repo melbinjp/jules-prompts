@@ -16,10 +16,10 @@ From a model and a person, reach a build that runs on its own and cannot call an
 - development that then runs without waiting: choices the briefing did not settle are researched, tested, made, recorded, and open to the person's override at any time;
 - a context that stays small and true however long the build runs;
 - safety from the setup, not from asking: a sandbox, a checkpoint after every step, standing limits for anything that leaves the sandbox;
-- quality from gates: nothing is done until its checks pass, and the loop continues until they do or the budget ends;
+- quality from gates: nothing is done until its checks pass, and the loop continues until they do;
 - the same setup working offline, online or both, unattended, supervised, or run by hand.
 
-Then run the lifecycle (`start-from-an-idea`, `change-with-a-reason`, `take-to-production`, `keep-it-on-course`) inside it.
+Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production` and `keep-it-on-course`.
 
 ## Rules
 
@@ -42,7 +42,7 @@ Then run the lifecycle (`start-from-an-idea`, `change-with-a-reason`, `take-to-p
 2. Become an agent. Use the harness there is, or build one to the specification, and run `harness/conformance.py` against it until every check holds.
 3. Brief. Write `BRIEFING.md` and go through it with the person in one sitting: the answers, the delegations, the standing limits, the budget, the confidentiality classes.
 4. Set up the sandbox and the gates. The environment, the checkpoints, the limits enforced where actions happen, the stop, and the model qualified on its fixture.
-5. Found the project. `start-from-an-idea`, inside the loop.
+5. Found the project. `start-from-an-idea` inside the loop, or its re-founding form for a project that already exists; then `design-the-experience` for the journeys.
 6. Build. Milestone by milestone, change by change, each through its gates, committed, with `STATE.md` rewritten and choices recorded, never waiting.
 7. Review at each milestone. `keep-it-on-course`, including the run: budget spent, choices made and overridden, prompts near the window's edge, gates that failed and why.
 8. Report. What passed its gates, what has not yet, and the table.

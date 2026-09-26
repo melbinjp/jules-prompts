@@ -17,10 +17,10 @@ From a model and a person, reach a build that runs on its own and cannot call an
 - development that then runs without waiting: choices the briefing did not settle are researched, tested, made, recorded, and open to the person's override at any time;
 - a context that stays small and true however long the build runs;
 - safety from the setup, not from asking: a sandbox, a checkpoint after every step, standing limits for anything that leaves the sandbox;
-- quality from gates: nothing is done until its checks pass, and the loop continues until they do or the budget ends;
+- quality from gates: nothing is done until its checks pass, and the loop continues until they do;
 - the same setup working offline, online or both, unattended, supervised, or run by hand.
 
-Then run the lifecycle (`start-from-an-idea`, `change-with-a-reason`, `take-to-production`, `keep-it-on-course`) inside it.
+Then run the lifecycle inside it, entering where the project's state says (`workflow.json` in jules-prompts): `start-from-an-idea` (for a project that already exists, its re-founding form), `design-the-experience`, `change-with-a-reason`, `take-to-production` and `keep-it-on-course`.
 
 **Context:**
 *   **The project, in the person's words:** `<THE_PROJECT>`.
@@ -78,7 +78,7 @@ A model on its own is not an agent. It answers one message and forgets it. The p
     *   **A sandbox.** The agent runs in an environment of its own (a container, a virtual machine, or a dedicated user account) holding the project and the tools, and none of the person's other files or credentials. Inside it, any command is safe to run, so every command runs.
     *   **Checkpoints.** Every step is committed; a step that breaks the build is reverted, not repaired in place on top of a mess.
     *   **Standing limits** on everything that leaves the sandbox, from the briefing, enforced where the action happens: a spending cap on the payment account, a publishing target that is a test channel until a milestone says otherwise, device limits in firmware.
-    *   **A budget**, counted in the log as it is spent, with the pace slowed and the person told at 80%.
+    *   **A budget**, counted in the log as it is spent, with the pace slowed and the person told at 80%. When it runs out, the run pauses and the project does not: `STATE.md` holds where the work is and the next step, and the report names the routes to continue (a cheaper or local model, fewer roles at once, a funding route from the ledger), so the work resumes the moment budget does.
     *   **A stop** the person can trigger without the agent's help, and a clean state whenever it stops.
 *   **Make it correct by gates, so a result can only be one that passed.** Nothing is marked done by the model's say-so:
     *   **Every change** passes its tests (seen to fail without the change), moves its measure, and passes the trace check (`change-with-a-reason`), or it is reverted and tried another way.
@@ -86,7 +86,7 @@ A model on its own is not an agent. It answers one message and forgets it. The p
     *   **The product** passes the bar in `take-to-production` before it reaches people.
     *   **The model itself** is qualified on the matching jules-prompts fixture before it is trusted with a stage, and re-qualified when it changes.
 
-    When a gate fails, the loop does not stop and does not lower the gate: it finds the cause and tries again, or takes another route, until the gate holds or the budget ends. What it reports at the end is what passed, and what did not yet, with the evidence.
+    When a gate fails, the loop does not stop and does not lower the gate: it finds the cause and tries again, or takes another route, until the gate holds, or the budget pauses the run. What it reports is what passed, and what did not yet, with the evidence and the next route.
 *   **Work in the smallest loop that finishes things.** Take the next task from the current milestone; make the change; run its gates; commit it with its `Serves:` and `Verified:` lines; rewrite `STATE.md`; take the next. Review at every milestone before starting the next.
 *   **Split into a team only where it pays, and coordinate through the repository.** One model can play several roles in turn, each with a fresh context and its own skill: builder, reviewer, researcher, tester. They share nothing but the repository. Where several models are available, route each role by what it may see and what it has scored (`start-from-an-idea`).
 *   **Explore where nothing is known.** For an invention, or a system nobody has built, there is nothing to look up. Write the unknowns as questions; for each, the cheapest experiment, simulation or prototype that would answer it; run the ones that decide the most first; record every result, failures included, as evidence in the ledger. Search prior work first, so the experiment starts where others stopped.
@@ -106,7 +106,7 @@ A model on its own is not an agent. It answers one message and forgets it. The p
 2.  **Become an agent.** Use the harness there is, or build one to the specification, and run `harness/conformance.py` against it until every check holds.
 3.  **Brief.** Write `BRIEFING.md` and go through it with the person in one sitting: the answers, the delegations, the standing limits, the budget, the confidentiality classes.
 4.  **Set up the sandbox and the gates.** The environment, the checkpoints, the limits enforced where actions happen, the stop, and the model qualified on its fixture.
-5.  **Found the project.** `start-from-an-idea`, inside the loop.
+5.  **Found the project.** `start-from-an-idea` inside the loop, or its re-founding form for a project that already exists; then `design-the-experience` for the journeys.
 6.  **Build.** Milestone by milestone, change by change, each through its gates, committed, with `STATE.md` rewritten and choices recorded, never waiting.
 7.  **Review at each milestone.** `keep-it-on-course`, including the run: budget spent, choices made and overridden, prompts near the window's edge, gates that failed and why.
 8.  **Report.** What passed its gates, what has not yet, and the table.

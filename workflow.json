@@ -1,7 +1,7 @@
 {
-  "version": "3.1",
+  "version": "4.0",
   "title": "From an Idea to a Working Product, and Always Improving",
-  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. With one model and one person, start at the first step; with an idea and a working agent, at the second; with a project that already exists, at the third. Each step names when it is done, and the other skills it calls on.",
+  "description": "The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, design what people and agents use, build it in traced changes, take it to production quality, and improve it continuously after launch. A project in any state enters where its state says, and every entry leads to the same path. Each step names when it is done, and the other skills it calls on.",
   "steps": [
     {
       "order": 1,
@@ -24,6 +24,7 @@
       "done_when": "the owner has agreed the path and its first step, the ledger passes the trace check, and the walking skeleton has run end to end and been rolled back once.",
       "branches": [
         "task_choose_with_evidence",
+        "task_design_the_experience",
         "task_act_on_the_physical_world",
         "task_map_the_architecture",
         "task_keep_it_confidential"
@@ -45,6 +46,20 @@
     },
     {
       "order": 4,
+      "prompt_slug": "task_design_the_experience",
+      "title": "Design what people and agents use",
+      "description": "Design every journey as a flow, with every state and every word, before breadth is built. Keep one system of look and behaviour in code, make every action operable by a person, an agent or automation with the same limits, and keep the design threaded to the architecture. Settle taste with the owner and everything else with evidence, and test each journey with people, or stand-ins labelled as such.",
+      "done_when": "each journey that must never fail is a flow with every state and word designed, operable by a person and an agent with the same limits, threaded to the architecture with no empty cell, and tested with people or labelled stand-ins until its target holds.",
+      "branches": [
+        "task_choose_with_evidence",
+        "task_change_with_a_reason",
+        "task_act_on_the_physical_world"
+      ],
+      "required": true,
+      "repeatable": true
+    },
+    {
+      "order": 5,
       "prompt_slug": "task_choose_with_evidence",
       "title": "Choose with evidence, whenever a choice matters",
       "description": "Compare real options for each consequential choice, including building it and combining several. Use criteria from the goal, back the decision with at least two pieces of evidence (one verified), redo every number, and keep a way out.",
@@ -54,13 +69,14 @@
       "repeatable": true
     },
     {
-      "order": 5,
+      "order": 6,
       "prompt_slug": "task_change_with_a_reason",
       "title": "Build in changes that each have a reason",
       "description": "Every milestone and every request, however vaguely worded, is translated into a measure, verified before and after, built through every layer it touches, and traced to the goal, with nothing left behind.",
       "done_when": "every claim in the request is accounted for, every commit has its Serves and Verified lines, the measure moved, and nothing is left detached.",
       "branches": [
         "task_scope_a_vague_issue",
+        "task_design_the_experience",
         "task_fix_a_bug_test_first",
         "task_verify_a_migration",
         "task_run_the_error_paths",
@@ -70,12 +86,13 @@
       "repeatable": true
     },
     {
-      "order": 6,
+      "order": 7,
       "prompt_slug": "task_take_to_production",
       "title": "Take it to production quality",
       "description": "Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.",
       "done_when": "every row of the bar holds, or is broken or skipped with its reason and its next step in the plan.",
       "branches": [
+        "task_design_the_experience",
         "task_security_review_agent_code",
         "task_run_the_error_paths",
         "task_prove_the_docs",
@@ -86,7 +103,7 @@
       "repeatable": true
     },
     {
-      "order": 7,
+      "order": 8,
       "prompt_slug": "task_review_an_agent_pr",
       "title": "Review what the agent produced",
       "description": "Check each pull request against the claims it makes about itself, and break the code under every new test to see it go red.",
@@ -100,7 +117,7 @@
       "repeatable": true
     },
     {
-      "order": 8,
+      "order": 9,
       "prompt_slug": "task_keep_it_on_course",
       "title": "Keep it on course and improving, for good",
       "description": "At every milestone and continuously after launch: take every measure again from its source, switch routes where a course change fired, remove what no longer serves the goal, run the pipeline both ways, and rank the next improvements. The project continues, adjusts, re-routes or grows; it is never left half-done.",
@@ -115,7 +132,7 @@
       "repeatable": true
     },
     {
-      "order": 9,
+      "order": 10,
       "prompt_slug": "task_update_dependencies",
       "title": "Keep it current",
       "description": "Update dependencies in small, verified steps, so staying current never becomes a rewrite.",
@@ -123,6 +140,81 @@
       "branches": [],
       "required": false,
       "repeatable": true
+    }
+  ],
+  "entries": [
+    {
+      "state": "An idea, and only a language model to build it with",
+      "start": "task_run_autonomously",
+      "then": [
+        "task_start_from_an_idea"
+      ],
+      "note": "The model builds its own harness and tools and proves them, the person is asked everything only they can answer in one sitting, and the build then runs without waiting."
+    },
+    {
+      "state": "An idea, and an agent that already works",
+      "start": "task_start_from_an_idea",
+      "then": [
+        "task_design_the_experience"
+      ],
+      "note": "What it takes, the costly decisions with evidence, a pipeline anyone can run, and one slice end to end."
+    },
+    {
+      "state": "A project that already exists, in any state: a prototype, a half-built or vibe-coded build, an inherited codebase, or a working product with gaps",
+      "start": "task_start_from_an_idea",
+      "then": [
+        "task_repair_setup_script",
+        "task_design_the_experience",
+        "task_take_to_production"
+      ],
+      "note": "Found it again on paper: the ledger written from what is there, every decision it embodies recorded with the evidence it had, and those nobody can justify marked for revisiting. Then make it run from cold, and close the gap."
+    },
+    {
+      "state": "Live, and it has to keep working and getting better",
+      "start": "task_keep_it_on_course",
+      "then": [
+        "task_change_with_a_reason"
+      ],
+      "note": "Every measure taken again from its source, the next improvements ranked by what they move, on a steady cadence for as long as it serves anyone."
+    },
+    {
+      "state": "Stalled, abandoned or drifting",
+      "start": "task_keep_it_on_course",
+      "then": [
+        "task_choose_with_evidence",
+        "task_change_with_a_reason"
+      ],
+      "note": "The review finds the route that is blocked and the next route to the same goal. Nothing is declared dead."
+    },
+    {
+      "state": "A request, however it is worded: 'optimise it', 'make it pretty', 'add AI'",
+      "start": "task_change_with_a_reason",
+      "then": [],
+      "note": "Translated into the measure it moves, verified before and after, built through every layer it touches."
+    },
+    {
+      "state": "A choice between options: a tool, a vendor, a part, a design, a route",
+      "start": "task_choose_with_evidence",
+      "then": [],
+      "note": "Real options, criteria from the goal, at least two backings with one verified, and a way out."
+    },
+    {
+      "state": "Work an agent produced",
+      "start": "task_review_an_agent_pr",
+      "then": [
+        "task_qa_an_agents_tests"
+      ],
+      "note": "Every claim it makes checked, and every new test seen to fail."
+    }
+  ],
+  "throughout": [
+    {
+      "when": "the project is private, proprietary or offline, or any of its work must not leave",
+      "skill": "task_keep_it_confidential"
+    },
+    {
+      "when": "it moves, heats, dispenses, spends or sends: hardware, devices or real-world services",
+      "skill": "task_act_on_the_physical_world"
     }
   ]
 }

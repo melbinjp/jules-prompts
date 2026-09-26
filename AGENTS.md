@@ -60,29 +60,40 @@ The skills need no network. On a private or air-gapped project, install from a c
 | Category | Description |
 |----------|-------------|
 | **Lifecycle** | One model and one person running a build on its own (`run-autonomously`), from any idea to a foundation and a path (`start-from-an-idea`), choices made with verified evidence (`choose-with-evidence`), every change traced to the goal (`change-with-a-reason`), and continuous improvement after launch (`keep-it-on-course`) |
+| **Design** | What people and agents see, do and hear, on any surface: flows, states, words, one system in code, every action operable by a person or an agent, tested with people (`design-the-experience`) |
 | **End to End** | Taking a project in any state to production quality (`take-to-production`) |
 | **Physical Systems** | Commands to hardware, devices and real-world services (`act-on-the-physical-world`) |
 | **Initial Scoping** | First-pass tasks for new or unknown projects (audit, hardening, frontend build) |
-| **Iterative Development** | Tasks for improving existing code (fix & refine, UI/UX, build from plan) |
+| **Iterative Development** | Tasks for improving existing code (fix & refine, build from plan; the legacy UI/UX review) |
 | **Maintenance** | Ongoing tasks (dependency updates, curation, agent-PR review) |
 | **Security** | Security review of agent-written code (`security-review-agent-code`), and the project's own confidentiality, offline first (`keep-it-confidential`) |
 | **Meta** | Templates and prompt-generation tools |
 
 ## Recommended Workflow
 
-From any idea to a working product, then continuous improvement. No step concludes that an idea cannot be done; a blocked route gets another route. Start at step 1 with one model and one person, at step 2 with an idea and a working agent, at step 3 with a project that already exists. Each step in `workflow.json` has a `done_when` gate and the `branches` (other skills) it calls on:
+From any idea to a working product, then continuous improvement. No step concludes that an idea cannot be done; a blocked route gets another route. A project in any state enters where its state says (`entries` in `workflow.json`):
+
+- an idea, and only a model to build it with: step 1, then 2;
+- an idea, and an agent that already works: step 2;
+- a project that already exists, in any state: step 2 in its re-founding form (the ledger written from what is there, every existing decision recorded with the evidence it had), then 3, 4 and 7;
+- live, or stalled, abandoned or drifting: step 9;
+- a request, however worded: step 6; a choice: step 5; work an agent produced: step 8;
+- alongside every step: `task_keep_it_confidential` for a private, proprietary or offline project, and `task_act_on_the_physical_world` for anything that moves, heats, dispenses, spends or sends (`throughout`).
+
+Each step has a `done_when` gate and the `branches` (other skills) it calls on:
 
 1. `task_run_autonomously`: one model and one person; the model builds and proves its own harness and tools if it has none, the person is briefed once, and development runs without waiting inside a sandbox, checkpoints and gates
 2. `task_start_from_an_idea`: what it takes to make the idea happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline a person or an agent can run, one slice end to end, and the ledger
 3. `task_repair_setup_script`: make it run from cold
-4. `task_choose_with_evidence`: each consequential choice (repeatable)
-5. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
-6. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
-7. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
-8. `task_keep_it_on_course`: at every milestone and continuously after launch; ranks the next improvements (repeatable)
-9. `task_update_dependencies`: keep it current (optional, repeatable)
+4. `task_design_the_experience`: every journey as a flow with every state and word, one system in code, every action operable by a person and an agent, threaded to the architecture, tested with people (repeatable)
+5. `task_choose_with_evidence`: each consequential choice (repeatable)
+6. `task_change_with_a_reason`: every milestone and every request, traced to the goal (repeatable)
+7. `task_take_to_production`: write the bar, close the gap, end in a verdict table (repeatable)
+8. `task_review_an_agent_pr`: review each pull request the agent produced (repeatable)
+9. `task_keep_it_on_course`: at every milestone and continuously after launch; ranks the next improvements (repeatable)
+10. `task_update_dependencies`: keep it current (optional, repeatable)
 
-Steps 2, 4, 5 and 8 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` and `Verified:` lines, in that project's CI.
+Steps 2, 4, 5, 6 and 9 share one ledger in the target project: `PROJECT.md` and `decisions/`. `harness/check_trace.py` checks it, and every commit's `Serves:` and `Verified:` lines, in that project's CI.
 
 See `workflow.json` for the machine-readable workflow graph.
 

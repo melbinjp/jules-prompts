@@ -1,7 +1,7 @@
 title: Jules Prompts
 # The description is what a results page and a link preview show, so it leads with the words
 # people search for: what these are, and which agents read them.
-description: "Free, open-source Agent Skills (SKILL.md) for Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules and any AI agent: take any idea, software or hardware, to a working product and keep it improving, with every decision backed by evidence and every change traced to the goal. Each skill ends in a verdict you can check."
+description: "Free, open-source Agent Skills (SKILL.md) for Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules and any AI agent: take any idea, software or hardware, in any state, to a working product and keep it improving, with every decision backed by evidence, every change traced to the goal, and the experience designed and tested with people. Each skill ends in a verdict you can check."
 author: Melbin J Paulose
 # The link-preview card, made from scripts/og-image.html (see the comment at its top).
 og_image: /assets/og.png
@@ -31,6 +31,11 @@ collections:
   # by scripts/emit.py; see emit_agent_skills for why they are wrapped rather than copied.
   agent_skills:
     output: true
+
+# The stylesheet is shipped compressed: every visitor downloads it, and nobody reads the output.
+# The source (assets/css/style.scss) keeps its comments and layout.
+sass:
+  style: compressed
 
 # Jekyll skips dot-directories. The Agent Skills discovery index lives in one.
 include:

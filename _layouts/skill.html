@@ -55,7 +55,41 @@ curl -fsSL {{ skill_path | absolute_url }} \
   </section>
   {%- endif %}
 
-  <div class="prose" id="procedure">
-    {{ content }}
+  {%- comment -%}
+    The procedure's sections are bold labels in the Markdown, because that is what an agent
+    reads. On the page they become headings a person can jump to. Only the page changes: the
+    SKILL.md stays byte for byte what agents load.
+  {%- endcomment -%}
+  {%- assign body = content -%}
+  {%- assign found = "" -%}
+  {%- assign names = "Objective,Context,Requirements &amp; Constraints,Constraints,Method,Guiding Principles,Execution Flow,Deliverables,Definition of Done" | split: "," -%}
+  {%- for name in names -%}
+    {%- assign opening = '<p><strong>' | append: name | append: ':</strong>' -%}
+    {%- if body contains opening -%}
+      {%- assign closed = opening | append: '</p>' -%}
+      {%- assign id = name | replace: "&amp;", "and" | slugify -%}
+      {%- assign heading = '<h2 class="section" id="' | append: id | append: '">' | append: name | append: '</h2>' -%}
+      {%- assign body = body | replace: closed, heading -%}
+      {%- assign heading_p = heading | append: '<p>' -%}
+      {%- assign body = body | replace: opening, heading_p -%}
+      {%- assign found = found | append: id | append: "|" | append: name | append: ";;" -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign sections = found | split: ";;" -%}
+  <div class="skill-body">
+    {%- if sections.size > 2 %}
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title">On this page</h2>
+      <ol>
+        {%- for section in sections %}
+        {%- assign parts = section | split: "|" %}
+        <li><a href="#{{ parts[0] }}">{{ parts[1] }}</a></li>
+        {%- endfor %}
+      </ol>
+    </nav>
+    {%- endif %}
+    <div class="prose" id="procedure">
+      {{ body }}
+    </div>
   </div>
 </article>

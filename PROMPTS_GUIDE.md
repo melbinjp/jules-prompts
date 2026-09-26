@@ -73,6 +73,18 @@ Owners ask in the words they have: "it feels slow", "make it scalable", "add AI"
 
 ---
 
+### [`task_design_the_experience.md`]({% link _prompts/task_design_the_experience.md %})
+**Purpose:** To design what people and agents meet when they use a product, on any surface, as one design with the architecture, with every decision backed by evidence and every journey tested.
+
+Asked to design, an agent picks a component library, a template and a colour, and lays out a screen per feature. The flow ends up in the order the features were built, the words are the developer's, and "modern" or "users prefer" stands in for evidence. This prompt starts from the people and their situation, with sources, and designs each journey as a flow with every state and every word before breadth is built. It keeps the design threaded to the architecture, so a promise like "undo" has the data model to keep it. It makes every action operable by a person, an agent or automation, with the same names and limits enforced in one place, and the level of automation a setting. It keeps one system of look and behaviour in code as the only source, settles taste with the owner by showing rendered directions, and tests each journey with people, or with stand-ins labelled as simulations. It works the same for screens, command lines, APIs, voices and devices. It ends in a verdict table.
+
+**When to use it:**
+*   After the project is founded, before building breadth, and again for each new journey.
+*   On any request about how a product looks or feels ("make it prettier", "more intuitive"), through `change-with-a-reason`.
+*   When agents, scripts or automation must operate a product people also use, or the other way round.
+
+---
+
 ### [`task_take_to_production.md`]({% link _prompts/task_take_to_production.md %})
 **Purpose:** To take a project in any state, software or physical, to production quality, and show item by item that it got there.
 
@@ -152,14 +164,13 @@ This prompt guides the AI to read an existing backend, from a live endpoint, its
 ---
 
 ### [`task_analyze_and_improve_ui_ux.md`]({% link _prompts/task_analyze_and_improve_ui_ux.md %})
-**Purpose:** To analyze and improve the frontend UI/UX of a repository.
+**Purpose:** To review a web frontend's UI/UX against usability heuristics and write recommendations. Legacy.
 
-This prompt guides the AI to conduct a comprehensive analysis of the target website's UI/UX and produce a report with concrete suggestions for improvement. The suggestions should cover usability, visual design, and overall user experience.
+This prompt guides the AI to analyze a website's UI/UX and produce a report with suggestions for usability, visual design and overall experience. `task_design_the_experience.md` replaces it for any design work: it designs from evidence about the people, keeps the design threaded to the architecture, covers agents as operators, and tests with people rather than recommending from principles.
 
 **When to use it:**
-*   When you want to improve the user experience of your website.
-*   Before starting a major redesign of your website.
-*   When you want to get a fresh perspective on your website's UI/UX.
+*   When a quick heuristic review of a website is all that is wanted.
+*   Otherwise, use `task_design_the_experience.md`.
 
 ---
 
@@ -388,19 +399,29 @@ Documentation does not fail loudly. Every sentence was true the day it was writt
 
 ## Recommended Workflow
 
-The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from any idea to a working product and then continuous improvement. Start at the first step with one model and one person, at the second with an idea and a working agent, and at the third with a project that already exists. Each step has a gate that says when it is done, and names the other skills it calls on.
+The sequence in [`workflow.json`]({{ '/workflow.json' | relative_url }}), also shown on the [workflow page]({{ '/workflow/' | relative_url }}), from any idea to a working product and then continuous improvement. A project in any state enters where its state says, and every entry leads onto the same path:
+
+*   **An idea, and only a model to build it with:** step 1, then 2.
+*   **An idea, and an agent that already works:** step 2.
+*   **A project that already exists, in any state** (a prototype, a half-built or vibe-coded build, an inherited codebase, a working product with gaps): step 2 in its re-founding form (the ledger written from what is there, every existing decision recorded with the evidence it had), then 3, 4 and 7.
+*   **Live, and it has to keep getting better,** or **stalled, abandoned or drifting:** step 9, which finds the next route to the same goal.
+*   **A request, however it is worded:** step 6. **A choice between options:** step 5. **Work an agent produced:** step 8.
+*   **Alongside every step:** `task_keep_it_confidential.md` for a private, proprietary or offline project, and `task_act_on_the_physical_world.md` for anything that moves, heats, dispenses, spends or sends.
+
+Each step has a gate that says when it is done, and names the other skills it calls on.
 
 1.  **Set up the model and the person.** `task_run_autonomously.md`. The model builds and proves its own harness and tools if it has none, the person is briefed once with standing limits, and the sandbox, checkpoints and gates go in, so development runs without waiting.
 2.  **Start from the idea.** `task_start_from_an_idea.md`. What it takes to make it happen and how it is paid for, the measures and course changes, the costly decisions made with verified evidence, a pipeline anyone can run, one slice end to end, and the ledger. For an existing project, write the ledger from what is there.
 3.  **Make it run from cold.** `task_repair_setup_script.md`. Dependencies install and the tests run to completion, so every later step starts from a baseline rather than an assumption.
-4.  **Choose with evidence, whenever a choice matters.** `task_choose_with_evidence.md`, repeated for each consequential choice.
-5.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
-6.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
-7.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
-8.  **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
-9.  **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
+4.  **Design what people and agents use.** `task_design_the_experience.md`, repeated for each new journey. Flows with every state and word, one system in code, every action operable by a person and an agent, threaded to the architecture, and tested with people.
+5.  **Choose with evidence, whenever a choice matters.** `task_choose_with_evidence.md`, repeated for each consequential choice.
+6.  **Build in changes that each have a reason.** `task_change_with_a_reason.md`, for every milestone and every request.
+7.  **Take it to production quality.** `task_take_to_production.md`, repeated as needed. It calls on the other core skills where they fit: `design-the-experience`, `map-the-architecture`, `run-the-error-paths`, `fix-a-bug-test-first`, `prove-the-fix`, and `act-on-the-physical-world` for anything that touches hardware.
+8.  **Review what the agent produced.** `task_review_an_agent_pr.md`, on each pull request.
+9.  **Keep it on course and improving.** `task_keep_it_on_course.md`, at every milestone and continuously after launch.
+10. **Keep it current.** `task_update_dependencies.md`, optional and repeatable.
 
-The second, fourth, fifth and eighth steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
+The second, fourth, fifth, sixth and ninth steps share one ledger: `PROJECT.md` (the goal, measures, journeys, resources, course changes and milestones) and `decisions/` (one file per decision, with what it serves, its evidence and what would reopen it). [`harness/check_trace.py`](https://github.com/melbinjp/jules-prompts/blob/main/harness/check_trace.py) checks it in CI, including that every commit names what it serves and how it was verified, and [`harness/ledger-example/`](https://github.com/melbinjp/jules-prompts/tree/main/harness/ledger-example) is a small worked example that passes it.
 
 The earlier sequence (`task_audit_repo.md`, then the legacy hardening and fix-and-refine prompts) still works and is still here. `task_take_to_production.md` covers what it was for, and checks it.
 

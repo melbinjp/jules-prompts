@@ -737,7 +737,14 @@ section:first-of-type > .section-title { margin-top: 8px; }
 
 // --- Skill pages -------------------------------------------------------------------
 
-.skill { max-width: 820px; }
+.skill {
+  max-width: 820px;
+  // Wide enough for the text and the list of its sections beside it.
+  @media (min-width: 1180px) {
+    max-width: 1096px;
+    > .crumbs, > .skill-head, > .use { max-width: 820px; }
+  }
+}
 
 .crumbs {
   margin-bottom: 20px;
@@ -939,4 +946,129 @@ section:first-of-type > .section-title { margin-top: 8px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+// --- Where to start ---------------------------------------------------------------------
+// One row per state a project can be in: the state in the person's words, then the route
+// into the path. Rows, not a table, so a phone reads them without scrolling sideways.
+
+.entries {
+  display: grid;
+  gap: 10px;
+  max-width: 920px;
+  margin: 20px 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  display: grid;
+  gap: 6px 24px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+
+  @media (min-width: 760px) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; }
+
+  p { margin: 0; }
+  .state { font-weight: 600; }
+  .entry-note { grid-column: 1 / -1; color: var(--text-2); font-size: 0.92rem; }
+}
+
+.route {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  font-size: 0.95rem;
+}
+
+.hop {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.hop-n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  border-radius: 6px;
+  background: var(--mark);
+  color: var(--on-mark);
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.then { color: var(--text-2); }
+
+.throughout {
+  max-width: var(--measure);
+  margin: 4px 0 8px;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  strong { color: var(--text); }
+}
+
+// --- On this page -------------------------------------------------------------------------
+// A long skill is a fifteen-minute read. Its sections become headings a reader can jump to,
+// and on a wide screen the list of them stays beside the text.
+
+.skill-body {
+  @media (min-width: 1180px) {
+    display: grid;
+    grid-template-columns: minmax(0, 820px) 220px;
+    gap: 56px;
+    align-items: start;
+    > .prose { grid-column: 1; grid-row: 1; }
+  }
+}
+
+.toc {
+  margin: 0 0 28px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 0.9rem;
+
+  h2 {
+    margin: 0 0 8px;
+    color: var(--label);
+    font-family: var(--display);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  ol { margin: 0; padding: 0; list-style: none; }
+  li { margin: 4px 0; }
+  a { color: var(--text-2); text-decoration: none; }
+  a:hover, a:focus-visible { color: var(--text); text-decoration: underline; }
+
+  @media (min-width: 1180px) {
+    position: sticky;
+    top: 24px;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+}
+
+.prose h2.section {
+  margin: 2.2em 0 0.6em;
+  padding-top: 0.6em;
+  border-top: 1px solid var(--line);
+  font-size: 1.3rem;
+  scroll-margin-top: 16px;
+}
+
+// Lists of links, not links inside sentences, get a 44 px target on touch screens: the
+// contents list, the path, the routes into it, each step's title, and the breadcrumb.
+@media (pointer: coarse) {
+  .toc li, .path li { margin: 0; }
+  .toc a, .path a, .route a, .step h2 a, .crumbs a { display: inline-block; padding: 11px 0; }
 }

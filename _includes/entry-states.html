@@ -1,0 +1,60 @@
+<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
+<ol class="entries">
+<li class="entry">
+  <p class="state">An idea, and only a language model to build it with</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">1</span><a href="{{ "/prompts/task_run_autonomously.html" | relative_url }}">Set up the model and the person</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">The model builds its own harness and tools and proves them, the person is asked everything only they can answer in one sitting, and the build then runs without waiting.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">An idea, and an agent that already works</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">What it takes, the costly decisions with evidence, a pipeline anyone can run, and one slice end to end.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">A project that already exists, in any state: a prototype, a half-built or vibe-coded build, an inherited codebase, or a working product with gaps</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">2</span><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">3</span><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">4</span><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">7</span><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">Found it again on paper: the ledger written from what is there, every decision it embodies recorded with the evidence it had, and those nobody can justify marked for revisiting. Then make it run from cold, and close the gap.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">Live, and it has to keep working and getting better</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">9</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">Every measure taken again from its source, the next improvements ranked by what they move, on a steady cadence for as long as it serves anyone.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">Stalled, abandoned or drifting</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">9</span><a href="{{ "/prompts/task_keep_it_on_course.html" | relative_url }}">Keep it on course and improving, for good</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">The review finds the route that is blocked and the next route to the same goal. Nothing is declared dead.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">A request, however it is worded: &#x27;optimise it&#x27;, &#x27;make it pretty&#x27;, &#x27;add AI&#x27;</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">6</span><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">Translated into the measure it moves, verified before and after, built through every layer it touches.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">A choice between options: a tool, a vendor, a part, a design, a route</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">5</span><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">Real options, criteria from the goal, at least two backings with one verified, and a way out.</p>
+  {%- endif %}
+</li>
+<li class="entry">
+  <p class="state">Work an agent produced</p>
+  <p class="route"><span class="sr-only">Start at </span><span class="hop"><span class="hop-n">8</span><a href="{{ "/prompts/task_review_an_agent_pr.html" | relative_url }}">Review what the agent produced</a></span><span class="then" aria-hidden="true">→</span><span class="hop"><a href="{{ "/prompts/task_qa_an_agents_tests.html" | relative_url }}">QA the Tests an Agent Wrote</a></span></p>
+  {%- if include.notes %}
+  <p class="entry-note">Every claim it makes checked, and every new test seen to fail.</p>
+  {%- endif %}
+</li>
+</ol>
+<p class="throughout"><strong>Alongside every step:</strong> <a href="{{ "/prompts/task_keep_it_confidential.html" | relative_url }}">Keep a Project Confidential, Offline First</a> when the project is private, proprietary or offline, or any of its work must not leave; <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a> when it moves, heats, dispenses, spends or sends: hardware, devices or real-world services.</p>

@@ -60,7 +60,7 @@ When the project acts on the physical world (hardware, devices, instruments, veh
 **Requirements & Constraints:**
 *   **Write the bar before changing anything.** Commit it to the repository (a `QUALITY.md`, or a section of the README) and keep it short. It states:
     *   the one job, in a sentence the person using it would say;
-    *   who does it, and on what: the actual devices, operating systems, browsers, networks and, for physical systems, the hardware and the conditions it runs in;
+    *   who does it, and on what: the people and, where they operate it, the agents and automation; the actual devices, operating systems, browsers, networks and, for physical systems, the hardware and the conditions it runs in;
     *   the three to five journeys that must never fail;
     *   what must never be lost or corrupted;
     *   the budgets that decide "fast enough" and "small enough": load time, size, frame rate, memory, battery, latency, cost.
@@ -75,7 +75,8 @@ When the project acts on the physical world (hardware, devices, instruments, veh
     *   **Reliability.** Every external dependency made to fail and to go slow: timeouts bounded, retries capped and safe to repeat, and a degraded mode the person can still use (`run-the-error-paths`).
     *   **Performance and capacity.** The budgets, and for anything that serves more than one person: the expected peak with a margin, measured; memory and open handles steady over a long run; the cost of one use, known.
     *   **Compatibility.** The platform matrix, plus the previous version's data and settings, other locales (longer translated text, right-to-left scripts, time zones, number, date and unit formats), and slow or metered networks.
-    *   **Accessibility and craft.** The craft standard below.
+    *   **Accessibility and craft.** The craft standard below. Where the flows, states or words were never designed, design them first (`design-the-experience`).
+    *   **Operators.** Each journey done end to end by each operator the bar names (a person, an agent through the machine interface, automation), under the same limits enforced in one place.
     *   **Operations.** The operability items below, and for anything that runs as a service: a health check, an alert on each never-fail journey that fires before a person reports it, and logs with enough context to diagnose a failure that cannot be reproduced.
     *   **Delivery.** A build that reproduces from the lockfile, checks that gate the merge and have been seen to fail, a release that is one action, and a rollback that has actually been tried.
     *   **Maintainability.** Setup from cold (`repair-setup-script`), documentation whose commands run (`prove-the-docs`), dependencies current (`update-dependencies`), and the complexity budget below.

@@ -1,5 +1,4 @@
 <!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->
-<p class="lede">The recommended sequence for making any idea real, software or physical, and keeping it working and improving: set up the model and the person, found the project on written reasons, build it in traced changes, take it to production quality, and improve it continuously after launch. With one model and one person, start at the first step; with an idea and a working agent, at the second; with a project that already exists, at the third. Each step names when it is done, and the other skills it calls on.</p>
 <ol class="steps">
 <li class="step">
   <h2><a href="{{ "/prompts/task_run_autonomously.html" | relative_url }}">Set up the model and the person</a></h2>
@@ -11,13 +10,20 @@
   <h2><a href="{{ "/prompts/task_start_from_an_idea.html" | relative_url }}">Start from the idea</a></h2>
   <p>Work out what it takes to make the idea happen and how it is paid for. Make the few decisions that are costly to reverse with verified evidence. Make every stage of the pipeline a command a person or an agent can run, and build one thin slice end to end. The ledger it writes gives every later step its reasons. For a project that already exists, write the ledger from what is there.</p>
   <p class="gate"><strong>Done when</strong> the owner has agreed the path and its first step, the ledger passes the trace check, and the walking skeleton has run end to end and been rolled back once.</p>
-  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a>, <a href="{{ "/prompts/task_keep_it_confidential.html" | relative_url }}">Keep a Project Confidential, Offline First</a></p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a>, <a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design the Experience, with Evidence</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a>, <a href="{{ "/prompts/task_keep_it_confidential.html" | relative_url }}">Keep a Project Confidential, Offline First</a></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_repair_setup_script.html" | relative_url }}">Make it run from cold</a></h2>
   <p>Dependencies install, the tests run to completion, and nothing reports success while broken, so every later step starts from a baseline rather than an assumption.</p>
   <p class="gate"><strong>Done when</strong> a clean checkout installs and runs its tests with one command, and breaking a step makes that command fail.</p>
   <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_isolate_tests_from_services.html" | relative_url }}">Isolate Tests from External Services</a></p>
+</li>
+<li class="step">
+  <h2><a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design what people and agents use</a></h2>
+  <p>Design every journey as a flow, with every state and every word, before breadth is built. Keep one system of look and behaviour in code, make every action operable by a person, an agent or automation with the same limits, and keep the design threaded to the architecture. Settle taste with the owner and everything else with evidence, and test each journey with people, or stand-ins labelled as such.</p>
+  <p class="gate"><strong>Done when</strong> each journey that must never fail is a flow with every state and word designed, operable by a person and an agent with the same limits, threaded to the architecture with no empty cell, and tested with people or labelled stand-ins until its target holds.</p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose Between Options with Evidence</a>, <a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Change a Project with a Reason</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
+  <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_choose_with_evidence.html" | relative_url }}">Choose with evidence, whenever a choice matters</a></h2>
@@ -29,14 +35,14 @@
   <h2><a href="{{ "/prompts/task_change_with_a_reason.html" | relative_url }}">Build in changes that each have a reason</a></h2>
   <p>Every milestone and every request, however vaguely worded, is translated into a measure, verified before and after, built through every layer it touches, and traced to the goal, with nothing left behind.</p>
   <p class="gate"><strong>Done when</strong> every claim in the request is accounted for, every commit has its Serves and Verified lines, the measure moved, and nothing is left detached.</p>
-  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_scope_a_vague_issue.html" | relative_url }}">Scope a Vague Issue</a>, <a href="{{ "/prompts/task_fix_a_bug_test_first.html" | relative_url }}">Fix a Bug, Failing Test First</a>, <a href="{{ "/prompts/task_verify_a_migration.html" | relative_url }}">Verify a Database Migration Before It Meets Real Data</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_scope_a_vague_issue.html" | relative_url }}">Scope a Vague Issue</a>, <a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design the Experience, with Evidence</a>, <a href="{{ "/prompts/task_fix_a_bug_test_first.html" | relative_url }}">Fix a Bug, Failing Test First</a>, <a href="{{ "/prompts/task_verify_a_migration.html" | relative_url }}">Verify a Database Migration Before It Meets Real Data</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">
   <h2><a href="{{ "/prompts/task_take_to_production.html" | relative_url }}">Take it to production quality</a></h2>
   <p>Write the bar, then close the gap in order of what it costs the people who use it: nothing lost, the core job on every platform, finished to use, nothing it does not need. Every item ends as holds, broken or skipped.</p>
   <p class="gate"><strong>Done when</strong> every row of the bar holds, or is broken or skipped with its reason and its next step in the plan.</p>
-  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_security_review_agent_code.html" | relative_url }}">Security Review of Agent-Written Code</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_prove_the_docs.html" | relative_url }}">Prove the Documentation Against the Code</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
+  <p class="branches"><strong>Calls on</strong> <a href="{{ "/prompts/task_design_the_experience.html" | relative_url }}">Design the Experience, with Evidence</a>, <a href="{{ "/prompts/task_security_review_agent_code.html" | relative_url }}">Security Review of Agent-Written Code</a>, <a href="{{ "/prompts/task_run_the_error_paths.html" | relative_url }}">Run the Error Paths</a>, <a href="{{ "/prompts/task_prove_the_docs.html" | relative_url }}">Prove the Documentation Against the Code</a>, <a href="{{ "/prompts/task_map_the_architecture.html" | relative_url }}">Map the Architecture</a>, <a href="{{ "/prompts/task_act_on_the_physical_world.html" | relative_url }}">Act on the Physical World, and Prove It Happened</a></p>
   <p class="tags"><span class="tag">repeat as needed</span></p>
 </li>
 <li class="step">

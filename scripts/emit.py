@@ -44,17 +44,18 @@ SKIP = {"template_master_prompt"}
 
 PLUGIN_NAME = "jules-prompts"
 PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
-PLUGIN_VERSION = "1.3.0"
+PLUGIN_VERSION = "1.4.0"
 PLUGIN_AUTHOR = {"name": "Melbin J Paulose", "url": "https://github.com/melbinjp"}
 # The words a marketplace, a registry or a search matches on.
 PLUGIN_KEYWORDS = [
     "agent-skills", "skill-md", "verification", "production-readiness", "security-review",
     "testing", "ci", "hardware", "physical-world", "project-lifecycle", "sdlc",
-    "decision-records", "claude-code", "codex", "jules",
+    "decision-records", "ux-design", "accessibility", "claude-code", "codex", "jules",
 ]
 PLUGIN_DESCRIPTION = (
-    "Take any idea, software or hardware, to a working product and keep it improving: "
-    "every decision backed by verified evidence, every change traced to the goal, and "
+    "Take any idea, software or hardware, in any state, to a working product and keep it "
+    "improving: designed with evidence for the people and agents who use it, every decision "
+    "backed by verified evidence, every change traced to the goal, and "
     "every claim checked, including work that reads as finished and is not, tests that "
     "cannot fail, and commands to the physical world that were accepted but never "
     "happened."
@@ -270,6 +271,19 @@ def _line(prompt: dict) -> str:
     return f"- [{prompt['title']}]({_skill_url(prompt)}): {prompt['description']}"
 
 
+def _entry_lines(prompts: list[dict]) -> list[str]:
+    """workflow.json's entries as llms.txt lines: the state, then the skills in order."""
+    workflow = json.loads((ROOT / "workflow.json").read_text(encoding="utf-8"))
+    slugs = {p["stem"]: p["slug"] for p in prompts}
+    lines = []
+    for entry in workflow["entries"]:
+        route = " then ".join(f"`{slugs[s]}`" for s in [entry["start"], *entry.get("then", [])])
+        lines.append(f"- {entry['state']} → {route}. {entry['note']}")
+    for t in workflow.get("throughout", []):
+        lines.append(f"- Alongside every step, when {t['when']} → `{slugs[t['skill']]}`.")
+    return lines
+
+
 def emit_site(prompts: list[dict]) -> dict[str, str]:
     """The files that let an agent use the site with no prior knowledge of it.
 
@@ -306,9 +320,10 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         [
             "# Jules Prompts",
             "",
-            "> Agent Skills that take any idea, software or hardware, to a working product and "
-            "keep it improving. Every decision is backed by verified evidence and every change "
-            "is traced to the goal, and the skills catch the failures agents actually have: work "
+            "> Agent Skills that take any idea, software or hardware, in any state, to a working "
+            "product and keep it improving. Every decision is backed by verified evidence, every "
+            "change is traced to the goal, what people and agents use is designed and tested with "
+            "them, and the skills catch the failures agents actually have: work "
             "that reads as finished and is not, setup that reports success while broken, tests "
             "that cannot fail, and commands to the physical world that were accepted but never "
             "happened. Each skill "
@@ -326,6 +341,10 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
             f"The ledger check, for a project's CI (Python, no dependencies): {SITE}/harness/check_trace.py",
             f"The whole path from idea to continuous improvement, each step with its gate: {SITE}/workflow.json",
             f"The test a self-built agent harness must pass (Python and git, nothing else): {SITE}/harness/conformance.py",
+            "",
+            "## Where to start, by the state the project is in",
+            "",
+            *_entry_lines(prompts),
             "",
             "## Start here",
             "",
@@ -371,8 +390,11 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         path.append(f'  <li>{link(stem, step["title"])}</li>')
     steps_html = (
         "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
-        f'<p class="lede">{html.escape(workflow["description"])}</p>\n'
         '<ol class="steps">\n' + "\n".join(steps) + "\n</ol>\n"
+    )
+    lede_html = (
+        "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
+        f'<p class="lede">{html.escape(workflow["description"])}</p>\n'
     )
     # The same sequence, as the home page's short list: one line per step, no detail.
     path_html = (
@@ -380,11 +402,48 @@ def emit_site(prompts: list[dict]) -> dict[str, str]:
         '<ol class="path">\n' + "\n".join(path) + "\n</ol>\n"
     )
 
+    # Where a project in any state enters the path. The home page shows the state and the
+    # route; the workflow page adds what happens there (`include.notes`).
+    numbers = {s["prompt_slug"]: s["order"] for s in workflow["steps"]}
+    step_titles = {s["prompt_slug"]: s["title"] for s in workflow["steps"]}
+
+    def hop(stem: str) -> str:
+        if stem in numbers:
+            return (f'<span class="hop"><span class="hop-n">{numbers[stem]}</span>'
+                    f'{link(stem, step_titles[stem])}</span>')
+        return f'<span class="hop">{link(stem, titles[stem])}</span>'
+
+    entries = []
+    for entry in workflow["entries"]:
+        route = '<span class="then" aria-hidden="true">→</span>'.join(
+            hop(s) for s in [entry["start"], *entry.get("then", [])])
+        entries.append(
+            '<li class="entry">\n'
+            f'  <p class="state">{html.escape(entry["state"])}</p>\n'
+            f'  <p class="route"><span class="sr-only">Start at </span>{route}</p>\n'
+            '  {%- if include.notes %}\n'
+            f'  <p class="entry-note">{html.escape(entry["note"])}</p>\n'
+            '  {%- endif %}\n'
+            "</li>"
+        )
+    throughout = "; ".join(
+        f'{link(t["skill"], titles[t["skill"]])} when {html.escape(t["when"])}'
+        for t in workflow.get("throughout", [])
+    )
+    entries_html = (
+        "<!-- Generated from workflow.json by scripts/emit.py. Edit that, not this. -->\n"
+        '<ol class="entries">\n' + "\n".join(entries) + "\n</ol>\n"
+        + (f'<p class="throughout"><strong>Alongside every step:</strong> {throughout}.</p>\n'
+           if throughout else "")
+    )
+
     return {
         f"{DISCOVERY.lstrip('/')}/index.json": json.dumps(index, indent=2) + "\n",
         "llms.txt": llms,
         "_includes/workflow-steps.html": steps_html,
+        "_includes/workflow-lede.html": lede_html,
         "_includes/path-steps.html": path_html,
+        "_includes/entry-states.html": entries_html,
         "_includes/report-exhibit.html": _report_exhibit(),
     }
 

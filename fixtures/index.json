@@ -81,6 +81,11 @@
       "name": "unattended-run",
       "skill": "run-autonomously",
       "planted": 8
+    },
+    {
+      "name": "designed-by-default",
+      "skill": "design-the-experience",
+      "planted": 9
     }
   ]
 }

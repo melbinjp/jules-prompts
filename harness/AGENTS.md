@@ -137,6 +137,7 @@ https://jules-prompts.wecanuseai.com/llms.txt.
 - an idea, or a project with no written reason for what it is → `start-from-an-idea`
 - a vendor, platform, part, provider or approach to choose → `choose-with-evidence`
 - any requested change, especially a vague one → `change-with-a-reason`
+- what people or agents see, do or hear: a flow, a screen, a command line, an API, a device's controls, or "make it prettier" → `design-the-experience`
 - a milestone reached, or the next round of improvement after launch → `keep-it-on-course`
 - a private or offline project, or anything leaving the machine → `keep-it-confidential`
 - making a project dependable, finished and production-ready → `take-to-production`

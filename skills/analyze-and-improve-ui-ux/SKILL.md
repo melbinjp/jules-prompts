@@ -1,7 +1,9 @@
 ---
 name: analyze-and-improve-ui-ux
-description: 'To analyze and improve the frontend UI/UX of a repository. Category:
-  Iterative Development. Legacy: general-purpose, kept for completeness.'
+description: 'To review a web frontend''s UI/UX against usability heuristics and write
+  recommendations. For designing or redesigning a product''s flows, states, words,
+  look and operators with evidence, use design-the-experience instead. Category: Iterative
+  Development. Legacy: general-purpose, kept for completeness.'
 license: MIT
 metadata:
   prompt_slug: task_analyze_and_improve_ui_ux

@@ -71,6 +71,7 @@ The rule that prevents all of this has four parts. Every change traces to a meas
     *   **"Slow":** which journey, on which device, measured how? It could be a page load on a phone, a query, a build, a start-up time, or a battery charge.
     *   **"Scalable":** more of what? People, data, requests, contributors, sites or hardware units.
     *   **"Modern":** which failing of what exists? How it looks, what it runs on, or a security update it has missed.
+    *   **"Prettier", "more intuitive", "cleaner":** which journey, for whom, and where do people hesitate, err or give up? Task success, time and errors on that journey, with people (`design-the-experience`); a look the owner wants is a taste call they make between rendered options.
     *   **"AI":** which job, for whom, and what is done today instead?
 
     Each meaning maps to an existing measure or journey, or to none.

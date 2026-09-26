@@ -1,0 +1,6 @@
+.appointments { padding: var(--space-3); color: var(--ink); }
+.appointment { border-bottom: 1px solid #e0e0e0; padding: 12px 0; }
+.appointment .when { color: #2b6cb0; font-weight: 600; }
+.appointment .where { color: #777; }
+.empty { padding: var(--space-4) 0; color: var(--ink-soft); }
+.empty a { color: var(--accent); }

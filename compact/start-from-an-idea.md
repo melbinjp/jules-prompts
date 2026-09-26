@@ -41,7 +41,7 @@ This skill never concludes that an idea cannot be done. Money, time, physics, la
 
 1. Intake. Record the idea word for word; ask the owner, in one message, what only they know. If the harness cannot pause, write the assumptions and proceed.
 2. What it takes. Need, what exists, difference, cost, funding routes, reach and what success needs, with sources and arithmetic; the path and its first step, to the owner.
-3. The top of the ledger. Goal, measures, journeys and course changes; an owner for each area; each journey threaded.
+3. The top of the ledger. Goal, measures, journeys and course changes; an owner for each area; each journey threaded, with its flow and states designed (`design-the-experience`) before breadth is built.
 4. The expensive decisions. Sort by door; for each one-way door, options, criteria, two kinds of evidence, exit and approval (`choose-with-evidence`); defer what a seam can hold.
 5. Resources and operations. The resource table in one message; the confidentiality classes; each agent qualified and routed by what it may see and what it scored; the tools for the gaps; every stage a command, with who runs it and the fallback.
 6. The walking skeleton. Through every stage, with tests seen to fail and a rollback tried; for a physical product, an observed action.

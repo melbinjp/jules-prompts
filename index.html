@@ -10,9 +10,9 @@ title: Agent Skills (SKILL.md) to take any idea to a working product
   <div class="hero-copy">
     <p class="eyebrow">Agent Skills <span aria-hidden="true">/</span> SKILL.md <span aria-hidden="true">/</span> MIT</p>
     <h1>Take any idea all the way, and <mark>keep it working</mark>.</h1>
-    <p class="lede">Agent Skills that take an idea, software or hardware, to a product people use, then keep it working and getting better. Every decision is backed by evidence someone verified, every change is traced to the goal, and every claim is checked, so nothing drifts, stalls or is left half-built. Each skill ends in a verdict you can check: <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
+    <p class="lede">Agent Skills that take any idea, software or hardware, in any state, to a product people use, then keep it working and improving. Every decision rests on verified evidence, every change traces to the goal, and every claim ends as <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
     <p class="actions">
-      <a class="button" href="{{ '/tasks.html' | relative_url }}">Browse the skills</a>
+      <a class="button" href="#start">Where are you starting?</a>
       <a class="button button-quiet" href="#agents">Point an agent here</a>
     </p>
     <p class="works-with">Works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, and agents that drive hardware.</p>
@@ -20,7 +20,7 @@ title: Agent Skills (SKILL.md) to take any idea to a working product
   {% include report-exhibit.html %}
 </section>
 
-<section class="paths" id="agents" aria-label="Two ways in">
+<section class="paths" id="agents" aria-label="Point an agent here">
   <div class="panel">
     <h2>Point an agent here</h2>
     <p>Give it this line. Everything it needs is one fetch away, and nothing depends on which agent it is.</p>
@@ -28,38 +28,46 @@ title: Agent Skills (SKILL.md) to take any idea to a working product
       <pre><code id="agent-line">Read {{ '/llms.txt' | absolute_url }} and follow the skill that matches the task.</code></pre>
       <button class="copy" type="button" data-copy="#agent-line">Copy</button>
     </div>
-    <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, which lists every skill with a SHA-256 digest of its <code>SKILL.md</code>.</p>
   </div>
   <div class="panel">
-    <h2>Read it yourself</h2>
-    <p>Every skill is a page you can read, copy, download or install, and the same text an agent loads.</p>
-    <p><a class="button" href="{{ '/tasks.html' | relative_url }}">Browse the skills</a></p>
-    <p class="fine">{{ core | size }} core skills, plus the older general-purpose ones, marked legacy.</p>
+    <h2>Or read them yourself</h2>
+    <p>Every skill is a page to read and the same <code>SKILL.md</code> an agent loads. {{ core | size }} core skills, plus older general-purpose ones marked legacy.</p>
+    <p><a class="button button-quiet" href="{{ '/tasks.html' | relative_url }}">All the skills</a></p>
+    <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, with a SHA-256 digest of every <code>SKILL.md</code>.</p>
   </div>
 </section>
 
 <section aria-labelledby="start">
-  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Start here</h2>
-  <div class="cards cards-featured">
-    {%- for p in featured %}
-    <a class="card card-featured" href="{{ p.url | relative_url }}">
-      <span class="card-meta">{{ p.category }}</span>
-      <h3><span>{{ p.title }}</span></h3>
-      <p>{{ p.description }}</p>
-    </a>
-    {%- endfor %}
-  </div>
+  <h2 id="start" class="section-title"><span class="n" aria-hidden="true">01</span>Where are you starting?</h2>
+  <p class="measure">Any project, in any state, enters the same path where its state says. Nothing is declared impossible or dead: a blocked route gets another route to the same goal.</p>
+  {% include entry-states.html %}
+  <p class="fine">What happens at each entry, each step's gate and the skills it calls on are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>, and in <a href="{{ '/workflow.json' | relative_url }}"><code>workflow.json</code></a> for agents.</p>
 </section>
 
 <section aria-labelledby="path">
   <h2 id="path" class="section-title"><span class="n" aria-hidden="true">02</span>The whole path</h2>
-  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done, and it calls on the other skills where it needs them. The steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
+  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done. The steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
   {% include path-steps.html %}
-  <p class="fine">Each step's gate and the skills it calls on are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>.</p>
+</section>
+
+<section aria-labelledby="core">
+  <h2 id="core" class="section-title"><span class="n" aria-hidden="true">03</span>The core skills</h2>
+  <div class="cards cards-featured">
+    {%- for p in featured %}
+    {%- assign first = p.description | split: ". " | first %}
+    {%- assign last = first | slice: -1, 1 %}
+    <a class="card card-featured" href="{{ p.url | relative_url }}">
+      <span class="card-meta">{{ p.category }}</span>
+      <h3><span>{{ p.title }}</span></h3>
+      <p>{{ first }}{% if last != "." %}.{% endif %}</p>
+    </a>
+    {%- endfor %}
+  </div>
+  <p class="fine">Every skill, with its full description, is on the <a href="{{ '/tasks.html' | relative_url }}">skills page</a>.</p>
 </section>
 
 <section aria-labelledby="install">
-  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">03</span>Install</h2>
+  <h2 id="install" class="section-title"><span class="n" aria-hidden="true">04</span>Install</h2>
   <div class="install">
     <div>
       <h3>One skill</h3>
@@ -99,12 +107,12 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="proof">
-  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">04</span>How you know a skill works</h2>
+  <h2 id="proof" class="section-title"><span class="n" aria-hidden="true">05</span>How you know a skill works</h2>
   <p class="measure">A skill nobody has seen fail is a claim. Each core skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. The last line is always the denominator. The report at the top of this page is the one the flagship skill should produce on its fixture.</p>
 </section>
 
 <section aria-labelledby="questions" id="faq">
-  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">05</span>Questions</h2>
+  <h2 id="questions" class="section-title"><span class="n" aria-hidden="true">06</span>Questions</h2>
   <div class="faq">
     {%- for item in site.data.faq %}
     <div>
@@ -116,7 +124,7 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="tools">
-  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">06</span>Tools these skills pair with</h2>
+  <h2 id="tools" class="section-title"><span class="n" aria-hidden="true">07</span>Tools these skills pair with</h2>
   <p class="measure">A skill tells an agent what to do. These do part of the same work mechanically, so the agent spends its judgement on the cases that need it.</p>
   <ul class="measure">
     <li><a href="https://github.com/melbinjp/docproof"><strong>docproof</strong></a> reads a repository's documentation and reports the claims its code contradicts: paths that no longer exist, commands that are not there, versions that moved. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and it runs as a GitHub Action. MIT.</li>
@@ -125,6 +133,6 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 </section>
 
 <section aria-labelledby="writing">
-  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">07</span>Writing</h2>
+  <h2 id="writing" class="section-title"><span class="n" aria-hidden="true">08</span>Writing</h2>
   <p class="measure">Notes from actually running this kind of tooling live at <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>. Most recently, why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</p>
 </section>
