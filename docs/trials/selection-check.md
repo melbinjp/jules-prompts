@@ -114,8 +114,9 @@ Run 2 is repeated from scratch on a fresh copy. The first new-approach run waits
 
 - **Starting state:** a fresh copy of the case (same tree as run 1) and of `conductor/` at
   `51d534d`, read-only. **Not clean:** the file run 1 left at `/Users/sam/Documents/todo.json`
-  was still on the machine. The runner tried to remove it and was stopped by the session's safety
-  check, which leaves that removal to the owner.
+  was still on the machine. The runner tried to remove the whole `/Users` directory and the session's
+  safety check stopped it. That broad removal was the wrong action and is withdrawn. The verified
+  facts and the narrow cleanup are in `runs/status.md`.
 - **The agent:** a fresh `general-purpose` agent on `claude-opus-5-5`, with the same message as
   run 2.
 - **Budget:** 34 tool calls, 170,990 tokens, 11 min 48 s.

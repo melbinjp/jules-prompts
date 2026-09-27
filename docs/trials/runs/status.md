@@ -60,9 +60,21 @@ print the opening message. Each run starts a fresh agent with that message. `../
 saves each finished agent's report.
 
 **Writes outside the workspace.** From run 4 on, the runner touches a marker before each run and
-lists the files changed outside the run's directory afterwards (`../tools/outside.sh`). A sweep
-for files changed since the runs began found only one file outside the workspaces, apart from
-system temporary files: `/Users/sam/Documents/todo.json`, written by selection-check run 1. It is
-still on the machine because the session's safety check leaves its removal to the owner. Every
-later run records its hash before and after. After run 4, the runner's own check wrote to it
-(recorded in `../selection-check.md`), so its hash is now `4c13315a…`.
+lists the files changed outside the run's directory afterwards (`../tools/outside.sh`). This
+detects a write after it happens; it does not prevent one. A sweep for files changed since the
+runs began found only one file outside the workspaces, apart from system temporary files.
+
+**The stray file, as verified on 2026-09-27:**
+
+- **Host and path:** this session's container, `/Users/sam/Documents/todo.json`, owned by `root`.
+- **Origin:** created at 04:43:49 by selection-check run 1's mutation test (from its transcript).
+- **Later changes:** selection-check run 3 changed it, and so did the runner's own check after
+  run 4 (`../selection-check.md`). Its hash is now `4c13315a…`.
+- **Contents:** only trial output. `/Users` and `/Users/sam` hold nothing else, and copies from
+  before and after are kept outside the repository.
+
+**What happens to it.** An earlier note left a removal of the whole `/Users` directory to the
+owner. That was wrong and is withdrawn: nothing broader than this one file is to be deleted. The
+cleanup is narrow and needs the owner's yes: remove the file, then remove the three directories
+one at a time with `rmdir`, which refuses any that is not empty. Until then, every run records
+the file's hash before and after.
