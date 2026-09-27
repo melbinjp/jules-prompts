@@ -27,7 +27,7 @@ The old run's string score for each fixture, and the new run's, link to the run 
 | error-path-never-run | [2 of 2](fixture-error-path-never-run-old.md) | not yet run | not started |  |
 | finished-looking-pr | [3 of 3](fixture-finished-looking-pr-old.md) | not yet run | not started |  |
 | security-check-removed | [2 of 2](fixture-security-check-removed-old.md) | not yet run | not started |  |
-| vague-issue | cut off, to rerun |  | not started |  |
+| vague-issue | [2 of 3](fixture-vague-issue-old.md) | not yet run | not started |  |
 | looks-finished | cut off, to rerun |  | not started |  |
 | command-accepted | cut off, to rerun |  | not started |  |
 | premature-start | cut off, to rerun |  | not started |  |
@@ -47,7 +47,7 @@ The old run's string score for each fixture, and the new run's, link to the run 
 | silent-backup | not started |  | not started |  |
 | unattended-run | not started |  | not started |  |
 
-Fixture runs recorded: old 7 of 26, new 0 of 26.
+Fixture runs recorded: old 8 of 26, new 0 of 26.
 <!-- /fixtures -->
 
 **Recording a run.** A run cut off before its agent returned a report is not scored or counted. It
