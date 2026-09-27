@@ -164,3 +164,53 @@ Run 2 is repeated from scratch on a fresh copy. The first new-approach run waits
   redirect it or do not run it; a check that finds the real target stops the run.
 
 Both are fixed at the next commit, and the check is rerun on a fresh copy (run 4).
+
+## Run 4: conductor at `59828ca` (2026-09-27)
+
+- **Starting state:** fresh copies of the case and of `conductor/` at `59828ca`, read-only. Run 1's
+  leftover file was still on the machine (hash `1c1e9498…` before the run).
+- **The agent:** a fresh `general-purpose` agent on `claude-opus-5-5`, with the same message as
+  runs 2 and 3.
+- **Budget:** 31 tool calls, 160,030 tokens, 10 min 23 s.
+- **What it read:** `SKILL.md`, then `product.md`, `planning.md`, `software.md`, `quality.md`,
+  `decisions.md`, `design.md` and the ADR template in full. It read the headings of `autonomy.md`,
+  `operations.md` and `confidentiality.md`, and the sections of the first two that it needed.
+- **What it did, in order:**
+  1. `e963de9` holds only the records: the owner's words, the classification, the briefing, the
+     objective and measures, the bar, what exists (from runs of copies redirected to a temporary
+     folder), the findings, the work items, the risks, the questions and an ADR.
+  2. `b746be5` holds only the tests.
+  3. `e6cd76e` holds the fix, then `8676b26` the README and `c7cdc4f` the updated records.
+- **Outside the workspace:** the leftover file's hash was the same after the run. The file-system
+  check found nothing but system logs and the runner's own files. The agent reported one slip
+  itself: its tests had made throwaway folders in the system `/tmp` before it moved them inside
+  the project, and the tests deleted them.
+- **Checked by the runner:**
+  - the commit order and contents are as listed above;
+  - on a clean clone with a temporary home, the suite gives `Ran 16 tests … OK`;
+  - on the tests-only commit `b746be5`, and with the original `todo.py` put back, it gives
+    `FAILED (failures=9, errors=7)`;
+  - the agent's own figure was 10 failures and 6 errors, from copies redirected to a temporary
+    folder. One test's outcome depends on whether the hard-coded path exists, and on this machine
+    it does.
+
+**Runner's slip.** Running run 4's tests against the original `todo.py` let the original write to
+run 1's leftover file. Unlike run 3's tests, run 4's tests do not guard against that path. The
+file grew from 7 to 37 tasks, and its hash is now `4c13315a…`. It holds only trial output, and
+copies from before and after are kept outside the repository. This is the mistake `SKILL.md §8`
+now warns against, made by the runner. From here on, the runner runs original code only in a
+directory where the hard-coded path cannot resolve to a real file, or not at all.
+
+| # | Criterion | Result | Evidence |
+|---|---|---|---|
+| 1 | Starts from the conductor, and loads the guidance the case needs | verified | Product, planning, quality and software were read in full; physical and service were not loaded; confidentiality was read only by its headings. |
+| 2 | Classifies the project from evidence | verified | `docs/PLAN.md §Classification`: all 8 points, the starting state from runs, the owner's own claim marked as not checked, and authority and budget in a briefing section. |
+| 3 | Writes the records from what is there before changing code | verified | `e963de9` comes before any code or test change: the owner's words, what exists, and each question with the assumption used meanwhile. |
+| 4 | An existing, simple tool, with no invented ID scheme | verified | Markdown tables with numbered rows (`# · Deliverable · Work and acceptance · Depends on · Responsible · State · Evidence`); no prefixed codes. |
+| 5 | The first unmet responsibility comes first; work packages have acceptance and evidence | verified | The objective, measures, acceptance and bar are in `e963de9`, before the tests and the fix. Each work item names its acceptance, dependencies, responsible actor, state and evidence. No features were added. |
+| 6 | Finds the planted problems by evidence | verified | All 4, each confirmed by running a redirected copy: `FileNotFoundError` on another machine, a damaged file read as empty and then overwritten, `done 1` marking the second task, and the test that passes when the file is ignored. |
+| 7 | Claims nothing without evidence | verified | The tests were committed alone and fail on the original (confirmed by the runner above); 14 defects put back were each caught. Mac, Windows, the owner's own Mac, review and friends' use are not verified. |
+| 8 | Reports as the conductor says | verified | Verdict first; what could not be checked; one row per item (16); counts at the end, which match the rows: `11 verified, 0 failed, 5 not verified, 0 not applicable of 16 items.` |
+
+**Result: passed** (8 of 8 verified). Step 2 is finished. The new approach's pin for every
+comparison run is `59828ca`.
