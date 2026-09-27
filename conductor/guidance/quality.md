@@ -83,9 +83,10 @@ Rank every finding and work from the top; do not polish a level 6 while a level 
 6. unfinished to use;
 7. everything else.
 
-Close the gap in small, reviewable changes, each with the evidence that it worked; re-walk the
-affected journeys after each. The change description lists each fix with its level (1 to 7) and
-the evidence that it worked.
+This is a priority order, not a labelling scheme: record it in the tracker's own priority field
+(`planning.md §Work records in the project's tool`). Close the gap in small, reviewable changes,
+each with the evidence that it worked; re-walk the affected journeys after each. The change
+description names what each fix protects and the evidence that it worked.
 
 The bar's gate: every row verified, or failed or not verified with its reason and its next step
 in the plan. A bar with open failures is a completed assessment, not a claim that the result is

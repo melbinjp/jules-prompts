@@ -98,10 +98,14 @@ supplier or resource changes, a decision's reopening condition fires, or a new n
 request enters at §7. A decision's reopening condition enters at
 `guidance/decisions.md`. An exhausted budget pauses the work with the next step recorded (§8).
 
-**Where to start.** At the first responsibility whose acceptance is not met, judged from
-evidence rather than from the project's label. A live product with no measurable objective
-starts at 1; an idea whose objective and deliverables are clear but whose dependencies are
-unknown starts at 4.
+**Where to start.** Scope comes from the request. When the request is the project itself
+(start it, finish it, get it ready for people), start at the first responsibility whose
+acceptance is not met, judged from evidence rather than from the project's label: a live product
+with no measurable objective starts at 1; an idea whose objective and deliverables are clear but
+whose dependencies are unknown starts at 4. When the request is a bounded piece of work (a bug
+fix, a review, a change), readiness (§5) applies to that work and its actual dependencies; a
+project-wide responsibility comes first only when its absence blocks the requested work or its
+acceptance. A bounded fix does not rebuild the business case.
 
 **The smallest loop that finishes things.** One ready work package at a time: do it, run its
 gates, record it with a link to its evidence, update the state note, take the next. Review at
@@ -200,9 +204,12 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   (electrical, gas, structural, medical, food, radio certification and the like).
 - **After a change, walk again the journeys it touches,** and measure again the way the
   measure says it is taken.
-- **Gates run after the last change.** A result checked before a later change is not checked.
-  Before the final verdict on a deliverable, re-run everything from cold: a clean checkout or
-  setup, every gate again, every journey walked again.
+- **Gates run after the last change.** A result checked before a later change is not checked:
+  before the verdict, revalidate every piece of evidence a later change could have affected.
+  Re-run from cold (a clean checkout or setup, every gate again, every journey walked again) where
+  risk or acceptance calls for it: a release, a handover, or the acceptor's criteria. A physical
+  step is revalidated by the inspection, measurement or simulation its risk needs, not replayed by
+  default.
 - **A failed gate means another attempt or another route, never a lower gate.**
 - **Completion is a delivered result and its acceptance,** not a count of closed tasks. An
   assessment with failed or unverified items is a completed assessment; on its own it does not

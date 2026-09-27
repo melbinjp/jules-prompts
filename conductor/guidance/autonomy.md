@@ -27,33 +27,37 @@ and does not invent what it cannot see.
 ## What a harness must do
 
 A model alone answers one message and forgets it; the harness supplies the loop, the files, the
-commands and the memory. Whether stock or built, check that it:
+commands and the memory. These are requirements, not a design: check that the harness, stock or
+built, meets each one with its own capabilities, and record how.
 
-- **loops** (look, decide, act, check, record) until the model says done, a step limit is reached,
-  or the person stops it; and exits cleanly at each;
-- **rebuilds a fresh, bounded context every step** from files, never a growing conversation: the
-  rules and the action format; the task; the guidance for the current work (only the sections needed
-  when it would take more than half the window); the state note; the person's overrides; the last few
-  actions and results, oldest dropped first, each cut to fit; every prompt inside the window with
-  room for the reply, including a small window;
-- **takes actions as one structured reply** (read a range of a file, write a file, run a command in
-  the project, record a choice, replace the state note, done), shows what was read or run in the next
-  step, and answers an unreadable reply with the format rather than crashing;
-- **keeps boundaries that do not depend on the model behaving:** files inside the project only; the
-  person's override lines and the harness's own log written by the person and the harness, never by
-  the model; the state note kept exactly as the model wrote it;
-- **checkpoints after every step that changed the project** (a version-control commit), so any step
-  can be undone and an earlier version recovered;
-- **logs every step:** what was sent, what was done, what it cost;
-- **starts a new run from the state note and the records,** not from memory;
-- **honours a stop the person can trigger without the agent** (a stop file or equivalent), checked
-  before acting;
-- **treats the model endpoint as configuration:** a local or a hosted runtime, speaking the common
-  chat-completions format; an endpoint off the local network refused unless explicitly allowed;
-  remote traffic through the project's egress proxy when one is set (`confidentiality.md §Agents and
-  models`);
-- **runs in any supervision mode as a setting:** unattended, supervised (each action shown for a
-  yes), or not at all while a person follows the state note by hand.
+- **It loops and stops cleanly:** it continues until the work is done, a step or budget limit is
+  reached, or the person stops it, and it leaves a clean state at each.
+- **Its context stays bounded and survives a restart:** long work does not depend on one growing
+  conversation. What the next step needs (the task, the rules, the current records and state note,
+  recent actions and results) can be rebuilt from files after a restart or a context reset,
+  including on a small context window.
+- **Unreadable output is handled, not fatal:** a malformed action or reply is answered and
+  retried, not a crash.
+- **Its boundaries do not depend on the model behaving:** where it may read and write, which
+  commands and hosts it may reach, and the records only the person or the harness may write (the
+  person's overrides, the harness's own log) are enforced by the harness or its environment.
+- **Its work is recoverable:** every change to the project can be undone and an earlier version
+  recovered (version control, snapshots, or the tool's own history).
+- **It logs every step:** what was sent, what was done, what it cost.
+- **It resumes from the records,** not from memory (`../SKILL.md §5`).
+- **It honours a stop the person can trigger without the agent,** checked before acting.
+- **Its model endpoint is configuration:** a local or a hosted runtime; an endpoint off the local
+  network refused unless explicitly allowed; remote traffic through the project's egress proxy when
+  one is set (`confidentiality.md §Agents and models`).
+- **Its supervision is a setting:** unattended, supervised (each action shown for a yes), or a
+  person following the state note by hand.
+
+**One way to meet these when a harness has to be built** (use it only where no existing harness
+fits): rebuild a fresh context from files at every step, with the oldest actions dropped first
+and every prompt fitting the window with room for the reply; take actions as one structured reply
+(read a range of a file, write a file, run a command, record a choice, replace the state note,
+done); keep the state note exactly as the model wrote it; commit after every step that changed the
+project; speak the common chat-completions format to the endpoint.
 
 ## Building a missing tool
 
