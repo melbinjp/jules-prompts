@@ -163,8 +163,9 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 
 - **Show that work is ready before starting it:** its prerequisites are met, with evidence;
   its resources (people, equipment, parts, money, access, time) are available; its acceptance
-  criteria are understood; and the action is authorised, within the standing limits or
-  approved.
+  criteria are written in the work records (§3), and on an existing project the records of what
+  is there are written first (§1); and the action is authorised, within the standing limits or
+  approved. No change to the product starts before this.
 - **When work is blocked,** record the actual waiting condition (what, on whom or what, since
   when, expected when) and update the forecast (`guidance/planning.md §Critical path and
   resources`). Take independent ready work if there is any. Never mark blocked work done, and
@@ -237,6 +238,11 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   budget, and the confidentiality rules.
 - **Inside the limits, act without asking. Outside them, take another route, or ask once with
   everything the owner needs to decide.**
+- **Running existing code or equipment is an action with effects.** Before running it, find
+  what it reads, writes, sends or moves: a hard-coded path, a real account or service, a device.
+  Where any of that reaches outside the working environment, redirect it (a temporary folder, a
+  test account, a simulator) or do not run it; a check that finds the real target stops the run.
+  This holds for every run: a baseline, a defect put back to see a test fail, a walk from cold.
 - **Write the plan before starting a piece of work.** Where the plan needs someone's approval
   and the harness can pause for it, wait. Where it cannot pause, state the plan and proceed with
   everything inside the delegated authority; an action outside it (a costly-to-reverse decision,
