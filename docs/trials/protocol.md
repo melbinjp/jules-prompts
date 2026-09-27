@@ -210,3 +210,47 @@ Kept in `docs/trials/runs/<case-or-fixture>-<approach>.md`:
 Large workspaces are summarised, with their final tree listed. The final report,
 `docs/trials/report.md`, compares old and new case by case and fixture by fixture, and lists every
 failure of the conductor and what was done about it.
+
+## Amendments after the first comparison runs (2026-09-27)
+
+Made after the drift review of 2026-09-27. Results recorded before an amendment keep the protocol
+commit they name. None of these changes the pass conditions, the cases, the fixtures, the
+requests, the rules given to the agents, or the scoring.
+
+**Amendment 3: containment.** Two runs wrote outside their workspace, and so did the runner's own
+check. Watching for such writes afterwards (`tools/outside.sh`) is detection, not containment.
+From this amendment on:
+
+- **Before every run,** the runner lists the absolute paths, hosts and devices named in the
+  workspace (`tools/paths.sh`) and records them.
+- **The runner's own executions** of original or faulty code happen only inside
+  `tools/contain.sh`. That runs them in a private mount namespace where every file system is
+  read-only except the workspace. It was verified before use: writes to `/`, `/tmp`, `/root`,
+  `/home` and `/Users` were refused, and a write inside the workspace succeeded.
+- **The agents' own commands** run with the session's writes confined to the trials directory
+  by the harness sandbox. A probe verifies this before the first run. The agents' rules and
+  opening messages are unchanged. A write the sandbox refuses is recorded in the run record.
+- **After every run,** `tools/outside.sh` still lists any file changed outside the workspace.
+
+**Amendment 4: order.** The central delivery evidence comes first. Remaining work runs in this
+order:
+
+1. the software case, old then new, each followed by its independent verifier;
+2. the output checks on the old fixture reports already recorded;
+3. the new approach on those same fixtures, each with its output check;
+4. the remaining fixtures, both approaches, each with its output check;
+5. the event case, then the greenhouse case, old and new, each verified;
+6. the held-back case, once and last, after its hash is checked again;
+7. the earlier failed project, when the owner identifies it and its failure has been diagnosed
+   from its own evidence.
+
+**Amendment 5: the new approach's pin.** The conductor changed after the drift review:
+
+- harness rules are stated as requirements;
+- the fix order is a priority;
+- readiness is scoped to the request;
+- re-runs are proportionate.
+
+No new-approach comparison run had happened, so none is invalidated. The pin is `33aa9e2`,
+replacing `59828ca`. The step 2 selection check is run again at `33aa9e2`, under amendment 3, and
+must pass before any new-approach comparison run.

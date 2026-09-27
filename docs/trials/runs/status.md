@@ -1,7 +1,8 @@
 # Trial runs: status
 
 Protocol `docs/trials/protocol.md` at `51d534d`. Old approach pinned at `f5fc9c0e`. New approach
-pinned at `59828ca` (the selection check passed on run 4).
+pinned at `33aa9e2` (protocol amendment 5; it was `59828ca`, where the selection check
+passed on run 4). The selection check is run again at `33aa9e2` before any new-approach run.
 
 | Run | State | String score | Output check |
 |---|---|---|---|
@@ -9,7 +10,8 @@ pinned at `59828ca` (the selection check passed on run 4).
 | Selection check, run 2 (conductor at `51d534d`) | Cut off by the rate limit; rerun from scratch | n/a | n/a |
 | Selection check, run 3 (conductor at `51d534d`) | Failed, criteria 3 and 5 (records written after the code changed); conductor fixed; recorded in `../selection-check.md` | n/a | n/a |
 | Selection check, run 4 (conductor at `59828ca`) | **Passed**, 8 of 8; recorded in `../selection-check.md` | n/a | n/a |
-| Cases: software, event, greenhouse (old and new) | Not started | | |
+| Selection check, run 5 (conductor at `33aa9e2`) | Next, once the containment in protocol amendment 3 is verified | | |
+| Cases: software, event, greenhouse (old and new) | Not started; the software case comes first (amendment 4) | | |
 | Held-back case | Not started; run once, last | | |
 | `../report.md` | Not started | | |
 
