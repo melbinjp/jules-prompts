@@ -25,7 +25,9 @@ of universal reliability or of statistical superiority.
 ## The two approaches
 
 - **Old:** the library at commit `f5fc9c0e721f4323f4ee79554220bb76128f796d`, exported read-only into
-  a directory of its own. It is never fetched from the live site. Its entry instruction is:
+  a directory of its own. It is never fetched from the live site. The export leaves out `fixtures/`,
+  which holds every planted defect and expected report: the method directory must not contain the
+  answers, and the conductor's does not. Its entry instruction is:
   > Read `<OLD>/llms.txt` and follow the skill that matches the task. Its links point to the website;
   > the same files are in this local copy (`<OLD>/skills/<name>/SKILL.md`, `<OLD>/workflow.json`,
   > `<OLD>/harness/`). Use the local copies.
