@@ -56,7 +56,10 @@ connection error partway through, and the agent then reports the failures as "un
 changes". The change looks reviewed and was never tested.
 
 1. **Run the suite with nothing else running,** and record the exact failure, the count, and
-   whether it failed at collection or in tests. Import-time connections fire before any test.
+   whether it failed at collection or in tests. Import-time connections fire before any test. Look
+   in the test configuration and fixtures (`conftest.py`, `setup.js`, base test classes, factories,
+   seeders), `docker-compose` and `.env.test` files, CI service definitions, and any helper that
+   opens a socket, reads a URL from the environment, or constructs a client at import time.
 2. **Inventory every external dependency:** what it is, which tests touch it, whether a seam exists.
 3. **Substitute one dependency at a time,** running the suite after each:
    - fake at the boundary the project already has (a repository class, a client wrapper, an
@@ -84,6 +87,11 @@ careful, and the number of real regressions caught is zero.
   `toBeDefined`, `status == 200`, `len > 0`) with no value assertion beside it; an expected value
   reconstructed from the implementation's own arithmetic, or captured by running the code; "no
   exception raised" as the only check; fixtures or snapshots captured from the code under test.
+- **Choose what to audit from version-control history, not names or comments:** every test file
+  added or changed by agent-authored commits or pull requests (for example `git log
+  --diff-filter=AM` over the test directory), the fixtures, snapshots and recorded responses added
+  with them (a snapshot committed with the code it snapshots is suspect), and every mock or patch
+  that substitutes the module under test rather than its dependencies.
 - **Prove each test can fail; do not read it and decide.** Mutate the code, not the test: invert a
   condition, return a constant, drop a field, skip a call. For a test that came with a fix, put the
   original defect back as precisely as you can (the inverted condition, the removed guard, the old
@@ -112,8 +120,11 @@ looks exactly like success.
   because an earlier one was; a linter with its rules disabled or `--exit-zero`; a job testing a
   stale cached artifact.
 - **Method:**
-  1. inventory every job and step, and what each claims to check; read the run history for jobs
-     that have never been red, or stopped appearing (the first suspects);
+  1. inventory every job and step, and what each claims to check, including reusable and inherited
+     workflows, the scripts they call (especially wrappers that aggregate several checks),
+     linter, formatter and test-runner configuration (including files that exist only on CI),
+     caching and artifact steps, and every condition that decides whether a job runs; read the run
+     history for jobs that have never been red, or stopped appearing (the first suspects);
   2. test the setup's own failure path first: if an install fails, does the pipeline stop or reuse
      a cache and pass?
   3. for each step, introduce the defect it exists to catch, one at a time on a throwaway branch
@@ -154,12 +165,21 @@ real job is a trustworthy answer to whether the work happened.
    - say what it will not do, one sentence per case; boring and checkable over clever and total.
 3. **Make it fail, and watch:** remove a dependency, a permission, an input, and interrupt it
    halfway; each failure must reach the exit code and the log. Report what you broke and what it did.
+4. **Hand it over:** the one command that runs it, what it will not do, and where its log goes.
 
 ## Architecture from what runs
 
 The folder structure is a claim about the architecture, and the claim most likely to be stale. A
 diagram assembled from names is fluent, confident, and describes the system somebody intended.
 
+- **The tells of a map built from names:** a layer in the diagram that no import crosses; a
+  "service" that is one function called from one place; a module named for a concept that holds
+  three unrelated things; a dependency arrow that points the way the design intended while the code
+  goes the other way.
+- **Where to look:** packaging and process definitions (`pyproject.toml`, `package.json`, `go.mod`,
+  `Cargo.toml`, `Makefile`, container files) and the CI workflow, often the only honest list of how it
+  is invoked; the resolved import graph; everything crossing a process, network, queue or database;
+  configuration and environment variables; `git log` over the whole tree for co-change.
 - **Find the entry points; do not guess them:** console scripts, `main` functions, server bindings,
   container commands, scheduled jobs, the commands CI runs. Run one and note what it touched.
 - **Build the import graph from resolved imports.** A layer boundary is one only when you have shown
@@ -168,6 +188,9 @@ diagram assembled from names is fluent, confident, and describes the system some
   a third-party API. Two packages in one process that import each other freely are one component.
 - **Use co-change:** files that change in the same commits are one unit of work, whatever folder
   they live in; report where this disagrees with the layout.
+- **Look for the coupling nobody intended:** the shared mutable helper, the module everything
+  imports, the cycle between two packages documented as independent. Anyone can find the designed
+  layers; this is where the value is.
 - **Follow the data:** where state lives, who writes it, who reads it. Two components that never call
   each other but write the same table are coupled.
 - **Count things:** imports in and out per module, commits per path, places that construct the
@@ -183,7 +206,10 @@ diagram assembled from names is fluent, confident, and describes the system some
 Given "the login is broken", an agent guesses what broken means and builds on the guess; the work
 looks complete and fixes something nobody reported. Scope before fixing, and produce no fix here.
 
-1. **List precisely what the issue does not say,** and the distinct readings its wording allows.
+1. **List precisely what the issue does not say** (version, environment, input), and the distinct
+   readings its wording allows. Read the report and everything attached to it, the tests and their
+   fixtures (how this project already reproduces things), and the recent history of the named area.
+   For each ambiguity, record the reading you took, so the next reader can correct you cheaply.
 2. **Separate three statements:** what the reporter said, what the software actually does, and what
    it should do. Expected behaviour needs a source (documentation, a test, a type, a specification);
    if none exists, record it as undefined.
@@ -204,8 +230,10 @@ for the wrong reason (an import error, a missing fixture) and is spent as eviden
 
 1. **Know which tests are already red,** and name them; run your test alone so its red cannot be
    confused with theirs.
-2. **Reproduce by hand from the report's exact input.** Paraphrasing it into a tidier case fixes a
-   bug nobody had.
+2. **Reproduce by hand from the report's exact input,** using the report and any attached logs,
+   inputs or version information. Paraphrasing it into a tidier case fixes a bug nobody had. Find the
+   narrowest module that could produce the behaviour by running, not by reading names, and read the
+   test file that covers it and its fixtures.
 3. **Write the failing test; read the failure line;** it must name the reported behaviour. Record it
    verbatim. Narrow until the test names one behaviour.
 4. **Commit the test alone,** before any production change (revert exploratory changes first).
@@ -241,8 +269,10 @@ Agent-written changes fail differently from human ones: correct style, sensible 
 description, and tests that pass because they assert what the code does. The danger is not that
 the code is bad; it is that it reads as finished.
 
-1. **List the linked issue's requirements** as discrete, checkable items; note which files the diff
-   touches and which it does not.
+1. **Treat the description as a set of claims:** every claim it makes about itself is checked or
+   marked unchecked, never read as a summary. **List the linked issue's requirements** as discrete,
+   checkable items; note which files the diff touches and which it does not; read the tests it adds or
+   changes, and the CI configuration, to know which checks actually gate the merge.
 2. **Baseline:** run the suite on the base commit, so you know what was already failing; then on
    the change, and account for every difference.
 3. **For each test the change adds, break the code under it and confirm the test fails;** restore.
@@ -318,12 +348,15 @@ Error handling is the least-executed code and the most confidently written. A ha
 never run is indistinguishable from one that works, until production supplies the difference.
 
 1. **Find every handler,** with file and line and the count: every `try`/`except`, `catch`, `rescue`,
-   `recover`, `if err != nil`; everything that retries, backs off, times out, or is called fallback,
-   default or safe; every boundary where others' failures arrive (network, subprocess, files,
-   databases, parsing). What the tests do not cover is the finding.
+   `recover`, `if err != nil`, and every exit code set or passed on; everything that retries, backs
+   off, times out, or is called fallback, default or safe; every boundary where others' failures
+   arrive (network, subprocess, files, databases, parsing). What the tests do not cover is the
+   finding.
 2. **Cause each failure for real:** a host not listening, a revoked permission, a full disk, a
-   corrupt file, a killed subprocess, a malformed payload. Record what the caller sees. One you
-   cannot cause is marked unreachable, which is itself a finding.
+   corrupt file, a killed subprocess, a malformed payload. Make every external dependency fail and
+   also go slow: timeouts must be bounded, retries capped and safe to repeat, and there must be a
+   degraded mode the person can still use. Record what the caller sees. One you cannot cause is
+   marked unreachable, which is itself a finding.
 3. **Judge each one:**
    - a handler that catches everything also catches the bug: narrow it, or justify it in a comment;
      a top-level loop that must survive logs the traceback and does not pretend to have handled it;
@@ -333,7 +366,10 @@ never run is indistinguishable from one that works, until production supplies th
    - a retry has a cap, a reason more attempts should help, and idempotence; retrying a
      non-idempotent write is a bug however carefully written; ask what happens on the second call,
      concurrently, after a partial write;
-   - the message names the thing that failed, the input that caused it, and the next action.
+   - the message names the thing that failed, the input that caused it, and the next action;
+   - exit codes and causes are not laundered: a pipe that takes its last command's status, or a broad
+     catch that strips an exception's meaning, both turn a failure into something that looks exactly
+     like success.
 4. **Fix the wrong ones,** each with a test that asserts what the caller sees (the value, the
    exception, the file left, the exit code), seen to fail before the fix; never a test that the
    handler was called.
@@ -344,8 +380,12 @@ never run is indistinguishable from one that works, until production supplies th
 A migration run once on a dev database and exiting 0 is the usual whole test, and every property
 that causes an outage is invisible under exactly those conditions.
 
-1. **Identify** the pending migrations, the production engine and exact version, and `count(*)` for
-   every table they touch (from production or the closest thing). If a count cannot be obtained, say
+1. **Identify** the pending migrations (both halves, and any backfill they call), the migration tool's
+   history table (what has been applied, in what order), the schemas and the application code that
+   reads or writes the affected columns, the deployment configuration (whether migrations run before,
+   during or after the application rollout, and any statement or lock timeout on the production
+   connection: a statement that takes 40 s locally is killed by a 30 s timeout in production), the
+   production engine and exact version, and `count(*)` for every table they touch (from production or the closest thing). If a count cannot be obtained, say
    so; the timings do not cover that table.
 2. **Build a copy on the same engine and version,** seeded to realistic row counts (filler values are
    fine). Never touch production.
@@ -368,7 +408,10 @@ that causes an outage is invisible under exactly those conditions.
 ## Dependencies
 
 1. **Baseline:** install from cold from the lockfile, run the full suite, record versions and result;
-   name tests that already fail.
+   name tests that already fail. Read every ecosystem's manifests and lockfiles, the runtime and tool
+   version files (`.nvmrc`, `.python-version`, `rust-toolchain`, base images, CI action versions), the
+   changelogs and advisories for what moves (from the local mirror when offline), and the licence the
+   product is distributed under.
 2. **Stock:** outdated, vulnerable and unused, per ecosystem, including the runtime, base images, CI
    actions and build tools. Remove what nothing imports, as its own change, rather than updating it.
 3. **One step per change:** patch and minor updates of one ecosystem together; each major version on
@@ -378,8 +421,9 @@ that causes an outage is invisible under exactly those conditions.
 4. **Read every major against the code:** list its breaking changes, search the code for each, and
    change or test each use; where the tests do not cover a changed behaviour, add a test that fails on
    the old behaviour first.
-5. **Examine everything new or that changed hands:** its licence against the product's, maintainer
-   and source, install scripts, and a vulnerability scan. One that fails gets another route: an
+5. **Examine everything new or that changed hands, including transitive dependencies** (what the
+   updated packages themselves pulled in, read from the lockfile diff): its licence against the
+   product's, maintainer and source, install scripts, and a vulnerability scan. One that fails gets another route: an
    earlier version, a replacement, or the project's own code.
 6. **Every pin has a reason and a revisit date;** an old pin with no reason is tried or explained.
 7. **A major that cannot be taken yet** is recorded with its blocker and its route, and the rest
@@ -413,7 +457,10 @@ A translation is a fork of the documentation with no way to tell it has drifted;
 readers fluently with last year's instructions. The deliverable is the text plus the machinery.
 
 1. **Decide the scope:** which pages, which languages, and which are left in the source language on
-   purpose, each with its reason. Find out whether the docs build overlays translations on the source
+   purpose, each with its reason. Read the docs build configuration (`mkdocs.yml`, a Docusaurus
+   config, `conf.py`, a Jekyll `_config.yml`), any script that assembles the docs before publishing,
+   the existing translations (for what has already drifted), and the contribution rules (whether
+   translations are wanted, and who reviews them). Find out whether the docs build overlays translations on the source
    (an untranslated page then serves the original) or copies (it then goes missing).
 2. **Record the source revision in every translated file,** so staleness is one version-control query.
 3. **Ship a staleness check with the translations:** for each file, compare the recorded revision

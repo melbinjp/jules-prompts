@@ -111,6 +111,11 @@ An action whose contract you cannot fill in is not ready to run. Then:
   world's).
 - **Keep an action log:** for every command, when, what, to which target, why, the observation before
   and after, and the verdict, so a person can reconstruct what was done to the world from the log.
+- **Report one row per physical action:** its target, its contract, the safeguards found, the
+  safeguards added, and the result. *Verified* means an independent observation confirmed the
+  outcome; *failed* means the observation contradicted it, **or a failure path reached an unsafe
+  state**; *not verified* means no independent observation was possible, and why. Each fix comes with
+  a test that drives the simulator into the failure and asserts the safe state.
 - **Inventory first:** every action the code or task can take on the world, with its target,
   whether it can be undone and its current safeguards. Look at every exit toward hardware or a
   real-world service (drivers; serial, GPIO, I2C, Modbus, CAN, MQTT or HTTP clients; vendor SDKs;
@@ -168,6 +173,7 @@ An action whose contract you cannot fill in is not ready to run. Then:
 - **Spare parts and consumables available;** a returns and repair path.
 - **A way to reach every unit** if something must be recalled or updated: who has which serial
   numbers, and how to contact them.
+- **The certification marks and declarations shipped with it** (`§Certification`).
 - **Customs and shipping rules** for each place it goes.
 - **Stage releases:** a small first batch, updates that can be paused, and devices that cannot be
   left unable to start.

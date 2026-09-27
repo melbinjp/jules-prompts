@@ -31,8 +31,9 @@ review, review against the objective and measures alone and say so.
    nothing (code, jobs, services, dependencies, configuration, accounts, subscriptions, rented
    equipment), found through the records and through the project's own tools (unused dependencies,
    unreachable code, unread configuration, dead routes, flags past their date); and features
-   nobody uses, from the usage data. Remove each through a change, or record its reason. Everything
-   nobody needs is paid for again every month.
+   nobody uses, from the usage data. Remove each through a change, or record its reason; a feature
+   that no measure names and nobody uses is removed only with the owner's yes. Everything nobody
+   needs is paid for again every month.
 4. **Check the money and every other resource** (`planning.md §Resources and their sources`).
 5. **Run every procedure both ways:** the person's documented path from a clean start, and the
    agent's or automation's path. A procedure only one of them can do is broken (a renamed script
@@ -40,9 +41,11 @@ review, review against the objective and measures alone and say so.
 6. **Restore a backup and try a rollback** whenever the schedule says (§Backups and restore).
 7. **Check every incident since the last review** has its cause proved, its prevention recorded, and
    its restoring action drilled (§After an incident).
-8. **Re-qualify agents and reconcile egress** where agents run the work (`autonomy.md §Routing work
-   to agents`, `confidentiality.md §Proving it`); show the owner the choices made on their behalf
-   since the last review (`autonomy.md §Choices on the owner's behalf`).
+8. **Review the run itself where agents do the work:** budget spent, choices made and overridden,
+   prompts near the edge of the window, and every gate that failed since the last review, with why
+   and what was done. Re-qualify agents and reconcile egress (`autonomy.md §Routing work to agents`,
+   `confidentiality.md §Proving it`); show the owner the choices made on their behalf since the last
+   review (`autonomy.md §Choices on the owner's behalf`).
 9. **Look outside** (§Upkeep), and **hear the people who use it** (`product.md §Hearing back`).
 10. **Choose the next improvements:** rank the candidates by the measure each moves, how far it is
     from its target, how many people it affects, and what it costs; take the top ones into the next

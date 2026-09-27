@@ -84,7 +84,12 @@ Rank every finding and work from the top; do not polish a level 6 while a level 
 7. everything else.
 
 Close the gap in small, reviewable changes, each with the evidence that it worked; re-walk the
-affected journeys after each.
+affected journeys after each. The change description lists each fix with its level (1 to 7) and
+the evidence that it worked.
+
+The bar's gate: every row verified, or failed or not verified with its reason and its next step
+in the plan. A bar with open failures is a completed assessment, not a claim that the result is
+ready (`../SKILL.md §6. Gates: verification and validation`).
 
 ## Scope by the job
 
@@ -141,6 +146,8 @@ you add.
 - **Every budget in the bar is asserted by a check that fails when it is exceeded:** in CI for
   software; in the recurring inspection or acceptance procedure otherwise. A budget measured once
   in a report is a snapshot, not a budget.
+- **For anything that serves more than one person,** measure the expected peak with a margin,
+  memory and open handles steady over a long run, and the cost of one use.
 
 ## Complexity budget
 
@@ -181,6 +188,10 @@ Applies to any work: a change, a deliverable, a report, a decision, and your own
   settled. The requirement that was quietly dropped does not announce itself.
 - **Check that the checks can fail:** a new test, inspection or gate is shown to detect the defect
   it exists for (`software.md §Tests that can fail`).
+- **Check each change's link and evidence:** it names the work item it serves and the evidence that
+  verifies it (the test seen to fail without it, the measurement before and after, the inspection).
+  A change with neither goes back until it has them; a change serving a rejected or superseded
+  decision, or nothing, is drift and goes to the owner.
 - **Distrust anything weakened to pass:** a loosened check, a skipped step, a widened tolerance, an
   exception swallowed. Each needs its stated reason.
 - **Do not widen the scope:** problems the work did not introduce are recorded separately.
@@ -189,3 +200,7 @@ Applies to any work: a change, a deliverable, a report, a decision, and your own
 - **The verdict comes first:** one sentence on whether the work does what it says, then the
   evidence.
 - **A review over nothing is not a pass:** if there was nothing in scope to review, say so.
+- **Post the review where the project reviews work** (on the change itself, or in the work record),
+  so the author and the acceptor see it.
+- **The author acts on every point:** fixes it, or answers why not; then the reviewer checks again.
+  Feedback left unanswered is an open item, not a pass.

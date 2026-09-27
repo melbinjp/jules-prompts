@@ -183,6 +183,9 @@ and neither can see the other's side.
 7. **Build each change as SKILL.md §7 says,** and record a translation table: claim, meaning,
    measure, value before, target, action, value after, evidence.
 
+A redesign, a new flow, or "make it prettier" or "more intuitive" is a request like any other: which
+measure it moves, the value before, the value after (`design.md §Taste and evidence`).
+
 ## Releasing to people
 
 A result can pass every check and still reach nobody. Reaching people is part of delivery,

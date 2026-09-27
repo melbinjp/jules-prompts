@@ -192,7 +192,7 @@ nothing in the inventory maps to them. Step 2 writes them from the proposal and 
 | choose-with-evidence.C11, choose-with-evidence.R45-R50, choose-with-evidence.G4, choose-with-evidence.G6, choose-with-evidence.E5, choose-with-evidence.D13, choose-with-evidence.D14 | conductor/guidance/decisions.md §A way out and a reopening condition | Seam, owned identifiers and data format, controlled URLs, an export tested once, the exit written, the reopening condition. |
 | choose-with-evidence.C12, choose-with-evidence.R51-R56, choose-with-evidence.G5, choose-with-evidence.E6, choose-with-evidence.D4, choose-with-evidence.D15 | conductor/guidance/decisions.md §Asking the owner | One message with the comparison, the recommendation and its cost, the runner-up, and what no would cost; then stop asking. Delegated choices within standing limits are made and recorded. |
 | choose-with-evidence.C13 | removed | Heading only. |
-| choose-with-evidence.C14-C16 | conductor/guidance/decisions.md §Recording and superseding decisions | **Replaced**: read the project's objective, measures, constraints and earlier ADRs, not `PROJECT.md` and `decisions/`. |
+| choose-with-evidence.C14-C16 | conductor/guidance/decisions.md §Which decisions need evidence | **Replaced**: read the project's objective, measures, constraints and earlier ADRs, not `PROJECT.md` and `decisions/`. |
 | choose-with-evidence.C17-C19 | conductor/guidance/decisions.md §Evidence | Real usage numbers, primary sources, and where the seam goes. |
 | choose-with-evidence.R2-R10, choose-with-evidence.G1 | conductor/guidance/decisions.md §Which decisions need evidence | Stakes first; the signs of a costly-to-reverse decision; effort matched to the stakes. "One-way/two-way door" wording kept as a plain explanation, not as a required field. |
 | choose-with-evidence.R57-R61, choose-with-evidence.E7, choose-with-evidence.D3 | conductor/guidance/decisions.md §Recording and superseding decisions | **Replaced**: an ADR in MADR form (`templates/adr.md`), with status, the options, the evidence by kind, the decision, the exit and the reopening condition; a superseded ADR names its successor. |
@@ -287,7 +287,7 @@ nothing in the inventory maps to them. Step 2 writes them from the proposal and 
 | take-to-production.R45 | conductor/SKILL.md §6. Gates: verification and validation; conductor/guidance/software.md §Tests that can fail | Every fix's test and every check seen to fail on the defect it exists for. |
 | take-to-production.R46, take-to-production.D3, take-to-production.D6, take-to-production.E9 | conductor/SKILL.md §10. Reporting; conductor/guidance/quality.md §Reviewing work | Every bar item verified, failed or not verified, from cold, with evidence; reviewed by someone other than the author. **Changed**: a completed assessment with failed or unverified items is reported as such and does not by itself support a ready-to-release claim (finalisation proposal §4). |
 | take-to-production.E1-E3 | conductor/SKILL.md §1. Classify the project; conductor/guidance/software.md §Setup that runs from cold; conductor/guidance/software.md §Architecture from what runs | Establish the starting state from evidence, not the README. |
-| take-to-production.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait for approval where the harness can pause and the action needs it. |
+| take-to-production.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | take-to-production.D2 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Each fix listed with its level and evidence in the change description. |
 
 ## design-the-experience
@@ -415,7 +415,7 @@ responsibilities, not one step.
 
 | IDs | Where it lands | How |
 |---|---|---|
-| start-from-an-idea.O1-O6, start-from-an-idea.E2, start-from-an-idea.D1 | conductor/guidance/product.md §What it takes | What it takes to make the idea happen, the costly decisions made with evidence, a procedure for every stage, one thin slice end to end, and the records every later change traces to. |
+| start-from-an-idea.O1-O6, start-from-an-idea.E2, start-from-an-idea.D1 | conductor/guidance/product.md §What it takes; conductor/SKILL.md §2. The control loop | What it takes to make the idea happen, the costly decisions made with evidence, a procedure for every stage, one thin slice end to end, and the records every later change traces to. |
 | start-from-an-idea.O7, start-from-an-idea.G1 | conductor/guidance/product.md §Alternative routes; conductor/SKILL.md §1. Classify the project | No idea is declared impossible: constraints get routes, each honestly costed. An existing project has its records written from what is there, its embodied decisions recorded with the evidence they had, and the unjustifiable ones marked for revisiting. |
 | start-from-an-idea.C1, start-from-an-idea.R1, start-from-an-idea.E1 | conductor/guidance/product.md §Intake: what only the owner knows | The idea word for word; one message asking only what only the owner knows (who it is for and what they do today, success, why, budget in money, time and agent use, deadlines and refusals, whether it must earn); assumptions written when the harness cannot pause. |
 | start-from-an-idea.C2, start-from-an-idea.C4, start-from-an-idea.R2-R10 | conductor/guidance/product.md §What it takes; conductor/guidance/physical.md §Parts, suppliers and lead times | Need, what exists (build on, learn from, stand apart), the difference, cost to build and run (BOM, certification and tooling for physical), several funding routes and runway, reach to the first ten and hundred, what success needs (each gap becomes work, never a verdict), and the path with its first step. |
@@ -440,7 +440,7 @@ responsibilities, not one step.
 | start-from-an-idea.R23, start-from-an-idea.R25-R27 | conductor/guidance/autonomy.md §Routing work to agents | By what each agent may see first, then by measured ability on a held-back task of this project's kind; fit the work to the harness and context size; every stage has a fallback agent or person. |
 | start-from-an-idea.R24 | conductor/guidance/confidentiality.md §Agents and models | Where each agent runs and which classes it may see. |
 | start-from-an-idea.R28 | conductor/guidance/autonomy.md §Building a missing tool | A step done three times, or one whose mistakes are costly, becomes a tool in the repository with its own test. |
-| start-from-an-idea.R29-R34 | conductor/SKILL.md §3. Work records | Nobody works in the dark: status from measurements; requests translated and confirmed; options and costs shown before choosing; why each part exists; what is there and who runs it. Each gap in visibility gets its mechanism in the records. |
+| start-from-an-idea.R29-R34 | conductor/SKILL.md §3. Work records; conductor/guidance/product.md §Requests, however they are worded; conductor/guidance/decisions.md §Asking the owner | Nobody works in the dark: status from measurements; requests translated and confirmed; options and costs shown before choosing; why each part exists; what is there and who runs it. Each gap in visibility gets its mechanism in the records. |
 | start-from-an-idea.R44, start-from-an-idea.D6, start-from-an-idea.D7, start-from-an-idea.E8 | conductor/SKILL.md §10. Reporting | Counts at the end; the table's rows become the founding checklist across product, decisions and planning. |
 | start-from-an-idea.G3 | conductor/guidance/decisions.md §Evidence | Every reason verified. |
 | start-from-an-idea.G4 | conductor/guidance/decisions.md §Asking the owner | The owner decides; the agent brings options and arithmetic. |
@@ -469,7 +469,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | repair-setup-script.R1-R5 | conductor/guidance/software.md §Setup that runs from cold | No long-running processes (detached with a readiness poll if needed; a sleep is not a readiness check); true exit codes (no `\|\| true`); unattended; no secrets; lightweight. |
 | repair-setup-script.G1-G5 | conductor/guidance/software.md §Setup that runs from cold | Reproduce before repairing; CI is the best evidence; install from the lockfile; install and verify as separate phases; report what cannot run rather than skipping it. |
 | repair-setup-script.E1, repair-setup-script.E7, repair-setup-script.E12, repair-setup-script.E15 | removed | Phase labels; no instruction. |
-| repair-setup-script.E6 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where approval is needed and the harness can pause. |
+| repair-setup-script.E6 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | repair-setup-script.E8-E11 | conductor/guidance/software.md §Setup that runs from cold | Repair, run, repeat until the runner reports results (not until all pass; no editing tests here); then prove the two silent failure modes: a failed install fails the script, and nothing blocks. |
 | repair-setup-script.E13, repair-setup-script.D3 | conductor/SKILL.md §4. Procedures and evidence | Evidence is the commands, their exit codes and the runner's summary line verbatim; what still cannot run is listed with the reason. |
 | repair-setup-script.E14, repair-setup-script.E16 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author; feedback addressed. |
@@ -487,11 +487,11 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | isolate-tests-from-services.R1-R4, isolate-tests-from-services.D2, isolate-tests-from-services.D4 | conductor/guidance/software.md §Tests that do not need services | Never change what a test asserts; nothing skipped silently; the isolated run is the default; the full suite against real services stays runnable and documented. |
 | isolate-tests-from-services.G1-G5, isolate-tests-from-services.D5 | conductor/guidance/software.md §Tests that do not need services | Find dependencies by running; fake at the existing seam (patching a library is a design finding); in-memory substitutes can lie; record rather than invent API responses; clock, network and randomness are the same problem. |
 | isolate-tests-from-services.E1, isolate-tests-from-services.E5, isolate-tests-from-services.E11, isolate-tests-from-services.E14 | removed | Phase labels. |
-| isolate-tests-from-services.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| isolate-tests-from-services.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | isolate-tests-from-services.E6-E10, isolate-tests-from-services.D3 | conductor/guidance/software.md §Tests that do not need services | One dependency at a time; genuine exceptions marked; isolation proved with egress blocked or dead ports; collected-test counts before and after reconciled exactly. |
 | isolate-tests-from-services.E12 | conductor/SKILL.md §4. Procedures and evidence | Both counts, the reconciliation and the verbatim summary line. |
 | isolate-tests-from-services.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| isolate-tests-from-services.E15 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| isolate-tests-from-services.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 | isolate-tests-from-services.D6, isolate-tests-from-services.D7 | conductor/SKILL.md §10. Reporting | One row per external service; counts at the end. |
 
 ## repair-a-green-pipeline
@@ -505,11 +505,11 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | repair-a-green-pipeline.C12-C15, repair-a-green-pipeline.E2, repair-a-green-pipeline.E3 | conductor/guidance/software.md §Pipelines that can fail | Where to look, and the run history: which jobs never went red, which stopped appearing. |
 | repair-a-green-pipeline.R3-R5, repair-a-green-pipeline.G1-G6, repair-a-green-pipeline.D2-D5 | conductor/guidance/software.md §Pipelines that can fail | Every step prints its coverage; swallowed exit codes removed or justified in place; no new checks while old ones are inert (missing ones listed separately); count and reconcile; never-red steps first; check a job ran, not that it passed; the setup's own failure path first; a badge is a claim; an unfailable check is said plainly. |
 | repair-a-green-pipeline.E1, repair-a-green-pipeline.E5, repair-a-green-pipeline.E11, repair-a-green-pipeline.E14 | removed | Phase labels. |
-| repair-a-green-pipeline.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| repair-a-green-pipeline.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | repair-a-green-pipeline.E6-E10, repair-a-green-pipeline.D1 | conductor/guidance/software.md §Pipelines that can fail | Defect per step, survivors grouped by cause, repaired and re-broken, coverage lines added, the tree left clean and green. |
 | repair-a-green-pipeline.E12 | conductor/SKILL.md §4. Procedures and evidence | The before and after table as evidence. |
 | repair-a-green-pipeline.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| repair-a-green-pipeline.E15 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| repair-a-green-pipeline.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 | repair-a-green-pipeline.D6, repair-a-green-pipeline.D7 | conductor/SKILL.md §10. Reporting | Verified means went red on its defect; failed means stayed green; not verified means could not be made to fail, with what was tried. |
 
 ## automate-a-workflow
@@ -550,7 +550,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | scope-a-vague-issue.R2-R5, scope-a-vague-issue.G1-G5 | conductor/guidance/software.md §Scoping a vague issue | Reproduce or say you could not; evidence per claim; the test fails for the reported reason; no widening; separate report, behaviour and expectation; name each gap and the reading taken; ask the codebase before the reporter; the smallest reproduction; expected behaviour needs a source, or is recorded as undefined. |
 | scope-a-vague-issue.E1, scope-a-vague-issue.E6, scope-a-vague-issue.E11, scope-a-vague-issue.E14 | removed | Phase labels. |
 | scope-a-vague-issue.E2-E4, scope-a-vague-issue.E7-E10, scope-a-vague-issue.D1-D5 | conductor/guidance/software.md §Scoping a vague issue | List what the issue does not say; the readings it allows; a clean baseline; every attempt recorded; reduce; a failing test confirmed red for the right reason by changing the suspected cause; separate defects recorded, not fixed. |
-| scope-a-vague-issue.E5 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| scope-a-vague-issue.E5 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | scope-a-vague-issue.E12 | conductor/SKILL.md §4. Procedures and evidence | The reproduction, the failing test's verbatim output, and the assumptions. |
 | scope-a-vague-issue.E13, scope-a-vague-issue.E15 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author; feedback addressed. |
 | scope-a-vague-issue.E16 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Proposed clearly as a reproduction, not a fix. |
@@ -567,10 +567,10 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | fix-a-bug-test-first.R3-R5, fix-a-bug-test-first.G1-G6, fix-a-bug-test-first.D5, fix-a-bug-test-first.D6 | conductor/guidance/software.md §Fixing a bug, failing test first | The smallest change, split from refactors; never move the assertion to fit; know which tests were already red; narrow the scope; the report's exact input first; unreproducible is a finding; beware fixes that make the test unreachable; say where the cause really was; look for siblings. |
 | fix-a-bug-test-first.E1, fix-a-bug-test-first.E5, fix-a-bug-test-first.E11, fix-a-bug-test-first.E14 | removed | Phase labels. |
 | fix-a-bug-test-first.E2, fix-a-bug-test-first.E3, fix-a-bug-test-first.E6-E10, fix-a-bug-test-first.D1-D4 | conductor/guidance/software.md §Fixing a bug, failing test first | Reproduce by hand; baseline; the failing test and its verbatim output; commit it alone; fix until green and stop; full suite; the revert check (the test goes red again with the fix removed). |
-| fix-a-bug-test-first.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| fix-a-bug-test-first.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | fix-a-bug-test-first.E12 | conductor/SKILL.md §4. Procedures and evidence | Failing and passing output, verbatim. |
 | fix-a-bug-test-first.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| fix-a-bug-test-first.E15 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| fix-a-bug-test-first.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 | fix-a-bug-test-first.D7, fix-a-bug-test-first.D8 | conductor/SKILL.md §10. Reporting | Counts at the end. |
 
 ## qa-an-agents-tests
@@ -583,11 +583,11 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | qa-an-agents-tests.C5-C7, qa-an-agents-tests.E2, qa-an-agents-tests.E3 | conductor/guidance/software.md §Tests that can fail | The list from history, not names; collected, passed and skipped counts from cold. |
 | qa-an-agents-tests.R3-R6, qa-an-agents-tests.G1, qa-an-agents-tests.G5, qa-an-agents-tests.G6, qa-an-agents-tests.D2-D5 | conductor/guidance/software.md §Tests that can fail | Revert every break and confirm a clean tree; a test that cannot fail is fixed or deleted; do not raise coverage to compensate; a test that fails once meaningful is a real defect left failing; mutate the code, not the test; check what is collected; read every skip. |
 | qa-an-agents-tests.E1, qa-an-agents-tests.E5, qa-an-agents-tests.E11, qa-an-agents-tests.E14 | removed | Phase labels. |
-| qa-an-agents-tests.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| qa-an-agents-tests.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | qa-an-agents-tests.E6-E10, qa-an-agents-tests.D1 | conductor/guidance/software.md §Tests that can fail | Mutate, run that test, restore; group survivors by tell; rewrite against the requirement or delete; re-run under the same mutation; full suite green and `git diff` clean. |
 | qa-an-agents-tests.E12 | conductor/SKILL.md §4. Procedures and evidence | The numbers plainly, including the coverage change and its sign. |
 | qa-an-agents-tests.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| qa-an-agents-tests.E15 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| qa-an-agents-tests.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 | qa-an-agents-tests.D6, qa-an-agents-tests.D7 | conductor/SKILL.md §10. Reporting | Verified means red for the stated reason; failed means stayed green (then fixed or deleted); not verified means could not be broken without rewriting the code. |
 
 ## review-an-agent-pr
@@ -600,7 +600,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | review-an-agent-pr.C4-C6, review-an-agent-pr.E2, review-an-agent-pr.E3 | conductor/guidance/software.md §Reviewing an agent's change | The diff and the issue it claims to close, its tests, and which checks actually gate the merge; the issue's requirements as discrete items. |
 | review-an-agent-pr.G1-G6, review-an-agent-pr.D2, review-an-agent-pr.D3 | conductor/guidance/software.md §Reviewing an agent's change | A new test can fail; assertions against the issue, not the diff; the quietly dropped requirement; deleted or weakened assertions, skips and widened tolerances; suppressed errors; the gate that should catch it actually runs. |
 | review-an-agent-pr.E1, review-an-agent-pr.E5, review-an-agent-pr.E11, review-an-agent-pr.E14 | removed | Phase labels. |
-| review-an-agent-pr.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| review-an-agent-pr.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | review-an-agent-pr.E6-E10, review-an-agent-pr.D1 | conductor/guidance/software.md §Reviewing an agent's change | Baseline on the base commit; suite on the change and every difference accounted for; break under each new test; each requirement met, partly or not, with file and line; exercise the interface by hand. |
 | review-an-agent-pr.E12, review-an-agent-pr.D4, review-an-agent-pr.D5 | conductor/SKILL.md §10. Reporting | One sentence first on whether it does what it says; what was verified, what could not be, and what was found. |
 | review-an-agent-pr.E13, review-an-agent-pr.E15 | conductor/guidance/quality.md §Reviewing work | The review posted where the project reviews work. |
@@ -616,7 +616,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | security-review-agent-code.C4-C6, security-review-agent-code.E2, security-review-agent-code.E3 | conductor/guidance/software.md §Security of agent-written code | The diff, CI, manifests and lockfiles, and fixtures, examples and docs where invented credentials land; the parts on input, credential or permission paths. |
 | security-review-agent-code.G1-G7, security-review-agent-code.D2-D4 | conductor/guidance/software.md §Security of agent-written code | A check that cannot fail is the defect; switched-off verification (`verify=False` and kin); credentials in anything the change created, including the history; where each new dependency came from, name checked character by character, lockfile consistent; permissions that widened; a swallowed exception around authorisation; injection wherever a string was built. |
 | security-review-agent-code.E1, security-review-agent-code.E5, security-review-agent-code.E11, security-review-agent-code.E14 | removed | Phase labels. |
-| security-review-agent-code.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| security-review-agent-code.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | security-review-agent-code.E6-E10 | conductor/guidance/software.md §Security of agent-written code | Walk each principle with file and line; make each new check fire; record each dependency's name, version and source; determine whether each credential is live and in history; run the project's scanners and report verbatim. |
 | security-review-agent-code.E12, security-review-agent-code.D1, security-review-agent-code.D5 | conductor/SKILL.md §10. Reporting | Findings ordered by what an attacker gains, each with the smallest fix; what was not examined. |
 | security-review-agent-code.E13, security-review-agent-code.E15 | conductor/guidance/quality.md §Reviewing work | The review posted where the project reviews work. |
@@ -643,11 +643,11 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | verify-a-migration.C6-C9, verify-a-migration.E2, verify-a-migration.E3 | conductor/guidance/software.md §Data migrations | Where to look, and the statements, tables, engine version and row counts. |
 | verify-a-migration.R1-R6, verify-a-migration.G1-G7 | conductor/guidance/software.md §Data migrations | Production engine and row counts (or say what is unknown); run the rollback and diff schema dumps; locks per statement; never touch production; re-measure a changed migration; constraints tested against the data; batched backfills killed halfway; the safe deploy order proved both ways; an applied migration is never edited. |
 | verify-a-migration.E1, verify-a-migration.E5, verify-a-migration.E13, verify-a-migration.E16 | removed | Phase labels. |
-| verify-a-migration.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| verify-a-migration.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | verify-a-migration.E6-E12, verify-a-migration.D1-D5 | conductor/guidance/software.md §Data migrations | The copy on the same engine, seeded; timed statements with locks; the round trip diffed; violating-row counts; interrupted backfill; old and new code against both schemas; the copy destroyed and production untouched; what could not be measured, named. |
 | verify-a-migration.E14 | conductor/SKILL.md §4. Procedures and evidence | Numbers reported with the row counts they rest on. |
 | verify-a-migration.E15 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| verify-a-migration.E17 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| verify-a-migration.E17 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 | verify-a-migration.D6, verify-a-migration.D7 | conductor/SKILL.md §10. Reporting | Counts at the end. |
 
 ## prove-the-docs
@@ -661,10 +661,10 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | prove-the-docs.C6-C9, prove-the-docs.E2, prove-the-docs.E3 | conductor/guidance/software.md §Documentation that matches the code | Where claims live, and the claim list with source lines, grouped by how each will be checked. |
 | prove-the-docs.R2-R5, prove-the-docs.E6-E10, prove-the-docs.D1, prove-the-docs.D3-D5 | conductor/guidance/software.md §Documentation that matches the code | The quickstart run literally from cold; do not polish unchecked prose; do not drop hard claims; generated examples produced by running; fix the false claims; re-run the suite and the quickstart. |
 | prove-the-docs.E1, prove-the-docs.E5, prove-the-docs.E11, prove-the-docs.E14 | removed | Phase labels. |
-| prove-the-docs.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Plan stated; wait where needed. |
+| prove-the-docs.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | prove-the-docs.E12, prove-the-docs.R6, prove-the-docs.D2, prove-the-docs.D6, prove-the-docs.D7 | conductor/SKILL.md §10. Reporting | Claims examined, verified, false, unverifiable; the denominator. |
 | prove-the-docs.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
-| prove-the-docs.E15 | conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | The change proposed with what was verified. |
+| prove-the-docs.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 
 ## translate-the-docs
 
@@ -809,7 +809,7 @@ These are requirements, not procedures; each is traced to where the conductor me
 | owner.1 | conductor/SKILL.md §1. Classify the project; conductor/SKILL.md §9. Closure and handover | Any project in any state enters by classification and its first unmet acceptance. "Kept there" is met by the handover to a named operator with review triggers, not by an endless loop for every project. |
 | owner.2 | conductor/guidance/product.md §What it takes; conductor/guidance/decisions.md §Which decisions need evidence; conductor/guidance/planning.md §Milestones as usable slices | The floor that later stages do not regret: costly decisions with evidence, a procedure for every stage, a walking skeleton. |
 | owner.3 | conductor/SKILL.md §4. Procedures and evidence; conductor/guidance/design.md §Every operator | Every procedure has a responsible actor, person, agent or automation; operation by person or agent with the same limits. |
-| owner.4 | conductor/SKILL.md §7. Changes; conductor/guidance/decisions.md §Evidence | Every change has a reason and a verification; decisions have two kinds of evidence. **Replaced mechanism**: review against the work record, not the trace check. |
+| owner.4 | conductor/SKILL.md §7. Changes; conductor/guidance/decisions.md §Evidence | Every change has a reason and a verification; every decision has at least two backings, at least one verified, and two different kinds of evidence when it is costly to reverse (as the old checker enforced). **Replaced mechanism**: review against the work record, not the trace check. |
 | owner.5 | conductor/guidance/product.md §Requests, however they are worded; conductor/guidance/software.md §Complete changes, nothing detached | Requests translated and shown with numbers; nothing left detached. |
 | owner.6 | conductor/guidance/product.md §Journeys and threads; conductor/guidance/design.md §Threads to the architecture | One design seen from flow, architecture and data. |
 | owner.7 | conductor/guidance/product.md §Areas and owners; conductor/guidance/design.md §What design covers | Every area founded or explicitly not applicable. |

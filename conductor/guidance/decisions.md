@@ -18,8 +18,9 @@ same failures appear whether the choice is a database, a board, a caterer or a m
    choice that serves none of them is not needed; say so and stop.
 3. **Set the stakes first, and let them set the effort.** What would a wrong choice cost, and how
    long would it take to reverse?
-   - **Costly to reverse** ("a one-way door"): it holds the data or the people; it fixes
-     identifiers, a public interface or public URLs; it has lead time or tooling; it is built
+   - **Costly to reverse** ("a one-way door"): it holds the data or the people; it fixes the data
+     model, identifiers, a public interface (and who operates each action through it: a person, an
+     agent, automation) or public URLs; it has lead time or tooling; it is built
      into firmware or hardware in people's hands; it is the language, runtime or platform; it is
      the licence or a name people will learn; it spends money or commits the owner to a person
      or supplier. Make it for the size and shape the objective implies, not only today's.

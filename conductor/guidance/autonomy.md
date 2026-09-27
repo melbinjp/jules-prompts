@@ -26,7 +26,8 @@ and does not invent what it cannot see.
 
 ## What a harness must do
 
-Whether stock or built, check that it:
+A model alone answers one message and forgets it; the harness supplies the loop, the files, the
+commands and the memory. Whether stock or built, check that it:
 
 - **loops** (look, decide, act, check, record) until the model says done, a step limit is reached,
   or the person stops it; and exits cleanly at each;
@@ -40,16 +41,19 @@ Whether stock or built, check that it:
   step, and answers an unreadable reply with the format rather than crashing;
 - **keeps boundaries that do not depend on the model behaving:** files inside the project only; the
   person's override lines and the harness's own log written by the person and the harness, never by
-  the model;
+  the model; the state note kept exactly as the model wrote it;
 - **checkpoints after every step that changed the project** (a version-control commit), so any step
   can be undone and an earlier version recovered;
 - **logs every step:** what was sent, what was done, what it cost;
 - **starts a new run from the state note and the records,** not from memory;
 - **honours a stop the person can trigger without the agent** (a stop file or equivalent), checked
   before acting;
-- **treats the model endpoint as configuration:** a local or a hosted runtime; an endpoint off the
-  local network refused unless explicitly allowed; remote traffic through the project's egress proxy
-  when one is set (`confidentiality.md §Agents and models`).
+- **treats the model endpoint as configuration:** a local or a hosted runtime, speaking the common
+  chat-completions format; an endpoint off the local network refused unless explicitly allowed;
+  remote traffic through the project's egress proxy when one is set (`confidentiality.md §Agents and
+  models`);
+- **runs in any supervision mode as a setting:** unattended, supervised (each action shown for a
+  yes), or not at all while a person follows the state note by hand.
 
 ## Building a missing tool
 
@@ -111,7 +115,8 @@ continues. At each review, show the owner the choices made since the last one.
 - **Standing limits enforced where the action happens,** not by the agent's good behaviour: a spending
   cap on the payment account, a publishing target that is a test channel until a milestone says
   otherwise, device limits in firmware.
-- **A stop the person can trigger without the agent,** and a clean state whenever it stops.
+- **A stop the person can trigger without the agent,** and a clean state whenever it stops. Try the
+  stop once, before relying on it.
 
 ## Budget
 

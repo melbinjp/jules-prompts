@@ -193,7 +193,11 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   agent in a fresh context given the work and its claims. A fresh-context review challenges
   claims; it does not replace competent human judgment, or an inspection the law requires
   (electrical, gas, structural, medical, food, radio certification and the like).
+- **After a change, walk again the journeys it touches,** and measure again the way the
+  measure says it is taken.
 - **Gates run after the last change.** A result checked before a later change is not checked.
+  Before the final verdict on a deliverable, re-run everything from cold: a clean checkout or
+  setup, every gate again, every journey walked again.
 - **A failed gate means another attempt or another route, never a lower gate.**
 - **Completion is a delivered result and its acceptance,** not a count of closed tasks. An
   assessment with failed or unverified items is a completed assessment; on its own it does not
@@ -228,9 +232,12 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   (money, publishing or sending to people, physical actions, actions during an incident), the
   budget, and the confidentiality rules.
 - **Inside the limits, act without asking. Outside them, take another route, or ask once with
-  everything the owner needs to decide.** State the plan for anything that needs approval;
-  where the harness can pause for it, wait; where it cannot, record the action as proposed and
-  do not take it.
+  everything the owner needs to decide.**
+- **Write the plan before starting a piece of work.** Where the plan needs someone's approval
+  and the harness can pause for it, wait. Where it cannot pause, state the plan and proceed with
+  everything inside the delegated authority; an action outside it (a costly-to-reverse decision,
+  anything irreversible, anything over a standing limit) is recorded as proposed and not taken
+  until it is approved.
 - **Anything that cannot be undone** (spending, sending to a person, publishing, cutting,
   dispensing, deleting records, acting near people) needs a person's yes to the exact action
   and its parameters, or an explicit, scoped, written standing authorisation.
@@ -263,7 +270,10 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   *failed* (the evidence contradicts the claim); *not verified* (it could not be checked, with
   the reason); *not applicable* (with the recorded decision); *exception* (with who authorised
   it). The last two are never counted as passes.
-- **Say first what could not be checked.**
+- **Lead with one sentence: whether the work does what it claims.** Then say what could not be
+  checked, and why, before the details.
+- **One row per item the work promised** (each requirement, journey, check, step, decision,
+  action or claim), each with its result and its evidence or reason.
 - **Report workflow and delivery separately.** A correctly handled block is good workflow; it
   is not a delivery.
 - **Quote evidence verbatim** where it is output.

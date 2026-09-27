@@ -31,9 +31,15 @@ engine who the customer is.
 
 ## Every channel that can carry the work out
 
-Map every channel, and give each a verdict with its evidence (a configuration line, a captured
-request): closed, controlled (with the rule it follows), or open by the owner's written decision.
-Walk all of these:
+Every tool is a channel until shown otherwise. Private rarely means only "not public": code in
+plaintext on a hosted platform is read by the platform, its CI logs, its AI features and every
+third-party app granted access, so list who can read it. Defaults leak: telemetry in the editor, the
+operating system, the build tools, the package managers and the agent harness; update and licence
+checks; cloud sync of the project folder; clipboard sync between devices.
+
+Map every channel in a table: the channel, what it sends, to whom, when, its verdict, and the
+evidence (a configuration line, a captured request). The verdict is closed, controlled (with the rule
+it follows), or open by the owner's written decision. Walk all of these:
 
 - version-control remotes and hosting, their hooks, CI and its logs, backups and sync clients;
 - agents and model providers, and the harness's context rules;
