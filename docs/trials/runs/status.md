@@ -9,18 +9,46 @@ pinned at `59828ca` (the selection check passed on run 4).
 | Selection check, run 2 (conductor at `51d534d`) | Cut off by the rate limit; rerun from scratch | n/a | n/a |
 | Selection check, run 3 (conductor at `51d534d`) | Failed, criteria 3 and 5 (records written after the code changed); conductor fixed; recorded in `../selection-check.md` | n/a | n/a |
 | Selection check, run 4 (conductor at `59828ca`) | **Passed**, 8 of 8; recorded in `../selection-check.md` | n/a | n/a |
-| `fixture-stale-docs-old` | Done | 3 of 3 | Not yet run |
-| `fixture-setup-succeeds-while-failing-old` | Done | 3 of 3 | Not yet run |
-| `fixture-finished-looking-pr-old` | Done | 3 of 3 | Not yet run |
-| `fixture-unfailable-tests-old` | Done | 2 of 4 | Not yet run |
-| `fixture-green-pipeline-old` | Done | 4 of 4 | Not yet run |
-| `fixture-error-path-never-run-old` | Done | 2 of 2 | Not yet run |
-| Old: security-check-removed, vague-issue, looks-finished, command-accepted, premature-start, vendor-comparison | Cut off by the rate limit; rerun from scratch | | |
-| Old: the other 14 fixtures | Not started | | |
-| New: all 26 fixtures | Not started | | |
 | Cases: software, event, greenhouse (old and new) | Not started | | |
 | Held-back case | Not started; run once, last | | |
 | `../report.md` | Not started | | |
+
+## Fixture runs
+
+The old run's string score for each fixture, and the new run's, link to the run records.
+
+<!-- fixtures -->
+| Fixture | Old: string score | Old: output check | New: string score | New: output check |
+|---|---|---|---|---|
+| unfailable-tests | [2 of 4](fixture-unfailable-tests-old.md) | not yet run | not started |  |
+| green-pipeline | [4 of 4](fixture-green-pipeline-old.md) | not yet run | not started |  |
+| setup-succeeds-while-failing | [3 of 3](fixture-setup-succeeds-while-failing-old.md) | not yet run | not started |  |
+| stale-docs | [3 of 3](fixture-stale-docs-old.md) | not yet run | not started |  |
+| error-path-never-run | [2 of 2](fixture-error-path-never-run-old.md) | not yet run | not started |  |
+| finished-looking-pr | [3 of 3](fixture-finished-looking-pr-old.md) | not yet run | not started |  |
+| security-check-removed | [2 of 2](fixture-security-check-removed-old.md) | not yet run | not started |  |
+| vague-issue | cut off, to rerun |  | not started |  |
+| looks-finished | cut off, to rerun |  | not started |  |
+| command-accepted | cut off, to rerun |  | not started |  |
+| premature-start | cut off, to rerun |  | not started |  |
+| vendor-comparison | cut off, to rerun |  | not started |  |
+| optimise-it | not started |  | not started |  |
+| six-months-in | not started |  | not started |  |
+| private-by-accident | not started |  | not started |  |
+| designed-by-default | not started |  | not started |  |
+| shipped-to-nobody | not started |  | not started |  |
+| restored-last | not started |  | not started |  |
+| fixed-before-tested | not started |  | not started |  |
+| bumped-everything | not started |  | not started |  |
+| migrated-on-empty | not started |  | not started |  |
+| skipped-to-green | not started |  | not started |  |
+| map-from-folders | not started |  | not started |  |
+| translated-once | not started |  | not started |  |
+| silent-backup | not started |  | not started |  |
+| unattended-run | not started |  | not started |  |
+
+Fixture runs recorded: old 7 of 26, new 0 of 26.
+<!-- /fixtures -->
 
 **Recording a run.** A run cut off before its agent returned a report is not scored or counted. It
 is rerun from scratch on a fresh workspace, and the cut-off is noted here. The unfailable-tests
