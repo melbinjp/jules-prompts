@@ -737,8 +737,9 @@ def write(target: str, prompts: list[dict]) -> list[Path]:
     expected = render(target, prompts)
     for path, text in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        if not path.exists() or path.read_text(encoding="utf-8") != text:
-            path.write_text(text, encoding="utf-8")
+        content = text.encode("utf-8")
+        if not path.exists() or path.read_bytes() != content:
+            path.write_bytes(content)
         written.append(path)
     # A procedure that was removed takes its generated forms with it.
     for path in orphans(target, expected):
@@ -757,7 +758,7 @@ def differences(target: str, prompts: list[dict]) -> list[str]:
     for path, text in expected.items():
         if not path.exists():
             problems.append(f"{path.relative_to(ROOT)} is missing")
-        elif path.read_text(encoding="utf-8") != text:
+        elif path.read_bytes() != text.encode("utf-8"):
             problems.append(f"{path.relative_to(ROOT)} differs from its source")
 
     # A file nobody generates any more is drift in the other direction.

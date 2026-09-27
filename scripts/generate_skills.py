@@ -101,7 +101,7 @@ def write(files: dict[str, str]) -> None:
     for name, content in files.items():
         dest = SKILLS / name / "SKILL.md"
         dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(content, encoding="utf-8")
+        dest.write_bytes(content.encode("utf-8"))
         wanted.add(name)
         print(f"wrote skills/{name}/SKILL.md")
     for child in SKILLS.iterdir():
@@ -116,8 +116,8 @@ def check(files: dict[str, str]) -> int:
         if not dest.exists():
             problems.append(f"missing skills/{name}/SKILL.md")
             continue
-        actual = dest.read_text(encoding="utf-8")
-        if actual != content:
+        actual = dest.read_bytes()
+        if actual != content.encode("utf-8"):
             problems.append(f"skills/{name}/SKILL.md disagrees with _prompts/")
     for child in SKILLS.iterdir() if SKILLS.exists() else []:
         if child.is_dir() and (child / "SKILL.md").exists() and child.name not in files:

@@ -8,6 +8,7 @@ og_image: /assets/og.png
 og_image_alt: "Jules Prompts. Take any idea all the way, and keep it working. An expected report reading 3 holds, 8 broken, 0 skipped of 11 items."
 # Needed for absolute_url, which the canonical and og:url tags in _includes/head.html use.
 url: https://jules-prompts.wecanuseai.com
+baseurl: "" # Custom domain is served at its root; local builds need no Pages API lookup.
 
 # WHY A SITEMAP, measured rather than assumed. Search is the only channel strangers actually
 # arrive through - the repository's own traffic for the fortnight to 2026-08-21 reads Google

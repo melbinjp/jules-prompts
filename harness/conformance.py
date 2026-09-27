@@ -156,10 +156,18 @@ def main() -> int:
         task.write_text("TASK-MARKER: make hello.txt say hello.")
         outside = tmp / "outside.txt"
 
+        # Compute the marker instead of putting it in the command itself: seeing
+        # the action in the next prompt must not masquerade as seeing its output.
+        # Python is already required to run this check; its command is quoted for
+        # the platform's shell, and && plus redirection still test shell execution.
+        calculation = [sys.executable, "-c", "print(str(4000 + 242) + '-computed')"]
+        shell_command = (subprocess.list2cmdline(calculation) if os.name == "nt"
+                         else shlex.join(calculation))
+        shell_command += " && echo 42 > out.txt"
         replies = [
             act("write", path="hello.txt", content="hello\n"),
             act("read", path="notes.txt"),
-            act("run", cmd="echo $((4000 + 242))-computed && echo 42 > out.txt"),
+            act("run", cmd=shell_command),
             act("write", path="../outside.txt", content="escaped"),
             "I will write the file next.",
             act("choose", question="Which greeting?", choice="hello", reason="the task says hello", reversible=True),

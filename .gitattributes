@@ -1,0 +1,9 @@
+# Served skill digests cover exact UTF-8/LF bytes on every platform.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

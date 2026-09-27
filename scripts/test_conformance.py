@@ -11,6 +11,7 @@ a hole in the test, and fails this.
 """
 from __future__ import annotations
 
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -57,7 +58,10 @@ BROKEN = [
 def conform(harness: Path, where: Path) -> tuple[int, str]:
     # Run from a scratch directory: a broken harness that ignores --workdir writes to its
     # current directory, and that must not be the repository.
-    done = subprocess.run([sys.executable, str(CONFORMANCE), "--harness", f"{sys.executable} {harness}",
+    # --harness uses shlex syntax on every platform. Quote each argument before
+    # serialising it, including Windows paths with spaces and backslashes.
+    command = shlex.join([sys.executable, str(harness)])
+    done = subprocess.run([sys.executable, str(CONFORMANCE), "--harness", command,
                            "--timeout", "60"], capture_output=True, text=True, cwd=where)
     return done.returncode, done.stdout + done.stderr
 
@@ -69,7 +73,8 @@ def main() -> int:
     if code != 0:
         problems.append(f"the reference fails the conformance test:\n{output}")
     source = REFERENCE.read_text(encoding="utf-8")
-    with tempfile.TemporaryDirectory() as tmp:
+    # Spaces also exercise argument quoting on platforms whose Python path has none.
+    with tempfile.TemporaryDirectory(prefix="jules harness ") as tmp:
         for number, (name, old, new) in enumerate(BROKEN):
             if old not in source:
                 problems.append(f"{name}: the text to break is not in reference_agent.py any more")

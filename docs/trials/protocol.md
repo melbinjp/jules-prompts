@@ -254,3 +254,29 @@ order:
 No new-approach comparison run had happened, so none is invalidated. The pin is `33aa9e2`,
 replacing `59828ca`. The step 2 selection check is run again at `33aa9e2`, under amendment 3, and
 must pass before any new-approach comparison run.
+
+## Windows build continuation (2026-09-27)
+
+The owner asked to sync the latest branch and complete the build, then excluded the earlier
+failed project. It is no longer a required trial. The original held-back case remains sealed;
+its content is not in this checkout and must not be reconstructed from its hash.
+
+The current runner is Codex on Windows. Available-case delivery exercises here are a separate
+validation cohort, not continuations of the historical Claude runs or a claim of identical
+model/tool conditions. Record the exact method export and any unavailable usage metadata.
+Keep the original inputs, scripted replies, authority limits and acceptance criteria. Both
+approaches receive the same environment rule: execute project code only in a preloaded
+Python 3.8 Docker image, with network disabled, a read-only root, dropped capabilities,
+no extra host mounts and only that run's workspace mounted writable. Ordinary host file
+reads and edits remain limited by the agent instruction to the workspace and method export.
+
+On this host the agent's file tools do **not** provide the enforced session filesystem
+sandbox assumed by amendment 3. Docker contains the executed project code, not the agent's
+host tools. Therefore these observations are supplementary delivery evidence; they do not
+by themselves satisfy amendment 3 or open the migration gate. Do not relabel instruction-only
+scope as enforced isolation. No original/faulty project code is executed directly on the host.
+
+The runner's container probe refused writes at `/`, `/tmp`, `/root`, `/home` and `/Users`,
+permitted a workspace write, and refused an outbound connection. Image prepared before runs:
+`python:3.8-slim`, digest
+`sha256:1d52838af602b4b5a831beb13a0e4d073280665ea7be7f69ce2382f29c5a613f`.

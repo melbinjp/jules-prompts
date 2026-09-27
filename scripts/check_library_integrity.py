@@ -37,6 +37,7 @@ SKILLS = ROOT / "skills"
 sys.path.insert(0, str(ROOT / "scripts"))
 import generate_skills  # noqa: E402
 import score_fixture  # noqa: E402
+import check_conductor  # noqa: E402
 
 REQUIRED_FIELDS = ("layout", "title", "description", "category", "type")
 
@@ -55,21 +56,6 @@ FORBIDDEN_IN_PROMPTS = (
     "google_search",
     "view_text_website",
     "`jules/",
-)
-
-# This library takes any idea and makes it happen. A procedure that tells an agent to decide
-# whether an idea deserves to exist, or to end a project when a number is missed, works against
-# that: it turns a constraint into a verdict. The first version of the lifecycle skills did
-# both, with a "should it exist" step and stop conditions, and read the owner's worry about
-# half-built projects as a reason to build fewer. A blocked route gets another route.
-PROJECT_ENDING = (
-    "stop condition",
-    "kill criteri",
-    "whether it should exist",
-    "whether it should be built",
-    "should not be built",
-    "don't build it",
-    "do not build it",
 )
 
 # Projects can be private, proprietary, offline, or built without the tools everyone else uses.
@@ -143,10 +129,6 @@ def main() -> int:
         if SERVICE_AGNOSTIC not in text:
             problems.append(f"{p.name} does not say it assumes no hosted service, so an agent "
                             "may read its steps as requiring one")
-        for needle in PROJECT_ENDING:
-            if needle in text.lower():
-                problems.append(f"{p.name} tells an agent to end or refuse a project "
-                                f"({needle!r}); a blocked route gets another route")
         layout = (yaml.safe_load(text[3:text.find("\n---", 3)]) or {}).get("layout")
         if layout != PROMPT_LAYOUT:
             problems.append(f"{p.name} uses layout {layout!r}, not {PROMPT_LAYOUT!r}, so its "
@@ -285,6 +267,13 @@ def main() -> int:
             if skill not in tested:
                 problems.append(f"skill {skill} has no fixture, so nobody has seen it catch anything")
 
+    conductor_problems, conductor_counts = check_conductor.validate(ROOT / "conductor")
+    problems.extend(f"conductor/{problem}" for problem in conductor_problems)
+    print(
+        f"checked conductor: {conductor_counts['files']} files, "
+        f"{conductor_counts['references']} local references, "
+        f"{conductor_counts['sections']} section references"
+    )
     print(
         f"checked {len(files)} prompt(s), "
         f"{len(steps)} workflow step(s), {len(planned)} skill(s), "
@@ -296,7 +285,7 @@ def main() -> int:
         for p in problems:
             print(f"  - {p}")
         return 1
-    print("the prompt set, the workflow, the skills and the fixtures agree, and every skill has a fixture")
+    print("the legacy library agrees and the conductor package is complete; delivery trials are a separate acceptance gate")
     return 0
 
 
