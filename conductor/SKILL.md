@@ -116,7 +116,11 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 - **Each work item records** the deliverable it belongs to, its owner, its acceptance
   criteria, its state, its dependencies and resource constraints, and, where useful, an
   estimate and dates. When it is done it links to its evidence. Use the tool's own fields,
-  identifiers and links; do not invent an ID scheme or a file format.
+  identifiers and links; do not invent an ID scheme or a file format. In a plain file, which has
+  no identifiers of its own, number the rows and refer to them in words ("work item 3", "the
+  second measure"); do not create families of prefixed codes (G1, M2, J3, W4) or rules for
+  cross-referencing them: that recreates a private format everyone must learn
+  (`guidance/planning.md §Work records in the project's tool`).
 - **Views are views.** A board, a Gantt chart, a burn-down or a report is a view of the
   records, or an export marked with its source and date. Never edit an export as a second plan.
 - **The project's other records** live where the project keeps documents (often a `docs/`
@@ -288,7 +292,7 @@ covers; sections refer to each other as `file §Heading`.
 | When | Load |
 |---|---|
 | Always, for the objective, measures, requests and reaching people | `guidance/product.md` |
-| Planning work, dependencies, schedule, resources, risks or change control | `guidance/planning.md` |
+| Always, at least `§Choosing methods by need` and `§Work records in the project's tool`; the rest when there are dependencies, dates, shared resources, risks or changes to control | `guidance/planning.md` |
 | Any choice that matters: a tool, supplier, part, platform, design or route | `guidance/decisions.md` |
 | Anything people or agents see, hear or operate | `guidance/design.md` |
 | Setting or checking the bar a result must meet | `guidance/quality.md` |

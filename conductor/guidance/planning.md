@@ -1,7 +1,8 @@
 # Planning: deliverables, work, dependencies, schedule and resources
 
-Load when planning work, sequencing it, scheduling it, assigning it, or when something changes a
-date, a resource or the scope. These are established project-management methods (ISO 21502 and
+Every project has work to choose and records to keep, so read at least §Choosing methods by need
+and §Work records in the project's tool on every project. Read the rest when there are
+dependencies, dates, shared resources, risks, or changes to agreed scope. These are established project-management methods (ISO 21502 and
 the APM body of knowledge describe them); what follows is enough to apply them without either.
 They are chosen by need, not all at once, and none of them is a separate document for its own
 sake.
@@ -198,5 +199,9 @@ tier that becomes a four-figure bill at the target size; a bill of materials abo
   milestones as the tool's milestones; the board and the roadmap as views. In a spreadsheet:
   one row per work package with the same columns. Offline or with nothing else: one Markdown
   file with a table, kept in the repository.
-- **No invented ID scheme or file format.** Refer to items by the tool's own identifiers.
+- **No invented ID scheme or file format.** Refer to items by the tool's own identifiers (an issue
+  number, a spreadsheet row). A plain file has none: number the rows of each table (1, 2, 3) and
+  refer to them in words, such as "work item 3" or "the second measure". Do not create families of
+  prefixed codes (G1, M2, J3, W4, Q5) or rules for cross-referencing them between files; that is
+  the private format this guidance exists to avoid.
 - **Mark every export with its source and date,** and do not edit it as a separate plan.

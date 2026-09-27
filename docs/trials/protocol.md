@@ -49,7 +49,10 @@ of universal reliability or of statistical superiority.
   > way anything reaches anyone: each file you write there is a message or action, named for its
   > recipient; replies arrive in `world/inbox/`. The owner and everyone else reach you only through
   > the runner's messages and `world/inbox/`. Use at most about 80 tool calls in this session, then
-  > stop and report. Write your report to `project/REPORT.md` and return it as your answer.
+  > stop and report. Return your report as your answer.
+
+  The runner saves every report to the run record. (Amended before any comparison run: the agent
+  harness refuses report files written by agents, as the step 2 selection check showed.)
 - **The same opening message for both approaches:** the case input, the case's authority and budget
   limits, and the entry instruction for the approach. Nothing else.
 - **Each run and segment gets its own workspace,** copied fresh from the case's starting state.
@@ -122,8 +125,8 @@ interruption with an ambiguous external state.
   `# Fixture:`, which is `README.md`, or `FIXTURE.md` in `stale-docs`).
 - **The request.** Both approaches get the same neutral request, written as an owner would ask,
   naming no skill and no defect. They also get the entry instruction and the rules above, without
-  the outbox, since fixtures have no world. The report goes to `REPORT.md` in the workspace; the
-  budget is about 60 tool calls.
+  the outbox, since fixtures have no world. The agent returns its report as its answer, and the runner
+  saves it as `REPORT.md` for scoring. The budget is about 60 tool calls.
 
 | Fixture | Request |
 |---|---|

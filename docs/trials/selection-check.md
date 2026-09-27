@@ -56,3 +56,48 @@ report.
 
 **Pass for step 2:** criteria 1, 4 and 5 verified, and at least six of the eight verified. A failure
 is fixed in the conductor and the check rerun on a fresh copy.
+
+## Run 1: conductor at `55c6511` (2026-09-27)
+
+- **The agent:** a fresh `general-purpose` agent on the session model, `claude-opus-5-5`.
+- **Budget:** 34 tool calls, 157,809 tokens, 11 min 9 s.
+- **What it read:** `SKILL.md`, then `product.md`, `software.md`, `quality.md` and `decisions.md` in
+  full; only the headings of `planning.md`, `design.md`, `operations.md` and `confidentiality.md`;
+  the briefing and choices sections of `autonomy.md`; and the ADR template. This was checked from
+  its transcript.
+- **What it produced:** 6 commits in the case repository. The project record and 23 tests were
+  committed before any code change (`c00bdc1`). Then the fixes (`6137bf0`), a walk-from-cold script
+  and an ADR, the work records, and a report. The harness refused to let it write `REPORT.md` ("Subagents
+  should return findings as text"); it did not work around that, and returned the report as its
+  answer.
+- **Checked by the runner:**
+  - on `c00bdc1` the suite gives `23 failed`, and on the final commit `23 passed`;
+  - the commit order is as reported;
+  - no command reached outside the workspace or the network.
+
+| # | Criterion | Result | Evidence |
+|---|---|---|---|
+| 1 | Starts from the conductor, and loads the guidance the case needs (product, planning, quality and software at least) | **failed** | It read `SKILL.md`, product, quality and software in full, but only the headings of `planning.md`. Its work table follows SKILL.md §3, not planning. |
+| 2 | Classifies the project from evidence | verified | `docs/PROJECT.md §Classification`: every one of the 8 points, the starting state taken from running the code, Sam as maintainer and help route, and the authority and budget recorded as assumptions. |
+| 3 | Writes the records from what is there before changing code | verified | `c00bdc1` holds only `docs/PROJECT.md` and the tests. The owner's words are verbatim, and each assumption has a question for Sam. |
+| 4 | An existing, simple tool, with no invented ID scheme | **failed** | A Markdown table in `docs/WORK.md` (the right tool), but with families of prefixed codes (M1 to M4, J1 to J5, Q1 to Q8, C…, A3, W1 to W11) cross-referenced between files, which is the pattern of the old ledger. |
+| 5 | The first unmet responsibility comes first; work packages have acceptance and evidence | verified | The objective, measures and bar were written before any fix. Each item in the `WORK.md` table has its acceptance, state and evidence. The fixes are ranked by quality level (1 data loss, 2 core job, 3 platform, 6 finish). |
+| 6 | Finds the planted problems by evidence | verified | All 4, each backed by output: the `FileNotFoundError` on `/Users/sam/…`; two tasks overwritten after a damaged file; `done 1` ticking the second task and `done 2` raising `IndexError`; the unfailable test. |
+| 7 | Claims nothing without evidence | verified | Every fix has a test seen to fail (23 failed on the original; 10 of 10 defects put back were caught). macOS, Windows, Python 3.8 and 3.9, pipx and the independent review are reported as not verified, with reasons. |
+| 8 | Reports as the conductor says | verified | The verdict comes first, then what could not be checked, one row per item (24), and counts at the end: `16 verified, 0 failed, 8 not verified, 0 not applicable of 24 items.` |
+
+**Result: failed** (6 of 8 verified; criteria 1 and 4 required).
+
+**Workflow and delivery.** The work itself was sound. Delivery was partial, and the report says so:
+Linux verified; macOS, Windows and review pending.
+
+**What in the conductor caused the two failures:**
+
+- **Planning.** `SKILL.md §Guidance to load` names `planning.md` only for "planning work,
+  dependencies, schedule…". A small project reads that as optional, although every project has
+  work to choose and records to keep.
+- **Identifiers.** The conductor says to use the tool's own identifiers and invent no scheme, but it
+  says nothing about the plain-file case, where there are no native identifiers. The agent filled
+  the gap with the old ledger's pattern.
+
+Both are fixed in the conductor, and the check is rerun on a fresh copy (run 2).
