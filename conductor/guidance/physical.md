@@ -47,8 +47,10 @@ not an installation; passing software tests is not system acceptance.
   part (`decisions.md §Options`).
 - **Cost at quantity against the price people will pay,** with certification, tooling, packaging and
   shipping included.
-- **Lead times drive the schedule:** order long-lead items first and put their delivery on the
-  critical path (`planning.md §Critical path and resources`).
+- **Lead times drive the schedule:** record delivery dates and the work that depends on receipt and
+  inspection; calculate float and the effect of delay on completion (`planning.md §Critical path
+  and resources`). A long lead time alone does not make a delivery critical. Prioritise ordering
+  from that schedule, within procurement authority.
 - **At each review, recheck prices, stock and end-of-life notices,** and route around a part that
   went out of stock or up in price.
 

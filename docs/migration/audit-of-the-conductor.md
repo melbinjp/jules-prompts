@@ -66,3 +66,47 @@ on transitive dependencies, a word the guidance had dropped.
   not itemised. They are left for your semantic review of the map.
 - This audit judged presence and precision. Whether the conductor works is what the trials in
   step 3 test.
+
+## Follow-up review: 2026-09-27
+
+The review of branch commit `927997a` confirmed that `33aa9e2` had corrected bounded-task scope,
+revalidation after changes, native harness capabilities and custom fix labels. The original audit
+above remains a record of the earlier draft; it is not a verdict on this later version.
+
+Six remaining corrections were made in the working tree, with the affected coverage-map rows
+qualified and their source labels preserved:
+
+- Isolation no longer claims every command is safe: network, spending, publishing and device
+  effects remain bounded by their own controls and delegated authority.
+- Recovery uses native checkpoints; per-step commits and automatic rollback are not required, and
+  repairs or restoration preserve unrelated and concurrent work.
+- Immediate harm and unsafe operation take priority over core-function or platform defects;
+  remaining priorities follow evidence of severity, likelihood and cost to affected people.
+- Delivery dependencies, float and completion impact determine criticality; a long lead time alone
+  does not put an item on the critical path.
+- Missing capabilities, repetition and costly mistakes justify evaluating tools; they do not
+  automatically justify building machinery beyond the authorised outcome and budget.
+- Failure exercises use controlled tests, safe drills or labelled simulations; they never require
+  endangering people or disrupting real delivery merely to obtain evidence.
+
+The planted-failure instructions remain in place. This is a static review and correction, not a
+delivery trial or evidence that an actual installation is safe. The pending delivery comparisons
+and their independent output checks remain the next evidence required for migration.
+
+### Verification on Windows
+
+The first `python scripts/inventory_map.py --destinations` run found all 1,825 source items but
+reported 600 missing destinations. The checker decoded UTF-8 Markdown with the Windows locale,
+corrupting the section delimiter in paths. Running with Python's UTF-8 mode confirmed the cause:
+`1825 of 1825 items mapped, 0 problems.`
+
+The checker now explicitly reads files and Git output as UTF-8 and emits UTF-8 diagnostics. The
+ordinary command, without an environment or interpreter-mode workaround, then returned exit 0:
+
+```text
+1825 of 1825 items mapped, 0 problems.
+```
+
+A captured `--list` run also returned exit 0, decoded strictly as UTF-8, and contained 1,825 items
+with no Unicode replacement characters. These checks establish inventory coverage and valid
+destination headings; they do not establish semantic equivalence or successful delivery.

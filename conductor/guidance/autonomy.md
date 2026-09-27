@@ -63,11 +63,15 @@ project; speak the common chat-completions format to the endpoint.
 
 - **Discover what exists first:** the tools on the machine, the libraries in the mirror, the
   documentation downloaded, established open-source tools.
-- **Whatever is missing** (a browser, hardware access, a simulator, a test jig, a search index over
-  downloaded documentation, a way to notify the person) **is built into the repository with its own
-  test,** so it outlives the agent and the harness that built it.
-- **A step done three times, or one whose mistakes are costly, becomes a tool.**
-- No harness, tool or simulator is a reason to stop; each is a thing to find, or build and prove.
+- **Build a missing capability only when the authorised outcome needs it** and existing tools or a
+  manual procedure cannot meet that need within the budget. Keep what is built in the repository
+  with its own test, so it outlives the agent and the harness that built it.
+- **A step done three times, or one whose mistakes are costly, is a candidate for a tool.** Compare
+  the cost and risk of making and maintaining it with reusing a tool or keeping a checked manual
+  procedure; automate when that comparison justifies it.
+- A missing harness, tool or simulator calls for alternatives, not an automatic build. If none fits
+  the authority, budget and requirements, record the blocked work and continue independent work
+  (`../SKILL.md §5. Readiness, blocking and resumption`).
 
 ## Briefing: ask once
 
@@ -113,9 +117,13 @@ continues. At each review, show the owner the choices made since the last one.
 
 - **A sandbox:** the agent runs in an environment of its own (a container, a virtual machine, a
   dedicated user account) holding the project and its tools, and none of the person's other files or
-  credentials. Inside it, any command is safe to run, so it never has to ask.
-- **Checkpoints:** every step is committed; a step that breaks the build is reverted, not repaired in
-  place on top of a mess.
+  credentials. Isolation protects only the boundaries it enforces: network calls, publishing,
+  spending and connected devices still need their own limits. Every command stays within the
+  delegated authority and uses an authorised target (`../SKILL.md §8`); isolation is not permission.
+- **Checkpoints:** before a change, make the current work recoverable through version control,
+  snapshots or the tool's history, and retain recovery points as work progresses. If a step breaks
+  the build, repair it or restore the affected work from a known checkpoint; preserve unrelated and
+  concurrent work. A commit after every step is one option, not a requirement.
 - **Standing limits enforced where the action happens,** not by the agent's good behaviour: a spending
   cap on the payment account, a publishing target that is a test channel until a milestone says
   otherwise, device limits in firmware.

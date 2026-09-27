@@ -73,12 +73,15 @@ failure or the attack happen, then look.
 
 ## Fix in order of cost to the person
 
-Rank every finding and work from the top; do not polish a level 6 while a level 1 is open:
+Address immediate harm and unsafe operation first, within the authorised safety and incident
+procedures (`physical.md §Safety states and irreversible actions`, `operations.md §Incidents:
+restore first`). Then rank findings by their actual severity, likelihood and cost to the people
+affected. Use this order as a starting point, and record why the evidence changes a priority:
 
 1. loses, corrupts or exposes what they trusted it with;
-2. cannot do the core job;
+2. cannot do the core job, including security or accessibility failures that prevent safe use;
 3. broken on a platform or in an environment they use;
-4. unsafe, insecure or inaccessible;
+4. other security or accessibility gaps;
 5. slower or heavier than the budget;
 6. unfinished to use;
 7. everything else.
@@ -115,12 +118,16 @@ ready (`../SKILL.md §6. Gates: verification and validation`).
 
 ## Failures caused on purpose
 
-For each item the bar says must never be lost, make the bad day happen and watch what the person
-would see: storage full or unavailable; offline in the middle of an operation; the process, tab or
-device killed mid-write; sent to the background; permission refused, then granted; a slow device;
-a wrong clock; two instances at once; an upgrade over existing data. For a physical or service
-delivery: power cut, a supplier no-show, the wrong part delivered, a person absent, rain. Each is
-certain to happen to someone; imagining it once is not causing it.
+For each item the bar says must never be lost, exercise the failure in controlled test conditions
+and watch what the person would see: storage full or unavailable; offline in the middle of an
+operation; the process, tab or device killed mid-write; sent to the background; permission refused,
+then granted; a slow device; a wrong clock; two instances at once; an upgrade over existing data.
+For a physical or service
+delivery, use safe drills or simulations for a power cut, a supplier no-show, the wrong part
+delivered, a person absent or rain. Never endanger people or disrupt a real delivery merely to
+produce test evidence. Record the scenario, observed response and limits of the test; label
+simulations as simulations, not proof of a real installation or its safety (`physical.md
+§Simulation and what it can establish`). Imagining a failure is not exercising the response.
 
 ## Craft standard
 

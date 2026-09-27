@@ -60,12 +60,12 @@ RANGE = re.compile(r"^(?P<prefix>.+\.)(?P<code>[A-Za-z]*)(?P<start>\d+)-(?:[A-Za
 
 def show(path: str) -> str:
     return subprocess.run(["git", "show", f"{BASELINE}:{path}"], cwd=ROOT, check=True,
-                          capture_output=True, text=True).stdout
+                          capture_output=True, text=True, encoding="utf-8").stdout
 
 
 def tracked(prefix: str) -> list[str]:
     out = subprocess.run(["git", "ls-tree", "-r", "--name-only", BASELINE, prefix], cwd=ROOT,
-                         check=True, capture_output=True, text=True).stdout
+                         check=True, capture_output=True, text=True, encoding="utf-8").stdout
     return sorted(line for line in out.splitlines() if line)
 
 
@@ -225,7 +225,7 @@ def map_rows(text: str) -> list[tuple[int, list[str], str, str]]:
 def headings(path: Path) -> set[str]:
     if not path.exists():
         return set()
-    return {m.group(1).strip() for m in re.finditer(r"^#+\s+(.+)$", path.read_text(), re.M)}
+    return {m.group(1).strip() for m in re.finditer(r"^#+\s+(.+)$", path.read_text(encoding="utf-8"), re.M)}
 
 
 def check(destinations: bool) -> int:
@@ -235,7 +235,7 @@ def check(destinations: bool) -> int:
         return 1
     problems = []
     mapped = set()
-    for number, ids, where, how in map_rows(MAP.read_text()):
+    for number, ids, where, how in map_rows(MAP.read_text(encoding="utf-8")):
         for ident in ids:
             if ident not in items:
                 problems.append(f"coverage-map.md:{number}: {ident} is not an item in the inventory")
@@ -283,4 +283,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     sys.exit(main())
