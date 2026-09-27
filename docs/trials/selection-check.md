@@ -101,3 +101,7 @@ Linux verified; macOS, Windows and review pending.
   the gap with the old ledger's pattern.
 
 Both are fixed in the conductor, and the check is rerun on a fresh copy (run 2).
+
+**Run 2 (conductor pinned at `51d534d`): cut off, not scored.** The session's API rate limit
+stopped the agent partway through. Its only output is one sentence of progress, so it is discarded.
+Run 2 is repeated from scratch on a fresh copy. The first new-approach run waits until it passes.
