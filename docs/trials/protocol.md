@@ -310,3 +310,8 @@ The full finalisation, including the end state for step 4, is in the owner's pla
 (15 November 2026 is a Sunday). Every agent that met a date noticed. Each date now names the
 same weekday in 2026, one day earlier; nothing else in the cases changed. Runs before this
 correction were given the corrected dates by the runner, as recorded in their logs.
+
+**Event case: the grant report (2026-09-29).** Closure requires a grant report, but the case only
+revealed that the grant needs one if the agent asked about the budget, and in both runs no agent
+asked (the budget was already in its authority limits). The authority limits now say so from the
+start. Both runs before this change are judged with that recorded.
