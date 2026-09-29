@@ -305,3 +305,8 @@ what the release needs: does the conductor deliver, and does it still catch the 
 
 The full finalisation, including the end state for step 4, is in the owner's plan
 (`_positioning/plans/2026-09-27-jules-prompts-finalisation.md` §6, outside this repository).
+
+**Case dates corrected (2026-09-29).** The three cases named weekdays from the 2025 calendar
+(15 November 2026 is a Sunday). Every agent that met a date noticed. Each date now names the
+same weekday in 2026, one day earlier; nothing else in the cases changed. Runs before this
+correction were given the corrected dates by the runner, as recorded in their logs.

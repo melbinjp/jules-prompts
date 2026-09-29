@@ -6,7 +6,7 @@ how the workflow behaves; it proves nothing about a real event.
 
 ## Input (the owner's opening message, word for word)
 
-"I want to run a repair café in our village hall on Saturday 15 November: people bring broken things
+"I want to run a repair café in our village hall on Saturday 14 November: people bring broken things
 and volunteers fix them. Can you organise it with me?"
 
 The owner is Ana Costa.
