@@ -11,7 +11,7 @@
       "title": "Conductor: deliver any project, with evidence",
       "description": "One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.",
       "path": "conductor/SKILL.md",
-      "digest": "sha256:60efef49bd5f5b727d41b56c8739d0219afcfd2975b0ce6bb37020e1f17f2b40"
+      "digest": "sha256:2670dbd6500d35343d6a48bf42e3fb73855e4237e4677594439ebd989509281b"
     },
     {
       "name": "conductor-guidance-product",
@@ -67,7 +67,7 @@
       "title": "Physical work: products, installations, devices and actions on the world",
       "description": "Load when the output includes anything physical (a device, a product made or fitted, an installation, equipment), or when the work issues commands that move, heat, dispense, spend or send: actuators, relays, motors, valves, heaters, robots, vehicles, instruments, machine tools, building controls, and services behind an API that ship, pay, dispense, dispatch or message a person.",
       "path": "conductor/guidance/physical.md",
-      "digest": "sha256:7d06add3e5564dc02289c6867728a47481faebb09465c3abe5508d156e28df66"
+      "digest": "sha256:d786bc635d34a7a62daca890869b3a80dfce8e508bcd365e792eb719b8edd04d"
     },
     {
       "name": "conductor-guidance-service",

@@ -185,7 +185,10 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
      tool, messages, order and delivery status, deployments, device state;
   2. for every action that might have happened (an order, a payment, a message, a deployment,
      a physical action), confirm whether it did before retrying; retry only when an
-     observation shows it did not, or when the action is idempotent;
+     observation shows it did not, or when the action is idempotent. A physical action is
+     confirmed by its independent observation, not the device's acknowledgement, and a fault
+     found this way is reported, not retried (`guidance/physical.md §Commands and observed
+     outcomes`);
   3. carry over the standing limits and permissions unchanged;
   4. rewrite the state note, then choose the next ready work.
 - **When a date, duration or resource changes,** recompute the forecast and say which
@@ -271,8 +274,8 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 ## 9. Closure and handover {#9-closure-and-handover}
 
 - **A finite project closes** when its delivery is accepted by the named acceptor with
-  evidence; its obligations are settled (payments, suppliers, licences, warranties, promises
-  to people); its materials are archived where the owner can find them (records, source,
+  evidence; its obligations are settled (payments, suppliers, licences, warranties, reports
+  owed to a funder, client or authority, promises to people); its materials are archived where the owner can find them (records, source,
   drawings, files, credentials held by the owner rather than an agent); and what was learned is
   recorded.
 - **Whatever must keep running is handed over** (`templates/handover.md`): a named operator,

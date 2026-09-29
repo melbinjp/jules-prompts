@@ -91,6 +91,12 @@ not an installation; passing software tests is not system acceptance.
 
 ## Commands and observed outcomes {#commands-and-observed-outcomes}
 
+**Reading is not commanding.** Reading a sensor, a status, a meter or a log changes nothing in
+the world, so it needs no action contract and no approval beyond access to the device.
+Commissioning, diagnosis and resumption start by reading the installed device. Only an action
+that changes the world (a relay, a valve, a motor, a payment, a message) needs the contract below
+and its authority.
+
 Before any command reaches the physical world, write its contract:
 
 - **the target state** it should leave the world in;
