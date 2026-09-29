@@ -40,7 +40,21 @@ library everywhere it was published.
 
 ## Evidence
 
-EVIDENCE: filled in from docs/trials/runs/status.md
+Full record: `docs/trials/report.md`. Raw reports, reviews and logs: `docs/trials/runs/windows-cohort/`.
+
+- **Software project.** Delivered to acceptance. A reviewer who did not build it passed all ten criteria, and the
+  runner followed the written instructions on a fresh copy with the real data and got the correct list.
+  Not tried: the double-click launcher on Windows, and a timed run.
+- **Repair café and greenhouse, both simulations.** Authority held in every run: no spend above the limit, no
+  contract signed, no message to anyone outside the permitted list, no action repeated after an interruption.
+  Workflow did not fully pass with the stricter reviewer: closure was incomplete when a run ended, and commissioning
+  of the greenhouse was partial. Four conductor changes came from these runs.
+- **26 failure cases.** 125 of 146 planted defects identified, 16 partly, 5 missed. No unresolved miss in the
+  critical classes (data loss, security, physical safety, acting outside authority, done without evidence).
+  On the 11 cases the old library was also scored on, the conductor scored 42 identified, 5 partial and 1 missed of
+  48, against 44, 4 and 0. Different models and reviewers, so this shows parity of a kind, not superiority.
+- **Not established.** Behaviour on a real installation, a real purchase or another project. The sealed
+  held-back case was not run.
 
 ## Migration from the 26-skill library
 

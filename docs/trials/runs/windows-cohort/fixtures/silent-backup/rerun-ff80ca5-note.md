@@ -1,0 +1,1 @@
+Rerun on conductor ff80ca5 after adding the "compare a backup job with its runbook" line. Not scored by a separate reviewer; read by the runner. Its report lists the weekly restore test (runbook step 5) and server pruning (step 6) as "still manual, and the script does not do them", which closes restore-check-dropped.

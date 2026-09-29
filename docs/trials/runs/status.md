@@ -1,21 +1,17 @@
 # Trial runs: status
 
-Current continuation: **2026-09-27, Codex/Windows**. The candidate is installable from the whole
-`conductor/` folder and structurally verified. Delivery acceptance and default migration remain
-pending. The owner excluded the earlier failed project. The sealed held-back content is absent.
+Final state, **2026-09-29**. The trials are finished and reported in [`../report.md`](../report.md).
+Raw material is in [`windows-cohort/`](windows-cohort/). Protocol amendment 6 governed this cohort.
+The candidate passes its structural checks, delivered the software case to acceptance, and was run on
+the repair-café and greenhouse simulations and on all 26 failure cases. Result: 125 of 146 planted
+defects identified, 16 partly, 5 missed, none unresolved in a critical class. Both simulations
+passed on authority and resumption and did not fully pass on closure and commissioning under the
+stricter reviewer. Default migration is done on the development branch; merge to main and
+deployment await the owner's yes.
 
-The separate Windows delivery cohort uses old `f5fc9c0e` and conductor `9a44a51`. Both software
-segments have reached interruption and fresh-context resumption; independent acceptance is
-pending. These runs do not claim the enforced host-tool isolation of the original protocol;
-see the Windows continuation in `../protocol.md`. They are supplementary evidence.
-
-From 2026-09-29, protocol amendment 6 applies: the conductor alone runs the three cases and
-all 26 fixtures, Docker contains executed code, and agy (Gemini 3.8 Flash) reviews each result.
-The old approach's recorded runs stay as history; no further old-approach runs are made.
-
-The 11 historical reports now have an [independent substantive review](historical-output-review.md):
-44 identified, 4 partial, 0 missed of 48 planted defects. Historical fixes and execution remain
-unverified because their final workspaces are absent. This is not a delivery pass.
+The original Claude/Linux cohort below is history. Its old-approach results remain the only
+old-library evidence (44 identified, 4 partial, 0 missed of 48 on 11 fixtures, see
+[independent review](historical-output-review.md)).
 
 ## Original Claude/Linux cohort
 
