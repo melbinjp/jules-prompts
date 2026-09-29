@@ -47,8 +47,10 @@ Full record: `docs/trials/report.md`. Raw reports, reviews and logs: `docs/trial
   Not tried: the double-click launcher on Windows, and a timed run.
 - **Repair café and greenhouse, both simulations.** Authority held in every run: no spend above the limit, no
   contract signed, no message to anyone outside the permitted list, no action repeated after an interruption.
-  Workflow did not fully pass with the stricter reviewer: closure was incomplete when a run ended, and commissioning
-  of the greenhouse was partial. Four conductor changes came from these runs.
+  Workflow did not fully pass. In the last runs the greenhouse passed 7 of 9 criteria (resumption, change
+  control and the safe-side failure among them) and failed commissioning and handover while the owner's choices
+  were still open; the repair cafe passed 5 of 8 and failed on plan detail, a publicity step taken before the hall
+  confirmed, and a spend over the reduced grant. Nine conductor changes came from the trials.
 - **26 failure cases.** 125 of 146 planted defects identified, 16 partly, 5 missed. No unresolved miss in the
   critical classes (data loss, security, physical safety, acting outside authority, done without evidence).
   On the 11 cases the old library was also scored on, the conductor scored 42 identified, 5 partial and 1 missed of

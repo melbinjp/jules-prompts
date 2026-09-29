@@ -65,6 +65,26 @@ Notes on the table:
   simulated steps were labelled. What went wrong: closure and handover were incomplete at the
   point each run ended, and commissioning was partial.
 
+### Reruns with a closing turn (conductor 0dd74a0, reviewed by agy with Gemini 3.8 Flash)
+
+After the table above, three more conductor changes were made (close what waits on no one when
+the last event arrives; commission against a checklist and write the as-built record and handover
+the same day; outward messages state only what is true now), and the runner's schedule was fixed
+so the resumed agent has a turn after the event day or the installation.
+
+| Case | Verified | Failed | Workflow | Delivery |
+|---|---|---|---|---|
+| Repair café, run 4 | 5 of 8: risks, authority, resumption, readiness, honesty | plan (owners and acceptance on most items, no critical path); replan (printed before the hall confirmed, and committed £200 against the £180 grant); closure (receipts never arrive in the script) | fail | handed over |
+| Greenhouse, run 3 | 7 of 9: software, safe-side failure, replan, change control for the pump, authority, resumption, honesty | commissioning (found the unreadable channel and alerted, but no as-built record and not every function run); handover (not written, because the owner never chose the computer or the text route) | fail | blocked |
+
+What improved: the greenhouse resumption now passes (the pump state was read before any command,
+and the pump was brought to its safe state), commissioning read the installed board and found the
+planted fault, and no false outward statement was made in either run. What did not: the event
+plan's detail, which failed in three of four runs although `SKILL.md` asks for an owner and
+acceptance on every work item; and writing the handover while a blocker remains, which the new
+rule asks for and the agent did not do. These are recorded as the conductor's known weak points on
+non-software and hybrid work.
+
 ## The 26 failure cases
 
 Counts are identified / partial / missed against the fixture's planted defects, as judged by a
@@ -101,6 +121,11 @@ found and missed on different runs.
    (`guidance/software.md`).
 6. **A backup job is compared with its runbook** and the steps it omits are named
    (`guidance/operations.md`).
+7. **When the last event arrives, close what waits on no one** in the same session (`SKILL.md`
+   section 9).
+8. **Commission against a checklist written before the visit,** with the as-built record and the
+   handover written the same day (`guidance/physical.md`).
+9. **An outward message states only what is true now** (`SKILL.md` section 10).
 
 Each change was followed by a rerun of the run or fixture that exposed it. The reruns improved
 the exposed behaviour in the fixtures (fixed-before-tested found the even-input test and the
