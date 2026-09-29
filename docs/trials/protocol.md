@@ -315,3 +315,9 @@ correction were given the corrected dates by the runner, as recorded in their lo
 revealed that the grant needs one if the agent asked about the budget, and in both runs no agent
 asked (the budget was already in its authority limits). The authority limits now say so from the
 start. Both runs before this change are judged with that recorded.
+
+**Closing turn (2026-09-29).** In the earlier event and greenhouse runs the event day, or the
+installation, reached the resumed agent with the runner's last reply, so no turn was left to close
+or commission. From run 4 the day and the installation arrive with the runner's second reply to the
+resumed agent, whether or not the agent reported ready (the date arrives regardless), and the third
+reply is a closing turn: "It is now a week later", with the owner's default answer.
