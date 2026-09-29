@@ -276,6 +276,10 @@ the code is bad; it is that it reads as finished.
 2. **Baseline:** run the suite on the base commit, so you know what was already failing; then on
    the change, and account for every difference.
 3. **For each test the change adds, break the code under it and confirm the test fails;** restore.
+   For a change that claims to fix a bug, also apply `§Fixing a bug, failing test first` to the
+   claim: compare the test's input with the report's exact input (a tidier input that divides
+   evenly can pass on the old code), read the history for a test-only commit (a fix and its test in
+   one commit cannot show the order), and name the tests that were already red before the change.
 4. **Walk the requirements:** each met, partly met or not addressed, with file and line. Agents
    satisfy the part of a request they understood; the dropped requirement will not announce itself.
 5. **Compare each assertion against the issue, not the diff.**

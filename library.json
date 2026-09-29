@@ -59,7 +59,7 @@
       "title": "Software: building, checking and delivering code",
       "description": "Load when the output or the work includes software. Most sections are about the ways agents specifically fail: work that reads as finished and is not, tests that cannot fail, pipelines that are green while checking nothing, setup that reports success while broken.",
       "path": "conductor/guidance/software.md",
-      "digest": "sha256:b848965e8d0cbfd69a22f07e3b83f757a19041ea8126d36664195066a09e9dc2"
+      "digest": "sha256:bdd2414f9765a3eb629213c4fd88a308a2c1ef771f0498860b6fe624eaad9b60"
     },
     {
       "name": "conductor-guidance-physical",
