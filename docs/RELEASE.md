@@ -38,6 +38,8 @@ library everywhere it was published.
 - Who can push to `main` decides what every agent that loads the conductor is told to do. That is a branch
   protection setting, not something this repository can check.
 
+What would close these gaps, and our view on it, is in `docs/VISION.md`.
+
 ## Evidence
 
 Full record: `docs/trials/report.md`. Raw reports, reviews and logs: `docs/trials/runs/windows-cohort/`.
