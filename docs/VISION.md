@@ -46,9 +46,13 @@ to change to reach it.
 ## Our view
 
 The aim is right, and it should be pursued, but it should be stated precisely. No procedure can
-make the result independent of the people and the world around it. What it can do is shrink the
+make the result independent of the people and the world around it.
+
+What it can do is shrink the
 person's role to the decisions only they can make: what the project is for, what it may spend,
 what it may send or sign, and what they accept. Everything else should be checked by something
-that runs, not by the reader remembering. The largest single step toward that is the first item
+that runs, not by the reader remembering.
+
+The largest single step toward that is the first item
 above: turn the conductor's checkable rules into checks that block. Until then the honest claim is
 that the conductor raises the floor and makes gaps visible; it does not yet make quality automatic.
