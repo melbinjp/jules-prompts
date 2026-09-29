@@ -1,7 +1,7 @@
 {
   "name": "jules-prompts-mcp",
-  "version": "1.2.0",
-  "description": "Serve the jules-prompts library to any MCP client as slash-command prompts.",
+  "version": "2.0.0",
+  "description": "Serve the conductor, an Agent Skill for delivering any project, and its guidance files to any MCP client as prompts and resources.",
   "keywords": [
     "agent-skills",
     "skill-md",
@@ -9,6 +9,7 @@
     "mcp-server",
     "prompts",
     "ai-agents",
+    "project-delivery",
     "claude-code",
     "codex",
     "cursor",

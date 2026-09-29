@@ -5,7 +5,7 @@
     python conformance.py --harness "./my-agent"
 
 jules-prompts does not ship an agent harness. A model that has nothing but a chat endpoint and a
-person builds its own, from the specification in the `run-autonomously` skill, in whatever
+person builds its own, from the specification in the conductor's autonomy guidance (`conductor/guidance/autonomy.md`), in whatever
 language suits it, and it is done when this passes against it. It needs Python 3.8 or later,
 git, and nothing else. It plays the model: a fake OpenAI-compatible chat endpoint on this
 machine replies with scripted actions, proper ones and careless ones, and this checks what the

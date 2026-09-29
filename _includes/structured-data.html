@@ -1,7 +1,7 @@
 {%- comment -%}
   Structured data (schema.org JSON-LD), so a search engine or an assistant that reads the page
   knows what it is without guessing from the layout: a website, the source repository, the
-  questions on the home page, and on a skill page, an article whose Markdown is the SKILL.md.
+  questions on the home page, and on a conductor page, an article whose Markdown is the file served for agents.
   Every value goes through jsonify, and scripts/check_site.py parses the result on every page.
 {%- endcomment -%}
 {%- assign home = '/' | absolute_url -%}
@@ -47,8 +47,7 @@
       ]
     }
 {%- elsif include.is_skill %}
-{%- assign skill_name = page.slug | remove_first: "task_" | replace: "_", "-" -%}
-{%- assign skill_url = '/.well-known/agent-skills/' | append: skill_name | append: '/SKILL.md' | absolute_url %},
+{%- assign skill_url = page.source_url | absolute_url %},
     {
       "@type": "TechArticle",
       "@id": {{ here | append: '#skill' | jsonify }},
@@ -58,8 +57,8 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://opensource.org/licenses/MIT",
-      "articleSection": {{ page.category | jsonify }},
-      "keywords": ["Agent Skills", "SKILL.md", {{ page.category | jsonify }}],
+      "articleSection": {{ page.kind | jsonify }},
+      "keywords": ["Agent Skills", "SKILL.md", "conductor", {{ page.kind | jsonify }}],
       "isPartOf": { "@id": {{ home | append: '#website' | jsonify }} },
       "publisher": { "@id": "https://wecanuseai.com/#organization" },
       "author": {{ person }},
@@ -68,7 +67,7 @@
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Skills", "item": {{ '/tasks.html' | absolute_url | jsonify }} },
+        { "@type": "ListItem", "position": 1, "name": "Conductor", "item": {{ '/conductor/' | absolute_url | jsonify }} },
         { "@type": "ListItem", "position": 2, "name": {{ page.title | jsonify }}, "item": {{ here | jsonify }} }
       ]
     }

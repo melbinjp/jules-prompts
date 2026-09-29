@@ -1,57 +1,55 @@
 ---
 layout: default
 body_class: home
-title: Agent Skills (SKILL.md) to take any idea to a working product
+title: The conductor, an Agent Skill for delivering any project
 ---
-{%- comment -%} Skills only: the Skill Template is for authors and has no SKILL.md. {%- endcomment -%}
-{%- assign skills = site.prompts | where_exp: "p", "p.slug contains 'task_'" -%}
 <section class="intro" aria-labelledby="title">
-  <h1 id="title">Take any idea all the way, and keep it working.</h1>
-  <p class="lede">{{ skills | size }} Agent Skills that take an idea, software or hardware, in any state, to a product people use, then keep it working and improving. Every decision rests on verified evidence, every change traces to the goal, and every claim ends as <span class="v is-holds">holds</span>, <span class="v is-broken">broken</span> or <span class="v is-skipped">skipped</span>.</p>
+  <h1 id="title">One conductor for delivering any project, with evidence.</h1>
+  <p class="lede">A single Agent Skill that takes a project, software, physical, service or hybrid, from nothing or from any existing state to an accepted result, and hands over whatever must keep running. It loads focused guidance only when the work needs it, and counts nothing as done without evidence about the actual result.</p>
   <p class="actions">
-    <a class="button" href="#start">Where are you starting?</a>
+    <a class="button" href="{{ '/conductor/' | relative_url }}">Read the conductor</a>
     <a class="button button-quiet" href="#agents">Point an agent here</a>
   </p>
   <p class="fine">Works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, and agents that drive hardware. Free and MIT licensed, with no sign-up and no tracking.</p>
 </section>
 
-<section aria-labelledby="start">
-  <h2 id="start">Where are you starting?</h2>
-  <p class="measure">Any project, in any state, enters the same path where its state says. Nothing is declared impossible or dead: a blocked route gets another route to the same goal.</p>
-  {% include entry-states.html %}
-  <p class="fine">What happens at each entry, and the gate that ends each step, are on the <a href="{{ '/workflow/' | relative_url }}">workflow page</a>. Every skill, grouped by what it is for, is on the <a href="{{ '/tasks.html' | relative_url }}">skills page</a>.</p>
+<section aria-labelledby="loop">
+  <h2 id="loop">What it does</h2>
+  <p class="measure">It classifies the project from evidence, then works through eight responsibilities and returns to any of them when the evidence changes. Where it starts is decided by what the project lacks, not by a label.</p>
+  {% include conductor-loop.html %}
+  <p class="fine">The <a href="{{ '/conductor/' | relative_url }}">conductor</a> also covers work records, readiness, gates, changes, authority and budget, closure and handover, and how a report ends.</p>
 </section>
 
-<section aria-labelledby="path">
-  <h2 id="path">The whole path</h2>
-  <p class="measure">From the idea to long after launch. Each step is a skill with a gate that says when it is done, and the steps share one ledger in the project, so every decision and every change has a reason that leads back to the goal.</p>
-  {% include path-steps.html %}
+<section aria-labelledby="guidance">
+  <h2 id="guidance">Guidance it loads when the work needs it</h2>
+  <p class="measure">Each file is one part of the loop, and the conductor says when to load it. On a small context window it loads one file at a time, and only the sections the work needs.</p>
+  {% include conductor-guidance.html %}
 </section>
 
 <section aria-labelledby="agents-title" id="agents">
   <h2 id="agents-title">Point an agent here, or install</h2>
   <p class="measure">Give an agent this line. Everything it needs is one fetch away, and nothing depends on which agent it is.</p>
   <div class="snippet measure">
-    <pre><code id="agent-line">Read {{ '/llms.txt' | absolute_url }} and follow the skill that matches the task.</code></pre>
+    <pre><code id="agent-line">Read {{ '/llms.txt' | absolute_url }} and follow the conductor for the task.</code></pre>
     <button class="copy" type="button" data-copy="#agent-line">Copy</button>
   </div>
-  <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, which gives every skill with a SHA-256 digest of its <code>SKILL.md</code>.</p>
+  <p class="fine">Clients that support Agent Skills discovery can start from <a href="{{ '/.well-known/agent-skills/index.json' | relative_url }}"><code>/.well-known/agent-skills/index.json</code></a>, which lists the conductor as an archive of the whole folder with a SHA-256 digest.</p>
   <div class="use-grid">
     <div>
-      <h3>One skill</h3>
+      <h3>The whole folder</h3>
       <div class="snippet">
-        <pre><code id="one">mkdir -p .claude/skills/take-to-production
-curl -fsSL {{ '/.well-known/agent-skills/take-to-production/SKILL.md' | absolute_url }} \
-  -o .claude/skills/take-to-production/SKILL.md</code></pre>
-        <button class="copy" type="button" data-copy="#one">Copy</button>
+        <pre><code id="folder">mkdir -p .agents/skills/conductor
+curl -fsSL {{ '/.well-known/agent-skills/conductor.zip' | absolute_url }} -o conductor.zip
+unzip -q conductor.zip -d .agents/skills/conductor</code></pre>
+        <button class="copy" type="button" data-copy="#folder">Copy</button>
       </div>
     </div>
     <div>
-      <h3>All of them</h3>
+      <h3>From a clone</h3>
       <div class="snippet">
-        <pre><code id="all">git clone --depth 1 https://github.com/melbinjp/jules-prompts
-cp -R jules-prompts/skills/* .claude/skills/</code></pre>
-        <button class="copy" type="button" data-copy="#all">Copy</button>
+        <pre><code id="clone">git clone --depth 1 https://github.com/melbinjp/jules-prompts
+cp -R jules-prompts/conductor .agents/skills/</code></pre>
+        <button class="copy" type="button" data-copy="#clone">Copy</button>
       </div>
     </div>
     <div>
@@ -63,7 +61,7 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
       </div>
     </div>
     <div>
-      <h3>As slash commands, over MCP</h3>
+      <h3>As prompts, over MCP</h3>
       <div class="snippet">
         <pre><code id="mcp">{ "mcpServers": { "jules-prompts": {
   "command": "npx", "args": ["-y", "github:melbinjp/jules-prompts"] } } }</code></pre>
@@ -71,13 +69,18 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
       </div>
     </div>
   </div>
-  <p class="fine">Use <code>.agents/skills/</code> for Codex and other agents that read <code>AGENTS.md</code>. Paste the <a href="{{ '/harness/AGENTS.md' | relative_url }}">standing rules</a> into a project's <code>AGENTS.md</code> so they apply even when nobody picks a skill.</p>
+  <p class="fine">Copy the whole folder: <code>SKILL.md</code> alone is incomplete, because it refers to the guidance and templates. Use <code>.claude/skills/</code> for Claude Code and <code>.agents/skills/</code> for Codex and other agents that read <code>AGENTS.md</code>. Paste the <a href="{{ '/harness/AGENTS.md' | relative_url }}">standing rules</a> into a project's <code>AGENTS.md</code> so they apply even when nobody loads the conductor.</p>
 </section>
 
 <section aria-labelledby="proof">
-  <h2 id="proof">How you know a skill works</h2>
-  <p class="measure">A skill nobody has seen fail is a claim. Every skill has a <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">fixture</a>: a small project with planted defects and a list of them. Run an agent on it with the skill, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. This is the report one skill should produce on its fixture:</p>
+  <h2 id="proof">How you know it works</h2>
+  <p class="measure">A procedure nobody has seen fail is a claim. The repository keeps <a href="https://github.com/melbinjp/jules-prompts/tree/main/fixtures">26 regression fixtures</a>: small projects with planted defects and a list of them. Run an agent on one with the conductor, and <code>scripts/score_fixture.py</code> says which defects its report named, which it missed and which it made up. This is the report one fixture should produce:</p>
   {% include report-exhibit.html %}
+</section>
+
+<section aria-labelledby="moved">
+  <h2 id="moved">Looking for one of the 26 skills?</h2>
+  <p class="measure">They are retired. Their guidance lives in the conductor and its guidance files, and every rule is mapped to where it went in the <a href="https://github.com/melbinjp/jules-prompts/blob/main/docs/migration/coverage-map.md">coverage map</a>. Old page and <code>SKILL.md</code> addresses redirect to the file that now holds their content.</p>
 </section>
 
 <section aria-labelledby="questions">
@@ -95,7 +98,7 @@ cp -R jules-prompts/skills/* .claude/skills/</code></pre>
 <section aria-labelledby="related">
   <h2 id="related">Related</h2>
   <ul class="related">
-    <li><a href="https://github.com/melbinjp/docproof">docproof</a> reads a repository's documentation and reports the claims its code contradicts. It is the automated half of <a href="{{ '/prompts/task_prove_the_docs.html' | relative_url }}">Prove the docs</a>, and runs as a GitHub Action.</li>
+    <li><a href="https://github.com/melbinjp/docproof">docproof</a> reads a repository's documentation and reports the claims its code contradicts. It is the automated half of the documentation checks in the <a href="{{ '/conductor/guidance/software.html' | relative_url }}">software guidance</a>, and runs as a GitHub Action.</li>
     <li><a href="https://github.com/melbinjp/rigout">rigout</a> is an MCP server that lets an authorised agent use a real machine: commands, files, Docker, persistent terminals.</li>
     <li>Notes from running this kind of tooling: <a href="https://log.wecanuseai.com/">log.wecanuseai.com</a>, most recently why <a href="https://log.wecanuseai.com/p/a-clean-verdict-over-five-per-cent.html">a clean verdict over five per cent of a repository</a> is not a clean repository.</li>
   </ul>

@@ -6,9 +6,10 @@
     python check_trace.py --commits origin/main..HEAD   # and every commit in the range
 
 Copy this file into a project that keeps a ledger, and run it in CI. It needs Python 3.8 or
-later and nothing else. It is the mechanical half of the jules-prompts lifecycle skills
-(found-a-project, choose-with-evidence, change-with-a-reason, keep-it-on-course): the skills
-decide what the ledger says, and this refuses a change that the ledger cannot account for.
+later and nothing else. It is kept for projects that already keep this ledger (the older
+jules-prompts lifecycle skills wrote it): it refuses a change that the ledger cannot account for.
+A new project uses the conductor's records instead (decisions as ADRs, work items in the
+project's own tool) and does not need this check.
 
 THE LEDGER is two things in the project's repository.
 

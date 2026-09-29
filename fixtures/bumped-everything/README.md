@@ -1,6 +1,6 @@
 # Fixture: bumped-everything
 
-Skill: `update-dependencies`. Prompt: `task_update_dependencies`.
+Written for the retired skill `update-dependencies`, whose guidance is now in `conductor/guidance/software.md`.
 
 Shelfy is a small inventory service, sold to shops under a proprietary licence (`LICENSE`). An
 agent was asked to bring its dependencies up to date. It opened one pull request (`PR.md`), its

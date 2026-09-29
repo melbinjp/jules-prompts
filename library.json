@@ -1,215 +1,121 @@
 {
   "library": "jules-prompts",
   "source": "https://github.com/melbinjp/jules-prompts",
-  "count": 26,
-  "procedures": [
+  "entry": "conductor",
+  "version": "3.0.0",
+  "count": 14,
+  "files": [
     {
-      "slug": "act-on-the-physical-world",
-      "title": "Act on the Physical World, and Prove It Happened",
-      "description": "To make an agent's commands to hardware, devices, machines and real-world services safe to issue and provable afterwards, because a command that was accepted is not a valve that closed.",
-      "category": "Physical Systems",
-      "prompt": "_prompts/task_act_on_the_physical_world.md",
-      "skill": "skills/act-on-the-physical-world/SKILL.md"
+      "name": "conductor",
+      "kind": "skill",
+      "title": "Conductor: deliver any project, with evidence",
+      "description": "One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.",
+      "path": "conductor/SKILL.md",
+      "digest": "sha256:60efef49bd5f5b727d41b56c8739d0219afcfd2975b0ce6bb37020e1f17f2b40"
     },
     {
-      "slug": "automate-a-workflow",
-      "title": "Automate a Workflow That Can Report Its Own Failure",
-      "description": "To replace a repeated manual sequence with a script whose main job is being able to tell you whether the work actually happened, because an automation that reports success while blind is worse than doing it by hand.",
-      "category": "Build",
-      "prompt": "_prompts/task_automate_a_workflow.md",
-      "skill": "skills/automate-a-workflow/SKILL.md"
+      "name": "conductor-guidance-product",
+      "kind": "guidance",
+      "title": "Product: what it is for, and reaching the people it is for",
+      "description": "Load for every project. It covers the objective and how it is measured, what it takes to make the idea happen, the areas the product needs, the journeys that must never fail, translating requests, releasing to people, and hearing back.",
+      "path": "conductor/guidance/product.md",
+      "digest": "sha256:2b3ef64936c68d8d051b9354d7b9992e466d351f39fd9d1f37d3a3205e1d0d2c"
     },
     {
-      "slug": "change-with-a-reason",
-      "title": "Change a Project with a Reason",
-      "description": "To turn any requested change, including a vague one like \"optimise it\", \"make it scalable\" or \"add AI\", into one that traces to the project's goal, is verified before and after, is built through every layer it touches, and leaves nothing detached. Nothing asked for is dismissed. When the named part already meets its target, the work goes where the owner's feeling comes from.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_change_with_a_reason.md",
-      "skill": "skills/change-with-a-reason/SKILL.md"
+      "name": "conductor-guidance-planning",
+      "kind": "guidance",
+      "title": "Planning: deliverables, work, dependencies, schedule and resources",
+      "description": "Every project has work to choose and records to keep, so read at least \u00a7Choosing methods by need and \u00a7Work records in the project's tool on every project. Read the rest when there are dependencies, dates, shared resources, risks, or changes to agreed scope.",
+      "path": "conductor/guidance/planning.md",
+      "digest": "sha256:1614f9c38760b1884e3a397e94b87560d46724a1213bd7f589791b67fb3ebd3f"
     },
     {
-      "slug": "choose-with-evidence",
-      "title": "Choose Between Options with Evidence",
-      "description": "To make a consequential choice, such as a vendor, platform, part, provider, library or where a resource comes from, against criteria taken from the project's goal. Evidence is in proportion to the stakes, every number is redone, and the choice keeps a way out and a condition that reopens it. It can also choose several options, or one after another.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_choose_with_evidence.md",
-      "skill": "skills/choose-with-evidence/SKILL.md"
+      "name": "conductor-guidance-decisions",
+      "kind": "guidance",
+      "title": "Decisions: choosing with evidence, and recording it",
+      "description": "Load for any choice that matters: a platform, supplier, part, provider, library, venue, design, route or tool; any decision that would be costly to reverse; and whenever a recorded decision's reopening condition fires. Decisions are recorded as ADRs.",
+      "path": "conductor/guidance/decisions.md",
+      "digest": "sha256:90f3e5cc42b17e8cd7e17ed2626870b4341a587a12c974fb4b0f1b262959c5fc"
     },
     {
-      "slug": "design-the-experience",
-      "title": "Design the Experience, with Evidence",
-      "description": "To design what people and agents see, do and hear when they use a product, on a screen, a command line, an API, a voice or a device, as one design with the architecture. Every flow, state, word and look has a reason and is tested with real people or stand-ins labelled as such. Every action can be operated by a person, an agent or automation, and the result is measured, not admired.",
-      "category": "Design",
-      "prompt": "_prompts/task_design_the_experience.md",
-      "skill": "skills/design-the-experience/SKILL.md"
+      "name": "conductor-guidance-design",
+      "kind": "guidance",
+      "title": "Design: what people and agents see, hear and operate",
+      "description": "Load whenever the output has anything people or agents meet: screens, a command line, an API, notifications, a voice, a device's controls, lights and sounds, packaging, manuals, signage, a venue's flow.",
+      "path": "conductor/guidance/design.md",
+      "digest": "sha256:621511de9444e30c4138f42aa86dc04a4c5de1f6c425d56188af42c3f8ea3514"
     },
     {
-      "slug": "fix-a-bug-test-first",
-      "title": "Fix a Bug, Failing Test First",
-      "description": "To fix a reported bug in an order that proves the fix worked, by making the test fail for the reported reason before any code changes.",
-      "category": "Build",
-      "prompt": "_prompts/task_fix_a_bug_test_first.md",
-      "skill": "skills/fix-a-bug-test-first/SKILL.md"
+      "name": "conductor-guidance-quality",
+      "kind": "guidance",
+      "title": "Quality: the bar a result must meet, and how it is checked",
+      "description": "Load when setting or checking what \"good enough to hand over\" means, for any kind of output: software, a physical product or installation, a service, an event, a document. It also holds the rules for reviewing any work, including your own.",
+      "path": "conductor/guidance/quality.md",
+      "digest": "sha256:f81e20267053f30c47aa2b9b756e7fa7fd281973bdde87991dd1bf9f3762ba4a"
     },
     {
-      "slug": "handle-an-incident",
-      "title": "Handle an Incident, Restore First and Then Prevent It",
-      "description": "To bring a live product back for the people it failed, then make the failure unable to recur. Stop the harm to data, restore by an action already tried, tell people and keep the evidence; then prove the cause with a failing test, fix it through the normal gates, put everyone right, and close the class of failure in the system.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_handle_an_incident.md",
-      "skill": "skills/handle-an-incident/SKILL.md"
+      "name": "conductor-guidance-software",
+      "kind": "guidance",
+      "title": "Software: building, checking and delivering code",
+      "description": "Load when the output or the work includes software. Most sections are about the ways agents specifically fail: work that reads as finished and is not, tests that cannot fail, pipelines that are green while checking nothing, setup that reports success while broken.",
+      "path": "conductor/guidance/software.md",
+      "digest": "sha256:b848965e8d0cbfd69a22f07e3b83f757a19041ea8126d36664195066a09e9dc2"
     },
     {
-      "slug": "isolate-tests-from-services",
-      "title": "Isolate Tests from External Services",
-      "description": "To make a test suite runnable in an agent's sandbox by removing its dependence on services it cannot start.",
-      "category": "Build",
-      "prompt": "_prompts/task_isolate_tests_from_services.md",
-      "skill": "skills/isolate-tests-from-services/SKILL.md"
+      "name": "conductor-guidance-physical",
+      "kind": "guidance",
+      "title": "Physical work: products, installations, devices and actions on the world",
+      "description": "Load when the output includes anything physical (a device, a product made or fitted, an installation, equipment), or when the work issues commands that move, heat, dispense, spend or send: actuators, relays, motors, valves, heaters, robots, vehicles, instruments, machine tools, building controls, and services behind an API that ship, pay, dispense, dispatch or message a person.",
+      "path": "conductor/guidance/physical.md",
+      "digest": "sha256:7d06add3e5564dc02289c6867728a47481faebb09465c3abe5508d156e28df66"
     },
     {
-      "slug": "keep-it-confidential",
-      "title": "Keep a Project Confidential, Offline First",
-      "description": "To keep a private or proprietary project's code, data, designs and plans inside the places the owner chose, whether it is built fully offline with local agents and models or has to use the internet. Every channel that can carry the work out (hosting, sync, agents and model providers, registries, telemetry, crash reports, searches) is mapped, closed or controlled, and checked in a network log. The whole pipeline is proved to run with the network off.",
-      "category": "Security",
-      "prompt": "_prompts/task_keep_it_confidential.md",
-      "skill": "skills/keep-it-confidential/SKILL.md"
+      "name": "conductor-guidance-service",
+      "kind": "guidance",
+      "title": "Service and creative work: events, films, documents, training and delivered services",
+      "description": "Load when the output is delivered by people rather than shipped as a product: an event, a film or video, a publication, a translation, a course, a consultation, a campaign, a service performed for a client.",
+      "path": "conductor/guidance/service.md",
+      "digest": "sha256:ec285f9fe4de8a1c74e611f45d1ca9716024ddf541463b37364c8c0c8c5d2ef3"
     },
     {
-      "slug": "keep-it-on-course",
-      "title": "Keep a Project on Course and Improving",
-      "description": "To keep a project working and getting better, at every milestone and continuously after launch. Every measure is taken again from its source, every course change and revisit condition is checked, whatever nothing serves is removed, and both a person and an agent run the pipeline. The next improvements are chosen by what they move, so the project never drifts, stalls or is left half-done.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_keep_it_on_course.md",
-      "skill": "skills/keep-it-on-course/SKILL.md"
+      "name": "conductor-guidance-operations",
+      "kind": "guidance",
+      "title": "Operations: keeping what runs working, and getting better",
+      "description": "Load for anything that keeps running after delivery (a service, an installation, a product in people's hands, a recurring event), and whenever something live fails the people who use it. Operations belong to a named operator.",
+      "path": "conductor/guidance/operations.md",
+      "digest": "sha256:3e0a192a009f9900359553b0b08588bbc2df48006a7897a693cce797d380ab46"
     },
     {
-      "slug": "map-the-architecture",
-      "title": "Map the Architecture",
-      "description": "To describe how the system actually works, by deriving it from what runs and what imports what rather than from the folder names.",
-      "category": "Build",
-      "prompt": "_prompts/task_map_the_architecture.md",
-      "skill": "skills/map-the-architecture/SKILL.md"
+      "name": "conductor-guidance-autonomy",
+      "kind": "guidance",
+      "title": "Autonomy: agents, harnesses and unattended work",
+      "description": "Load when the work is done by an agent that does not yet have a working harness, when it will run unattended or for long stretches, when several agents share the work, or when choosing which agent does which work.",
+      "path": "conductor/guidance/autonomy.md",
+      "digest": "sha256:528ec4c13009e45fc567f9c3b4b6f73e89e26f70ffc90796622c96a673c38d2b"
     },
     {
-      "slug": "prove-the-docs",
-      "title": "Prove the Documentation Against the Code",
-      "description": "To find the claims in the docs that were true when written and are not true now, by executing each one rather than reading it.",
-      "category": "Verify",
-      "prompt": "_prompts/task_prove_the_docs.md",
-      "skill": "skills/prove-the-docs/SKILL.md"
+      "name": "conductor-guidance-confidentiality",
+      "kind": "guidance",
+      "title": "Confidentiality: keeping the work where the owner chose",
+      "description": "Load when the project is private, proprietary or offline, or when any of its work (the idea, code, data, designs, customer names, even the fact that it exists) must not leave. Load it before anything is sent anywhere: a search, a remote model, a hosted tool, a forum post.",
+      "path": "conductor/guidance/confidentiality.md",
+      "digest": "sha256:8e1717bdd927034c4abe68221d4f5d795506dc3d7e6a9a446f7db1b4d5430630"
     },
     {
-      "slug": "qa-an-agents-tests",
-      "title": "QA the Tests an Agent Wrote",
-      "description": "To find the tests that cannot fail, whether an agent wrote them from the implementation or they came with a fix, by breaking the behaviour or putting the defect back and watching each test go red for the stated reason.",
-      "category": "Verify",
-      "prompt": "_prompts/task_qa_an_agents_tests.md",
-      "skill": "skills/qa-an-agents-tests/SKILL.md"
+      "name": "conductor-template-adr",
+      "kind": "template",
+      "title": "Decision record (ADR) template",
+      "description": "One file per decision, numbered in order, kept where the project keeps its documents (often docs/decisions/).",
+      "path": "conductor/templates/adr.md",
+      "digest": "sha256:f519c0d253c71e12d5f92d588cca33793da14cd4487ca6bddb46bbd4ccc3dcd2"
     },
     {
-      "slug": "release-to-people",
-      "title": "Release a Product to Its People, and Hear Back",
-      "description": "To take a product that meets its bar to the people it is for, and hear back. Every way in is walked from a clean device, listings and legal texts match the product, the release is staged and pauses itself, people are told where they already are, and someone answers. A quiet channel gets the next route, never a verdict on the idea.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_release_to_people.md",
-      "skill": "skills/release-to-people/SKILL.md"
-    },
-    {
-      "slug": "repair-a-green-pipeline",
-      "title": "Repair a Pipeline That Is Green Without Checking Anything",
-      "description": "To find the CI steps that pass because they are not running what they claim, and make each one able to fail again.",
-      "category": "Verify",
-      "prompt": "_prompts/task_repair_a_green_pipeline.md",
-      "skill": "skills/repair-a-green-pipeline/SKILL.md"
-    },
-    {
-      "slug": "repair-setup-script",
-      "title": "Repair the Environment Setup Script",
-      "description": "To diagnose and repair the setup script so agent tasks stop failing before any code is written.",
-      "category": "Build",
-      "prompt": "_prompts/task_repair_setup_script.md",
-      "skill": "skills/repair-setup-script/SKILL.md"
-    },
-    {
-      "slug": "review-an-agent-pr",
-      "title": "Review an Agent-Written Pull Request",
-      "description": "To review a pull request an agent wrote, against the failure modes agents actually have.",
-      "category": "Verify",
-      "prompt": "_prompts/task_review_an_agent_pr.md",
-      "skill": "skills/review-an-agent-pr/SKILL.md"
-    },
-    {
-      "slug": "run-autonomously",
-      "title": "Run a Project Autonomously, from One Model and One Person",
-      "description": "To take one language model and one person to a project that builds itself. The model builds its own agent harness and every tool it lacks, from a specification it can prove against a test. The person is asked everything only they can answer at the start, and development then runs without waiting. It is safe because of a sandbox, checkpoints and standing limits, and it is correct because nothing counts as done until its checks pass. Offline, online or both, unattended, supervised or by hand.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_run_autonomously.md",
-      "skill": "skills/run-autonomously/SKILL.md"
-    },
-    {
-      "slug": "run-the-error-paths",
-      "title": "Run the Error Paths",
-      "description": "To find the failure handling that has never once executed, by causing each failure on purpose and watching what the code actually does.",
-      "category": "Verify",
-      "prompt": "_prompts/task_run_the_error_paths.md",
-      "skill": "skills/run-the-error-paths/SKILL.md"
-    },
-    {
-      "slug": "scope-a-vague-issue",
-      "title": "Scope a Vague Issue",
-      "description": "To turn an underspecified bug report into a reproducible, testable task before any fix is attempted.",
-      "category": "Build",
-      "prompt": "_prompts/task_scope_a_vague_issue.md",
-      "skill": "skills/scope-a-vague-issue/SKILL.md"
-    },
-    {
-      "slug": "security-review-agent-code",
-      "title": "Security Review of Agent-Written Code",
-      "description": "To review a change an agent wrote for the security defects agents specifically introduce.",
-      "category": "Security",
-      "prompt": "_prompts/task_security_review_agent_code.md",
-      "skill": "skills/security-review-agent-code/SKILL.md"
-    },
-    {
-      "slug": "start-from-an-idea",
-      "title": "Start a Project from an Idea",
-      "description": "To take any idea, software or physical, to a foundation it can grow on without later regret. It works out what it takes to make the idea happen and how that is paid for, makes the costly-to-reverse decisions with verified evidence, gives it a pipeline a person or an agent can run and one slice working end to end, and writes a ledger that gives every later change a reason.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_start_from_an_idea.md",
-      "skill": "skills/start-from-an-idea/SKILL.md"
-    },
-    {
-      "slug": "take-to-production",
-      "title": "Take a Project to Production Quality",
-      "description": "To take a project in any state, software or physical, to production quality. It does its one job dependably and securely on every platform its people use, loses and leaks nothing, feels finished, carries nothing it does not need, and every area that decides this, from security and privacy to operations, is checked rather than assumed.",
-      "category": "Lifecycle",
-      "prompt": "_prompts/task_take_to_production.md",
-      "skill": "skills/take-to-production/SKILL.md"
-    },
-    {
-      "slug": "translate-the-docs",
-      "title": "Translate the Docs Without Forking Them",
-      "description": "To add a language to a project's documentation together with the machinery that says when a translation has gone stale, because a translation nobody can tell is out of date is worse than no translation.",
-      "category": "Build",
-      "prompt": "_prompts/task_translate_the_docs.md",
-      "skill": "skills/translate-the-docs/SKILL.md"
-    },
-    {
-      "slug": "update-dependencies",
-      "title": "Update Dependencies",
-      "description": "To bring a project's dependencies, runtime and build tools up to date in small steps that each prove they changed what they say, so staying current never becomes a rewrite. Every major version's breaking changes are checked against the code, the lockfile is regenerated rather than edited, nothing new arrives unexamined, and every pin carries a reason and a date to revisit.",
-      "category": "Build",
-      "prompt": "_prompts/task_update_dependencies.md",
-      "skill": "skills/update-dependencies/SKILL.md"
-    },
-    {
-      "slug": "verify-a-migration",
-      "title": "Verify a Database Migration Before It Meets Real Data",
-      "description": "To find what a migration does at production row counts, on the production engine, and on the way back down, none of which a dev database can show you.",
-      "category": "Build",
-      "prompt": "_prompts/task_verify_a_migration.md",
-      "skill": "skills/verify-a-migration/SKILL.md"
+      "name": "conductor-template-handover",
+      "kind": "template",
+      "title": "Handover note template",
+      "description": "For anything that keeps running after a project closes, or when a project changes hands. Kept with the project's records; the receiving operator confirms each section by walking it, not by reading it.",
+      "path": "conductor/templates/handover.md",
+      "digest": "sha256:5f6e2570d76deee21e12eca4ea24ab6a2387433e4b84168d73c5b68ea9fad1cf"
     }
   ]
 }

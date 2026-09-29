@@ -1,12 +1,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- assign page_desc = page.description | default: site.description | strip_html | normalize_whitespace -%}
-{%- assign slug_prefix = page.slug | slice: 0, 5 -%}
 {%- assign is_skill = false -%}
-{%- if page.collection == "prompts" and slug_prefix == "task_" -%}{%- assign is_skill = true -%}{%- endif -%}
+{%- if page.collection == "conductor_pages" -%}{%- assign is_skill = true -%}{%- endif -%}
 {%- comment -%}
   Titles carry the words people search for. The home page says what the site is, a skill page
-  says it is an Agent Skill, and the name comes last, where a results page truncates first.
+  says it is part of an Agent Skill, and the name comes last, where a results page truncates first.
 {%- endcomment -%}
 {%- if page.url == "/" -%}
   {%- assign page_title = site.title | append: ": " | append: page.title -%}
@@ -40,9 +39,8 @@
 {%- comment -%} Where an agent that fetched this page should look instead. {%- endcomment %}
 <link rel="alternate" type="text/plain" title="llms.txt" href="{{ '/llms.txt' | relative_url }}">
 <link rel="alternate" type="application/json" title="Agent Skills discovery index" href="{{ '/.well-known/agent-skills/index.json' | relative_url }}">
-{%- if is_skill -%}
-{%- assign skill_name = page.slug | remove_first: "task_" | replace: "_", "-" %}
-<link rel="alternate" type="text/markdown" title="SKILL.md" href="{{ '/.well-known/agent-skills/' | append: skill_name | append: '/SKILL.md' | relative_url }}">
+{%- if is_skill %}
+<link rel="alternate" type="text/markdown" title="{{ page.file | split: '/' | last }}" href="{{ page.source_url | relative_url }}">
 {%- endif %}
 {% include structured-data.html is_skill=is_skill page_title=page_title page_desc=page_desc %}
 {%- comment -%}

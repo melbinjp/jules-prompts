@@ -1,29 +1,140 @@
----
-layout: null
----
 {
-  "version": "2.1",
-  "generated": "{{ 'now' | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "version": "3.0",
   "repository": "https://github.com/melbinjp/jules-prompts",
   "documentation": "https://jules-prompts.wecanuseai.com/",
-  "skills_index": {{ '/.well-known/agent-skills/index.json' | absolute_url | jsonify }},
-  "total_prompts": {{ site.prompts | size }},
-  "categories": {{ site.prompts | map: "category" | uniq | sort | jsonify }},
+  "skills_index": "https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json",
+  "total_prompts": 14,
+  "categories": [
+    "Conductor",
+    "Guidance",
+    "Template"
+  ],
   "prompts": [
-    {%- assign sorted_prompts = site.prompts | sort: "title" -%}
-    {%- for prompt in sorted_prompts -%}
-    {%- assign slug_prefix = prompt.slug | slice: 0, 5 -%}
-    {%- assign skill_name = prompt.slug | remove_first: "task_" | replace: "_", "-" -%}
     {
-      "title": {{ prompt.title | jsonify }},
-      "description": {{ prompt.description | jsonify }},
-      "category": {{ prompt.category | jsonify }},
-      "status": {{ prompt.status | default: "core" | jsonify }},
-      "url": {{ prompt.url | relative_url | jsonify }},
-      "skill": {% if slug_prefix == "task_" %}{{ "/.well-known/agent-skills/" | append: skill_name | append: "/SKILL.md" | relative_url | jsonify }}{% else %}null{% endif %},
-      "source_path": {{ prompt.path | jsonify }},
-      "slug": {{ prompt.slug | jsonify }}
-    }{% unless forloop.last %},{% endunless %}
-    {%- endfor -%}
+      "slug": "conductor",
+      "title": "Conductor: deliver any project, with evidence",
+      "description": "One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.",
+      "category": "Conductor",
+      "url": "/conductor/",
+      "skill": "/.well-known/agent-skills/conductor/SKILL.md",
+      "source_path": "conductor/SKILL.md"
+    },
+    {
+      "slug": "conductor-guidance-product",
+      "title": "Product: what it is for, and reaching the people it is for",
+      "description": "Load for every project. It covers the objective and how it is measured, what it takes to make the idea happen, the areas the product needs, the journeys that must never fail, translating requests, releasing to people, and hearing back.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/product.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/product.md",
+      "source_path": "conductor/guidance/product.md"
+    },
+    {
+      "slug": "conductor-guidance-planning",
+      "title": "Planning: deliverables, work, dependencies, schedule and resources",
+      "description": "Every project has work to choose and records to keep, so read at least \u00a7Choosing methods by need and \u00a7Work records in the project's tool on every project. Read the rest when there are dependencies, dates, shared resources, risks, or changes to agreed scope.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/planning.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/planning.md",
+      "source_path": "conductor/guidance/planning.md"
+    },
+    {
+      "slug": "conductor-guidance-decisions",
+      "title": "Decisions: choosing with evidence, and recording it",
+      "description": "Load for any choice that matters: a platform, supplier, part, provider, library, venue, design, route or tool; any decision that would be costly to reverse; and whenever a recorded decision's reopening condition fires. Decisions are recorded as ADRs.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/decisions.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/decisions.md",
+      "source_path": "conductor/guidance/decisions.md"
+    },
+    {
+      "slug": "conductor-guidance-design",
+      "title": "Design: what people and agents see, hear and operate",
+      "description": "Load whenever the output has anything people or agents meet: screens, a command line, an API, notifications, a voice, a device's controls, lights and sounds, packaging, manuals, signage, a venue's flow.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/design.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/design.md",
+      "source_path": "conductor/guidance/design.md"
+    },
+    {
+      "slug": "conductor-guidance-quality",
+      "title": "Quality: the bar a result must meet, and how it is checked",
+      "description": "Load when setting or checking what \"good enough to hand over\" means, for any kind of output: software, a physical product or installation, a service, an event, a document. It also holds the rules for reviewing any work, including your own.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/quality.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/quality.md",
+      "source_path": "conductor/guidance/quality.md"
+    },
+    {
+      "slug": "conductor-guidance-software",
+      "title": "Software: building, checking and delivering code",
+      "description": "Load when the output or the work includes software. Most sections are about the ways agents specifically fail: work that reads as finished and is not, tests that cannot fail, pipelines that are green while checking nothing, setup that reports success while broken.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/software.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/software.md",
+      "source_path": "conductor/guidance/software.md"
+    },
+    {
+      "slug": "conductor-guidance-physical",
+      "title": "Physical work: products, installations, devices and actions on the world",
+      "description": "Load when the output includes anything physical (a device, a product made or fitted, an installation, equipment), or when the work issues commands that move, heat, dispense, spend or send: actuators, relays, motors, valves, heaters, robots, vehicles, instruments, machine tools, building controls, and services behind an API that ship, pay, dispense, dispatch or message a person.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/physical.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/physical.md",
+      "source_path": "conductor/guidance/physical.md"
+    },
+    {
+      "slug": "conductor-guidance-service",
+      "title": "Service and creative work: events, films, documents, training and delivered services",
+      "description": "Load when the output is delivered by people rather than shipped as a product: an event, a film or video, a publication, a translation, a course, a consultation, a campaign, a service performed for a client.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/service.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/service.md",
+      "source_path": "conductor/guidance/service.md"
+    },
+    {
+      "slug": "conductor-guidance-operations",
+      "title": "Operations: keeping what runs working, and getting better",
+      "description": "Load for anything that keeps running after delivery (a service, an installation, a product in people's hands, a recurring event), and whenever something live fails the people who use it. Operations belong to a named operator.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/operations.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/operations.md",
+      "source_path": "conductor/guidance/operations.md"
+    },
+    {
+      "slug": "conductor-guidance-autonomy",
+      "title": "Autonomy: agents, harnesses and unattended work",
+      "description": "Load when the work is done by an agent that does not yet have a working harness, when it will run unattended or for long stretches, when several agents share the work, or when choosing which agent does which work.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/autonomy.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/autonomy.md",
+      "source_path": "conductor/guidance/autonomy.md"
+    },
+    {
+      "slug": "conductor-guidance-confidentiality",
+      "title": "Confidentiality: keeping the work where the owner chose",
+      "description": "Load when the project is private, proprietary or offline, or when any of its work (the idea, code, data, designs, customer names, even the fact that it exists) must not leave. Load it before anything is sent anywhere: a search, a remote model, a hosted tool, a forum post.",
+      "category": "Guidance",
+      "url": "/conductor/guidance/confidentiality.html",
+      "skill": "/.well-known/agent-skills/conductor/guidance/confidentiality.md",
+      "source_path": "conductor/guidance/confidentiality.md"
+    },
+    {
+      "slug": "conductor-template-adr",
+      "title": "Decision record (ADR) template",
+      "description": "One file per decision, numbered in order, kept where the project keeps its documents (often docs/decisions/).",
+      "category": "Template",
+      "url": "/conductor/templates/adr.html",
+      "skill": "/.well-known/agent-skills/conductor/templates/adr.md",
+      "source_path": "conductor/templates/adr.md"
+    },
+    {
+      "slug": "conductor-template-handover",
+      "title": "Handover note template",
+      "description": "For anything that keeps running after a project closes, or when a project changes hands. Kept with the project's records; the receiving operator confirms each section by walking it, not by reading it.",
+      "category": "Template",
+      "url": "/conductor/templates/handover.html",
+      "skill": "/.well-known/agent-skills/conductor/templates/handover.md",
+      "source_path": "conductor/templates/handover.md"
+    }
   ]
 }

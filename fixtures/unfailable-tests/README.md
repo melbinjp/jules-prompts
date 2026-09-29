@@ -1,6 +1,6 @@
 # Fixture: unfailable-tests
 
-Skill: `qa-an-agents-tests`. Prompt: `task_qa_an_agents_tests`.
+Written for the retired skill `qa-an-agents-tests`, whose guidance is now in `conductor/guidance/software.md`.
 
 `pricing.discount(100, 10)` returns `0.0` because the divisor is 10, not 100.
 Four tests pass anyway. One control test can fail.

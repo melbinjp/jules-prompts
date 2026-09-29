@@ -1,6 +1,6 @@
 # Fixture: looks-finished
 
-Skill: `take-to-production`. Prompt: `task_take_to_production`.
+Written for the retired skill `take-to-production`, whose guidance is now in `conductor/guidance/quality.md`.
 
 `app/` is Jot, a notes app. In the browser it was built in, it looks finished:
 you can add notes, the theme follows the system, and Export works. Its README

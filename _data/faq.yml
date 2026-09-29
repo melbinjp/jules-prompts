@@ -1,24 +1,41 @@
 # The home page's questions. Rendered as HTML on the page and as FAQPage structured data in
 # its head, from this one list, so the two cannot disagree. Answers may use inline HTML.
+- q: What is the conductor?
+  a: >-
+    One Agent Skill for delivering a project of any kind. It classifies the project from evidence, works through the responsibilities every project has (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps its records in the project's own tools, and loads a focused guidance file only when the work needs it. It counts nothing as done without evidence about the actual result and someone other than the author who checked it.
 - q: What is an Agent Skill?
-  a: A folder with a <code>SKILL.md</code> file in it. The file starts with a name and a one-line description of when to use it, and the procedure follows. An agent that supports skills reads the descriptions and loads the one that matches the task. Claude Code, Codex, GitHub Copilot, Cursor and Gemini CLI all read the format.
-- q: Which agents can use these?
-  a: Any agent that can read a file or fetch a URL. Install them as skills where the agent supports them, point it at <a href="/llms.txt">llms.txt</a>, add the MCP server to get them as slash commands, or paste the text. Nothing in them depends on one product's tool names.
+  a: >-
+    A folder with a <code>SKILL.md</code> file in it. The file starts with a name and a one-line description of when to use it, and the procedure follows, with supporting files beside it. An agent that supports skills reads the description and loads the skill when the task matches. Claude Code, Codex, GitHub Copilot, Cursor and Gemini CLI all read the format.
+- q: Which agents can use it?
+  a: >-
+    Any agent that can read a file or fetch a URL. Install the whole folder as a skill where the agent supports them, point the agent at <a href="/llms.txt">llms.txt</a>, add the MCP server to get the conductor and each guidance file as prompts, or paste the text. Nothing in it depends on one product's tool names.
 - q: Is this affiliated with Google or Jules?
-  a: No. The library started in 2025 as prompts for Jules, Google's coding agent, which is where the name comes from. The skills work with Jules and with every other agent.
+  a: >-
+    No. The library started in 2025 as prompts for Jules, Google's coding agent, which is where the name comes from. The conductor works with Jules and with every other agent.
 - q: What does it cost?
-  a: Nothing. Everything is MIT licensed, there is nothing to sign up for, and the site has no analytics, cookies or trackers.
-- q: Can an agent that controls hardware use them?
-  a: Yes. <a href="/prompts/task_act_on_the_physical_world.html">Act on the Physical World, and Prove It Happened</a> is for any command that moves, heats, dispenses, spends or sends. It confirms the result through an independent measurement rather than the device's acknowledgement, and sends every failure to a safe state decided in advance.
-- q: Can it start a project from nothing but an idea?
-  a: Yes. <a href="/prompts/task_start_from_an_idea.html">Start a Project from an Idea</a> first works out what it takes to make it happen, from who needs it and what already exists to build on, to what it costs and the routes to pay for it. It then writes down what success is and the next route for when the first one is blocked, and makes the few decisions that are costly to reverse with verified evidence. It never concludes that an idea cannot be done. It turns every stage of the pipeline into a command a person or an agent can run, so the project can be run by hand, fully automated or anything between. Then it builds one thin slice end to end. It works the same for hardware.
+  a: >-
+    Nothing. Everything is MIT licensed, there is nothing to sign up for, and the site has no analytics, cookies or trackers.
+- q: Can an agent that controls hardware use it?
+  a: >-
+    Yes. The <a href="/conductor/guidance/physical.html">physical work guidance</a> is for any command that moves, heats, dispenses, spends or sends. It treats an acknowledgement as not being an outcome, confirms the result through something that measures the world, and sends every failure to a safe state decided in advance.
+- q: Can it start a project from nothing but an idea, or a single word?
+  a: >-
+    Yes. The <a href="/conductor/guidance/product.html">product guidance</a> covers starting from nothing: what only the owner can answer, what it takes to make the idea happen, the objective and how it is measured, and the other routes to it when one is blocked. The costly-to-reverse choices go through the <a href="/conductor/guidance/decisions.html">decision guidance</a>, with evidence in proportion to the stakes. Every stage of the work is a procedure a person, an agent or automation can repeat.
 - q: My project already exists, or it stalled. Where do I start?
-  a: Where its state says, on the path every project shares. A prototype, a half-built or vibe-coded build, an inherited codebase or a working product with gaps is first founded again on paper, so everything already there gets its reason or is marked for revisiting, and then taken to production. A live, stalled or drifting project starts with <a href="/prompts/task_keep_it_on_course.html">Keep a Project on Course and Improving</a>, which finds the next route to the same goal. The first section of this page lists every starting state.
+  a: >-
+    The conductor first writes down what the project is for, what exists and what actually runs, and the decisions it already embodies, marking those nobody can justify for revisiting. It then starts at the first responsibility whose acceptance is not met, judged from evidence. A live project failing people right now starts with the <a href="/conductor/guidance/operations.html">operations guidance</a>: restore first, then find the cause.
 - q: Does it cover design, or only code?
-  a: Design too. <a href="/prompts/task_design_the_experience.html">Design the Experience, with Evidence</a> starts from the people and their situation, designs every journey as a flow with every state and every word, keeps one system of look and behaviour in code, and makes every action operable by a person, an agent or automation with the same limits. It keeps the design threaded to the architecture, so what it promises can be built, and tests each journey with people. It works for screens, command lines, APIs, voices and devices.
+  a: >-
+    Design too. The <a href="/conductor/guidance/design.html">design guidance</a> covers whatever people or agents meet: screens, command lines, APIs, voices, devices, packaging and signage. Every journey is decided on purpose, with a reason, and tested with people or with stand-ins labelled as such.
 - q: How does it keep a project from drifting?
-  a: Every decision and every commit says which goal or measure it serves, in a ledger kept in the project, and a check in its CI refuses anything that serves nothing. <a href="/prompts/task_change_with_a_reason.html">Change a Project with a Reason</a> turns vague requests like "make it scalable" into measured changes, or a no with the number. <a href="/prompts/task_keep_it_on_course.html">Keep a Project on Course and Improving</a> takes every measure again at each milestone and continuously after launch, and ranks the next improvements.
+  a: >-
+    Every change traces to the objective, a requirement or an accepted decision, and a change that serves none of them is a question for the owner. Decisions are recorded as ADRs with their options, evidence, a way out and a condition that reopens them. Measures are taken again the way they say they are taken, before and after a change.
 - q: Can it be used offline, or on a private project?
-  a: Yes. The skills are plain files that need no network. Install them from a copy of the repository, run the MCP server from that copy with the network refused, and give small local models the short forms in <code>compact/</code>. <a href="/prompts/task_keep_it_confidential.html">Keep a Project Confidential, Offline First</a> keeps the project's own code, data and plans from leaving through its tools, proves the pipeline runs with the network off, and sets how the internet is used when it must be. No skill assumes a hosted service.
+  a: >-
+    Yes. The conductor is plain files that need no network. Install it from a copy of the repository, run the MCP server from that copy with the network refused, and load one guidance file at a time on a small context window. The <a href="/conductor/guidance/confidentiality.html">confidentiality guidance</a> keeps the project's own code, data and plans from leaving through its tools, and no step assumes a hosted service.
 - q: Can one model and one person build a project with this, on its own?
-  a: Yes. <a href="/prompts/task_run_autonomously.html">Run a Project Autonomously</a> has the model build its own agent harness and tools if it has none, and prove them against a test the library supplies. It asks the person everything only they can answer at the start, then develops without waiting. It is safe because of a sandbox, checkpoints and limits set in advance, and correct because nothing counts as done until its tests, measures and a fresh review pass.
+  a: >-
+    Yes. The <a href="/conductor/guidance/autonomy.html">autonomy guidance</a> covers an agent that has no working harness yet, a build that runs unattended, and several agents sharing the work. The owner is asked what only they can answer once, at the start, and the work then runs within written limits.
+- q: What happened to the 26 skills?
+  a: >-
+    They are retired, and their tag in the repository is <code>library-26-final</code>. Every rule they held is mapped, in the coverage map, to where it now lives in the conductor. Old page addresses and old <code>SKILL.md</code> addresses redirect to the file that holds their content.

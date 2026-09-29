@@ -1,6 +1,6 @@
 # Fixture: migrated-on-empty
 
-Skill: `verify-a-migration`. Prompt: `task_verify_a_migration`.
+Written for the retired skill `verify-a-migration`, whose guidance is now in `conductor/guidance/software.md`.
 
 Crate runs a shop's orders on PostgreSQL 15. Migration 0042 adds a unique email constraint,
 widens order totals and indexes orders by customer. An agent verified it (`VERIFY.md`) and

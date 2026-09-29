@@ -1,72 +1,99 @@
 # AGENTS.md
 
-> How an AI agent finds and uses the skills in this repository, and how to change the library itself.
+> How an AI agent finds and uses the conductor in this repository, and how to change it.
 
 ## What this repository is
 
-Two forms currently coexist: the existing 26-skill library, and a candidate conductor under
-evaluation. Neither depends on a particular agent or harness. The existing library remains the
-website, plugin, MCP and generated `skills/` interface; each of its skills is one self-contained
-Markdown procedure with a planted-defect fixture. The conductor is a multi-file skill for
-delivering software, physical, service, creative and hybrid projects, including finite projects
-that close after accepted delivery.
+The conductor: one Agent Skill for delivering a project of any kind, software, physical, service,
+creative or hybrid, including finite projects that close after accepted delivery and work that must be
+handed over to keep running. It is a multi-file skill: `conductor/SKILL.md`, `conductor/guidance/` and
+`conductor/templates/`. It does not depend on a particular agent or harness (Jules, Claude Code, Codex,
+Cursor, Copilot, or anything that reads `AGENTS.md` or `SKILL.md`), and it assumes no hosted service.
+The earlier library of 26 skills is retired; its last commit is tagged `library-26-final`.
 
-## Use the candidate conductor
+## Use the conductor
 
-- Read `conductor/SKILL.md`, then the guidance it selects. It is the canonical candidate
-  source; `guidance/` and `templates/` are required parts of the package.
-- Install by copying the whole `conductor/` directory into `.agents/skills/` or
-  `.claude/skills/` in the target project. Do not copy only `SKILL.md`, or place a hand-edited
-  copy in this repository's generated `skills/`: the emitter treats ungenerated files as stale.
-- Follow its reporting and work-record conventions when it is selected; the legacy three
-  verdicts and custom ledger below describe the existing library, not conductor requirements.
-- The coverage map is `docs/migration/coverage-map.md`; trial requirements and current evidence
-  are in `docs/trials/protocol.md` and `docs/trials/runs/status.md`. Structural checks are not
-  delivery acceptance. Compatibility migration and default replacement await the trial review.
+- Read `conductor/SKILL.md` whole, then the guidance it selects. On a small context window, load one
+  guidance file at a time and only the sections the current work needs.
+- Install by copying the **whole** `conductor/` directory into `.agents/skills/` or `.claude/skills/` in
+  the target project. Do not copy only `SKILL.md`, and do not place a hand-edited copy in this
+  repository's generated `skills/`: the emitter treats ungenerated files as stale.
+- Follow its reporting and work-record conventions: every item ends as verified, failed, not verified,
+  not applicable or exception, and a report ends with its counts. Records live in the project's own
+  tools; decisions are ADRs (`conductor/templates/adr.md`).
+- To see whether an agent or model can follow it, run it on a fixture and score the report:
+  `python scripts/score_fixture.py fixtures/<name> REPORT.md`. The request for each fixture is in
+  `docs/trials/tools/requests.json`.
 
-## Find a skill in the existing library
+## Find it
 
-- **By where the project is:** `workflow.json`. Its `entries` say where each kind of project starts (an idea and only a model, a project that already exists in any state, broken for people right now, and so on), its `steps` give the path in order with each step's `done_when` gate and the `branches` it calls on, and `throughout` names the skills that apply alongside every step. The same, readable: `https://jules-prompts.wecanuseai.com/workflow/`.
-- **By task:** `GET https://jules-prompts.wecanuseai.com/llms.txt` lists every skill with its description and the link to its `SKILL.md`, starting with where to start by state.
-- **By the Agent Skills discovery convention:** `GET https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json`. Each entry has `name`, `type`, `description`, `url` and `digest`, the SHA-256 of the served `SKILL.md`; verify it.
-- **From a clone:** `skills/<name>/SKILL.md`, or the source in `_prompts/`. Copy skills into `.claude/skills/` or `.agents/skills/`. `prompts.json` is an older index, still served.
+- **From a clone:** `conductor/SKILL.md`. `skills/conductor/` and `plugin/skills/conductor/` are generated
+  copies.
+- **By task:** `GET https://jules-prompts.wecanuseai.com/llms.txt` links the whole folder as one archive
+  and every file in it, each with its digest.
+- **By the Agent Skills discovery convention:** `GET https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json`.
+  The conductor is one entry of type `archive` (a zip with `SKILL.md` at its root); verify its `digest`,
+  the SHA-256 of the archive's bytes.
+- **Over MCP:** the prompt `conductor`, and each guidance and template file as a further prompt or as
+  the resource `conductor://<path>`.
 
-Paste [`harness/AGENTS.md`](harness/AGENTS.md) into a target project's `AGENTS.md` so its rules apply even when nobody picks a skill.
-
-## Use a skill in the existing library
-
-1. Load the matching `SKILL.md`. The procedure starts after its front matter.
-2. Fill any placeholders, such as `<THE_IDEA>`; a skill says what to do if one is left unfilled.
-3. Follow it. Report every claim as `holds`, `broken` or `skipped`, and end with the count of each.
-4. To see whether an agent or model can follow a skill, run it on the skill's fixture and score the report: `python scripts/score_fixture.py fixtures/<name> REPORT.md`.
+Paste [`harness/AGENTS.md`](harness/AGENTS.md) into a target project's `AGENTS.md` so its standing rules
+apply even when nobody loads the conductor.
 
 ## Offline and private use
 
-The skills need no network. On a private or air-gapped project, install from a clone (`skills/`, or `/plugin marketplace add /path/to/clone`), run the MCP server with `JULES_PROMPTS_DIR=/path/to/clone` (it then refuses to use the network), give small local models the short forms in `compact/`, and qualify each model on the fixtures before routing work to it. `keep-it-confidential` covers the project's own confidentiality.
+The conductor needs no network. On a private or air-gapped project, install from a clone (`conductor/`,
+or `/plugin marketplace add /path/to/clone`), run the MCP server with
+`JULES_PROMPTS_DIR=/path/to/clone` (it then refuses to use the network), and qualify each model on the
+fixtures before routing work to it. `conductor/guidance/confidentiality.md` covers the project's own
+confidentiality.
 
-## Change the library
+## The harness folder
 
-- The source of each existing library skill is `_prompts/task_<name>.md`; a new one starts from the Skill Template, `_prompts/template_master_prompt.md`. Its distributed forms (`skills/`, `plugin/`, `compact/`, `_agent_skills/`, the indexes, `llms.txt`, the workflow includes and the redirect stubs) are generated from it and from `workflow.json` by `python scripts/emit.py`; never edit a generated file.
-- Edit the candidate directly in `conductor/`. `scripts/check_conductor.py` validates its metadata, file membership and local file/section references, including a copied installation. `scripts/test_check_conductor.py` must reject deliberately broken packages. These checks also run through library integrity and CI; the delivery trials remain separate.
-- Every existing library skill needs a fixture in `fixtures/` whose `EXPECTED_REPORT.md` names every planted defect; the integrity check refuses a skill without one. Keep these cases during conductor evaluation.
-- A removed skill's old page is mapped to its replacement in `MOVED` in `scripts/emit.py`.
-- Before pushing: `python scripts/emit.py --check`, `python scripts/check_library_integrity.py`, `python scripts/test_check_conductor.py`, `python scripts/test_check_trace.py`, `python scripts/test_conformance.py`, and `python scripts/check_site.py _site` on a build of the site. Preserve the plugin and MCP interfaces and run the MCP smoke check when those change.
+`harness/check_trace.py` stays for projects that already keep the older ledger (`PROJECT.md`,
+`decisions/`, and `Serves:` and `Verified:` lines in commits) and run the check in their CI. New projects
+use the conductor's records instead and do not adopt the ledger. `harness/conformance.py` tests an agent
+harness that a model built for itself. Do not change either's behaviour without their tests
+(`scripts/test_check_trace.py`, `scripts/test_conformance.py`).
+
+## Change the conductor
+
+- Edit `conductor/` directly. It is the only procedure source, hand-written, and never generated.
+  `scripts/check_conductor.py` validates its metadata, file membership and local file and section
+  references, including a copied installation; `scripts/test_check_conductor.py` must reject
+  deliberately broken packages.
+- Everything else agents load (`skills/`, `plugin/`, `_agent_skills/`, `_conductor_pages/`, the discovery
+  index and archive, `llms.txt`, `library.json`, `prompts.json`, the redirect stubs) is generated by
+  `python scripts/emit.py`. Never edit a generated file. To add a form, add a target to `TARGETS` in that
+  script.
+- Every fixture in `fixtures/` needs a `defects.json`, an `EXPECTED_REPORT.md` that names every planted
+  defect, and a request in `docs/trials/tools/requests.json`; the integrity check refuses one without.
+  A change meant to catch a failure adds or extends a fixture.
+- A retired page's address is mapped to the file that now holds its content in `MOVED` and
+  `RETIRED_SKILLS` in `scripts/emit.py`.
+- Do not edit `docs/trials/`: it records what was run. `docs/migration/checks.md` says which check protects
+  which behaviour.
+- Before pushing: `python scripts/emit.py --check`, `python scripts/check_library_integrity.py`,
+  `python scripts/check_conductor.py`, `python scripts/test_check_conductor.py`,
+  `python scripts/test_emit_bytes.py`, `python scripts/test_trial_prep.py`,
+  `python scripts/inventory_map.py --destinations`, `python scripts/test_check_trace.py`,
+  `python scripts/test_conformance.py`, `node mcp/smoke-test.mjs`, and `python scripts/check_site.py _site`
+  on a build of the site. Structural checks are not delivery acceptance.
 
 ## Repository structure
 
 ```
-conductor/               candidate entry point, guidance and templates; canonical, not generated
-docs/migration/          coverage and migration evidence
-docs/trials/             trial protocol, runs and their current status
-_prompts/                 the skills, one Markdown file each (the source)
-workflow.json             where each kind of project starts, and the path with its gates
-fixtures/                 a planted-defect project for every skill, with defects.json
-harness/AGENTS.md         standing rules to paste into a target project's AGENTS.md
-harness/check_trace.py    the ledger check for a target project's CI (Python 3.8+, no dependencies)
-harness/conformance.py    the test a harness a model built for itself must pass
-harness/ledger-example/   a small ledger that passes the check
-scripts/                  emit.py (generates every form) and the checks
-skills/ plugin/ compact/  generated: Agent Skills, the Claude Code plugin, short forms
-_agent_skills/ redirects/ generated: the served SKILL.md files, and stubs for removed pages
-mcp/                      the MCP server
+conductor/               the entry point, guidance and templates; canonical, hand-written
+docs/RELEASE.md          supported scope, known limitations, evidence, migration
+docs/migration/          coverage map, the audit, build notes, and checks.md
+docs/trials/             trial protocol, runs and their current status (a record; do not edit)
+fixtures/                26 regression cases: planted defects, defects.json, EXPECTED_REPORT.md
+harness/AGENTS.md        standing rules to paste into a target project's AGENTS.md
+harness/check_trace.py   the older ledger check, for projects that already keep the ledger
+harness/conformance.py   the test a harness a model built for itself must pass
+scripts/                 emit.py (generates every form) and the checks
+skills/ plugin/          generated: the Agent Skill folder and the Claude Code plugin
+_agent_skills/ _conductor_pages/ redirects/   generated: the served files, the site's pages, stubs
+library.json prompts.json llms.txt .well-known/   generated: the indexes and the archive
+mcp/                     the MCP server
 ```

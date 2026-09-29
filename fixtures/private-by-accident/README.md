@@ -1,6 +1,6 @@
 # Fixture: private-by-accident
 
-Skill: `keep-it-confidential`. Prompt: `task_keep_it_confidential`.
+Written for the retired skill `keep-it-confidential`, whose guidance is now in `conductor/guidance/confidentiality.md`.
 
 Heron, a proprietary tool for sorting produce by its light spectrum, built for one customer.
 Its own README says it is developed fully offline and that nothing leaves the machine. Its

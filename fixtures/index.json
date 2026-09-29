@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "description": "Planted-failure fixtures. Each one contains known defects and a defects.json listing them. Score an agent report with scripts/score_fixture.py.",
+  "description": "Regression fixtures for the conductor. Each one contains known defects and a defects.json listing them; docs/trials/tools/requests.json has the request an agent is given. Score an agent report with scripts/score_fixture.py. The 'skill' of each entry names the retired skill the case was written for, kept as its provenance.",
   "fixtures": [
     {
       "name": "unfailable-tests",

@@ -1,0 +1,13 @@
+---
+permalink: /workflow.json
+layout: null
+sitemap: false
+---
+{% raw %}{
+  "moved": true,
+  "note": "workflow.json was retired. The conductor replaces the fixed path with a control loop that starts where the project's first unmet acceptance is.",
+  "replaced_by": "https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/SKILL.md",
+  "archive": "https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip",
+  "index": "https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json"
+}
+{% endraw %}

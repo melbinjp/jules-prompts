@@ -1,6 +1,6 @@
 # Fixture: map-from-folders
 
-Skill: `map-the-architecture`. Prompt: `task_map_the_architecture`.
+Written for the retired skill `map-the-architecture`, whose guidance is now in `conductor/guidance/software.md`.
 
 Pantry is an online grocery service. An agent was asked to map its architecture before a
 rewrite and wrote `ARCHITECTURE.md`. The code is in `src/`, the plugin configuration in

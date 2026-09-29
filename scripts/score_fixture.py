@@ -2,13 +2,15 @@
 """Score an agent's report against a planted-failure fixture.
 
 A fixture is a miniature repository with known defects and a defects.json that
-lists them. An agent given the matching skill writes a report. This script
-decides holds / broken / skipped from the report text, never from whether the
-report *sounds* complete.
+lists them. An agent given the conductor and the fixture's request writes a report.
+This script decides holds / broken / skipped from the report text, never from
+whether the report *sounds* complete.
 
     python scripts/score_fixture.py fixtures/unfailable-tests path/to/REPORT.md
 
-Verdicts (the same three this library uses everywhere else):
+Verdicts (the scorer's own three words; the conductor's reports say verified,
+failed and not verified, and the scorer does not read those words, only whether
+the defect was named):
 
     holds   the report named the planted defect
     broken  it missed it, or claimed a defect that is not planted
@@ -101,7 +103,7 @@ def score(report: str, spec: dict) -> dict:
 
 def format_report(out: dict) -> str:
     lines = [
-        f"fixture {out['fixture']}  skill {out['skill']}",
+        f"fixture {out['fixture']}",
         f"{out['holds']} holds, {out['broken']} broken, {out['skipped']} skipped"
         + (f", invented {len(out['invented'])}" if out["invented"] else ""),
     ]

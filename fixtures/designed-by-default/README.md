@@ -1,6 +1,6 @@
 # Fixture: designed-by-default
 
-Skill: `design-the-experience`. Prompt: `task_design_the_experience`.
+Written for the retired skill `design-the-experience`, whose guidance is now in `conductor/guidance/design.md`.
 
 Slot books physiotherapy appointments for a small clinic. Patients book on their phones, the
 receptionist works at the desk, and a reminder agent reschedules missed appointments through the

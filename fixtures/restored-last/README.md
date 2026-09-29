@@ -1,6 +1,6 @@
 # Fixture: restored-last
 
-Skill: `handle-an-incident`. Prompt: `task_handle_an_incident`.
+Written for the retired skill `handle-an-incident`, whose guidance is now in `conductor/guidance/operations.md`.
 
 Boxwell sends a monthly veg box and charges each subscriber once a month. On 2026-10-02 release
 2.14 went out at 09:02, and subscribers started being charged two and three times. The incident

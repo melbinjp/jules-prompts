@@ -1,6 +1,6 @@
 # Fixture: six-months-in
 
-Skill: `keep-it-on-course`. Prompt: `task_keep_it_on_course`.
+Written for the retired skill `keep-it-on-course`, whose guidance is now in `conductor/guidance/operations.md`.
 
 The woodshop booking app six months after launch: its ledger, decisions, logs, bills,
 scripts and schedule, and the last status report (`STATUS.md`), which says all measures are

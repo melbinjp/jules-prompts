@@ -1,6 +1,6 @@
 # Fixture: translated-once
 
-Skill: `translate-the-docs`. Prompt: `task_translate_the_docs`.
+Written for the retired skill `translate-the-docs`, whose guidance is now in `conductor/guidance/software.md`.
 
 Tidal is a small self-hosted web server. An agent added Spanish documentation under `docs/es/`
 from the English in `docs/en/`, in one pull request (`PR.md`). What has happened to the English

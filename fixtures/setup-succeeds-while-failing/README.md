@@ -1,6 +1,6 @@
 # Fixture: setup-succeeds-while-failing
 
-Skill: `repair-setup-script`.
+Written for the retired skill `repair-setup-script`, whose guidance is now in `conductor/guidance/software.md`.
 
 Do not run `setup.sh` to completion; it blocks. Read it, and confirm `pip install -r requirements.txt` fails.
 

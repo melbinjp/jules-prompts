@@ -1,6 +1,6 @@
 # Fixture: skipped-to-green
 
-Skill: `isolate-tests-from-services`. Prompt: `task_isolate_tests_from_services`.
+Written for the retired skill `isolate-tests-from-services`, whose guidance is now in `conductor/guidance/software.md`.
 
 Ledgerly's tests needed PostgreSQL, Redis and the payment provider's sandbox to run. An agent was
 asked to make the default `pytest` run from cold with none of them. Its pull request (`PR.md`)

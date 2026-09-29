@@ -12,15 +12,19 @@ was visible in the repository. All of it was visible in _site.
 
 What it checks, each against the built files:
 
-  agents   every skill in the discovery index is served, byte for byte the SKILL.md in
-           skills/, with the digest the index states; every procedure has an entry; llms.txt
-           lists every skill and every link in it resolves; each skill page points at its
-           SKILL.md.
-  people   every HTML page is a whole page with a <title> and one <h1>; skill pages carry
-           their title and description; no prompt text has turned into a table.
+  agents   the discovery index lists the conductor as an archive of the whole folder, and the
+           archive served is the one the emitter builds, with the digest the index states; every
+           file of the conductor is also served byte for byte at its own address; llms.txt lists
+           every file, states the same digests and every link in it resolves; each conductor
+           page points at the file it shows.
+  moved    every retired address (the old skill pages, the old skills' SKILL.md addresses,
+           /tasks.html, /workflow/ and /workflow.json) is served and lands on a page or file
+           that exists, and none of them is in the sitemap.
+  people   every HTML page is a whole page with a <title> and one <h1>; conductor pages carry
+           their title and description; no Markdown has turned into a table.
   search   every page names a link-preview image the site serves, at 1200 by 630; every
-           block of structured data parses; the home page and every skill page have one, and
-           a skill page's names the skill's title and its SKILL.md.
+           block of structured data parses; the home page and every conductor page have one, and
+           a conductor page's names the file's title and where its Markdown is served.
   budget   no page pulls a script, stylesheet or font from another origin, and no web font
            is shipped at all (text is set in the reader's own system font); the stylesheet,
            the script, the preview image and every page stay under a size budget.
@@ -31,14 +35,19 @@ run it against a build of the old site and it goes red.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import re
 import sys
+import zipfile
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+import emit  # noqa: E402  the same reading of conductor/ that generated the site's files
+
 SITE_HOST = (ROOT / "CNAME").read_text(encoding="utf-8").strip()
 INDEX = ".well-known/agent-skills/index.json"
 SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
@@ -155,41 +164,66 @@ def main() -> int:
 
     problems: list[str] = []
     checked = 0
+    docs = emit.load_package()
+    by_source = {d["source"]: d for d in docs}
+    by_page = {d["page"]: d for d in docs}
+
+    def sha(data: bytes) -> str:
+        return "sha256:" + hashlib.sha256(data).hexdigest()
 
     # --- agents -------------------------------------------------------------------
-    library = json.loads((ROOT / "library.json").read_text(encoding="utf-8"))
-    procedures = {p["slug"]: p for p in library["procedures"]}
-
     index_path = site / INDEX
-    entries: dict[str, dict] = {}
+    entries: list[dict] = []
     if not index_path.exists():
-        problems.append(f"/{INDEX} is not served, so no discovery client can find a skill")
+        problems.append(f"/{INDEX} is not served, so no discovery client can find the conductor")
     else:
         index = json.loads(index_path.read_text(encoding="utf-8"))
         if index.get("$schema") != SCHEMA:
             problems.append(f"/{INDEX} $schema is {index.get('$schema')!r}, not {SCHEMA!r}")
-        entries = {e.get("name"): e for e in index.get("skills", [])}
+        entries = index.get("skills", [])
+    names = [e.get("name") for e in entries]
+    if names != ["conductor"]:
+        problems.append(f"the discovery index lists {names}, not exactly the conductor")
 
-    for slug in procedures:
+    archive_digest = None
+    for entry in entries[:1]:
         checked += 1
-        entry = entries.get(slug)
-        if entry is None:
-            problems.append(f"skill {slug} is in library.json but not in the discovery index")
-            continue
-        served = local(site, entry["url"])
-        source = ROOT / "skills" / slug / "SKILL.md"
+        if entry.get("type") != "archive":
+            problems.append(f"the conductor is a folder, so its index type is 'archive', not {entry.get('type')!r}")
+        if entry.get("description") != docs[0]["description"]:
+            problems.append("the index description differs from the SKILL.md description")
+        served = local(site, entry.get("url", ""))
         if served is None or not served.is_file():
-            problems.append(f"skill {slug}: {entry['url']} is not served")
-            continue
-        body = served.read_bytes()
-        if body != source.read_bytes():
-            problems.append(f"skill {slug}: the served SKILL.md differs from skills/{slug}/SKILL.md")
-        digest = "sha256:" + hashlib.sha256(body).hexdigest()
-        if entry.get("digest") != digest:
-            problems.append(f"skill {slug}: index digest {entry.get('digest')} != served {digest}")
-    for name in entries:
-        if name not in procedures:
-            problems.append(f"the discovery index lists {name}, which is not a procedure")
+            problems.append(f"the archive {entry.get('url')} is not served")
+        else:
+            data = served.read_bytes()
+            archive_digest = sha(data)
+            if entry.get("digest") != archive_digest:
+                problems.append(f"index digest {entry.get('digest')} != served archive {archive_digest}")
+            if data != emit.build_archive(docs):
+                problems.append("the served archive is not the one built from conductor/")
+            try:
+                with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                    members = archive.namelist()
+                    for member in members:
+                        if member.startswith("/") or ".." in Path(member).parts:
+                            problems.append(f"the archive holds an unsafe path {member!r}")
+                    if sorted(members) != sorted(d["path"] for d in docs):
+                        problems.append("the archive does not hold exactly the files of conductor/")
+                    for d in docs:
+                        if d["path"] in members and archive.read(d["path"]) != d["text"].encode("utf-8"):
+                            problems.append(f"archive member {d['path']} differs from conductor/{d['path']}")
+            except zipfile.BadZipFile:
+                problems.append("the served archive is not a zip file")
+
+    # Every file of the conductor, also served on its own, byte for byte.
+    for d in docs:
+        checked += 1
+        served = local(site, d["source"])
+        if served is None or not served.is_file():
+            problems.append(f"{d['source']} is not served")
+        elif served.read_bytes() != d["text"].encode("utf-8"):
+            problems.append(f"the served {d['source']} differs from conductor/{d['path']}")
 
     llms = site / "llms.txt"
     if not llms.exists():
@@ -197,15 +231,58 @@ def main() -> int:
     else:
         text = llms.read_text(encoding="utf-8")
         links = re.findall(r"\]\((https?://[^)\s]+)\)|:\s(https?://\S+)", text)
-        for slug in procedures:
-            if f"/.well-known/agent-skills/{slug}/SKILL.md" not in text:
-                problems.append(f"llms.txt does not list {slug}")
+        for d in docs:
+            if d["source"] not in text:
+                problems.append(f"llms.txt does not list {d['path']}")
+        if archive_digest and archive_digest not in text:
+            problems.append("llms.txt does not state the archive's SHA-256, or states another")
+        if emit.sha256(docs[0]["text"]) not in text:
+            problems.append("llms.txt does not state SKILL.md's SHA-256, or states another")
         for pair in links:
             url = pair[0] or pair[1]
             checked += 1
             target = local(site, url)
             if target is not None and not target.is_file():
                 problems.append(f"llms.txt links {url}, which the site does not serve")
+
+    # --- moved --------------------------------------------------------------------
+    sitemap = (site / "sitemap.xml").read_text(encoding="utf-8") if (site / "sitemap.xml").exists() else ""
+    if f"{emit.SITE}/conductor/" not in sitemap:
+        problems.append("the sitemap does not list the conductor page")
+    refresh = re.compile(r'http-equiv="refresh" content="0; url=([^"]+)"')
+    for old, path in sorted(emit.MOVED.items()):
+        checked += 1
+        stub = local(site, old)
+        if stub is None or not stub.is_file():
+            problems.append(f"the retired address {old} is not served")
+            continue
+        found = refresh.search(stub.read_text(encoding="utf-8"))
+        wanted = emit.SITE + next(d["page"] for d in docs if d["path"] == path)
+        if not found or found.group(1) != wanted:
+            problems.append(f"{old} does not redirect to {wanted}")
+        elif (local(site, found.group(1)) or stub).is_file() is False:
+            problems.append(f"{old} redirects to {found.group(1)}, which the site does not serve")
+        if old in sitemap:
+            problems.append(f"the retired address {old} is in the sitemap")
+    for slug, path in sorted(emit.RETIRED_SKILLS.items()):
+        checked += 1
+        notice = site / ".well-known" / "agent-skills" / slug / "SKILL.md"
+        if not notice.is_file():
+            problems.append(f"the retired skill's address /.well-known/agent-skills/{slug}/SKILL.md is not served")
+            continue
+        text = notice.read_text(encoding="utf-8")
+        target = next(d for d in docs if d["path"] == path)
+        for wanted in (emit.SITE + docs[0]["source"], emit.SITE + target["source"]):
+            if wanted not in text:
+                problems.append(f"the notice at the retired {slug} address does not point at {wanted}")
+    checked += 1
+    workflow = site / "workflow.json"
+    try:
+        notice = json.loads(workflow.read_text(encoding="utf-8"))
+        if not notice.get("moved") or notice.get("replaced_by") != emit.SITE + docs[0]["source"]:
+            problems.append("/workflow.json does not say where the conductor is")
+    except (OSError, json.JSONDecodeError):
+        problems.append("/workflow.json is not served as JSON")
 
     # --- people -------------------------------------------------------------------
     pages = sorted(p for p in site.rglob("*.html"))
@@ -244,29 +321,33 @@ def main() -> int:
         if rel == "index.html" and not {"WebSite", "FAQPage"} <= types:
             problems.append(f"{rel}: structured data has {sorted(map(str, types))}, not WebSite and FAQPage")
 
-        if rel.startswith("prompts/"):
-            stem = path.stem
-            source = (ROOT / "_prompts" / f"{stem}.md").read_text(encoding="utf-8")
-            title = re.search(r"^title:\s*(.+)$", source, re.M).group(1).strip()
-            if page.h1 and page.h1[0] != title:
-                problems.append(f"{rel} <h1> is {page.h1[0]!r}, not the title {title!r}")
-            source_tables = len(re.findall(r"^\|.*\|\s*$\n^\|\s*:?-", source, re.M))
+        url = "/" + rel.removesuffix("index.html")
+        doc = by_page.get(url)
+        if rel.startswith("conductor/") and doc is None:
+            problems.append(f"{rel} is a page under /conductor/ that no file of conductor/ explains")
+        if doc is not None:
+            if page.h1 and page.h1[0] != doc["title"]:
+                problems.append(f"{rel} <h1> is {page.h1[0]!r}, not the title {doc['title']!r}")
+            source_tables = len(re.findall(r"^\|.*\|\s*$\n^\|\s*:?-", doc["text"], re.M))
             if page.tables > source_tables:
                 problems.append(f"{rel} renders {page.tables} table(s); its source has {source_tables}")
-            if stem.startswith("task_"):
-                slug = stem.removeprefix("task_").replace("_", "-")
-                want = f"/.well-known/agent-skills/{slug}/SKILL.md"
-                if page.alternates.get("text/markdown") != want:
-                    problems.append(f"{rel} does not point agents at {want}")
-                article = next((n for n in nodes if n.get("@type") == "TechArticle"), None)
-                if article is None:
-                    problems.append(f"{rel}: no TechArticle in its structured data")
-                else:
-                    if article.get("headline") != title:
-                        problems.append(f"{rel}: structured headline {article.get('headline')!r} is not {title!r}")
-                    content = article.get("encoding", {}).get("contentUrl", "")
-                    if not content.endswith(want):
-                        problems.append(f"{rel}: structured data points at {content!r}, not {want}")
+            if page.alternates.get("text/markdown") != doc["source"]:
+                problems.append(f"{rel} does not point agents at {doc['source']}")
+            article = next((n for n in nodes if n.get("@type") == "TechArticle"), None)
+            if article is None:
+                problems.append(f"{rel}: no TechArticle in its structured data")
+            else:
+                if article.get("headline") != doc["title"]:
+                    problems.append(f"{rel}: structured headline {article.get('headline')!r} is not {doc['title']!r}")
+                content = article.get("encoding", {}).get("contentUrl", "")
+                if not content.endswith(doc["source"]):
+                    problems.append(f"{rel}: structured data points at {content!r}, not {doc['source']}")
+    for page_url in by_page:
+        checked += 1
+        built = site / page_url.lstrip("/")
+        built = built / "index.html" if page_url.endswith("/") else built
+        if not built.is_file():
+            problems.append(f"the page {page_url} for a conductor file is not served")
 
     # --- budget -------------------------------------------------------------------
     for kind, path in (
@@ -288,13 +369,15 @@ def main() -> int:
     if shipped or "@font-face" in css:
         problems.append(f"the site ships a web font ({', '.join(shipped) or '@font-face in the stylesheet'})")
 
-    print(f"checked {len(procedures)} skill(s), {len(pages)} page(s); {checked} checks in all")
+    print(f"checked {len(docs)} conductor file(s), {len(emit.MOVED)} retired page(s), "
+          f"{len(emit.RETIRED_SKILLS)} retired skill address(es), {len(pages)} page(s); {checked} checks in all")
     if problems:
         print(f"\n{len(problems)} problem(s):")
         for problem in problems:
             print(f"  - {problem}")
         return 1
-    print("the site serves every skill verbatim, and every page is whole, titled, self-hosted and described")
+    print("the site serves the conductor verbatim, every retired address lands somewhere, and every page is "
+          "whole, titled, self-hosted and described")
     return 0
 
 

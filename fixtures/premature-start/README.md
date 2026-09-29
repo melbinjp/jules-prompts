@@ -1,6 +1,6 @@
 # Fixture: premature-start
 
-Skill: `start-from-an-idea`. Prompt: `task_start_from_an_idea`.
+Written for the retired skill `start-from-an-idea`, whose guidance is now in `conductor/SKILL.md`.
 
 An owner's idea for a soil-moisture kit (`IDEA.md`), and the start another agent made on
 it: a plan, research notes, a Compose file, a service, firmware settings, a bill of

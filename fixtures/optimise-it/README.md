@@ -1,6 +1,6 @@
 # Fixture: optimise-it
 
-Skill: `change-with-a-reason`. Prompt: `task_change_with_a_reason`.
+Written for the retired skill `change-with-a-reason`, whose guidance is now in `conductor/SKILL.md`.
 
 A small booking app with a ledger (`PROJECT.md`, `decisions/`), an owner's request
 (`REQUEST.md`), and the change another agent made for it, described in `CHANGES.md` and

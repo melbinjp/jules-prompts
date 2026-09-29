@@ -3,26 +3,36 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/melbinjp/jules-prompts?style=social)](https://github.com/melbinjp/jules-prompts)
 
-This checkout contains the existing 26-skill library and a candidate **conductor**: one entry
-point for software, physical, service, creative and hybrid projects. The conductor is being
-evaluated before it replaces the existing distribution. The website, plugin, MCP server and
-generated `skills/` still serve the existing library.
+The **conductor** is one Agent Skill for delivering a project of any kind: software, physical,
+service, creative or a mix. It works from nothing, a single word, an idea, an existing build or a
+live product, to a result the owner has accepted, and it hands over whatever must keep running. It
+classifies the project from evidence and works through the responsibilities every project has:
+objective and acceptance, deliverables and work, owners, dependencies and resources, execution
+within authority, verification and validation, change, and handover or closure.
 
-## Try the candidate conductor from a clone
+It keeps its records in the project's own tools and loads a focused guidance file only when the
+work needs it. It counts nothing as done without evidence about the actual result, checked by
+someone other than the author.
 
-Start with [`conductor/SKILL.md`](conductor/SKILL.md). It selects focused guidance, uses the
-project's existing work records, and allows an accepted finite project to close or hand over
-ongoing work. It does not require the legacy ledger or a custom agent harness.
+It replaces the earlier library of 26 skills, which is retired. Its guidance lives in the conductor
+and every rule is mapped to where it went (see [Where the 26 skills went](#where-the-26-skills-went)).
 
-Copy the **whole `conductor/` directory**, including `guidance/` and `templates/`, into the
-target project's skill directory:
+The name is historical: the library began in 2025 as prompts for Jules, Google's coding agent, and
+is not affiliated with Google. The instructions are harness-agnostic: they do not depend on Jules,
+Claude Code, Codex, Cursor, or any other product's tool names, and they assume no hosted service.
+
+## Install
+
+Copy the **whole `conductor/` folder**, with `guidance/` and `templates/`, into the target
+project's skill directory. A copy of `SKILL.md` alone is incomplete: its relative references need
+the supporting files.
 
 | Agent | Installed entry point |
 |---|---|
 | Codex and other agents using `.agents/skills` | `.agents/skills/conductor/SKILL.md` |
 | Claude Code | `.claude/skills/conductor/SKILL.md` |
 
-For example, from this repository in a POSIX shell, for a new installation:
+From a clone, in a POSIX shell:
 
 ```sh
 mkdir -p /path/to/project/.agents/skills
@@ -37,107 +47,50 @@ New-Item -ItemType Directory -Force -Path $skillParent | Out-Null
 Copy-Item -LiteralPath conductor -Destination $skillParent -Recurse
 ```
 
-Then ask the agent to read its installed `conductor/SKILL.md` and follow it for the requested
-work. A copy of `SKILL.md` alone is incomplete: its relative references need the supporting
-files. For an update, replace the existing conductor directory as a whole after preserving any
-local edits. The published plugin, `npx` and single-file website installs below do not yet
-install this candidate.
+From the site, with no clone, the folder is one zip with `SKILL.md` at its root:
 
-The package check also works on a copied installation (Python and PyYAML required):
+```sh
+mkdir -p .agents/skills/conductor
+curl -fsSL https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip -o conductor.zip
+unzip -q conductor.zip -d .agents/skills/conductor
+```
+
+Then ask the agent to read its installed `conductor/SKILL.md` and follow it for the requested work.
+To update, replace the conductor folder as a whole after keeping any local edits.
+
+The package check also works on an installed copy (Python and PyYAML required):
 
 ```sh
 python scripts/check_conductor.py /path/to/project/.agents/skills/conductor
 ```
 
-### Migration and evidence
+### As a Claude Code plugin
 
-The [coverage map](docs/migration/coverage-map.md) and conductor are present. Package integrity
-checks cover metadata, supporting files and local section references. They do not establish
-that an agent delivered a project successfully. The [trial protocol](docs/trials/protocol.md)
-defines that acceptance gate; the [current run status](docs/trials/runs/status.md) records what
-has actually been run, checked or blocked.
+```
+/plugin marketplace add melbinjp/jules-prompts
+/plugin install jules-prompts@jules-prompts
+```
 
-Compatibility migration has not been accepted. The existing 26 procedures, fixtures, URLs,
-plugin and MCP commands remain available while trials and their review are completed.
-Changing the default entry point or removing legacy machinery comes after that review.
-
-## Existing library
-
-A library of Agent Skills that take any idea, software or hardware, to a working product and keep it working and getting better. It is engineering work, and it treats nothing as impossible: a constraint (money, time, physics, law, skills) is a problem with routes around it, and the skills find the routes, cost them honestly and take the first step. Every decision is backed by evidence someone verified, every change is traced to the goal, and every claim ends as holds, broken or skipped, so a project neither drifts nor stalls nor is left half-built. Planted-failure fixtures show each skill catching what it claims to.
-
-**Where to start depends on what you have.**
-
-- **One model and one person, and nothing else:** [Run a Project Autonomously](_prompts/task_run_autonomously.md). The model builds its own agent harness and every tool it lacks, from a specification it proves against [`harness/conformance.py`](harness/conformance.py). The person is asked everything only they can answer at the start. Development then runs without waiting: safe because of a sandbox, checkpoints and standing limits, and correct because nothing is called done until its checks pass.
-- **An idea:** [Start a Project from an Idea](_prompts/task_start_from_an_idea.md). It works out what it takes to make the idea happen: the need, what already exists to build on, the costs and the funding routes, and the path that fits what the owner has. It makes the few costly-to-reverse decisions with verified evidence, makes every stage of the pipeline runnable by a person or an agent, builds one thin slice end to end, and writes the ledger every later change traces to.
-- **A project that exists, in any state** (a prototype, a half-built or vibe-coded build, an inherited codebase, a working product with gaps): found it again on paper with [Start a Project from an Idea](_prompts/task_start_from_an_idea.md), so what is already there gets its reasons or is marked for revisiting, then [Take a Project to Production Quality](_prompts/task_take_to_production.md). It takes the project to the point where it does its one job dependably, feels finished and carries nothing it does not need, and shows that item by item.
-- **What people and agents will see, do and hear:** [Design the Experience, with Evidence](_prompts/task_design_the_experience.md). Every journey as a flow with every state and word, one system of look and behaviour in code, every action operable by a person, an agent or automation with the same limits, threaded to the architecture, and tested with people. For screens, command lines, APIs, voices and devices.
-- **Ready for people:** [Release a Product to Its People, and Hear Back](_prompts/task_release_to_people.md). Every way in walked from a clean device, listings and legal texts true to the product, a staged release that pauses itself, people told where they already are, and someone answering.
-- **Live, stalled or drifting:** [Keep a Project on Course and Improving](_prompts/task_keep_it_on_course.md) finds the next route to the same goal and the next improvements.
-- **Broken for people right now:** [Handle an Incident, Restore First and Then Prevent It](_prompts/task_handle_an_incident.md). Stop the harm, restore by a tried action, tell people, keep the evidence; then the cause, the fix, everyone put right, and the class of failure closed.
-- **A change to make,** however vaguely it was asked for: [Change a Project with a Reason](_prompts/task_change_with_a_reason.md).
-- **Anything that moves, heats, dispenses, spends or sends:** [Act on the Physical World](_prompts/task_act_on_the_physical_world.md).
-
-Between those, [Choose Between Options with Evidence](_prompts/task_choose_with_evidence.md) makes each consequential choice, and [Keep a Project Confidential, Offline First](_prompts/task_keep_it_confidential.md) runs alongside every step of a private, proprietary or offline project. [Keep a Project on Course and Improving](_prompts/task_keep_it_on_course.md) runs at every milestone and continuously after launch: it takes every measure again, switches routes where one is blocked, removes what nothing serves, and ranks the next improvements. The [workflow](workflow.json) puts them in order, with the state each kind of project enters at, the gate that ends each step and the skills each one calls on.
-
-A prompt and a skill here are the same procedure. The prompt is the text; the skill is that text with a name and a description in front, so an agent can decide for itself when to load it. The site serves both.
-
-The name is historical: the library began in 2025 as prompts for Jules, Google's coding agent, and is not affiliated with Google. The instructions are harness-agnostic: they do not depend on Jules, Claude Code, Codex, Cursor, or any other product's tool names.
-
-## Layers
-
-1. **`_prompts/`**: the canonical procedure text. Website, JSON index, MCP slash commands.
-2. **`skills/`**: the same text as [Agent Skills](https://agentskills.io/specification). Generated from `_prompts/`. Copy into `.claude/skills/` or `.agents/skills/`.
-3. **`fixtures/`**: miniature repositories with planted defects. The way to see a skill go red.
-4. **`plugin/`**: the whole library as one installable Claude Code plugin, a manifest and the skills. `.claude-plugin/marketplace.json` lists it, so `/plugin marketplace add melbinjp/jules-prompts` then `/plugin install jules-prompts@jules-prompts` installs it.
-5. **`library.json`**: every procedure, its category and its tier, in one machine-readable list.
-6. **The site's agent files**: `llms.txt`, `.well-known/agent-skills/index.json` and `_agent_skills/`, so an agent given only the domain can find and load every skill, and verify each against its digest.
-
-The skill, plugin, index and site forms are generated by `scripts/emit.py` and checked byte for byte in CI,
-so a copy that has drifted from its source fails the build instead of quietly disagreeing
-with it. Adding a new output format, whatever the ecosystem asks for next, is one entry in
-that script's `TARGETS`; the guarantee is structural rather than per-format.
-
-### Groups
-
-Each skill says what it is for in its `category`. **Lifecycle** is the path itself, from a model and a person or an idea to a product that keeps working. **Design** is what people and agents meet. **Build** and **Verify** are the methods the path calls on to change a project and to check it. **Security** and **Physical Systems** apply alongside every step. Every skill has a fixture that shows it catching what it claims to.
-
-Standing doctrine, for a project's `AGENTS.md` so it fires when nobody picks a skill: [`harness/AGENTS.md`](harness/AGENTS.md).
-
-### The ledger
-
-The lifecycle skills keep one ledger in the project they work on: `PROJECT.md` (the goal, success measures, journeys, resources, course changes and milestones, each with an ID) and `decisions/` (one file per decision, saying what it serves, its options and evidence, its way out and what would reopen it). Every commit names what it serves and how it was verified, in `Serves:` and `Verified:` lines. [`harness/check_trace.py`](harness/check_trace.py) is the check for that project's CI. It needs Python 3.8 and nothing else, and refuses a decision that serves nothing or has fewer than two backings (at least one measured, calculated, simulated, proved, prototyped or tested), a costly-to-reverse decision without two kinds of evidence, an exit or an approval, and a commit that does not say what it serves or how it was verified. [`harness/ledger-example/`](harness/ledger-example/) is a small worked example that passes it, and `scripts/test_check_trace.py` breaks that example in each of the 29 ways the check covers, to show it goes red.
-
-The check proves a record has the right shape. Whether its criteria, evidence and arithmetic are honest is what the skills are for, and two fixtures show the difference: the trace check passes on `vendor-comparison` and `six-months-in`, and each still has six or seven planted defects.
-
-## Getting Started
-
-The [skills page](https://jules-prompts.wecanuseai.com/tasks.html) lists every skill by what it is for, and the [workflow page](https://jules-prompts.wecanuseai.com/workflow/) shows where each kind of project starts and the gate that ends each step.
-
-To prepare a repository so any agent can clone, install and test it from cold, use [Repair the Environment Setup Script](_prompts/task_repair_setup_script.md).
-
-## How to Use
+The plugin (version 3.0.0) carries the same folder as `skills/conductor/`.
 
 ### From the site, with no install
 
-Tell the agent: `Read https://jules-prompts.wecanuseai.com/llms.txt and follow the skill that matches the task.` Clients that support [Agent Skills discovery](https://github.com/cloudflare/agent-skills-discovery-rfc) can start from `https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json` instead: every skill, with a SHA-256 digest of its `SKILL.md`.
-
-### As Agent Skills (installed)
-
-```bash
-# one, straight from the site
-mkdir -p .claude/skills/take-to-production
-curl -fsSL https://jules-prompts.wecanuseai.com/.well-known/agent-skills/take-to-production/SKILL.md \
-  -o .claude/skills/take-to-production/SKILL.md
-
-# or all of them, from a clone
-cp -R skills/* .claude/skills/
-```
-
-Paste [`harness/AGENTS.md`](harness/AGENTS.md) into the project's `AGENTS.md`.
+Tell the agent: `Read https://jules-prompts.wecanuseai.com/llms.txt and follow the conductor for the task.`
+`llms.txt` links the archive of the whole folder and every file in it, each with its SHA-256.
+Clients that support [Agent Skills discovery](https://github.com/cloudflare/agent-skills-discovery-rfc)
+can start from `https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json`, which lists
+the conductor as an archive with the digest of its bytes. The archive is stored without compression,
+so its bytes, and that digest, are the same wherever it is built.
 
 ### As an MCP server
 
-Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as slash commands. The server reads this repository live rather than a bundled copy, index and bodies both from GitHub, so it starts even where the website is unreachable.
+Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as slash
+commands. The server gives the conductor as the prompt `conductor` and each guidance and template
+file as a further prompt (for example `conductor-guidance-planning`), so a client with a small
+context window loads one file at a time, as `SKILL.md` directs. The same files are resources
+(`conductor://SKILL.md`, `conductor://guidance/planning.md`). The server reads this repository live
+rather than a bundled copy, index and files both from GitHub, so it starts even where the website is
+unreachable.
 
 ```json
 {
@@ -150,64 +103,118 @@ Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MC
 }
 ```
 
-Prompts that contain placeholders such as `<PR_URL_OR_DIFF_RANGE>` expose them as arguments, so the client asks for the value and the server substitutes it before handing over the text.
-
 ### Offline, and on private projects
 
-Nothing in the skills needs the internet, and nothing here has to be fetched while you work. Fetching a skill from the site also tells the site's host which skill someone wanted; installing from a copy tells nobody.
+Nothing in the conductor needs the internet, and nothing here has to be fetched while you work.
+Fetching a file from the site also tells the site's host which file someone wanted; installing from
+a copy tells nobody.
 
-1. **Get the library once.** `git clone https://github.com/melbinjp/jules-prompts`, or carry a clone across on removable media. Note the commit hash; on the other side, `git fsck` and `git rev-parse HEAD` confirm the copy is whole and is that commit.
-2. **Install the skills from the copy.** `cp -R jules-prompts/skills/* .claude/skills/` (or `.agents/skills/`). In Claude Code, `/plugin marketplace add /path/to/jules-prompts` then `/plugin install jules-prompts@jules-prompts` installs from the directory.
-3. **Run the MCP server from the copy, with no network.** Point the client at `node /path/to/jules-prompts/mcp/index.js` with `JULES_PROMPTS_DIR=/path/to/jules-prompts` in its environment. In that mode the server reads the copy and refuses to use the network at all; CI proves it. Its two dependencies come from `npm ci`, run once where a registry or a mirror is reachable, with `node_modules` carried across with the clone.
-4. **Give small local models the short forms.** `compact/<name>.md` is each skill as a checklist of a few hundred words, for models whose context cannot hold the full skill next to the code.
-5. **Qualify a model before trusting it with a stage.** Run it on the skill's fixture and score the report with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the fixture is evidence.
-6. **Check the project's ledger offline.** `harness/check_trace.py` needs Python and nothing else.
-7. **No agent harness at all?** A model with only a chat endpoint builds its own from the specification in `run-autonomously`, and it is ready when `python harness/conformance.py --harness "<its command>"` passes: a scripted model drives it through proper and careless actions and checks every prompt, file and commit.
-8. **Keep the project itself private.** [Keep a Project Confidential, Offline First](_prompts/task_keep_it_confidential.md) maps every channel the work can leave through (hosting, agents and model providers, telemetry, registries, crash reports, searches), proves the pipeline runs with the network off, and sets how the internet is used when it must be.
+1. **Get the repository once.** `git clone https://github.com/melbinjp/jules-prompts`, or carry a clone
+   across on removable media. Note the commit hash; on the other side, `git fsck` and
+   `git rev-parse HEAD` confirm the copy is whole and is that commit.
+2. **Install the conductor from the copy.** `cp -R jules-prompts/conductor .agents/skills/` (or
+   `.claude/skills/`). In Claude Code, `/plugin marketplace add /path/to/jules-prompts` then
+   `/plugin install jules-prompts@jules-prompts` installs from the directory.
+3. **Run the MCP server from the copy, with no network.** Point the client at
+   `node /path/to/jules-prompts/mcp/index.js` with `JULES_PROMPTS_DIR=/path/to/jules-prompts` in its
+   environment. In that mode the server reads the copy and refuses to use the network at all; CI proves
+   it. Its two dependencies come from `npm ci`, run once where a registry or a mirror is reachable, with
+   `node_modules` carried across with the clone.
+4. **On a small context window,** load one guidance file at a time and only the sections the current
+   work needs. `SKILL.md` says how.
+5. **Qualify a model before trusting it with a kind of work.** Run it on a fixture and score the report
+   with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the
+   fixture is evidence.
+6. **Keep the project itself private.** [`conductor/guidance/confidentiality.md`](conductor/guidance/confidentiality.md)
+   maps every channel the work can leave through: hosting, agents and model providers, telemetry,
+   registries, crash reports, searches. It proves the pipeline runs with the network off, and sets how
+   the internet is used when it must be.
 
-### For humans (copy-paste)
+## What is in the conductor
 
-1. Open the prompt file (e.g. [`task_take_to_production.md`](_prompts/task_take_to_production.md)).
-2. Copy the body after the YAML front matter.
-3. Paste it into the agent's instruction input.
+- [`SKILL.md`](conductor/SKILL.md): classify the project, the control loop, work records, procedures
+  and evidence, readiness and resumption, gates, changes, authority and budget, closure and handover,
+  reporting, and which guidance to load.
+- [`guidance/`](conductor/guidance): `product`, `planning`, `decisions`, `design`, `quality`,
+  `software`, `physical`, `service`, `operations`, `autonomy` and `confidentiality`. Each is one part
+  of the loop, not a substitute for it.
+- [`templates/`](conductor/templates): `adr.md` for decision records and `handover.md` for handover.
 
-### For agents (programmatic)
+## Fixtures
 
-1. Fetch `https://jules-prompts.wecanuseai.com/llms.txt`, or the discovery index at `/.well-known/agent-skills/index.json`.
-2. Select a skill by its description.
-3. Fetch its `SKILL.md` and follow it. `prompts.json` still works, and now carries each prompt's `skill` URL.
-
-### Against fixtures (proof)
+`fixtures/` holds 26 miniature projects with planted defects, each with a `defects.json`, an
+`EXPECTED_REPORT.md` that names them all, and a request in `docs/trials/tools/requests.json`. They
+are the conductor's regression cases: a procedure nobody has seen fail is a claim.
 
 ```bash
 python scripts/score_fixture.py fixtures/unfailable-tests path/to/REPORT.md
 python scripts/score_fixture.py fixtures/unfailable-tests --self-check
 ```
 
-Verdicts are **holds** / **broken** / **skipped**. The last line is coverage.
+The scorer reads whether each planted defect was named. Its words are holds, broken and skipped; the
+conductor's own reports say verified, failed and not verified. The last line is coverage.
 
-## Keeping the library current
+## The harness folder, kept
 
-New prompts are useful when they cover a recurring task that the existing set does not handle clearly. Do not add prompts only to increase the count.
+[`harness/`](harness) stays for two uses.
 
-When adding or revising a prompt:
+- [`harness/AGENTS.md`](harness/AGENTS.md) is a short block of standing rules to paste into a
+  project's `AGENTS.md`, so they apply even when nobody loads the conductor. It points at the conductor.
+- [`harness/check_trace.py`](harness/check_trace.py) **remains for projects that already keep the older
+  ledger** (`PROJECT.md`, `decisions/`, and `Serves:` and `Verified:` lines in every commit). It needs
+  Python 3.8 and nothing else, and it is unchanged, with its worked example in `harness/ledger-example/`
+  and its tests in `scripts/test_check_trace.py`. **New projects use the conductor's records instead**,
+  in the tools they already have (decisions as ADRs, work items in their own tracker), and do not adopt
+  the ledger.
+- [`harness/conformance.py`](harness/conformance.py) tests an agent harness that a model built for
+  itself, following [`conductor/guidance/autonomy.md`](conductor/guidance/autonomy.md). It needs Python
+  and git, and it passes a reference harness and fails each of twelve copies with one property broken.
 
-1. Keep its YAML front matter aligned with the other files in `_prompts/`.
-2. Write harness-agnostic instructions: no `You are Jules`, no `set_plan` / `submit` / `request_code_review`.
-3. Run `python scripts/emit.py` so every generated form (skills, plugin, index, site files) matches.
-4. Update `workflow.json` only when the recommended sequence, or where a kind of project starts, changes.
-5. Add a fixture under `fixtures/` with `defects.json` and an `EXPECTED_REPORT.md` that names every planted defect. Every skill has one; the integrity check refuses a skill without.
-6. When a skill is removed, map its old page to the skill that replaces it in `MOVED` in `scripts/emit.py`, so saved links still land somewhere useful.
-7. `python scripts/check_library_integrity.py`, `python scripts/test_check_conductor.py`, `python scripts/emit.py --check` and `python scripts/test_check_trace.py` must pass, and so must `python scripts/check_site.py _site` on a build of the site (CI builds it the way GitHub Pages does).
+## Where the 26 skills went
 
-Edit candidate instructions directly in `conductor/`; they are not generated from `_prompts/`.
-Run `python scripts/check_conductor.py` and `python scripts/test_check_conductor.py` after
-changing its structure or references. The library integrity check includes the package check.
-Keep trial evidence separate from these structural checks, and preserve the existing install
-interfaces until compatibility migration is accepted.
+The 26 skills are retired; the last commit that has them is tagged `library-26-final`. The
+[coverage map](docs/migration/coverage-map.md) says, for every rule, step and fixture defect, where it
+now lives in the conductor. [`docs/migration/checks.md`](docs/migration/checks.md) says what happened to
+every check that protected the old library. [`docs/RELEASE.md`](docs/RELEASE.md) states the supported
+scope, the known limitations, the evidence and the migration.
+
+Nothing published simply broke. Every old page (`/prompts/task_*.html`, `/tasks.html`, `/workflow/`)
+redirects to the conductor or to the guidance page that now holds its content, each old skill's
+`SKILL.md` address serves a short notice that names the conductor, and `/workflow.json` serves a notice
+in JSON. The old plugin (2.0.0) and the old MCP prompts (`task_*`) are replaced by version 3.0.0 and
+by `conductor` with its guidance prompts.
+
+## Changing the conductor
+
+The conductor is written by hand in `conductor/` and is the only procedure source. Everything else
+that agents load is generated from it by `python scripts/emit.py`: `skills/conductor/`, the plugin, the
+discovery index, the archive, `llms.txt`, `library.json`, `prompts.json` and the site's pages. Never
+edit a generated file. Every generated form is checked byte for byte against a fresh generation in CI, so
+a copy that has drifted fails the build instead of quietly disagreeing with its source.
+
+Before pushing:
+
+```sh
+python scripts/emit.py --check
+python scripts/check_library_integrity.py
+python scripts/check_conductor.py
+python scripts/test_check_conductor.py
+python scripts/test_emit_bytes.py
+python scripts/test_trial_prep.py
+python scripts/inventory_map.py --destinations
+python scripts/test_check_trace.py
+python scripts/test_conformance.py
+node mcp/smoke-test.mjs
+python scripts/check_site.py _site      # on a build of the site, made the way GitHub Pages makes it
+```
+
+If a change to the conductor is meant to catch a failure, add or extend a fixture under `fixtures/` with a
+`defects.json`, an `EXPECTED_REPORT.md` that names every planted defect, and a request. Evidence that an
+agent delivered a project is separate from these structural checks: see the
+[trial protocol](docs/trials/protocol.md) and the [current run status](docs/trials/runs/status.md).
 
 ## Contributing
 
-Contributions are welcome. The goal is a small set of high-quality, general-purpose procedures that encode best practices for the failures agents actually have, and a corpus that can show those procedures failing.
-
-If you have an idea for a new skill or fixture, please open an issue to discuss it. A new skill starts from the [Skill Template](_prompts/template_master_prompt.md) and comes with a fixture.
+Contributions are welcome. The goal is one small, general-purpose conductor that encodes the failures
+agents actually have, and a corpus that can show it failing. If you have an idea for a change or a
+fixture, please open an issue to discuss it.

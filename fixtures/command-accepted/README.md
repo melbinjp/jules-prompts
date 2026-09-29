@@ -1,6 +1,6 @@
 # Fixture: command-accepted
 
-Skill: `act-on-the-physical-world`. Prompt: `task_act_on_the_physical_world`.
+Written for the retired skill `act-on-the-physical-world`, whose guidance is now in `conductor/guidance/physical.md`.
 
 A greenhouse controller: a valve, a fertiliser doser, a heater, a pump and a
 roof vent, driven over HTTP. Its tests all pass, because each one asserts what

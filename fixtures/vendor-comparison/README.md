@@ -1,6 +1,6 @@
 # Fixture: vendor-comparison
 
-Skill: `choose-with-evidence`. Prompt: `task_choose_with_evidence`.
+Written for the retired skill `choose-with-evidence`, whose guidance is now in `conductor/guidance/decisions.md`.
 
 A community radio station's archive, with a ledger and two decisions. `D0003`, the hosting
 decision, has every section a decision record should have, and the trace check passes on

@@ -1,6 +1,6 @@
 # Fixture: shipped-to-nobody
 
-Skill: `release-to-people`. Prompt: `task_release_to_people`.
+Written for the retired skill `release-to-people`, whose guidance is now in `conductor/guidance/product.md`.
 
 Tidewise shows tide times and safe paddling windows for sea kayakers. It passed its production
 bar, version 1.0.0 was released, and after two weeks the notes say the launch failed. Here are

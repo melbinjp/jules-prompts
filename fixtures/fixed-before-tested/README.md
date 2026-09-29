@@ -1,6 +1,6 @@
 # Fixture: fixed-before-tested
 
-Skill: `fix-a-bug-test-first`. Prompt: `task_fix_a_bug_test_first`.
+Written for the retired skill `fix-a-bug-test-first`, whose guidance is now in `conductor/guidance/software.md`.
 
 Tabletop splits a restaurant bill between friends. A person reported that splitting £10.00
 three ways loses a penny (`ISSUE.md`). An agent fixed it and opened a pull request (`PR.md`)

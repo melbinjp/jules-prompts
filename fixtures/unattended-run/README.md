@@ -1,6 +1,6 @@
 # Fixture: unattended-run
 
-Skill: `run-autonomously`. Prompt: `task_run_autonomously`.
+Written for the retired skill `run-autonomously`, whose guidance is now in `conductor/guidance/autonomy.md`.
 
 A model was given a pricing module to build and a person, built itself a harness
 (`agent/config.toml`), and ran overnight. Its run log (`run-log.jsonl`), its notes and the

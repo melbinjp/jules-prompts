@@ -1,0 +1,13 @@
+---
+permalink: /.well-known/agent-skills/change-with-a-reason/SKILL.md
+layout: null
+sitemap: false
+excerpt_separator: ""
+---
+{% raw %}The skill change-with-a-reason was retired. What it held is now part of the conductor, the one entry point of this library.
+
+Conductor (read this first): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/SKILL.md
+Whole folder, with SHA-256 in the index: https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip
+Where this skill's guidance went: https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/SKILL.md
+Index: https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
+{% endraw %}
