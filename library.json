@@ -11,7 +11,7 @@
       "title": "Conductor: deliver any project, with evidence",
       "description": "One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.",
       "path": "conductor/SKILL.md",
-      "digest": "sha256:2670dbd6500d35343d6a48bf42e3fb73855e4237e4677594439ebd989509281b"
+      "digest": "sha256:7f0eb7a15dd4c9f5648423896245214a8a7f79ec60a41b16b9c2e5d0739415e0"
     },
     {
       "name": "conductor-guidance-product",

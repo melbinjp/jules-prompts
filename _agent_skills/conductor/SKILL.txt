@@ -181,6 +181,9 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   resources`). Take independent ready work if there is any. Never mark blocked work done, and
   never rebuild unrelated work to fill the time. A block that persists gets another route to
   the same objective (`guidance/product.md §Alternative routes`).
+- **When a wait could run past a date the work depends on,** record the latest date to
+  decide, and before it put the choice, with a recommendation, to whoever decides. A fixed date
+  that passes while work waits on an answer that never came is a failure of the plan.
 - **On resumption** (a new session, a new context, another agent, after an interruption):
   1. read the real artifacts and external state first: the records, the repository, the
      tool, messages, order and delivery status, deployments, device state;
