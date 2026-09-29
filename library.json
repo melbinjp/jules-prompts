@@ -83,7 +83,7 @@
       "title": "Operations: keeping what runs working, and getting better",
       "description": "Load for anything that keeps running after delivery (a service, an installation, a product in people's hands, a recurring event), and whenever something live fails the people who use it. Operations belong to a named operator.",
       "path": "conductor/guidance/operations.md",
-      "digest": "sha256:3e0a192a009f9900359553b0b08588bbc2df48006a7897a693cce797d380ab46"
+      "digest": "sha256:1d5f5d9bf0a82fcea64ae39a2becdfcb30e067fa3982855b1e6ed5bc85124ceb"
     },
     {
       "name": "conductor-guidance-autonomy",

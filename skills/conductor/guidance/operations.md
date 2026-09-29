@@ -121,6 +121,9 @@ rollback unused, is the failure this prevents.
   and check the restored data is usable (the application starts on it, the counts match).
 - **Backups are verified by their effect:** size, count and a restore, not the job's exit code
   (`software.md §Automations that report their own failure`).
+- **When fixing or writing a backup job, compare it with the runbook step by step** and list, in the
+  report and the job's notes, each step it does not do (the restore check, the off-site size
+  comparison, pruning). A step left manual is a decision to name, not a silent omission.
 - **Restore onto a copy first during an incident,** never over newer data.
 - **Know where every piece of state lives and what writes it** (`quality.md §Walk every area`).
 

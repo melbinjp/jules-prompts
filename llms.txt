@@ -9,7 +9,7 @@ To use it as an agent:
 3. End every report with its counts: verified, failed, not verified and not applicable.
 
 The whole folder as one archive (zip, SKILL.md at its root): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip
-SHA-256 of that archive: sha256:82127d20b05a413638618ad6b856dbe7b2125c5f9bc9112d5aea88d30675b2a4
+SHA-256 of that archive: sha256:8ca0385dac6cac6252e929cc94c99c2a8c75244550e07ad0228cfaac9990064e
 Discovery index (Agent Skills 0.2.0): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
 SHA-256 of SKILL.md: sha256:7f0eb7a15dd4c9f5648423896245214a8a7f79ec60a41b16b9c2e5d0739415e0
 Every file with its SHA-256: https://jules-prompts.wecanuseai.com/library.json
