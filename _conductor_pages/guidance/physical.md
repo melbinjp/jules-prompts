@@ -79,8 +79,11 @@ not an installation; passing software tests is not system acceptance.
    power, mounting, conditions), the installer available, and the work authorised.
 2. **Install by the written procedure,** recording what was installed where, with serial numbers
    and versions (the as-built record).
-3. **Commission on site:** test each function in the installed configuration, under the real
-   conditions, with the results recorded; list anything outstanding (a punch list) with owners.
+3. **Commission on site against a checklist written before the visit:** one row per function in
+   the acceptance criteria (each sensor, each alert, each failure path, the safe state), each run
+   on the installed configuration under the real conditions, with the result recorded. List
+   anything outstanding (a punch list) with owners. Write the as-built record and the handover the
+   same day, marking pending whatever a blocker still holds.
 4. **Inspections the law requires** (electrical, gas, structural, radio, medical, food and the like)
    are done by a competent, qualified person and recorded; an agent's review never substitutes for
    them.

@@ -282,6 +282,11 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   owed to a funder, client or authority, promises to people); its materials are archived where the owner can find them (records, source,
   drawings, files, credentials held by the owner rather than an agent); and what was learned is
   recorded.
+- **When the last event arrives** (the delivery, the event, the installation), do in that same
+  session everything closure needs that waits on no one: the records archived, each report owed
+  drafted, what was paid set against what is receipted, the handover written, the lessons
+  recorded. List what still waits on someone, with who and by when. A project waiting only on
+  acceptance or a receipt is closed except for that item.
 - **Whatever must keep running is handed over** (`templates/handover.md`): a named operator,
   their responsibilities, the resources and budget, the procedures, the review cadence and the
   triggers that call for action, the contacts, and access transferred with keys rotated. From
@@ -306,6 +311,8 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 - **Report workflow and delivery separately.** A correctly handled block is good workflow; it
   is not a delivery.
 - **Quote evidence verbatim** where it is output.
+- **A message that leaves states only what is true now.** An intention is written as an
+  intention ("we intend to arrange cover"), never as done.
 - **End every report with its counts**, for example: `14 verified, 2 failed, 3 not verified,
   2 not applicable of 21 items.`
 
