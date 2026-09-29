@@ -280,3 +280,28 @@ The runner's container probe refused writes at `/`, `/tmp`, `/root`, `/home` and
 permitted a workspace write, and refused an outbound connection. Image prepared before runs:
 `python:3.8-slim`, digest
 `sha256:1d52838af602b4b5a831beb13a0e4d073280665ea7be7f69ce2382f29c5a613f`.
+
+## Amendment 6: the release evidence (2026-09-29)
+
+The owner asked whether the full comparison and the enforced sandbox were needed, allowed
+Docker, and named agy with Gemini 3.8 Flash for independent reviews. The trials now answer only
+what the release needs: does the conductor deliver, and does it still catch the planted failures.
+
+- **Dropped:** old-approach runs not already recorded, the held-back case (its content is not in
+  this checkout), the earlier failed project, and the enforced agent-tool sandbox of amendment 3.
+- **Containment:** project and fixture code runs only in `python:3.8-slim` (the digest above)
+  with `--network none`, a read-only root, dropped capabilities and only the run's workspace
+  mounted writable. The agents are told this in their rules; after each run the runner checks
+  that the repository and the other workspaces are unchanged.
+- **Agents under test:** a fresh Claude subagent per case segment. Fixture runs use agy
+  `gemini-3.8-flash-high` first; a missed defect is rerun once on a Claude subagent, so a model
+  limit is not recorded as a conductor gap.
+- **Independent review:** agy `gemini-3.8-flash-high`, fresh context, given the criteria or
+  `defects.json` and the actual files. A run whose status is not SUCCESS, or whose answer is
+  empty, is not a verdict.
+- **Pass conditions:** 1-4 above stand. Condition 5 is judged against each fixture's planted
+  defects directly: a defect in a critical class that the conductor does not identify must be
+  fixed in the conductor and the fixture rerun. Other misses are listed.
+
+The full finalisation, including the end state for step 4, is in the owner's plan
+(`_positioning/plans/2026-09-27-jules-prompts-finalisation.md` §6, outside this repository).

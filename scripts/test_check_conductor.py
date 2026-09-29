@@ -101,6 +101,13 @@ class ConductorCheckTests(unittest.TestCase):
         self.append("SKILL.md", "[Missing](guidance/missing.md)")
         self.rejects("missing local file 'guidance/missing.md'")
 
+    def test_markdown_entry_links_are_relative_to_their_document(self):
+        self.append("guidance/quality.md", "[Conductor](SKILL.md#how-to-use-this)")
+        self.rejects("missing local file 'SKILL.md'")
+        self.replace("guidance/quality.md", "(SKILL.md#how-to-use-this)",
+                     "(../SKILL.md#how-to-use-this)")
+        self.assertEqual([], check_conductor.validate(self.root)[0])
+
     def test_fenced_examples_are_not_dependencies(self):
         self.append("templates/adr.md", "```markdown\n# Example\nRead `missing.md §Invented`.\n```")
         self.assertEqual([], check_conductor.validate(self.root)[0])

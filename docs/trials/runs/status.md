@@ -1,5 +1,24 @@
 # Trial runs: status
 
+Current continuation: **2026-09-27, Codex/Windows**. The candidate is installable from the whole
+`conductor/` folder and structurally verified. Delivery acceptance and default migration remain
+pending. The owner excluded the earlier failed project. The sealed held-back content is absent.
+
+The separate Windows delivery cohort uses old `f5fc9c0e` and conductor `9a44a51`. Both software
+segments have reached interruption and fresh-context resumption; independent acceptance is
+pending. These runs do not claim the enforced host-tool isolation of the original protocol;
+see the Windows continuation in `../protocol.md`. They are supplementary evidence.
+
+From 2026-09-29, protocol amendment 6 applies: the conductor alone runs the three cases and
+all 26 fixtures, Docker contains executed code, and agy (Gemini 3.8 Flash) reviews each result.
+The old approach's recorded runs stay as history; no further old-approach runs are made.
+
+The 11 historical reports now have an [independent substantive review](historical-output-review.md):
+44 identified, 4 partial, 0 missed of 48 planted defects. Historical fixes and execution remain
+unverified because their final workspaces are absent. This is not a delivery pass.
+
+## Original Claude/Linux cohort
+
 Protocol `docs/trials/protocol.md` at `51d534d`. Old approach pinned at `f5fc9c0e`. New approach
 pinned at `33aa9e2` (protocol amendment 5; it was `59828ca`, where the selection check
 passed on run 4). The selection check is run again at `33aa9e2` before any new-approach run.
@@ -22,17 +41,17 @@ The old run's string score for each fixture, and the new run's, link to the run 
 <!-- fixtures -->
 | Fixture | Old: string score | Old: output check | New: string score | New: output check |
 |---|---|---|---|---|
-| unfailable-tests | [2 of 4](fixture-unfailable-tests-old.md) | not yet run | not started |  |
-| green-pipeline | [4 of 4](fixture-green-pipeline-old.md) | not yet run | not started |  |
-| setup-succeeds-while-failing | [3 of 3](fixture-setup-succeeds-while-failing-old.md) | not yet run | not started |  |
-| stale-docs | [3 of 3](fixture-stale-docs-old.md) | not yet run | not started |  |
-| error-path-never-run | [2 of 2](fixture-error-path-never-run-old.md) | not yet run | not started |  |
-| finished-looking-pr | [3 of 3](fixture-finished-looking-pr-old.md) | not yet run | not started |  |
-| security-check-removed | [2 of 2](fixture-security-check-removed-old.md) | not yet run | not started |  |
-| vague-issue | [2 of 3](fixture-vague-issue-old.md) | not yet run | not started |  |
-| looks-finished | [7 of 8](fixture-looks-finished-old.md) | not yet run | not started |  |
-| command-accepted | [2 of 6](fixture-command-accepted-old.md) | not yet run | not started |  |
-| premature-start | [4 of 10](fixture-premature-start-old.md) | not yet run | not started |  |
+| unfailable-tests | [2 of 4](fixture-unfailable-tests-old.md) | [4/4 identified](historical-output-review.md) | not started |  |
+| green-pipeline | [4 of 4](fixture-green-pipeline-old.md) | [4/4 identified](historical-output-review.md) | not started |  |
+| setup-succeeds-while-failing | [3 of 3](fixture-setup-succeeds-while-failing-old.md) | [3/3 identified](historical-output-review.md) | not started |  |
+| stale-docs | [3 of 3](fixture-stale-docs-old.md) | [3/3 identified](historical-output-review.md) | not started |  |
+| error-path-never-run | [2 of 2](fixture-error-path-never-run-old.md) | [2/2 identified](historical-output-review.md) | not started |  |
+| finished-looking-pr | [3 of 3](fixture-finished-looking-pr-old.md) | [3/3 identified](historical-output-review.md) | not started |  |
+| security-check-removed | [2 of 2](fixture-security-check-removed-old.md) | [2/2 identified](historical-output-review.md) | not started |  |
+| vague-issue | [2 of 3](fixture-vague-issue-old.md) | [3/3 identified](historical-output-review.md) | not started |  |
+| looks-finished | [7 of 8](fixture-looks-finished-old.md) | [7 identified, 1 partial](historical-output-review.md) | not started |  |
+| command-accepted | [2 of 6](fixture-command-accepted-old.md) | [6/6 identified](historical-output-review.md) | not started |  |
+| premature-start | [4 of 10](fixture-premature-start-old.md) | [7 identified, 3 partial](historical-output-review.md) | not started |  |
 | vendor-comparison | cut off, to rerun |  | not started |  |
 | optimise-it | not started |  | not started |  |
 | six-months-in | not started |  | not started |  |

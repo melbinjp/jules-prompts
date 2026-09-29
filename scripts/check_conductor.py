@@ -89,9 +89,10 @@ def validate(root: Path) -> tuple[list[str], dict[str, int]]:
     def location(source: Path, offset: int) -> str:
         return f"{source.relative_to(root).as_posix()}:{texts[source].count(chr(10), 0, offset) + 1}"
 
-    def resolve(source: Path, name: str, offset: int) -> Path | None:
-        # SKILL.md is also used as the conductor's name in prose inside guidance/.
-        target = entry if name == "SKILL.md" else (source.parent / name).resolve()
+    def resolve(source: Path, name: str, offset: int, shorthand: bool = False) -> Path | None:
+        # Prose uses SKILL.md as the conductor's name; Markdown URLs follow their
+        # actual document directory, so guidance/SKILL.md must not pass as ../SKILL.md.
+        target = entry if shorthand and name == "SKILL.md" else (source.parent / name).resolve()
         counts["references"] += 1
         if not target.is_relative_to(root):
             problems.append(f"{location(source, offset)}: {name!r} leaves the conductor package")
@@ -132,7 +133,7 @@ def validate(root: Path) -> tuple[list[str], dict[str, int]]:
                 # These are target-project examples, not conductor dependencies.
                 if name == "AGENTS.md" or re.match(r"\d{4}-", name):
                     continue
-                target = resolve(source, name, match.start())
+                target = resolve(source, name, match.start(), shorthand=True)
                 if target and file_ref.group("section"):
                     section(source, target, file_ref.group("section"), match.start())
                 if target and file_ref.group("anchor"):
@@ -168,7 +169,7 @@ def validate(root: Path) -> tuple[list[str], dict[str, int]]:
 
         prose = "".join(remaining)
         for match in BARE_FILE_SECTION.finditer(prose):
-            target = resolve(source, match.group("file"), match.start())
+            target = resolve(source, match.group("file"), match.start(), shorthand=True)
             if target:
                 section(source, target, match.group("section"), match.start())
             remaining[match.start():match.end()] = " " * (match.end() - match.start())
