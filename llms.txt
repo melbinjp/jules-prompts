@@ -12,7 +12,6 @@ The whole folder as one archive (zip, SKILL.md at its root): https://jules-promp
 SHA-256 of that archive: sha256:782f2f260d17d4fe855c6f9f71f9e73ad2627c2d92ada81b1f73a9274a288131
 Discovery index (Agent Skills 0.2.0): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
 SHA-256 of SKILL.md: sha256:25c745d79169cadd13f328c8ca369389578a26b574b230f1f8074483af081740
-Every file with its SHA-256: https://jules-prompts.wecanuseai.com/library.json
 
 ## The conductor
 
@@ -42,4 +41,4 @@ Every file with its SHA-256: https://jules-prompts.wecanuseai.com/library.json
 - [Standing rules for a project's AGENTS.md](https://jules-prompts.wecanuseai.com/harness/AGENTS.md): short rules that apply on every task, pointing at the conductor
 - [The ledger check](https://jules-prompts.wecanuseai.com/harness/check_trace.py): for projects that already keep the older ledger (Python, no dependencies)
 - [The test a self-built agent harness must pass](https://jules-prompts.wecanuseai.com/harness/conformance.py): Python and git, nothing else
-- [Source repository](https://github.com/melbinjp/jules-prompts): the conductor, its regression fixtures with planted defects, the scorer, a plugin bundle and an MCP server
+- [Source repository](https://github.com/melbinjp/jules-prompts): the conductor, its regression fixtures with planted defects, the scorer and the harness

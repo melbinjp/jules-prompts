@@ -107,8 +107,7 @@ class Archive(unittest.TestCase):
         served = emit.emit_agent_skills(docs)["conductor/SKILL.txt"]
         body = served.split("{% raw %}", 1)[1].rsplit("{% endraw %}", 1)[0]
         self.assertEqual(body.encode("utf-8"), (emit.PACKAGE / "SKILL.md").read_bytes())
-        library = json.loads(emit.emit_index(docs)["library.json"])
-        self.assertEqual(library["files"][0]["digest"], emit.sha256(body))
+        self.assertIn(emit.sha256(body), emit.emit_site(docs)["llms.txt"])
 
 
 if __name__ == "__main__":

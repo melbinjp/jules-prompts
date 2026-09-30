@@ -8,7 +8,7 @@
     A folder with a <code>SKILL.md</code> file in it. The file starts with a name and a one-line description of when to use it, and the procedure follows, with supporting files beside it. An agent that supports skills reads the description and loads the skill when the task matches. Claude Code, Codex, GitHub Copilot, Cursor and Gemini CLI all read the format.
 - q: Which agents can use it?
   a: >-
-    Any agent that can read a file or fetch a URL. Install the whole folder as a skill where the agent supports them, point the agent at <a href="/llms.txt">llms.txt</a>, add the MCP server to get the conductor and each guidance file as prompts, or paste the text. Nothing in it depends on one product's tool names.
+    Any agent that can read a file or fetch a URL. Install the whole folder as a skill where the agent supports them, point the agent at <a href="/llms.txt">llms.txt</a>, or paste the text. Nothing in it depends on one product's tool names.
 - q: Is this affiliated with Google or Jules?
   a: >-
     No. The library started in 2025 as prompts for Jules, Google's coding agent, which is where the name comes from. The conductor works with Jules and with every other agent.
@@ -32,7 +32,7 @@
     Every change traces to the objective, a requirement or an accepted decision, and a change that serves none of them is a question for the owner. Decisions are recorded as ADRs with their options, evidence, a way out and a condition that reopens them. Measures are taken again the way they say they are taken, before and after a change.
 - q: Can it be used offline, or on a private project?
   a: >-
-    Yes. The conductor is plain files that need no network. Install it from a copy of the repository, run the MCP server from that copy with the network refused, and load one guidance file at a time on a small context window. The <a href="/conductor/guidance/confidentiality.html">confidentiality guidance</a> keeps the project's own code, data and plans from leaving through its tools, and no step assumes a hosted service.
+    Yes. The conductor is plain files that need no network. Install it by copying the <code>conductor/</code> folder from a copy of the repository, and load one guidance file at a time on a small context window. The <a href="/conductor/guidance/confidentiality.html">confidentiality guidance</a> keeps the project's own code, data and plans from leaving through its tools, and no step assumes a hosted service.
 - q: Can one model and one person build a project with this, on its own?
   a: >-
     Yes. The <a href="/conductor/guidance/autonomy.html">autonomy guidance</a> covers an agent that has no working harness yet, a build that runs unattended, and several agents sharing the work. The owner is asked what only they can answer once, at the start, and the work then runs within written limits.

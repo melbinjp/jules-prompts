@@ -52,22 +52,6 @@ cp -R jules-prompts/conductor .agents/skills/</code></pre>
         <button class="copy" type="button" data-copy="#clone">Copy</button>
       </div>
     </div>
-    <div>
-      <h3>As a Claude Code plugin</h3>
-      <div class="snippet">
-        <pre><code id="plugin">/plugin marketplace add melbinjp/jules-prompts
-/plugin install jules-prompts@jules-prompts</code></pre>
-        <button class="copy" type="button" data-copy="#plugin">Copy</button>
-      </div>
-    </div>
-    <div>
-      <h3>As prompts, over MCP</h3>
-      <div class="snippet">
-        <pre><code id="mcp">{ "mcpServers": { "jules-prompts": {
-  "command": "npx", "args": ["-y", "github:melbinjp/jules-prompts"] } } }</code></pre>
-        <button class="copy" type="button" data-copy="#mcp">Copy</button>
-      </div>
-    </div>
   </div>
   <p class="fine">Copy the whole folder: <code>SKILL.md</code> alone is incomplete, because it refers to the guidance and templates. Use <code>.claude/skills/</code> for Claude Code and <code>.agents/skills/</code> for Codex and other agents that read <code>AGENTS.md</code>. Paste the <a href="{{ '/harness/AGENTS.md' | relative_url }}">standing rules</a> into a project's <code>AGENTS.md</code> so they apply even when nobody loads the conductor.</p>
 </section>

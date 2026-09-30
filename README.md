@@ -64,15 +64,6 @@ The package check also works on an installed copy (Python and PyYAML required):
 python scripts/check_conductor.py /path/to/project/.agents/skills/conductor
 ```
 
-### As a Claude Code plugin
-
-```
-/plugin marketplace add melbinjp/jules-prompts
-/plugin install jules-prompts@jules-prompts
-```
-
-The plugin (version 3.0.0) carries the same folder as `skills/conductor/`.
-
 ### From the site, with no install
 
 Tell the agent: `Read https://jules-prompts.wecanuseai.com/llms.txt and follow the conductor for the task.`
@@ -81,27 +72,6 @@ Clients that support [Agent Skills discovery](https://github.com/cloudflare/agen
 can start from `https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json`, which lists
 the conductor as an archive with the digest of its bytes. The archive is stored without compression,
 so its bytes, and that digest, are the same wherever it is built.
-
-### As an MCP server
-
-Claude Code, Claude Desktop, VS Code / Copilot Chat, Windsurf and Zed surface MCP prompts as slash
-commands. The server gives the conductor as the prompt `conductor` and each guidance and template
-file as a further prompt (for example `conductor-guidance-planning`), so a client with a small
-context window loads one file at a time, as `SKILL.md` directs. The same files are resources
-(`conductor://SKILL.md`, `conductor://guidance/planning.md`). The server reads this repository live
-rather than a bundled copy, index and files both from GitHub, so it starts even where the website is
-unreachable.
-
-```json
-{
-  "mcpServers": {
-    "jules-prompts": {
-      "command": "npx",
-      "args": ["-y", "github:melbinjp/jules-prompts"]
-    }
-  }
-}
-```
 
 ### Offline, and on private projects
 
@@ -113,16 +83,10 @@ a copy tells nobody.
    across on removable media. Note the commit hash; on the other side, `git fsck` and
    `git rev-parse HEAD` confirm the copy is whole and is that commit.
 2. **Install the conductor from the copy.** `cp -R jules-prompts/conductor .agents/skills/` (or
-   `.claude/skills/`). In Claude Code, `/plugin marketplace add /path/to/jules-prompts` then
-   `/plugin install jules-prompts@jules-prompts` installs from the directory.
-3. **Run the MCP server from the copy, with no network.** Point the client at
-   `node /path/to/jules-prompts/mcp/index.js` with `JULES_PROMPTS_DIR=/path/to/jules-prompts` in its
-   environment. In that mode the server reads the copy and refuses to use the network at all; CI proves
-   it. Its two dependencies come from `npm ci`, run once where a registry or a mirror is reachable, with
-   `node_modules` carried across with the clone.
-4. **On a small context window,** load one guidance file at a time and only the sections the current
+   `.claude/skills/`).
+3. **On a small context window,** load one guidance file at a time and only the sections the current
    work needs. `SKILL.md` says how.
-5. **Qualify a model before trusting it with a kind of work.** Run it on a fixture and score the report
+4. **Qualify a model before trusting it with a kind of work.** Run it on a fixture and score the report
    with `scripts/score_fixture.py`, all offline. A model's reputation is a claim; its score on the
    fixture is evidence.
 6. **Keep the project itself private.** [`conductor/guidance/confidentiality.md`](conductor/guidance/confidentiality.md)
@@ -181,14 +145,14 @@ scope, the known limitations, the evidence and the migration.
 Nothing published simply broke. Every old page (`/prompts/task_*.html`, `/tasks.html`, `/workflow/`)
 redirects to the conductor or to the guidance page that now holds its content, each old skill's
 `SKILL.md` address serves a short notice that names the conductor, and `/workflow.json` serves a notice
-in JSON. The old plugin (2.0.0) and the old MCP prompts (`task_*`) are replaced by version 3.0.0 and
-by `conductor` with its guidance prompts.
+in JSON. The plugin and the MCP server that once delivered the library were removed by the owner on
+2026-09-30; the conductor is installed by copying its folder, or read from the site.
 
 ## Changing the conductor
 
 The conductor is written by hand in `conductor/` and is the only procedure source. Everything else
-that agents load is generated from it by `python scripts/emit.py`: `skills/conductor/`, the plugin, the
-discovery index, the archive, `llms.txt`, `library.json`, `prompts.json` and the site's pages. Never
+that agents load is generated from it by `python scripts/emit.py`: `skills/conductor/`, the
+discovery index, the archive, `llms.txt` and the site's pages. Never
 edit a generated file. Every generated form is checked byte for byte against a fresh generation in CI, so
 a copy that has drifted fails the build instead of quietly disagreeing with its source.
 
@@ -204,7 +168,6 @@ python scripts/test_trial_prep.py
 python scripts/inventory_map.py --destinations
 python scripts/test_check_trace.py
 python scripts/test_conformance.py
-node mcp/smoke-test.mjs
 python scripts/check_site.py _site      # on a build of the site, made the way GitHub Pages makes it
 ```
 

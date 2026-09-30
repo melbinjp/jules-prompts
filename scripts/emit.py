@@ -36,23 +36,8 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 PACKAGE = ROOT / "conductor"
 
-PLUGIN_NAME = "jules-prompts"
 SKILL_NAME = "conductor"
-PLUGIN_REPO = "https://github.com/melbinjp/jules-prompts"
-PLUGIN_VERSION = "3.0.0"
-PLUGIN_AUTHOR = {"name": "Melbin J Paulose", "url": "https://github.com/melbinjp"}
-# The words a marketplace, a registry or a search matches on.
-PLUGIN_KEYWORDS = [
-    "agent-skills", "skill-md", "project-delivery", "verification", "project-management",
-    "decision-records", "production-readiness", "hardware", "physical-world", "claude-code",
-    "codex", "jules",
-]
-PLUGIN_DESCRIPTION = (
-    "One entry point for delivering any project, software, physical, service or hybrid, from "
-    "nothing or from any existing state to an accepted result, and for handing over whatever "
-    "must keep running. It loads focused guidance only when the work needs it, and counts "
-    "nothing as done without evidence about the actual result."
-)
+REPO = "https://github.com/melbinjp/jules-prompts"
 
 # The published site, from the file that tells GitHub Pages which domain to serve.
 SITE = "https://" + (ROOT / "CNAME").read_text(encoding="utf-8").strip()
@@ -206,109 +191,6 @@ def emit_skills(docs: list[dict]) -> Files:
     return {f"{SKILL_NAME}/{d['path']}": d["text"] for d in docs}
 
 
-def emit_plugin(docs: list[dict]) -> Files:
-    """The Claude Code plugin: a manifest and the conductor folder, so it installs in one step.
-
-    Bundling is how agent tooling ships now. Generating the bundle means it cannot drift from the
-    procedure it claims to contain, which is the failure this whole repository is about.
-    """
-    manifest = {
-        "name": PLUGIN_NAME,
-        "description": PLUGIN_DESCRIPTION,
-        "version": PLUGIN_VERSION,
-        "author": PLUGIN_AUTHOR,
-        "homepage": SITE + "/",
-        "repository": PLUGIN_REPO,
-        "license": "MIT",
-        "keywords": PLUGIN_KEYWORDS,
-    }
-    files: Files = {".claude-plugin/plugin.json": json.dumps(manifest, indent=2) + "\n"}
-    for d in docs:
-        files[f"skills/{SKILL_NAME}/{d['path']}"] = d["text"]
-    return files
-
-
-def emit_marketplace(docs: list[dict]) -> Files:
-    """A marketplace of one, at the repository root, so the plugin installs by name:
-
-        /plugin marketplace add melbinjp/jules-prompts
-        /plugin install jules-prompts@jules-prompts
-
-    It is also what plugin directories look for when they index GitHub.
-    """
-    marketplace = {
-        "name": PLUGIN_NAME,
-        "owner": PLUGIN_AUTHOR,
-        "metadata": {"description": PLUGIN_DESCRIPTION, "version": PLUGIN_VERSION},
-        "plugins": [
-            {
-                "name": PLUGIN_NAME,
-                "source": "./plugin",
-                "description": PLUGIN_DESCRIPTION,
-                "version": PLUGIN_VERSION,
-                "author": PLUGIN_AUTHOR,
-                "homepage": SITE + "/",
-                "repository": PLUGIN_REPO,
-                "license": "MIT",
-                "keywords": PLUGIN_KEYWORDS,
-                "category": "development",
-            }
-        ],
-    }
-    return {".claude-plugin/marketplace.json": json.dumps(marketplace, indent=2) + "\n"}
-
-
-def emit_index(docs: list[dict]) -> Files:
-    """The MCP server's index (`library.json`) and the older list some clients read.
-
-    Every file of the conductor is listed with the SHA-256 of its bytes, so a client can verify
-    what it loaded, including SKILL.md.
-    """
-    label = {"skill": "Conductor", "guidance": "Guidance", "template": "Template"}
-    library = {
-        "library": PLUGIN_NAME,
-        "source": PLUGIN_REPO,
-        "entry": SKILL_NAME,
-        "version": PLUGIN_VERSION,
-        "count": len(docs),
-        "files": [
-            {
-                "name": d["name"],
-                "kind": d["kind"],
-                "title": d["title"],
-                "description": d["description"],
-                "path": f"conductor/{d['path']}",
-                "digest": sha256(d["text"]),
-            }
-            for d in docs
-        ],
-    }
-    prompts = {
-        "version": "3.0",
-        "repository": PLUGIN_REPO,
-        "documentation": SITE + "/",
-        "skills_index": f"{SITE}{DISCOVERY}/index.json",
-        "total_prompts": len(docs),
-        "categories": [label[k] for k in ("skill", "guidance", "template")],
-        "prompts": [
-            {
-                "slug": d["name"],
-                "title": d["title"],
-                "description": d["description"],
-                "category": label[d["kind"]],
-                "url": d["page"],
-                "skill": d["source"],
-                "source_path": f"conductor/{d['path']}",
-            }
-            for d in docs
-        ],
-    }
-    return {
-        "library.json": json.dumps(library, indent=2) + "\n",
-        "prompts.json": json.dumps(prompts, indent=2) + "\n",
-    }
-
-
 def emit_agent_skills(docs: list[dict]) -> Files:
     """Each file of the conductor, served by the site byte for byte at its discovery URL.
 
@@ -403,7 +285,6 @@ def emit_site(docs: list[dict]) -> Files:
             f"SHA-256 of that archive: {sha256(archive)}",
             f"Discovery index (Agent Skills 0.2.0): {SITE}{DISCOVERY}/index.json",
             f"SHA-256 of SKILL.md: {sha256(entry['text'])}",
-            f"Every file with its SHA-256: {SITE}/library.json",
             "",
             "## The conductor",
             "",
@@ -425,8 +306,8 @@ def emit_site(docs: list[dict]) -> Files:
             "older ledger (Python, no dependencies)",
             f"- [The test a self-built agent harness must pass]({SITE}/harness/conformance.py): "
             "Python and git, nothing else",
-            f"- [Source repository]({PLUGIN_REPO}): the conductor, its regression fixtures with planted "
-            "defects, the scorer, a plugin bundle and an MCP server",
+            f"- [Source repository]({REPO}): the conductor, its regression fixtures with planted "
+            "defects, the scorer and the harness",
             "",
         ]
     )
@@ -517,7 +398,7 @@ def _report_exhibit() -> str:
         f'<span class="what">{_inline(item)}<small>{_inline(evidence)}</small></span></li>'
         for item, evidence, verdict in rows
     )
-    source = f"{PLUGIN_REPO}/tree/main/fixtures/{EXHIBIT_FIXTURE}"
+    source = f"{REPO}/tree/main/fixtures/{EXHIBIT_FIXTURE}"
     line = (f"{stated['holds']} verified, {stated['broken']} failed, {stated['skipped']} not verified "
             f"of {stated['items']} items.")
     return (
@@ -734,9 +615,6 @@ def emit_redirects(docs: list[dict]) -> Files:
 # name -> (output directory relative to the repo root, renderer)
 TARGETS = {
     "skills": ("skills", emit_skills),
-    "plugin": ("plugin", emit_plugin),
-    "marketplace": (".", emit_marketplace),
-    "index": (".", emit_index),
     "agent-skills": ("_agent_skills", emit_agent_skills),
     "archive": (".", emit_archive),
     "site": (".", emit_site),

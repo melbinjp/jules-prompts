@@ -7,9 +7,9 @@ name: Library integrity
 # Deliberately has no `continue-on-error` and no step that swallows an exit code: a check that
 # cannot fail is indistinguishable from one that was never run.
 #
-# And no path filter on pull requests. The old one listed the paths someone thought mattered;
-# mcp/ was not among them, so a pull request that changed only the MCP server ran no checks at
-# all. A gate that a path filter can skip is not a gate, and this workflow takes about a minute.
+# And no path filter on pull requests. The old one listed the paths someone thought mattered, and
+# a pull request that changed only a path it missed ran no checks at all. A gate that a path
+# filter can skip is not a gate, and this workflow takes about a minute.
 #
 # Actions are pinned to the commit their tag pointed at when pinned, so a moved tag cannot change
 # what runs here. The comment names the tag, for updating.
@@ -94,37 +94,3 @@ jobs:
 
       - name: The site must serve what it claims
         run: python scripts/check_site.py _site
-
-  mcp:
-    # The server has to actually speak MCP, not merely parse. This starts it, runs a real
-    # initialize / prompts/list / prompts/get / resources exchange over stdio, and checks the text
-    # served is the file's own. It reads the repository at the commit under test, so a pull request
-    # is checked against its own conductor rather than main's.
-    runs-on: ubuntu-latest
-    env:
-      JULES_PROMPTS_REF: ${{ github.event.pull_request.head.sha || github.sha }}
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: '22'
-
-      - name: Install
-        run: npm ci
-
-      # The server's dependencies were carrying one high and two moderate advisories, pulled in
-      # by the SDK's HTTP transports. A new high one fails the build rather than waiting to be
-      # noticed.
-      - name: No known high-severity vulnerabilities in what the server ships
-        run: npm audit --omit=dev --audit-level=high
-
-      - name: The MCP server must answer a real client
-        run: node mcp/smoke-test.mjs
-
-      # Private and offline projects run the server from a copy on disk. In that mode it replaces
-      # fetch with one that throws, so this also proves it served everything with no network.
-      - name: The MCP server must answer from a local copy, with no network
-        run: node mcp/smoke-test.mjs
-        env:
-          JULES_PROMPTS_DIR: .

@@ -3,9 +3,6 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 
-# Node
-node_modules/
-
 # Python
 __pycache__/
 *.py[cod]

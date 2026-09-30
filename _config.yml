@@ -41,20 +41,10 @@ sass:
 include:
   - .well-known
 
-# Jekyll's default exclude list is REPLACED, not extended, when this key is set - so
-# node_modules has to be named here or the whole tree gets copied into _site.
-#
-# plugin/ is excluded because Jekyll rendered every SKILL.md in it as a bare HTML fragment (no
-# layout, no styles) and listed them in the sitemap. The conductor is served from
-# /.well-known/agent-skills/ instead, verbatim.
+# Jekyll's default exclude list is REPLACED, not extended, when this key is set.
 exclude:
-  - node_modules
-  - package.json
-  - package-lock.json
-  - mcp
   - scripts
   - skills
-  - plugin
   - fixtures
   # A worked example of a project's ledger. Its decision records have front matter, so Jekyll
   # would render each one as a bare page; it is read on GitHub instead.

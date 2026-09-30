@@ -12,14 +12,15 @@ The old library is the tag `library-26-final`.
 |---|---|---|---|
 | Library integrity (`check_library_integrity.py`) | replaced | the pieces of the library agree with each other | rewritten for the conductor and fixtures; see the function table below |
 | Conductor check tests (`test_check_conductor.py`) | retained | the package check rejects broken installs and references | unchanged; runs in the same job |
-| `emit.py --check` | retained | every generated form is byte for byte its source | source is `conductor/`; targets are skills, plugin, marketplace, index, agent-skills, archive, site, pages, redirects |
+| `emit.py --check` | retained | every generated form is byte for byte its source | source is `conductor/`; targets are skills, agent-skills, archive, site, pages, redirects (the plugin, marketplace and index targets are retired, below) |
 | `test_emit_bytes.py` | retained, changed | a CRLF checkout cannot silently invalidate published digests | rewritten (see below) and extended to the archive |
 | `test_trial_prep.py` | retained | trial preparation never deletes interrupted evidence | unchanged |
 | `inventory_map.py --destinations` | retained | every mapped destination in the coverage map exists | unchanged; it reads the old library from the baseline commit, not the working tree |
 | `test_check_trace.py` | retained | `check_trace.py` catches each way of breaking a ledger | unchanged; the harness stays for projects that keep the ledger |
 | `test_conformance.py` | retained | the conformance test tells a good harness from a broken one | unchanged |
 | Site job: build with `jekyll-build-pages`, then `check_site.py` | retained | the built site serves what it claims | same build; `check_site.py` rewritten (below); PyYAML installed because it now reads the conductor the way `emit.py` does |
-| MCP job: `npm ci`, `npm audit`, smoke test, smoke test from a local copy | retained | the server speaks MCP, has no known high vulnerabilities, and refuses the network in local mode | smoke test rewritten (below) |
+| MCP job: `npm ci`, `npm audit`, smoke test, smoke test from a local copy | retired: MCP server and plugin removed by the owner, 2026-09-30 | the server spoke MCP, had no known high vulnerabilities, and refused the network in local mode | the job, `mcp/`, `package.json` and `package-lock.json` are removed |
+| `emit.py` targets `plugin`, `marketplace` and `index` (`plugin/`, `.claude-plugin/marketplace.json`, `library.json`, `prompts.json`) | retired: MCP server and plugin removed by the owner, 2026-09-30 | the plugin, its marketplace entry and the MCP server's indexes were byte for byte the conductor | removed with their generators; `llms.txt` and the discovery index still state every digest |
 | (new) `check_conductor.py` as its own step | new | the package is complete and its references resolve, reported on its own | previously only inside library integrity |
 
 Kept as they were: pinned actions, no `continue-on-error`, both operating systems, no path filter.
@@ -65,7 +66,9 @@ Kept as they were: pinned actions, no `continue-on-error`, both operating system
 | Budgets (stylesheet, script, image), no web font | retained | unchanged |
 | (new) every retired page is served and redirects to a page that exists; every old skill `SKILL.md` address serves a notice naming the conductor and the guidance file that holds its content; `/workflow.json` is a notice; none of them in the sitemap; the sitemap has the conductor | new | protects saved links |
 
-## `mcp/smoke-test.mjs`
+## `mcp/smoke-test.mjs` (retired: MCP server and plugin removed by the owner, 2026-09-30)
+
+The file is deleted. The table records what it once checked and is kept as history.
 
 | Old check | Class | Now |
 |---|---|---|
