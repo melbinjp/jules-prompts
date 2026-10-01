@@ -1,0 +1,17 @@
+{
+  "evidence_kind": "synthetic provider capture, not a live API response",
+  "captured_at": "2026-09-29T08:00:00Z",
+  "job": "catalogue-weekly",
+  "enabled": true,
+  "schedule": "0 2 * * 1",
+  "target": "public staging catalogue",
+  "authority": "OPERATOR-BRIEF.md; ordinary public staging URL updates only",
+  "steps": [
+    "inspect public URLs",
+    "repair stale staging URLs",
+    "independent saved readback",
+    "STATE summary"
+  ],
+  "overdue_observer": "provider health check outside this job, deadline Monday 04:00 UTC",
+  "failure_route": "leave scoped exception for Sam; no customer message or spending"
+}

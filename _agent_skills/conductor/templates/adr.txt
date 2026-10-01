@@ -27,8 +27,10 @@ and superseding decisions`.
 
 ## Criteria
 
-<Recorded before any option was scored. Hard limits as pass or fail; the rest with weights, each
-taken from a named measure, journey, constraint or risk.>
+<Recorded before scoring. Hard limits as pass or fail; the remaining criteria from named
+objectives, measures, journeys, constraints or risks. Explain the comparison method and scales;
+use weights only when justified, with their rationale. Preserve conditional tradeoffs when
+the priorities do not establish one clearly preferable option.>
 
 ## Options
 
@@ -49,7 +51,8 @@ reverse.
 ## Decision
 
 <What was chosen: one option, a portfolio, a sequence with its switch condition, or a timed
-experiment. The seam that keeps it reversible. The assumption that would flip it.>
+experiment. Serious alternatives and the conditions under which each is preferable; any
+unresolved superiority. The seam that keeps it reversible. The assumption that would flip it.>
 
 ## Exit
 

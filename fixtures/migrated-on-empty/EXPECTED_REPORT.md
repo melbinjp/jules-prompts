@@ -30,11 +30,20 @@ The copy procedure (`ops/copy.md`) is right: a nightly restore to a separate Pos
 | round trip identical | down does not restore `total`; never run | broken |
 | deploy order | not established | skipped |
 | production untouched | nothing run against it | holds |
+| migration-final-only | `FOLLOWUP_REVIEW.md` omits the before set and comparison conditions | broken |
 
-8 items: 1 holds, 6 broken, 1 skipped.
+9 items: 1 holds, 7 broken, 1 skipped.
 
 defect_id: wrong-engine-empty-tables
 defect_id: guessed-row-count
 defect_id: rollback-read-not-run
 defect_id: locks-not-measured
 defect_id: constraint-violations-uncounted
+
+## October 1 evidence-record extension
+
+
+- migration-final-only: FOLLOWUP_REVIEW must report both before and after measurements: 210s/180s versus 80s/0.3s, PostgreSQL15, datasetA, 48,210,554 orders and identical load. Preserve the proposed migration versions and measurement provenance; supplied synthetic numbers are not independently observed runs. These timings do not repair the original case's untested rollback, constraint or deployment-order defects.
+
+
+defect_id: migration-final-only

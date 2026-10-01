@@ -5,7 +5,7 @@
     {
       "name": "unfailable-tests",
       "skill": "qa-an-agents-tests",
-      "planted": 4
+      "planted": 5
     },
     {
       "name": "green-pipeline",
@@ -20,7 +20,7 @@
     {
       "name": "stale-docs",
       "skill": "prove-the-docs",
-      "planted": 3
+      "planted": 5
     },
     {
       "name": "error-path-never-run",
@@ -30,7 +30,7 @@
     {
       "name": "security-check-removed",
       "skill": "security-review-agent-code",
-      "planted": 2
+      "planted": 4
     },
     {
       "name": "vague-issue",
@@ -60,7 +60,7 @@
     {
       "name": "vendor-comparison",
       "skill": "choose-with-evidence",
-      "planted": 6
+      "planted": 8
     },
     {
       "name": "optimise-it",
@@ -70,7 +70,7 @@
     {
       "name": "six-months-in",
       "skill": "keep-it-on-course",
-      "planted": 7
+      "planted": 9
     },
     {
       "name": "private-by-accident",
@@ -80,12 +80,12 @@
     {
       "name": "unattended-run",
       "skill": "run-autonomously",
-      "planted": 8
+      "planted": 11
     },
     {
       "name": "designed-by-default",
       "skill": "design-the-experience",
-      "planted": 9
+      "planted": 11
     },
     {
       "name": "shipped-to-nobody",
@@ -110,7 +110,7 @@
     {
       "name": "migrated-on-empty",
       "skill": "verify-a-migration",
-      "planted": 5
+      "planted": 6
     },
     {
       "name": "skipped-to-green",

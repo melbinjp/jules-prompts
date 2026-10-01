@@ -1,8 +1,9 @@
 # AGENTS.md fragment, standing rules
 
 Copy the sections below into the repository's `AGENTS.md`. They are standing instructions: they
-fire on every task, not only the ones where the conductor was loaded. Delete any bullet that does
-not apply. Do not add bullets for things that have not yet gone wrong here.
+fire on every task, not only the ones where the conductor was loaded. Omit a bullet only with a
+recorded reason it does not apply; unfamiliar work is not an exclusion. Add project-specific
+rules when evidence shows they are needed.
 
 This fragment is the portable half of [jules-prompts](https://github.com/melbinjp/jules-prompts).
 The other half is the conductor, an Agent Skill in `conductor/` that you install as a whole
@@ -73,14 +74,23 @@ you did not: `14 verified, 2 failed, 3 not verified, 2 not applicable of 21 item
   the condition that reopens them. Contradicting an accepted decision takes a superseding record
   before the code changes.
 - Translate a vague request ("faster", "scalable", "modern", "add AI") into a measure, and measure
-  before changing anything. If the measure already meets its target, the answer is no, with the
-  number.
+  before changing anything. Meeting a target is evidence of adequacy, not proof of efficiency:
+  compare total effort, cost, quality and risk before recommending a change. A model's opinion
+  is a hypothesis to test, not the benchmark. Strong contrary evidence can justify proposing
+  that an accepted decision be reopened; actual changes still follow its authority and process.
 - A change is done when it is carried through every layer it touches and what it replaced is gone:
   no module nothing calls, no setting nothing reads, no dependency nothing imports.
-- Nothing the owner asks for is dismissed, and no route is declared impossible. A blocked route gets
-  another route, costed honestly.
+- Do not dismiss the owner's objective because one route failed. Seek alternatives costed
+  honestly; if no feasible authorised route is demonstrated, record evidence and uncertainties
+  and propose the needed constraint or objective change rather than inventing success.
 - Every stage of the work is a procedure another person or agent can repeat. Nothing lives only in
   an agent's memory or tools.
+- Before choosing guidance, account for every supported journey, feature, affected surface,
+  indirect output and continuing duty. Record justified exclusions; keep effective checks or
+  demonstrate a replacement's equivalent protection before removing them.
+- Keep settled policy and repeated claims tied to their authoritative records. Assess an
+  accepted decision when evidence warrants it; do not silently override it or commission parked
+  work. Several projects retain their own objectives, records and authority.
 
 **A project that already keeps the older ledger** (`PROJECT.md`, `decisions/`, and `Serves:` and
 `Verified:` lines in every commit) can keep it, and keep running `harness/check_trace.py` in its CI:
@@ -116,6 +126,10 @@ For a build that runs with nobody watching (`conductor/guidance/autonomy.md`).
 - Nothing is done until its gates pass: its tests, seen to fail without it; its measure; a review
   by someone other than its author, in a fresh context. A failed gate means another attempt or
   another route, never a lower gate.
+- Reuse actual cloud jobs and the project's existing state view. A schedule is not autonomous
+  completion: verify observation, authorised decisions and actions, outcomes, recovery and
+  overdue detection. Keep finite, manual and assisted work labelled honestly. A takeover needs
+  demonstrated access, authority and capability, not an edited operator field.
 
 ## Acting on the world
 
@@ -131,7 +145,7 @@ services that ship, pay or message a person (`conductor/guidance/physical.md`).
 - Do not retry an action that may already have happened. Use absolute targets, or observe that the
   first attempt did not happen.
 - Nothing that cannot be undone happens without a person's yes to the exact action and its
-  parameters.
+  parameters, or explicit standing authority covering that action and those limits.
 
 ## Which guidance to load
 

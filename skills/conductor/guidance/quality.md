@@ -26,7 +26,8 @@ Before changing anything, write the bar in the project's records, short:
   from the project, saying how);
 - **who does it, and on what:** the people and, where they operate it, the agents and automation;
   the actual devices, operating systems, browsers, networks, venues, or hardware and conditions;
-- **the three to five journeys that must never fail;**
+- **every journey that must never fail,** with other supported journeys accounted for too;
+  no fixed number is a completeness limit;
 - **what must never be lost or corrupted;**
 - **the budgets** that decide "fast enough" and "small enough": load time, size, frame rate,
   memory, battery, latency, cost per use, time on site;
@@ -182,9 +183,38 @@ you add.
 - The repository holds only source: no build output, dependency folders, secrets, or links into
   someone's machine.
 
+## Challenging recommendations and existing methods
+
+Challenge material premises before commitment, including your own proposals. Separate observed
+facts, owner preferences, accepted decisions, assumptions and proposals. For a consequential
+recommendation, identify its strongest plausible counterargument, the premise most likely to
+invalidate it, and the source, observation or test that would settle that premise. Check actual
+state and primary evidence; agreement among summaries or models is not independent evidence.
+
+Model knowledge generates hypotheses, not verified findings. Ground an efficiency challenge in
+accepted outcomes and hard limits, the measured end-to-end baseline, current primary references,
+and fair representative comparisons. Include total implementation/operating/reversal cost, human
+effort, quality, failure and recovery, privacy and risk. Independent review examines that evidence;
+it does not replace it. Distinguish suspected inefficiency, demonstrated deficiency and verified
+alternative benefit under the tested conditions. Meeting current targets does not prove efficiency.
+
+Preserving authority governs who may change a decision, not whether its empirical premises may be
+questioned. Correct contradicted claims and reconcile affected drafts and records. Preserve the
+owner's legitimate preferences and objective; actual reopening and changes follow their authority
+and conditions (`decisions.md §A way out and a reopening condition`). Size the effort to consequence
+and useful information: do not extend review with checks that cannot affect the action.
+
+Challenge missing development setup against an accepted requirement, measured failure or
+demonstrated operating need. Reuse an adequate tool or configure/build the smallest capability
+that closes the gap; otherwise record an authorised exception and its cost. Do not turn tooling
+into its own objective or permanently accept a workaround that defeats agreed quality or autonomy.
+
 ## Reviewing work
 
 Applies to any work: a change, a deliverable, a report, a decision, and your own.
+
+- Apply §Challenging recommendations and existing methods to consequential claims before
+  treating them as ready; review the original acceptance and alternatives as well as the output.
 
 - **Review is by someone other than the author:** a person, or an agent in a fresh context given
   the work and its claims, never the context that produced it.

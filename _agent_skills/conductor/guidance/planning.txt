@@ -77,6 +77,10 @@ Each work package records, in the project's tool (§Work records in the project'
 
 ## Dependencies and the schedule
 
+Across projects, link only real prerequisites and shared-resource constraints in their existing
+records. Each project retains its own objective, authority and acceptance; being in one workspace
+does not make all adjacent or parked work commissioned (`../SKILL.md §1. Classify the project`).
+
 1. **Record each real prerequisite as a link** between work packages ("B cannot start until A is
    done"; occasionally "cannot finish until", or a lag such as "concrete cures for 7 days").
    Record outside handoffs (a supplier delivery, an approval, a client's content) as work
@@ -211,4 +215,9 @@ tier that becomes a four-figure bill at the target size; a bill of materials abo
   prefixed codes (G1, M2, J3, W4, Q5) or rules for cross-referencing them between files; that is
   the private format this guidance exists to avoid.
 - **Mark every export with its source and date,** and do not edit it as a separate plan.
+- **Use an existing linked view for shared state and takeover.** Show objective, authority,
+  accepted core, active work, duty modes, evidence and exceptions from the authoritative records.
+  If no suitable view exists, `../templates/state.md` is a small optional Markdown fallback,
+  not another plan, store or source of authority. Verify the next operator's actual access,
+  authority and capability before declaring a takeover complete.
 {% endraw %}

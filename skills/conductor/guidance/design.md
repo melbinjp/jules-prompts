@@ -12,7 +12,7 @@ are trying to do, or what happens when it goes wrong.
 ## What design covers
 
 - **Who uses it, where, on what, with which abilities,** from evidence.
-- **Every critical journey as a flow,** with every state of every step and every word designed,
+- **Every supported journey as a flow,** with every state of every step and every word designed,
   before breadth is built.
 - **One system of look, feel and behaviour,** kept in the source as the only source.
 - **Every action operable by a person, an agent or automation,** with the same meaning and limits.
@@ -46,8 +46,12 @@ people, or labelled stand-ins, until its target holds.
 
 ## Flows, states and words
 
-- **Design each critical journey as one flow** from the moment the person arrives to the moment
+- **Design each supported journey as one flow** from the moment the person arrives to the moment
   the job is done: each step, the decision they make there, and what they see or hear.
+- Reuse shared flows rather than duplicate them. Mark critical journeys and apply their stronger
+  acceptance and user-testing gates; verify others to the depth their risk and intended use need.
+  "Not critical" does not mean omitted. For finite or creative delivery use the actual recipient
+  or operator's path, not an invented website journey.
 - **The flow is the shortest one that does the job:** count its steps and justify each. Where a
   step asks for something, name what it is used for; a field nothing uses is removed. "Designed
   by default" puts nine fields before anything worth signing up for, and orders the flow by

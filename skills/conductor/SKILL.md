@@ -43,8 +43,13 @@ changes:
 3. **Scale and uncertainty.** How many deliverables, people, teams and outside parties; lead
    times; money at stake; how much of the work is already known. This sets how much planning
    the project gets (`guidance/planning.md`).
-4. **Finite or ongoing.** What is to be delivered and accepted, and what, if anything, must
-   keep running afterwards and who will operate it.
+4. **Finite, ongoing or mixed.** What is delivered and accepted, what must keep operating,
+   and who or what operates each part. Record each continuing duty's agreed mode: manual,
+   assisted or autonomous. These are literal outcomes, not labels: autonomous duties complete
+   without human intervention; assisted duties name the human checkpoints; manual duties have
+   a usable human procedure (`guidance/operations.md`). Reuse adequate existing cloud jobs,
+   services and operators. Do not impose continuing operation on a finite project or substitute
+   a manual procedure for an agreed autonomous outcome.
 5. **Confidentiality.** Whether anything (the idea, code, data, designs, names, even the fact
    that the project exists) must not leave. If so, load `guidance/confidentiality.md` before
    anything is sent anywhere, including searches and remote models.
@@ -62,6 +67,14 @@ already embodies with the evidence they had (often none), and those nobody can j
 for revisiting. Then it starts where §2 says, like any other.
 
 **Nothing, or a single word:** `guidance/product.md §Starting from nothing or a single word`.
+
+**Several projects or a workspace.** Identify each project and continuing duty with its own
+objective, authority, records and acceptance. Apply the loop to the work commissioned in each;
+coordinate actual dependencies and shared resources through linked views in existing records.
+Make competing priorities explicit; allocate only within the owner's priorities and delegation.
+Do not merge separate authorities, copy private runtime data into source, override deterministic
+responsibilities or restart parked or retired work without authorisation. Parked work may be
+evaluated within an authorised review and recommended for reopening; that does not commission it.
 
 ## 2. The control loop
 
@@ -111,6 +124,21 @@ acceptance. A bounded fix does not rebuild the business case.
 gates, record it with a link to its evidence, update the state note, take the next. Review at
 each milestone before starting the next (`guidance/quality.md §Reviewing work`).
 
+**Coverage before methods.** For a whole-project request, reconcile the recorded requirements,
+supported features, journeys, surfaces, state, external actions and continuing duties with the
+actual project. Include indirect outputs: messages, reports, background work, administration,
+machine interfaces and handoffs. Each item has evidence, an open gap or an authorised scope change.
+For bounded work, account for its consequences: behaviour and design, interfaces and words,
+data and migrations, security/privacy/permissions, dependencies or parts, checks/delivery and
+operations/handoffs. Discover these from actual sources, entry points and operating services,
+not only a task label. Select guidance from that inventory; record considered exclusions with
+their reasons. An unread section does not prove non-applicability. Keep this proportionate in
+existing records, not another tracking system.
+
+**Challenge before commitment.** Apply `guidance/quality.md §Challenging recommendations and
+existing methods` to consequential proposals, including your own. Turn model suggestions into
+testable hypotheses and compare defensible alternatives (`guidance/decisions.md §Options`).
+
 ## 3. Work records
 
 - **One authoritative set of work records, in the project's existing tool**: its issue
@@ -127,6 +155,13 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   (`guidance/planning.md §Work records in the project's tool`).
 - **Views are views.** A board, a Gantt chart, a burn-down or a report is a view of the
   records, or an export marked with its source and date. Never edit an export as a second plan.
+- **Authority and settled core.** Name the current requirements, accepted decisions, delegated
+  limits and authoritative sources for policy and operating values. Record precedence where
+  sources conflict; do not invent a universal file hierarchy. Reconcile contradictions within
+  authority and mark superseded material historical. Give repeated material facts one source:
+  derive the copies where practical, otherwise check them. Historical evidence retains its dates
+  and values. Outward prose includes material terms and consequences, without unnecessary
+  implementation detail; simplification remains truthful.
 - **The project's other records** live where the project keeps documents (often a `docs/`
   folder, or the team's shared space): the objective, measures and acceptance; the production
   bar; decisions as ADRs (`templates/adr.md`); the briefing and standing limits; choices made on
@@ -140,6 +175,13 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   performs each procedure. A gap in what someone can see gets its own record.
 - **A short state note** says where the work is, what is waiting and on what, and what is
   next. It is rewritten, not appended, and it is a view: the records are the truth.
+- **A shared view for takeover.** Reuse that note or the project's native view; `templates/state.md`
+  is a Markdown fallback, not a mandatory store migration. Link the milestone, accepted core,
+  operating evidence, active work and owner exceptions to their authoritative records. Change
+  ownership/mode there, then refresh the view. Takeover verifies authority, access, capability,
+  prerequisites and resumption state; editing a name or mode does not establish them. Qualified
+  human and agent operators use shared procedures within the same limits. Do not build a
+  dashboard merely to provide this summary.
 
 ## 4. Procedures and evidence
 
@@ -161,7 +203,8 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 - **The operating model.** For each procedure: who performs it today (a person, an agent or
   automation), who approves it, and the fallback if they are unavailable. Moving between
   manual, hybrid and automated changes this record, not the procedure. Anything that cannot be
-  undone keeps a person's yes at every level of automation (§8).
+  undone keeps a person's exact approval or explicit scoped standing authority at every level
+  of automation (§8).
 
 ## 5. Readiness, blocking and resumption
 
@@ -197,6 +240,11 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 - **Every gate has three parts:** a concrete acceptance condition; evidence about the actual
   output, version and environment; and an accountable verifier, named. Failed or absent
   evidence cannot establish readiness.
+- **Keep effective existing checks.** Changing records, tools or guidance does not silently
+  remove safeguards. Every required rule has a verification method that can detect violation:
+  existing project/provider checks where practical, otherwise competent independent inspection,
+  rehearsal or acceptance. An enforcement replacement records its guarantee and demonstrates
+  the replacement, or has an authorised exception. Do not build a general harness for one rule.
 - **"Does not apply" is a recorded decision with its reason. An authorised exception names
   who authorised it, its scope and when it expires.** Neither is ever reported as a pass.
 - **Verification and validation are different questions.** Verification: does the result
@@ -232,8 +280,13 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
 - **Evidence in proportion to the stakes.** A change that is costly to reverse needs its
   decision first (`guidance/decisions.md`).
 - **Read the accepted decisions a change touches.** Take a route that keeps the decision, or
-  reopen it with new evidence and supersede it before the change. A change that quietly
+  propose reopening it under the recorded conditions or an explicit authorised request, and
+  obtain any required superseding decision before the change. A change that quietly
   contradicts a recorded decision is drift.
+- **Authority is not immunity from scrutiny.** Challenge inefficient methods and empirical
+  premises with evidence, even when current targets hold. Distinguish a suspected inefficiency,
+  a demonstrated deficiency and a verified improvement. Propose reopening when the evidence
+  warrants it; authorisation and the recorded reopening process still govern actual changes.
 - **Whole or not at all.** A change is carried through everything it touches (in software:
   every layer, `guidance/software.md §Complete changes, nothing detached`; outside software:
   every drawing, document, procedure, record, label and supplier order), and what it replaces
@@ -253,13 +306,16 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   everything the owner needs to decide.**
 - **Running existing code or equipment is an action with effects.** Before running it, find
   what it reads, writes, sends or moves: a hard-coded path, a real account or service, a device.
-  Where any of that reaches outside the working environment, redirect it (a temporary folder, a
-  test account, a simulator) or do not run it; a check that finds the real target stops the run.
-  This holds for every run: a baseline, a defect put back to see a test fail, a walk from cold.
+  For a test, baseline, mutation or walk from cold, redirect effects outside the working
+  environment (a temporary folder, a test account, a simulator) or do not run it; a check that
+  finds the real target stops the test. A deliberately live operating run instead verifies its
+  target and explicit scoped authority, enforces the authorised limits and observes the actual
+  outcome and failure paths. A test's permission never authorises a live run.
 - **Write the plan before starting a piece of work.** Where the plan needs someone's approval
   and the harness can pause for it, wait. Where it cannot pause, state the plan and proceed with
-  everything inside the delegated authority; an action outside it (a costly-to-reverse decision,
-  anything irreversible, anything over a standing limit) is recorded as proposed and not taken
+  everything inside the delegated authority; an action outside it (a costly-to-reverse or
+  irreversible action not covered by scoped standing authority, or anything over a standing
+  limit) is recorded as proposed and not taken
   until it is approved.
 - **Anything that cannot be undone** (spending, sending to a person, publishing, cutting,
   dispensing, deleting records, acting near people) needs a person's yes to the exact action
@@ -286,8 +342,9 @@ each milestone before starting the next (`guidance/quality.md §Reviewing work`)
   triggers that call for action, the contacts, and access transferred with keys rotated. From
   then on `guidance/operations.md` applies to that operator.
 - **Closing a project does not abandon the owner's broader goal.** A next objective starts as
-  a new project, with this one's records. No route is declared impossible: a constraint gets
-  routes around it, each honestly costed.
+  a new project, with this one's records. A blocked route gets alternatives costed honestly.
+  If no feasible authorised route is demonstrated, record the evidence and uncertainties and
+  propose the needed constraint or objective change; do not invent success or commission work.
 - **A pause** keeps security updates, backups and the data people rely on running, and
   records what restarts the work.
 - **Anyone could pick the project up from its records alone.**
@@ -329,4 +386,5 @@ covers; sections refer to each other as `file §Heading`.
 | An agent without a working harness, unattended runs, several agents | `guidance/autonomy.md` |
 | Anything that must not leave | `guidance/confidentiality.md` |
 
-Templates: `templates/adr.md` for decisions, `templates/handover.md` for handover.
+Templates: `templates/adr.md` for decisions, `templates/handover.md` for handover,
+`templates/state.md` for a shared state view when the project has no suitable one.

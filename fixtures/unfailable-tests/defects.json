@@ -2,7 +2,7 @@
   "fixture": "unfailable-tests",
   "skill": "qa-an-agents-tests",
   "prompt_slug": "task_qa_an_agents_tests",
-  "description": "Four tests that cannot fail, next to one that can, covering a discount function whose 10% off is wrong.",
+  "description": "Four tests that cannot fail, next to one that can, covering a discount function whose 10% off is wrong. October 1 evidence-record extension: qa-counts-unreconciled.",
   "defects": [
     {
       "id": "shape-assertion",
@@ -41,6 +41,17 @@
       "tell": "the only assertion is that no exception was raised",
       "must_mention": [
         "test_discount_does_not_raise"
+      ]
+    },
+    {
+      "id": "qa-counts-unreconciled",
+      "file": "QA_REVIEW.md",
+      "tell": "Candidate QA review omits cold/final counts and changed check names, treating unrelated coverage as compensation for deleted checks.",
+      "must_mention": [
+        "QA_REVIEW",
+        "cold",
+        "final",
+        "coverage"
       ]
     }
   ],

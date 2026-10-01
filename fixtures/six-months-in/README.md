@@ -14,3 +14,7 @@ python harness/check_trace.py --root fixtures/six-months-in   # passes: the shap
 python scripts/score_fixture.py fixtures/six-months-in REPORT.md
 python scripts/score_fixture.py fixtures/six-months-in --self-check
 ```
+
+## October 1 extension
+
+The original case and positive control remain. This case now has 9 planted defects; the dated extension adds 2. All new data are synthetic fixture evidence, not observations of a live project or cloud service. The existing request covers the extension; historical trial reports retain their original scope.

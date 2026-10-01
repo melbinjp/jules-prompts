@@ -49,7 +49,7 @@ pull request.
 |---|---|---|
 | every generated form matches `conductor/` | `emit.py --check` across six targets (CI) | verified |
 | the archive is the same bytes anywhere | stored zip, fixed times and modes; tests rebuild it in another directory with other file times and compare (CI) | verified |
-| agent, from the discovery index | one `archive` entry; the served zip equals the built one, holds exactly the 14 files at its root, and its digest matches (CI) | verified |
+| agent, from the discovery index | one `archive` entry; the served zip equals the built one, holds exactly the 15 source files at its root (including the optional state-view template), and its digest matches (CI) | verified |
 | agent, from `llms.txt` | every file listed with its digest; every link resolves in the built site (CI) | verified |
 | a saved link to a retired page or skill address | 41 retired pages redirect, 26 old `SKILL.md` addresses serve a notice, `/workflow.json` serves a notice; checked on a build (CI) | verified |
 | the package installs whole | `check_conductor.py` on the repository and on a copied install; mutation tests for broken copies (CI) | verified |

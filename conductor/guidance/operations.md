@@ -14,6 +14,30 @@ Operations belong to a named operator (`../SKILL.md §9. Closure and handover`).
 - **Walk the operator through one run of each critical procedure and one periodic review.**
 - **Tell the people who use it** who now looks after it and how to reach them.
 
+## Operating modes and activation
+
+- **Locate the mechanism already in use.** For each continuing duty record its operator/service,
+  agreed mode, trigger and time zone where relevant, configuration source, authority, expected
+  outcome, run evidence and missed-duty response. Existing cloud schedules and managed services
+  are valid mechanisms; do not require a local agent session or duplicate an adequate job.
+  Verify the effect, not merely the schedule's presence or a successful exit.
+- **Prove the agreed mode.** Manual duties have an accepted operator and usable procedure;
+  assisted duties define the human handoff and response. Autonomous duties complete end to end
+  without human intervention, within standing authority, with evidence of unattended activation
+  and outcome. Exercise interruption, failure, duplicate activation and overdue work where
+  relevant. If later human judgement is required to complete the duty, that path is assisted,
+  not autonomous; an exception does not quietly relabel its acceptance.
+- **Detect loss of critical operation.** Where missed work or loss of the operator would otherwise
+  be silent, demonstrate detection that does not depend on the failed component. Reuse an adequate
+  external monitor or provider facility. Simulation and pending future runs are labelled; neither
+  proves observed unattended operation.
+- **Continue within delegation.** Routine review and changes are the operator's work within
+  standing limits; only matters outside those limits or requiring agreed approval go to the owner.
+  Reviews do not reopen settled decisions by themselves. A finite project closes under all the
+  conditions in `../SKILL.md §9. Closure and handover`; continuing duties remain under their
+  operating mechanism. Takeover verifies access, authority, capability and resumption, not just
+  assignment in a summary (`../SKILL.md §3. Work records`).
+
 ## Periodic review
 
 Projects rarely fail on one day; they drift or stall, one unexamined month at a time. Run a review
@@ -35,9 +59,11 @@ review, review against the objective and measures alone and say so.
    that no measure names and nobody uses is removed only with the owner's yes. Everything nobody
    needs is paid for again every month.
 4. **Check the money and every other resource** (`planning.md §Resources and their sources`).
-5. **Run every procedure both ways:** the person's documented path from a clean start, and the
-   agent's or automation's path. A procedure only one of them can do is broken (a renamed script
-   nobody noticed because an agent releases through its own tool).
+5. **Run every required or supported operator path:** the person's documented path from a clean
+   start, and the agent's or automation's path where that procedure supports or requires it.
+   A broken required manual fallback remains a defect even if the agent's private route works.
+   Where interchangeability is required, qualify each operator on the common procedure; do not
+   invent automation for an intentionally manual duty or call it autonomous.
 6. **Restore a backup and try a rollback** whenever the schedule says (§Backups and restore).
 7. **Check every incident since the last review** has its cause proved, its prevention recorded, and
    its restoring action drilled (§After an incident).
@@ -51,7 +77,10 @@ review, review against the objective and measures alone and say so.
     from its target, how many people it affects, and what it costs; take the top ones into the next
     milestone as changes. When a measure has held its target for a while, raise it or add the next
     measure, with the owner.
-11. **Set the course, with the evidence and a recommendation; the owner decides:**
+11. **Set the course with evidence and a recommendation.** The operator decides within standing
+    delegation and records the choice; only the exceptions go to the owner with the concrete
+    decision and evidence. Changes to objectives, limits and accepted decisions follow their
+    agreed approval rules:
     - continue: the measures are moving; name the next milestone;
     - adjust: a measure, target, milestone or decision changes, with the reason recorded;
     - re-route: a route is blocked; switch to another approach, channel, supplier, design or funding

@@ -98,6 +98,8 @@ careful, and the number of real regressions caught is zero.
   --diff-filter=AM` over the test directory), the fixtures, snapshots and recorded responses added
   with them (a snapshot committed with the code it snapshots is suspect), and every mock or patch
   that substitutes the module under test rather than its dependencies.
+- **Take a cold baseline before mutation or edits:** the in-scope suite's collected, passed, failed
+  and skipped counts, with skip reasons. A baseline that could not run is a limitation, not green.
 - **Prove each test can fail; do not read it and decide.** Mutate the code, not the test: invert a
   condition, return a constant, drop a field, skip a call. For a test that came with a fix, put the
   original defect back as precisely as you can (the inverted condition, the removed guard, the old
@@ -112,6 +114,9 @@ careful, and the number of real regressions caught is zero.
   functions you can count. Read every skip, mark and condition added, with its reason and whether it
   is still true.
 - **A claimed fix with no test is a finding.**
+- **Account for the audit:** tests examined, unable to fail meaningfully, rewritten and deleted;
+  final suite counts and the coverage change. Do not add unrelated tests or change thresholds to
+  compensate for lost coverage after removing misleading tests.
 
 ## Pipelines that can fail
 
@@ -303,6 +308,12 @@ the code is bad; it is that it reads as finished.
 An agent asked to make a failure stop finds the shortest route, which is often to remove the thing
 objecting. The defect is a check that no longer checks, and the diff looks like work.
 
+- Read the complete in-scope diff and account for every changed file, grouped as code,
+  configuration, CI, dependencies, fixtures and documentation where applicable. Trace affected
+  inputs, credentials and permissions; reuse the ordinary review's inventory when complete.
+- For every new dependency record its exact name, version, resolved source and actual import/use;
+  verify manifest and lockfile agreement. Use the project's record format, with none omitted.
+
 - **What to look for:**
   - **a check that cannot fail:** a scanner under `continue-on-error`, an exit discarded with
     `|| true`, an audit only uploaded as an artifact; make each new check find something and
@@ -413,7 +424,9 @@ that causes an outage is invisible under exactly those conditions.
    current code against the old. If both break, split the migration.
 8. **A migration already applied anywhere is never edited;** check the history table.
 9. **Destroy the copy;** report timings with the row counts they rest on, and what could not be
-   measured. If you change the migration, measure again.
+   measured. If you change the migration, repeat the measurements against the changed version and
+   report both sets, identifying versions, data and conditions. Explain any condition that prevents
+   a direct comparison.
 
 ## Dependencies
 
@@ -453,6 +466,9 @@ restates the intended behaviour, now in a second place and sounding authoritativ
    record every deviation you had to make.
 3. **Verdict and evidence per claim:** verified (ran it, or the line that proves it), false (ran it and
    it did something else), unverifiable (cannot be checked as written, a finding about the sentence).
+   Every unverifiable material claim gets a proposed measurable wording, verification plan or
+   removal proposal with the decision it needs. Do not quietly delete a requirement because it
+   is difficult to check, or leave an unverifiable promise without a concrete next action.
 4. **Suspect first:** every number and name (versions, ports, paths, flags, defaults, timings,
    platforms); intent verbs ("should", "will", "automatically", "simply"); every link and anchor;
    every code block, run in order from the state the document says the reader is in.
@@ -460,6 +476,10 @@ restates the intended behaviour, now in a second place and sounding authoritativ
    document, leave the document and report the defect. Do not polish prose you have not checked, and
    do not drop a claim because it is hard to verify. Example output is produced by running the code.
 6. **Re-run the suite and the quickstart from cold.** Report examined, verified, false, unverifiable.
+
+Include generated messages and other outward outputs in the claim inventory. Check repeated
+policy and values against their authoritative sources (`../SKILL.md §3. Work records`), not just
+against other prose that repeats the same claim.
 
 ## Translations
 

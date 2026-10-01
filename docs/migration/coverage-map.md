@@ -1,12 +1,12 @@
 # Coverage map: from the current library to the conductor
 
-Status: step 1 of the approved plan, for review. Nothing here is removed yet; the current
-library stays in place until the trials in step 3 have been reviewed.
+Status: migration map maintained on the conductor development branch. The baseline inventory
+is frozen; the October 1 semantic audit and strengthening below qualify its preservation claims.
 
 Baseline: every item below is read from commit `f5fc9c0e721f4323f4ee79554220bb76128f796d` by
 `scripts/inventory_map.py`, which also checks that every item is listed here. That check is an
 inventory aid only: it shows that nothing was forgotten, not that its meaning survived. The
-meaning is for review, row by row.
+meaning is for review, row by row. A listed destination never establishes semantic equivalence.
 
 How to read a row: the IDs it covers (`skill.R3-R7` means R3 to R7 of that skill's Requirements;
 O objective, C context, R requirements, G guiding principles, E execution flow, D deliverables);
@@ -16,6 +16,35 @@ often a home-made format replaced by an established one. **Removed** means the b
 is not kept, and the reason says why.
 
 ## What changes in kind, not item by item
+
+### October 1 strengthening
+
+The owner authorised the inclusive wording draft and evidence-based challenge clarification.
+The branch now restores explicit all-supported-journey coverage, cold/final QA counts, complete
+security diff and dependency provenance, before/after migration measurements and concrete remedies
+for unverifiable documentation claims. Their existing rows below describe the current procedure,
+not proof that the earlier draft had fully preserved it.
+
+Additional instructions cover actual consequences before method selection, authoritative core and
+audience claims, conditional alternatives, qualified takeover, finite/ongoing/mixed duty modes,
+existing cloud-job reuse and literal unattended outcomes. Project authority controls changes,
+not immunity from evidence-based scrutiny. Supported operator paths must work; intentionally
+manual duties do not require invented automation. Persistence means seeking feasible alternatives,
+not promising a route against physical/legal limits or commissioning parked work.
+
+Fifteen new defects extend eight existing cases (161 current defects across 26 fixtures):
+`authority-shields-improvement`, `conditional-alternatives-hidden` (vendor-comparison);
+`schedule-as-autonomous-completion`, `cloud-absence-inferred-locally` (unattended-run);
+`cockpit-duplicate-authority`, `takeover-by-label` (six-months-in);
+`supported-journey-omitted`, `change-consequences-not-routed` (designed-by-default).
+The evidence-record cases add `qa-counts-unreconciled` (unfailable-tests),
+`security-scope-by-filename` and `dependency-provenance-unchecked` (security-check-removed),
+`migration-final-only` (migrated-on-empty), `unverifiable-claim-no-remedy` and
+`repeated-claims-no-authority` (stale-docs), and `qualification-easier-replacement`
+(unattended-run). All added observations are synthetic fixture inputs.
+These additions are outside the frozen 1,825-item baseline, which still contains its original
+146 defects. Historical trial results retain that original denominator. Expected-report scoring
+checks the case records; detecting these cases in an independent agent run remains separate.
 
 These decisions recur through the map. Each is taken from the finalisation proposal.
 
@@ -169,7 +198,7 @@ nothing in the inventory maps to them. Step 2 writes them from the proposal and 
 | run-autonomously.R27-R30, run-autonomously.R32, run-autonomously.E4 | conductor/guidance/autonomy.md §Sandbox, checkpoints and stop | Isolation, recovery, enforced limits and a stop tried before reliance are kept. **Qualified (2026-09-27):** authority still applies inside isolation; use native recoverable checkpoints and repair or restore only the affected work, preserving unrelated and concurrent work, rather than mandatory commits or automatic rollback. |
 | run-autonomously.R31 | conductor/guidance/autonomy.md §Budget | Kept: counted, slowed at 80%, a pause that keeps the next step recorded, routes to continue. |
 | run-autonomously.R33-R36, run-autonomously.R38 | conductor/SKILL.md §6. Gates: verification and validation | Gates for every change, every milestone, the product; a failed gate means another attempt or route, never a lower gate. The trace check in R34 is **replaced** by review against the work record. **Changed after the drift review (2026-09-27):** a later change requires revalidating the evidence it could affect; a full re-run from cold is required where risk or acceptance calls for it (release, handover, the acceptor's criteria), and physical steps get proportionate inspection or simulation, not blanket replay. |
-| run-autonomously.R37 | conductor/guidance/autonomy.md §Routing work to agents | **Replaced**: qualification on a small held-back task of the project's own kind; the library's fixtures are optional samples, not the gate. |
+| run-autonomously.R37 | conductor/guidance/autonomy.md §Routing work to agents | **Replaced**: versioned held-back task of the project's own kind, plus a matching existing regression fixture where applicable. Keep task/scorer/criteria/conditions stable, record scores and versions, assess regressions and route to fallback on failed acceptance. An easier replacement is not improvement. Comparability and matching-case obligations strengthened October 1. |
 | run-autonomously.R39, run-autonomously.E6 | conductor/SKILL.md §2. The control loop | The smallest loop that finishes things: next ready task, change, gates, record, next. `Serves:`/`Verified:` **replaced** by the link to the work item and its evidence. |
 | run-autonomously.R40 | conductor/guidance/autonomy.md §Several agents | Kept. |
 | run-autonomously.R41 | conductor/guidance/planning.md §Rolling-wave planning and exploration | Unknowns as questions, the cheapest deciding experiment first, prior work searched first. |
@@ -310,7 +339,7 @@ need it.
 | design-the-experience.C11 | removed | Heading only. |
 | design-the-experience.C12 | conductor/guidance/design.md §Threads to the architecture | **Replaced**: the objective, measures, journeys and their threads in the project's records. |
 | design-the-experience.C13-C15 | conductor/guidance/design.md §People and their situation | Every surface people or agents meet, every style source, and where people already got stuck. |
-| design-the-experience.R2, design-the-experience.R3, design-the-experience.E2, design-the-experience.D2 | conductor/guidance/design.md §Flows, states and words | Shortest flow, steps counted and justified, every field used; every state including first-time; every word written as design. |
+| design-the-experience.R2, design-the-experience.R3, design-the-experience.E2, design-the-experience.D2 | conductor/guidance/design.md §Flows, states and words | Every supported journey, shortest flow, steps counted and justified, every field used; every state including first-time; every word written as design. Critical journeys get stronger gates; non-critical is not an exclusion. Explicit breadth restored October 1. |
 | design-the-experience.R10, design-the-experience.G6, design-the-experience.E5, design-the-experience.D3 | conductor/guidance/design.md §One system of look and behaviour | Tokens, components and patterns in code as the only source; a value elsewhere is a defect; the device, CLI and API equivalents. |
 | design-the-experience.R11 | conductor/guidance/design.md §Accessible and inclusive | WCAG 2.2 AA computed not eyeballed, keyboard, labels, 44 px, reflow; translations and local formats; the device equivalents (reach, grip, force, colour-blind-safe lights, sound or feel for each light). |
 | design-the-experience.R14, design-the-experience.D4 | conductor/guidance/decisions.md §Recording and superseding decisions; conductor/guidance/design.md §Taste and evidence | Design decisions recorded as ADRs; name, habits and machine interfaces are costly to reverse, a colour is not. |
@@ -580,7 +609,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | qa-an-agents-tests.O1, qa-an-agents-tests.C1, qa-an-agents-tests.C2, qa-an-agents-tests.R1, qa-an-agents-tests.R2 | conductor/guidance/software.md §Tests that can fail | Tests written from the implementation cannot catch it; prove each can fail by breaking the behaviour (or putting the original defect back precisely), one break at a time, red on its assertion for the stated reason. A claimed fix with no test is a finding. Also the general rule in SKILL.md §6. |
 | qa-an-agents-tests.C3, qa-an-agents-tests.G2-G4 | conductor/guidance/software.md §Tests that can fail | The tells: mocking the unit under test, shape-only assertions, expected values captured by running the code, "no exception" as the only check, fixtures captured from the code. |
 | qa-an-agents-tests.C4 | removed | Heading only. |
-| qa-an-agents-tests.C5-C7, qa-an-agents-tests.E2, qa-an-agents-tests.E3 | conductor/guidance/software.md §Tests that can fail | The list from history, not names; collected, passed and skipped counts from cold. |
+| qa-an-agents-tests.C5-C7, qa-an-agents-tests.E2, qa-an-agents-tests.E3 | conductor/guidance/software.md §Tests that can fail | The list from history, not names; collected, passed, failed and skipped counts from cold, skip reasons and reconciled final counts. Explicit reporting restored October 1. |
 | qa-an-agents-tests.R3-R6, qa-an-agents-tests.G1, qa-an-agents-tests.G5, qa-an-agents-tests.G6, qa-an-agents-tests.D2-D5 | conductor/guidance/software.md §Tests that can fail | Revert every break and confirm a clean tree; a test that cannot fail is fixed or deleted; do not raise coverage to compensate; a test that fails once meaningful is a real defect left failing; mutate the code, not the test; check what is collected; read every skip. |
 | qa-an-agents-tests.E1, qa-an-agents-tests.E5, qa-an-agents-tests.E11, qa-an-agents-tests.E14 | removed | Phase labels. |
 | qa-an-agents-tests.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
@@ -613,11 +642,11 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | security-review-agent-code.O1, security-review-agent-code.C1, security-review-agent-code.R1-R4 | conductor/guidance/software.md §Security of agent-written code | The shortest route to a green build removes the thing objecting; report with file, line and what an attacker gains; rate by gain; state what was not examined. |
 | security-review-agent-code.C2 | conductor/guidance/software.md §Security of agent-written code | The change under review. |
 | security-review-agent-code.C3 | removed | Heading only. |
-| security-review-agent-code.C4-C6, security-review-agent-code.E2, security-review-agent-code.E3 | conductor/guidance/software.md §Security of agent-written code | The diff, CI, manifests and lockfiles, and fixtures, examples and docs where invented credentials land; the parts on input, credential or permission paths. |
+| security-review-agent-code.C4-C6, security-review-agent-code.E2, security-review-agent-code.E3 | conductor/guidance/software.md §Security of agent-written code | Entire in-scope diff inventoried before deeper input, credential and permission review; CI, manifests, lockfiles, fixtures, examples and docs included. Complete scope restored October 1. |
 | security-review-agent-code.G1-G7, security-review-agent-code.D2-D4 | conductor/guidance/software.md §Security of agent-written code | A check that cannot fail is the defect; switched-off verification (`verify=False` and kin); credentials in anything the change created, including the history; where each new dependency came from, name checked character by character, lockfile consistent; permissions that widened; a swallowed exception around authorisation; injection wherever a string was built. |
 | security-review-agent-code.E1, security-review-agent-code.E5, security-review-agent-code.E11, security-review-agent-code.E14 | removed | Phase labels. |
 | security-review-agent-code.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
-| security-review-agent-code.E6-E10 | conductor/guidance/software.md §Security of agent-written code | Walk each principle with file and line; make each new check fire; record each dependency's name, version and source; determine whether each credential is live and in history; run the project's scanners and report verbatim. |
+| security-review-agent-code.E6-E10 | conductor/guidance/software.md §Security of agent-written code | Walk each principle with file and line; make each new check fire; record every new dependency's exact name, version, resolved source and import/use with manifest/lock consistency; determine whether each credential is live and in history; run scanners and report verbatim. Dependency evidence restored October 1; no extra table required. |
 | security-review-agent-code.E12, security-review-agent-code.D1, security-review-agent-code.D5 | conductor/SKILL.md §10. Reporting | Findings ordered by what an attacker gains, each with the smallest fix; what was not examined. |
 | security-review-agent-code.E13, security-review-agent-code.E15 | conductor/guidance/quality.md §Reviewing work | The review posted where the project reviews work. |
 | security-review-agent-code.D6, security-review-agent-code.D7 | conductor/SKILL.md §10. Reporting | Verified means attacked or made to fire and it held; failed means it did not; not verified means not examined, with why. |
@@ -641,7 +670,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | verify-a-migration.O1, verify-a-migration.C1-C4 | conductor/guidance/software.md §Data migrations | What a migration does at real row counts, on the production engine and version, what it locks, whether the rollback works, and the safe deploy order; the dev database hides every one of these. |
 | verify-a-migration.C5 | removed | Heading only. |
 | verify-a-migration.C6-C9, verify-a-migration.E2, verify-a-migration.E3 | conductor/guidance/software.md §Data migrations | Where to look, and the statements, tables, engine version and row counts. |
-| verify-a-migration.R1-R6, verify-a-migration.G1-G7 | conductor/guidance/software.md §Data migrations | Production engine and row counts (or say what is unknown); run the rollback and diff schema dumps; locks per statement; never touch production; re-measure a changed migration; constraints tested against the data; batched backfills killed halfway; the safe deploy order proved both ways; an applied migration is never edited. |
+| verify-a-migration.R1-R6, verify-a-migration.G1-G7 | conductor/guidance/software.md §Data migrations | Production engine and row counts (or say what is unknown); run rollback and diff schema dumps; locks per statement; never touch production; re-measure a changed migration and report both before/after sets with comparable versions/data/conditions; constraints tested against data; batched backfills killed halfway; deploy order proved both ways; applied migrations never edited. Explicit comparison restored October 1. |
 | verify-a-migration.E1, verify-a-migration.E5, verify-a-migration.E13, verify-a-migration.E16 | removed | Phase labels. |
 | verify-a-migration.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
 | verify-a-migration.E6-E12, verify-a-migration.D1-D5 | conductor/guidance/software.md §Data migrations | The copy on the same engine, seeded; timed statements with locks; the round trip diffed; violating-row counts; interrupted backfill; old and new code against both schemas; the copy destroyed and production untouched; what could not be measured, named. |
@@ -662,7 +691,7 @@ confidentiality`, review goes to `quality.md §Reviewing work`, and the pull req
 | prove-the-docs.R2-R5, prove-the-docs.E6-E10, prove-the-docs.D1, prove-the-docs.D3-D5 | conductor/guidance/software.md §Documentation that matches the code | The quickstart run literally from cold; do not polish unchecked prose; do not drop hard claims; generated examples produced by running; fix the false claims; re-run the suite and the quickstart. |
 | prove-the-docs.E1, prove-the-docs.E5, prove-the-docs.E11, prove-the-docs.E14 | removed | Phase labels. |
 | prove-the-docs.E4 | conductor/SKILL.md §8. Authority, budget and confidentiality | Write the plan; wait if approval is needed and the harness can pause; otherwise state it and proceed within the delegated authority. |
-| prove-the-docs.E12, prove-the-docs.R6, prove-the-docs.D2, prove-the-docs.D6, prove-the-docs.D7 | conductor/SKILL.md §10. Reporting | Claims examined, verified, false, unverifiable; the denominator. |
+| prove-the-docs.E12, prove-the-docs.R6, prove-the-docs.D2, prove-the-docs.D6, prove-the-docs.D7 | conductor/SKILL.md §10. Reporting; conductor/guidance/software.md §Documentation that matches the code | Claims examined, verified, false, unverifiable; the denominator. Every unverifiable material claim receives measurable wording, a concrete verification plan or an authorised removal proposal; difficult requirements are not quietly dropped. Explicit remedy restored October 1. |
 | prove-the-docs.E13 | conductor/guidance/quality.md §Reviewing work | Review by someone other than the author. |
 | prove-the-docs.E15 | conductor/guidance/quality.md §Reviewing work; conductor/guidance/software.md §Delivery: review, CI, deploy, rollback | Feedback acted on (each point fixed or answered); the change proposed with what was verified. |
 

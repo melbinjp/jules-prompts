@@ -19,6 +19,10 @@ it (`../SKILL.md §9. Closure and handover`, `../guidance/operations.md §Handov
 <What the operator is responsible for, what they may decide alone, what goes to the owner, and
 the standing limits: spending, publishing or sending, physical actions, incident actions.>
 
+<Each duty's agreed mode: manual, assisted or autonomous; autonomous completion requires no human
+operation, assisted paths name their human checkpoints. Takeover confirms authority, access,
+capability, prerequisites and actual state.>
+
 ## Measures and where each is taken
 
 <Each measure, its target, and its source: the log query, the invoice, the meter, the count.>
@@ -36,9 +40,12 @@ Each walked once with the operator; the date it was last performed.
 
 ## Review cadence and triggers
 
-<How often the operator reviews it, and the conditions that call for action at once: a measure
-off target, a cost over budget, an advisory, a part's end of life, a decision's reopening
-condition.>
+<For each continuing duty: operator/service; cadence or event and time zone; existing trigger
+and configuration source; authority; expected outcome; last result and its evidence; missed-run
+and failure response; restart and duplicate handling where relevant. Name the observer for loss
+of critical operation and the demonstrated evidence or remaining gap. Include decision reopening
+conditions and exception escalation. Reuse existing cloud mechanisms; a schedule alone is not proof
+of the outcome.>
 
 ## Resources and budget
 

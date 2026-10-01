@@ -2,7 +2,7 @@
   "fixture": "stale-docs",
   "skill": "prove-the-docs",
   "prompt_slug": "task_prove_the_docs",
-  "description": "A README whose checkable claims the code contradicts.",
+  "description": "A README whose checkable claims the code contradicts. October 1 evidence-record extension: unverifiable-claim-no-remedy; repeated-claims-no-authority.",
   "defects": [
     {
       "id": "missing-path",
@@ -28,6 +28,27 @@
       "must_mention": [
         "3.8",
         "3.10"
+      ]
+    },
+    {
+      "id": "unverifiable-claim-no-remedy",
+      "file": "PUBLIC_COPY.md",
+      "tell": "Material fastest/most reliable promise is called unverifiable without measurable wording, verification plan or authorised removal proposal.",
+      "must_mention": [
+        "PUBLIC_COPY",
+        "fastest",
+        "verification",
+        "removal"
+      ]
+    },
+    {
+      "id": "repeated-claims-no-authority",
+      "file": "PUBLIC_COPY.md",
+      "tell": "Public/message copies agree on thirty days but accepted POLICY is seven; comparing copies to each other bypasses authoritative policy.",
+      "must_mention": [
+        "POLICY.md",
+        "seven",
+        "thirty"
       ]
     }
   ]

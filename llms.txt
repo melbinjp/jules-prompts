@@ -9,9 +9,9 @@ To use it as an agent:
 3. End every report with its counts: verified, failed, not verified and not applicable.
 
 The whole folder as one archive (zip, SKILL.md at its root): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip
-SHA-256 of that archive: sha256:782f2f260d17d4fe855c6f9f71f9e73ad2627c2d92ada81b1f73a9274a288131
+SHA-256 of that archive: sha256:225f97a3a5946b073ee32a67040dbe767dd982aa6663cd7b0d89be48764bc09a
 Discovery index (Agent Skills 0.2.0): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
-SHA-256 of SKILL.md: sha256:25c745d79169cadd13f328c8ca369389578a26b574b230f1f8074483af081740
+SHA-256 of SKILL.md: sha256:ef40187270079c4592b742c3069f815aa926a7abc5f100ee935e60e3d9bb076c
 
 ## The conductor
 
@@ -35,6 +35,7 @@ SHA-256 of SKILL.md: sha256:25c745d79169cadd13f328c8ca369389578a26b574b230f1f807
 
 - [Decision record (ADR) template](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/templates/adr.md): One file per decision, numbered in order, kept where the project keeps its documents (often docs/decisions/).
 - [Handover note template](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/templates/handover.md): For anything that keeps running after a project closes, or when a project changes hands. Kept with the project's records; the receiving operator confirms each section by walking it, not by reading it.
+- [Shared state view template](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/templates/state.md): Use only when the project's existing state note or native view does not serve this purpose. This is a summary, not another backlog or authority. Link to source records and dated evidence. Keep private runtime data and credentials out of source.
 
 ## Optional
 

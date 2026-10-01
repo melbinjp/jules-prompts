@@ -17,3 +17,11 @@ defect_id: shape-assertion
 defect_id: mocks-the-unit
 defect_id: reconstructed-expected
 defect_id: no-exception
+
+## October 1 evidence-record extension
+
+
+- qa-counts-unreconciled: QA_REVIEW omits the cold and final count reconciliation (5 versus 4 collected). Report collected/passed/failed/skipped counts, skip reasons, examined/unfailable/rewritten/deleted checks and the final behavior coverage. Unrelated coverage cannot compensate for deleted obligations. These supplied counts are synthetic candidate evidence, not a fresh run of the original tree; inspect the candidate or mark its reconciliation unverified. Preserve the zero-percent positive control.
+
+
+defect_id: qa-counts-unreconciled

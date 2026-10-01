@@ -104,10 +104,12 @@ need; only engineering was considered.
   now and record the switch.
 - **A blocked route with no written alternative gets the next route found** (`decisions.md`) and
   recorded.
-- **Nothing is declared impossible, and no project is declared dead.** Money, time, physics,
-  law and skills are constraints, and a constraint has routes around it. Say honestly what each
-  costs and how long it takes. A quiet launch, a lost supplier or a missed measure is evidence
-  about a route, never a verdict on the idea.
+- **Do not dismiss the objective because a route failed.** Seek alternatives around money, time,
+  skills and other constraints, with honest costs and durations. Respect physical and legal
+  limits: if no feasible authorised route is demonstrated, record that finding, its evidence
+  and remaining uncertainties, and propose a constraint or objective change to the authorised
+  decision-maker. Do not promise a workable route without evidence. A quiet launch or a lost
+  supplier alone does not establish that the objective is infeasible.
 
 ## Areas and owners
 
@@ -141,8 +143,9 @@ someone paying. These shape the design, so they are founded at the start.
 
 ## Journeys and threads
 
-- **List the three to five journeys that must never fail,** in the words of the person doing
-  them ("a member books a free slot on a phone and gets a confirmation").
+- **List every supported journey, and mark those that must never fail,** in the words of the
+  person doing them ("a member books a free slot on a phone and gets a confirmation"). Keep the
+  list short where the actual project permits; no fixed number is a completeness limit.
 - **Thread each one through every area:** one table per journey, one row per step, recording
   what the person does, what they see or hear, the component or procedure that handles it, the
   data or record written, the evidence that proves it (a test, an inspection, a rehearsal), and
@@ -150,6 +153,8 @@ someone paying. These shape the design, so they are founded at the start.
   delivery the "component" is the procedure, person or equipment that handles the step.
 - The threads keep the flow, the architecture and the data one design rather than three
   (`design.md §Threads to the architecture`).
+- Critical journeys receive the stronger acceptance and user-testing gates. Other supported
+  journeys still have coherent flows and states; vary verification depth by risk and intended use.
 
 ## Requests, however they are worded
 
@@ -178,7 +183,7 @@ and neither can see the other's side.
    plan, meter the current, time the process. Optimising what is easy instead of what is slow,
    and building the buzzword (a queue for "scalable", a rewrite for "modern", an unused model
    call for "AI"), are the failures this prevents.
-6. **Account for every claim.** Each ends as one of four, and none as a bare no:
+6. **Account for every claim.** Each ends with an evidenced disposition, never a bare no:
    - **changed**, with the value before and after;
    - **already meets its target**, with the number, and the improvement that matters instead,
      found from where the owner's feeling comes from;
@@ -186,6 +191,9 @@ and neither can see the other's side.
      the owner is away, recorded as a proposal while the measured parts continue;
    - **redirected**: the decision it would have broken, and the route that got the owner what
      they wanted.
+   - **no feasible authorised route demonstrated**: the evidence and constraints, remaining
+     uncertainties, and a proposed constraint or objective change for the authorised decider.
+     This is an open decision or an authorised closure, not a fulfilled request.
 7. **Build each change as SKILL.md §7 says,** and record a translation table: claim, meaning,
    measure, value before, target, action, value after, evidence.
 

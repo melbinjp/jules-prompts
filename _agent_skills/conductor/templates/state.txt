@@ -1,0 +1,42 @@
+---
+permalink: /.well-known/agent-skills/conductor/templates/state.md
+layout: null
+sitemap: false
+excerpt_separator: ""
+---
+{% raw %}# Shared state view template
+
+Use only when the project's existing state note or native view does not serve this purpose.
+This is a summary, not another backlog or authority (`../SKILL.md §3. Work records`). Link to
+source records and dated evidence. Keep private runtime data and credentials out of source.
+An operator or mode change requires actual authority, access and capability, not just a field edit.
+
+```markdown
+# State: <project>
+
+Updated: <date/time/time zone> by <operator>
+Objective and accepted milestone: <summary and authoritative link>
+Settled core and limits: <accepted requirements/decisions/authority links>
+Records: <where ownership, modes and work are actually maintained>
+
+## Continuing duties, where applicable
+
+<Duty, agreed manual/assisted/autonomous mode and operator/service; actual trigger/configuration;
+last verified outcome with source/date; failure/overdue response and observer of critical loss.
+None for a finite result with no continuing duty.>
+
+## Active work
+
+| Source work item | Operator and mode | State | Evidence and date |
+|---|---|---|---|
+| <link> | <qualified actor; agreed mode> | <actual state> | <source> |
+
+## Exceptions for the owner
+
+<Concrete decisions outside delegation; known failures/unknowns and their next action.>
+
+## Next real action
+
+<Next ready authorised work package; what acceptance it will deliver.>
+```
+{% endraw %}

@@ -17,3 +17,7 @@ The empty state of the bookings list (`web/list.html`) is designed right. It is 
 python scripts/score_fixture.py fixtures/designed-by-default REPORT.md
 python scripts/score_fixture.py fixtures/designed-by-default --self-check
 ```
+
+## October 1 extension
+
+The original case and positive control remain. This case now has 11 planted defects; the dated extension adds 2. All new data are synthetic fixture evidence, not observations of a live project or cloud service. The existing request covers the extension; historical trial reports retain their original scope.

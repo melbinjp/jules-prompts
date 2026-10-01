@@ -17,3 +17,7 @@ PostgreSQL 15 host with the real row counts. It is the control; nobody used it.
 python scripts/score_fixture.py fixtures/migrated-on-empty REPORT.md
 python scripts/score_fixture.py fixtures/migrated-on-empty --self-check
 ```
+
+## Evidence-record regression extension
+
+The case now contains 6 planted defects. These additional review records are synthetic, separate from the original artifacts and historical trial results; they exercise evidence accounting rather than claim a live run. Original inputs and controls remain unchanged.

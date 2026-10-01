@@ -56,8 +56,10 @@ Adjust, and continue. STATUS.md is replaced by this report, and the committee is
 | restore | last checked in October | broken |
 | status report matches the sources | "all on track" against two missed measures | broken |
 | what the help messages ask | the chat export is not in the repository | skipped |
+| cockpit-duplicate-authority | `COCKPIT.md` and extension evidence | broken |
+| takeover-by-label | `OPERATING-MODEL.md` and extension evidence | broken |
 
-15 items: 5 holds, 9 broken, 1 skipped.
+17 items: 5 holds, 11 broken, 1 skipped.
 
 defect_id: measure-missed-quietly
 defect_id: trigger-fired
@@ -66,3 +68,13 @@ defect_id: ghost-dependency
 defect_id: cost-over-budget
 defect_id: manual-path-broken
 defect_id: restore-never-tried
+
+## October 1 extension findings
+
+
+- cockpit-duplicate-authority: COCKPIT.md silently changes M3 from £5 to £15. Restore the authoritative £5 ceiling unless an authorised superseding decision changes it. Make the cockpit a dated linked view of PROJECT.md and decisions, not an editable second authority; preserve native records and keep private runtime state outside public Git.
+- takeover-by-label: OPERATING-MODEL.md does not prove takeover. The agent is read-only, lacks deployment credentials and scoped authority, and has not demonstrated resumption and outcome verification. Keep takeover pending and preserve the maintainer's manual fallback while repairing its existing broken release path. M1's double-booking log remains a valid positive control.
+
+
+defect_id: cockpit-duplicate-authority
+defect_id: takeover-by-label

@@ -22,6 +22,14 @@ library everywhere it was published.
 
 ## Known limitations
 
+October 1 local strengthening adds complete consequence/journey coverage, evidence-based challenge
+of accepted methods, conditional alternatives, settled-core claim consistency, qualified takeover
+and explicit operating modes with existing cloud reuse. The shared state template is an optional
+view of existing records. Standing rules and generated forms follow the source. Fifteen new defects
+extend eight existing regression cases, for 161 across the same 26 fixtures; the trial results below
+remain the historical 146-defect run. These changes do not establish successful autonomous
+operation of Utily or any workspace project. Model detection of the new cases remains to be tried.
+
 - Structural checks do not show that an agent delivers a project. That is what the trials in
   `docs/trials/` are for, and the section below points at their record.
 - The fixtures are scored by whether a report names each planted defect. The scorer reads strings, so a

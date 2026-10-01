@@ -171,10 +171,15 @@ flag that sounds right, a test it believes passed).
   provider) and which of the project's confidentiality classes it may receive. No agent receives a
   class the rules have not released to it, however capable it is (`confidentiality.md §Agents and
   models`).
-- **Then by measured ability, not reputation:** qualify each agent for each kind of work on a small
-  task held back from this project and of the same kind, scored against its acceptance criteria;
-  record the scores. A model's reputation, size or benchmark is a claim. Re-qualify when a model, its
-  settings or the harness changes, and move the work to its fallback if the score fell.
+- **Then by measured ability, not reputation:** qualify each agent for each kind of work on a
+  versioned task held back from this project and of the same kind, scored against recorded
+  acceptance criteria. Also use a matching existing regression fixture where one applies, naming
+  its coverage and limits; otherwise use a representative held-back case rather than invent a
+  general benchmark. Keep task, scorer, criteria and conditions stable for before/after comparisons;
+  record versions and scores. Re-qualify when the model, settings or harness changes using that
+  same set, adding new cases separately. An easier replacement does not establish improvement.
+  Route to the fallback when required acceptance fails; a lower score also gets its regression
+  assessed rather than silently accepted. Reputation, size and published benchmarks are claims.
 - **Fit the work to the agent:** a small local model with a short context gets smaller, tightly scoped
   work packages and one guidance section at a time; a stronger one gets more.
 - **No procedure rests on one agent:** record, for each, the agent, where it runs, the classes it may
@@ -192,7 +197,8 @@ flag that sounds right, a test it believes passed).
 ## Standing rules for the project {#standing-rules-for-the-project}
 
 A short block for the project's agent instructions (its `AGENTS.md` or equivalent), so the rules
-apply even when nobody loads this guidance. Adapt it; delete lines that do not apply.
+apply even when nobody loads this guidance. Adapt it; omit lines only with a recorded reason
+they do not apply, not because the subject has not been examined.
 
 ```markdown
 ## How work is done here
@@ -211,6 +217,14 @@ apply even when nobody loads this guidance. Adapt it; delete lines that do not a
 - Every change traces to the objective, a requirement or an accepted decision (ADRs in <place>), is
   measured before and after, is carried through everything it touches, and removes what it replaces.
   Contradicting an accepted decision takes a superseding ADR first.
+- Preserving authority does not shield inefficient methods from evidence-based challenge. Model
+  suggestions are hypotheses; compare actual outcomes and representative alternatives before
+  claiming improvement. Reopening and changes remain within the agreed authority.
+- Account for every supported journey and actual consequence of a change before choosing checks;
+  an unread section does not prove the subject irrelevant. Keep effective existing safeguards.
+- Reuse the existing state view and cloud/operating mechanisms. A summary is not another authority;
+  takeover verifies access, authority, capability and resumption. An autonomous duty completes
+  without human operation, with activation, outcome and failure handling demonstrated.
 - Add machinery only when you can name what breaks without it.
 - The records are the memory: rebuild from them each session; look up, do not remember; never wait
   on what can be looked up or reversibly chosen, and record each such choice for the owner.
@@ -218,7 +232,7 @@ apply even when nobody loads this guidance. Adapt it; delete lines that do not a
   other than its author.
 - Acting on the world: an acknowledgement is not an outcome; the default target is the simulator;
   every failure goes to a decided safe state; never retry what may already have happened; nothing
-  irreversible without a person's yes to the exact action.
+  irreversible without a person's yes to the exact action or explicit scoped standing authority.
 - Confidential work: send nothing beyond <the confidentiality record>; remote models get only the
   released classes and the smallest excerpt; offline is proved by running offline.
 - Commands: install `<command>`, test `<command>`, required environment `<variables>`.

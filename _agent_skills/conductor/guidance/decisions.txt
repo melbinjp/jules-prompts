@@ -55,20 +55,33 @@ same failures appear whether the choice is a database, a board, a caterer or a m
   evidence, and the reason is written down.
 - **If every option fails a hard limit, the limit is the problem to solve:** find what would
   move it (a funding route, a phased approach, a different design, a tool built for the job) and
-  cost that route. The answer is never that the choice cannot be made.
+  cost that route. If no feasible authorised route has been demonstrated, say so with evidence,
+  remaining uncertainties and the smallest constraint change that would enable one; take that
+  proposal to the authorised decision-maker instead of inventing a workable option.
 - **Choose one, several, or a sequence:**
-  - **one**, when it passes the hard limits and wins clearly on the weighted criteria;
+  - **one**, when it passes the hard limits and is clearly preferable on the justified criteria;
   - **a portfolio**, each option where it is strongest (one place keeps the masters, another
     serves them);
   - **a sequence**: start with one behind a seam, and write now the condition that triggers a
     switch (a measure, a price, a date, a count of incidents) and the plan for switching;
   - **an experiment**, when evidence cannot separate two options and trying is cheap: run both
     for a fixed period, measure them on the criteria, decide on a date set in advance.
+- **Several outcomes may be defensible.** Define improvement for the accepted objectives,
+  affected people, constraints and time horizon. Compare hard limits first, then material
+  tradeoffs. If priorities or evidence do not separate the options, retain the serious
+  alternatives and explain which is preferable under which conditions. Do not manufacture a
+  winner with invented scores or weights. Compare the combined costs, dependencies, risks and
+  limits of a portfolio; good parts do not automatically make a good whole.
+- Challenge material premises before commitment (`quality.md §Challenging recommendations and
+  existing methods`). The owner's named option and an accepted method can both be evaluated;
+  that does not authorise a contradictory change.
 
 ## Criteria before scores
 
-1. **Write the criteria and their weights before looking at any candidate, and record them** so
-   the order shows in the history.
+1. **Write the criteria and any justified weights before scoring candidates, and record them**
+   with the measurement scales and rationale so the order shows in the history. Use a method
+   proportionate to the stakes and evidence, not a fixed scoring recipe. A simple weighted table
+   is not a claim of formal decision analysis or government/enterprise conformity.
 2. **Take every criterion from something named:** a measure, a journey, a constraint (the budget,
    a licence, a lead time, the skills of whoever will maintain it) or a risk. Popularity, stars,
    "modern" and "developer experience" are easy to score and connected to nothing.
@@ -95,7 +108,8 @@ same failures appear whether the choice is a database, a board, a caterer or a m
   or built** rather than read.
 - **A costly-to-reverse decision needs two different kinds of evidence** (a calculation and a
   measurement; a primary source and a prototype), three or more options, a way out, a reopening
-  condition, and the owner's approval. Two articles quoting the same benchmark are one piece of
+  condition, and the owner's approval or explicit scoped standing authority covering the choice.
+  Two articles quoting the same benchmark are one piece of
   evidence.
 - **Gather the real numbers:** current and expected usage, sizes and rates, measured wherever
   possible; and find where the choice plugs into the code, circuit or process, which is where
@@ -110,6 +124,11 @@ same failures appear whether the choice is a database, a board, a caterer or a m
   standby current, delivery, tax).
 - **Name the term that dominates,** which is often not the headline price.
 - **Name the assumption that would flip the decision,** and how far it would have to move.
+- **Check plausible scenarios and uncertainty:** changes in usage, cost, priorities and evidence
+  that could change the recommendation, using justified ranges rather than invented precision.
+  Distinguish measured advantage, preference-dependent choice and evidence that cannot separate
+  alternatives. Gather more evidence when its likely effect on the action justifies cost and delay;
+  otherwise take the justified reversible next step within delegation and record its switch condition.
 
 ## A way out and a reopening condition
 
@@ -118,7 +137,11 @@ same failures appear whether the choice is a database, a board, a caterer or a m
   URLs on a domain the project controls; test an export once.
 - **Write the exit down:** what leaving would cost, and how it would be done.
 - **Write the condition that reopens it** (a measure, a price, a date, a count of incidents).
-  Nothing else reopens it: not a newer article, and not a change of mood.
+  Only that condition or an explicit request from the authorised decision-maker reopens it;
+  a newer article or a change of mood alone does not. Reopening is a review, not approval to
+  replace the decision. Apply the existing evidence and approval requirements. Evidence may
+  justify proposing reopening even when the original condition was too narrow; do not change
+  the decision silently. Another acceptable option alone does not reopen an accepted choice.
 - **At every review, evaluate each accepted decision's reopening condition** with today's numbers.
   For each that has fired, reopen the decision, or record why it stands, with the number. A
   condition that could never fire is itself a finding: rewrite it.
@@ -135,6 +158,8 @@ same failures appear whether the choice is a database, a board, a caterer or a m
 - **Number ADRs in order and keep each file's number unique.** A superseded ADR names the ADR that
   replaced it, and the replacement names the one it supersedes.
 - **Record a decision before, or with, the change that needs it.**
+- Keep the accepted core and repeated policy/values consistent with their authoritative sources
+  (`../SKILL.md §3. Work records`); do not leave superseded material claiming current authority.
 - **Design decisions are decisions like any other:** the flow chosen, the interaction model, the
   information architecture, the design tokens, the name and the voice. The product's name,
   anything people learn by habit, and a machine interface others will build on are costly to
@@ -156,12 +181,13 @@ same failures appear whether the choice is a database, a board, a caterer or a m
 
 - **When the choice needs the owner to pay, sign up, approve or accept a risk, send one message**
   with: the comparison; the recommendation and its cost now and at the target size; the
-  runner-up and why it lost; and what happens if they say no.
+  strongest alternatives, their tradeoffs and the conditions under which each is preferable;
+  any unresolved superiority; and what happens if they say no.
 - **Then stop asking.** A no is a constraint; plan around it. Present the alternatives and the
   cost of each; recommend once, and never nag toward an option.
 - **A decision the briefing delegated** is made without asking, within its standing limits, and
   recorded with how to undo it (`autonomy.md §Choices on the owner's behalf`); only what the
   briefing kept for the owner goes to them, and the work carries on meanwhile.
-- **For a costly decision, wait for approval where the harness can pause.** Where it cannot,
-  record the decision as proposed and do not act on it.
+- **For a costly decision outside explicit scoped standing authority, wait for approval where
+  the harness can pause.** Where it cannot, record the decision as proposed and do not act on it.
 {% endraw %}

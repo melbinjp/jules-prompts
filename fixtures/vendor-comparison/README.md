@@ -16,3 +16,7 @@ python harness/check_trace.py --root fixtures/vendor-comparison   # passes
 python scripts/score_fixture.py fixtures/vendor-comparison REPORT.md
 python scripts/score_fixture.py fixtures/vendor-comparison --self-check
 ```
+
+## October 1 extension
+
+The original case and positive control remain. This case now has 8 planted defects; the dated extension adds 2. All new data are synthetic fixture evidence, not observations of a live project or cloud service. The existing request covers the extension; historical trial reports retain their original scope.

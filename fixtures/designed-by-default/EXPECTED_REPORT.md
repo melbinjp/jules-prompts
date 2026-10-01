@@ -41,8 +41,10 @@ The empty state of the bookings list (`web/list.html`) is designed right. It say
 | each surface rendered and looked at | not in the fixture: no screenshots can be taken here | skipped |
 | each journey tested with people, labelled | agent runs reported as measured people | broken |
 | each design decision with evidence | D0004 on opinion; M1 fell to 52% | broken |
+| supported-journey-omitted | `CHANGE_REVIEW.md` and extension evidence | broken |
+| change-consequences-not-routed | `CHANGE_REVIEW.md` and extension evidence | broken |
 
-12 items: 1 holds, 10 broken, 1 skipped.
+14 items: 1 holds, 12 broken, 1 skipped.
 
 defect_id: flow-by-build-order
 defect_id: undo-without-history
@@ -53,3 +55,13 @@ defect_id: contrast
 defect_id: developer-words
 defect_id: limit-only-in-the-page
 defect_id: agent-path-missing
+
+## October 1 extension findings
+
+
+- supported-journey-omitted: J4 receipt export is declared supported. Non-critical means proportionate verification, not exclusion: walk its flow, states, human and machine paths and outcome. Keep the stronger critical gates for J1-J3 and preserve web/list.html's correct empty state.
+- change-consequences-not-routed: receipt layout alone cannot establish acceptance. Route actual permissions to security review, retention and expiry to storage/privacy and wording checks, cleanup to operations with outcome/failure evidence, and the human/machine paths to design. Account for the entire affected change or justify exclusions. The contract does not itself prove an access vulnerability or successful live expiry; report those as not verified until actual implementation and observations support a verdict.
+
+
+defect_id: supported-journey-omitted
+defect_id: change-consequences-not-routed

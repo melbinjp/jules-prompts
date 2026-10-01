@@ -45,8 +45,10 @@ D0002, the audio format, is done right. Its criteria were written before the com
 | revisit condition | "never, unless..." | broken |
 | audio format decision (D0002) | criteria dated first, ABX test, exit through the masters | holds |
 | studio uplink could serve the NAS directly | uplink speed not recorded in the ledger | skipped |
+| authority-shields-improvement | `METHOD_REVIEW.md` and extension evidence | broken |
+| conditional-alternatives-hidden | `METHOD_REVIEW.md` and extension evidence | broken |
 
-11 items: 1 holds, 9 broken, 1 skipped.
+13 items: 1 holds, 11 broken, 1 skipped.
 
 defect_id: criteria-not-from-measures
 defect_id: missing-options
@@ -54,3 +56,13 @@ defect_id: egress-arithmetic
 defect_id: vendor-claim-only
 defect_id: unrepresentative-test
 defect_id: door-misclassified
+
+## October 1 extension findings
+
+
+- authority-shields-improvement: D0004 does not bar a commissioned comparison. The two same-snapshot runs show manual 180/178 minutes versus 2 minutes, with equal seeded-failure detection. Include the 60-minute setup and ongoing/reversal costs, access and reliability before claiming a verified live improvement; these two runs justify further evaluation and proposing authorised reconsideration despite the narrow trigger. Do not silently supersede D0004 or automate publication.
+- conditional-alternatives-hidden: Simple saves operator time (0.5 versus 2 hours/month), Flexible saves $18/month and exits in 0.5 versus 2 hours. Both meet hard limits. The weights and scoring scales behind 9.7/6.6 are absent; do not invent the owner's preferences. Present conditional recommendations and sensitivity/switch conditions, with a reversible next step or one consolidated preference question if commitment needs it. D0002 remains the positive control.
+
+
+defect_id: authority-shields-improvement
+defect_id: conditional-alternatives-hidden

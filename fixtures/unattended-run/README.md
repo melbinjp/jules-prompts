@@ -14,3 +14,11 @@ the start, with standing limits. It is the control.
 python scripts/score_fixture.py fixtures/unattended-run REPORT.md
 python scripts/score_fixture.py fixtures/unattended-run --self-check
 ```
+
+## October 1 extension
+
+The original case and positive control remain. This case now has 10 planted defects; the dated extension adds 2. All new data are synthetic fixture evidence, not observations of a live project or cloud service. The existing request covers the extension; historical trial reports retain their original scope.
+
+## Evidence-record regression extension
+
+The case now contains 11 planted defects. These additional review records are synthetic, separate from the original artifacts and historical trial results; they exercise evidence accounting rather than claim a live run. Original inputs and controls remain unchanged.

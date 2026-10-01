@@ -1,0 +1,5 @@
+snapshot,run,method,links,seeded_failures,found_failures,operator_minutes,setup_minutes
+archive-2026-09-15,1,manual,1500,4,4,180,0
+archive-2026-09-15,1,existing-batch,1500,4,4,2,60
+archive-2026-09-15,2,manual,1500,4,4,178,0
+archive-2026-09-15,2,existing-batch,1500,4,4,2,60
