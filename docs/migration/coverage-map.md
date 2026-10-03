@@ -46,12 +46,17 @@ These additions are outside the frozen 1,825-item baseline, which still contains
 146 defects. Historical trial results retain that original denominator. Expected-report scoring
 checks the case records; detecting these cases in an independent agent run remains separate.
 
-October 3, from the lair application: a whole project now requires a vision, a plan and a
-minimum on every applicable aspect before a batch of actions, including the commercial exchange
-when the project must earn. The minimum stays when current technology cannot meet it. Two
-synthetic defects extend premature-start (`means-capped-the-result`, `actions-without-a-vision`),
-163 across the same 26 fixtures. They are outside the frozen baseline. The trial record is
-unchanged.
+A whole project requires a vision, a plan and a minimum on every applicable aspect before a
+batch of actions, including the commercial exchange when the project must earn. The minimum
+stays when current technology cannot meet it. After that writing, and again at each checkpoint,
+the run names what the record would still let through. Once use has started, the next batch
+waits on a checkpoint in the existing records. The way the result is used is in scope when it
+applies: several experiments, outward exposure kept inside authority, money operated as a means,
+and an aim above that money left unnamed when the owner has not named it. Six synthetic defects
+extend premature-start (`means-capped-the-result`, `actions-without-a-vision`,
+`no-checkpoint-after-start`, `outward-before-authority`, `one-experiment-closed-the-rest`,
+`money-stood-in-for-the-aim`), 167 across the same 26 fixtures. They are outside the frozen
+baseline. The trial record is unchanged. No new inventory rows are added for these ids.
 
 These decisions recur through the map. Each is taken from the finalisation proposal.
 
@@ -98,7 +103,8 @@ then checks that every `file §Heading` in this map exists.
   sources · Estimates and arithmetic · Work records in the project's tool
 - `conductor/guidance/product.md`: Intake: what only the owner knows · Starting from nothing or a
   single word · What it takes · Objective, outcomes and measures · The vision, the plan and the
-  business · Alternative routes · Areas and owners · Journeys and threads · Experience design ·
+  business · What the record still misses · Checkpoints after the work has started · How the
+  result is used · Alternative routes · Areas and owners · Journeys and threads · Experience design ·
   Requests, however they are worded ·
   Releasing to people · Hearing back
 - `conductor/guidance/decisions.md`: Which decisions need evidence · Options · Criteria before

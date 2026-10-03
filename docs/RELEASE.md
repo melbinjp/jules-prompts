@@ -27,11 +27,12 @@ of accepted methods, conditional alternatives, settled-core claim consistency, q
 and explicit operating modes with existing cloud reuse. The shared state template is an optional
 view of existing records. Standing rules and generated forms follow the source. Fifteen new defects
 extend eight existing regression cases, for 161 across the same 26 fixtures; the trial results below
-remain the historical 146-defect run. October 3 adds two further defects on premature-start
-(`means-capped-the-result`, `actions-without-a-vision`), 163 across the same 26 fixtures: a season
-promise dropped because current boards cannot meet it, and a service list treated as the work.
-The trial record is unchanged. These changes do not establish successful autonomous
-operation of Utily or any workspace project. Model detection of the new cases remains to be tried.
+remain the historical 146-defect run. A later extension of premature-start adds defects for a
+season promise dropped because current boards cannot meet it, a service list treated as the
+work, no checkpoint after use has started, an outward message before it was authorised, one
+experiment closing the other routes, and money standing in for an unnamed aim. That is 167
+across the same 26 fixtures. The trial record is unchanged. These changes do not establish
+that an agent delivers a project. Model detection of the new cases remains to be tried.
 
 - Structural checks do not show that an agent delivers a project. That is what the trials in
   `docs/trials/` are for, and the section below points at their record.

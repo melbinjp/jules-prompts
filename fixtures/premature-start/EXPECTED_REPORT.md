@@ -37,6 +37,10 @@ Most of that start decided things the idea did not ask for, and none of it can b
 
 - means-capped-the-result: PLAN.md's settled product drops the owner's season promise because the chosen ESP32 dev board, and hobby boards in general, cannot last a season. It then calls a kit the owner recharges every two days the product, and refuses another radio or a custom board. The season is the minimum. The board is a means that missed it. The next work is a route that can meet the season, using the battery arithmetic and the radio comparison, or an open gap. The two-day kit is not the vision.
 - actions-without-a-vision: the same section says the services listed above are the work and there is no separate plan. The vision heading is the slogan already rejected under unmeasurable-goal. Architecture, milestones and next steps are a batch of actions. The kit a gardener can buy, and the plan those actions come from, are absent. Until they are written, more services are not the next work.
+- no-checkpoint-after-start: the services are already running and a public listing is live. No checkpoint was set after that start. Nothing will be looked at again until launch. The next work is a checkpoint with what is looked at, the evidence, the date or trigger, who looks, and what a fail does.
+- outward-before-authority: Buyers were emailed the price before the owner approved any message. That is outward exposure past the authority. The next work is to record the message, what it commits, and how it can be taken back, and to send nothing further until the owner has authorised it.
+- one-experiment-closed-the-rest: the only experiment is this stack. Other routes were not opened. One experiment is not the portfolio. Each open route needs an objective, a budget, a stop condition, and what it must show. The primary objective stays named.
+- money-stood-in-for-the-aim: Earning from the kit is called the vision. No separate aim was named by the owner, and none will be asked. Money is a means. An aim the owner has not named stays unnamed. Do not invent one. The money is still operated.
 
 ## Verdicts
 
@@ -60,8 +64,12 @@ Most of that start decided things the idea did not ask for, and none of it can b
 | dev board sleep current | not measured; no board to hand | skipped |
 | season promise kept as the minimum | dropped because hobby boards cannot meet it; two-day recharge called the product | broken |
 | vision and plan before the service list | "no separate plan"; the services listed above treated as the work | broken |
+| checkpoint after use started | services already running; no checkpoint until launch | broken |
+| outward exposure inside authority | buyers were emailed before the owner approved | broken |
+| several experiments, each with a stop | only experiment is this stack; other routes were not opened | broken |
+| money as a means, aim unnamed if unstated | earning from the kit called the vision; no separate aim | broken |
 
-18 items: 1 holds, 16 broken, 1 skipped.
+22 items: 1 holds, 20 broken, 1 skipped.
 
 defect_id: no-need-evidence
 defect_id: unmeasurable-goal
@@ -75,3 +83,7 @@ defect_id: no-certification
 defect_id: no-money
 defect_id: means-capped-the-result
 defect_id: actions-without-a-vision
+defect_id: no-checkpoint-after-start
+defect_id: outward-before-authority
+defect_id: one-experiment-closed-the-rest
+defect_id: money-stood-in-for-the-aim

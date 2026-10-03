@@ -42,3 +42,11 @@ A whole season on one set of batteries is not possible on the ESP32 dev board al
 and hobby boards cannot do better, so that promise is dropped. The product is a kit the owner
 recharges every two days. No other radio and no custom board will be looked at. The services
 listed above are the work. There is no separate plan.
+
+## After the work started
+
+The services are already running. A public listing is live. No checkpoint was set after that
+start. Nothing will be looked at again until launch. Buyers were emailed the price before the
+owner approved any message. The only experiment is this stack. Other routes were not opened.
+Earning from the kit is the vision. No separate aim was named by the owner, and none will be
+asked.

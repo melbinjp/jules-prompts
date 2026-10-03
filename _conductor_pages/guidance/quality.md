@@ -72,6 +72,11 @@ costs; and the bad days already reported (issues, crash reports, complaints, ret
   does not meet the commercial minimum. The named exchange, observed, does. A quality minimum
   is met by the checks in this file, including a check shown to fail for the defect it exists
   for (`../SKILL.md §6`).
+- **Use has a minimum too.** Several experiments, outward exposure, money operated as a means,
+  and an aim above that money, when they apply, are aspects with minima
+  (`product.md §How the result is used`). A checkpoint after use has started is part of
+  acceptance (`product.md §Checkpoints after the work has started`). A record that cannot name
+  what it still misses has not looked (`product.md §What the record still misses`).
 
 ## Walk every area {#walk-every-area}
 

@@ -1,6 +1,6 @@
 ---
 name: conductor
-description: One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs, including the exchange when the project must earn, and it keeps those minima when the technology already in hand falls short. Focused guidance loads only when the project needs it.
+description: One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs. That includes the exchange when the project must earn, what a record still misses, checkpoints after use starts, and the way the result is used. It keeps those minima when the technology in hand falls short. Focused guidance loads only when the project needs it.
 ---
 # Conductor: deliver any project, with evidence
 
@@ -68,6 +68,10 @@ changes:
    (`guidance/product.md §The vision, the plan and the business`,
    `guidance/quality.md §The floor and the means`). These are written before a batch of
    actions. They stay as written when the current technology, tools, team or habits fall short.
+   The same record holds what it still misses, the checkpoints once use has started, and how
+   the result is used (`guidance/product.md §What the record still misses`,
+   `guidance/product.md §Checkpoints after the work has started`,
+   `guidance/product.md §How the result is used`).
 
 **An existing project** has its records written from what is there before anything changes:
 what it is for (in the owner's words), what exists and what actually runs, the decisions it
@@ -142,6 +146,24 @@ writing it is the next work. A bounded fix still has three limits. It does not c
 vision. It does not drop an aspect below its minimum. It does not rename a weaker result as the
 vision when the current means cannot reach it (`guidance/quality.md §The floor and the means`).
 A group of actions with no vision and no plan is not delivery.
+
+**What the record still misses.** After those three things are written, and again at each
+checkpoint, name what the record would still let through. An applicable aspect with no row.
+A use the vision does not name. A consequence of work already started. A minimum met on paper
+and missed in the result. A part of this method the run needed and did not load. When any of
+those can be named, covering it is the next work. When none can, record the search
+(`guidance/product.md §What the record still misses`).
+
+**Checkpoints after use starts.** Once work that uses this method has started, the next batch
+waits until a checkpoint is written in the existing records. It names what will be looked at,
+the evidence that passes or fails it, the date or trigger, who looks, and what a fail does.
+A running task or an updated summary is not a checkpoint met
+(`guidance/product.md §Checkpoints after the work has started`).
+
+**The way the result is used.** Several experiments, how much leaves the working environment,
+money operated as a means, and whether an aim sits above that money, are aspects when they
+apply. Each has a minimum. An aim the owner has not named stays unnamed
+(`guidance/product.md §How the result is used`).
 
 **The smallest loop that finishes things.** One ready work package at a time: do it, run its
 gates, record it with a link to its evidence, update the state note, take the next. Review at
@@ -397,7 +419,7 @@ covers; sections refer to each other as `file §Heading`.
 
 | When | Load |
 |---|---|
-| Always, for the objective, the vision and the business (`§The vision, the plan and the business`), measures, requests and reaching people | `guidance/product.md` |
+| Always, for the objective, the vision and the business (`§The vision, the plan and the business`), what the record still misses, checkpoints after use starts, how the result is used, measures, requests and reaching people | `guidance/product.md` |
 | Always, at least `§Choosing methods by need` and `§Work records in the project's tool`; the rest when there are dependencies, dates, shared resources, risks or changes to control | `guidance/planning.md` |
 | Any choice that matters: a tool, supplier, part, platform, design or route | `guidance/decisions.md` |
 | Anything people or agents see, hear or operate | `guidance/design.md` |

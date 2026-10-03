@@ -125,6 +125,75 @@ changes.
   no completed exchange does not meet a vision whose success is to earn.
 - **Every aspect is founded before the build is called the project.** §Areas and owners. For a
   whole-project request, an area with no owner and no written reason fails the check.
+- **What the record still misses, the checkpoints after use starts, and how the result is
+  used are part of the same writing** (§What the record still misses,
+  §Checkpoints after the work has started, §How the result is used).
+
+## What the record still misses
+
+After the vision, the plan and the minima are written, name what that record would still let
+through. Look again at every checkpoint.
+
+Name one of these when it is true:
+
+- An applicable aspect has no row. Silence is not a pass (§Areas and owners).
+- The owner uses the result in a way the vision does not name.
+- Work already started has a consequence the plan does not name. A message, a price, a
+  dependency, a person now waiting, or a spend.
+- A minimum is met on paper and missed in the result.
+- This method has a part the run needed and did not load. An unread section does not prove it
+  does not apply (`../SKILL.md §2`).
+
+When any of those can be named, covering it is the next work, before the next batch. When none
+can, record the search, its date and what was read. Write the gap in the records the project
+already has. Do not open a new tracking system.
+
+A run that never asks what it missed has not finished the check.
+
+## Checkpoints after the work has started
+
+Once work that uses this method has started, set the next checkpoint in the existing records
+before the next batch. A milestone review can be that checkpoint
+(`operations.md §Periodic review`). It is not a second system.
+
+Each checkpoint names:
+
+- what will be looked at: the vision, the plan, each applicable minimum, what the record still
+  misses, and how the result is used;
+- the evidence that passes or fails it;
+- the date or the trigger;
+- who looks;
+- what a fail does. Another route, or that batch stops. The minimum is not lowered
+  (`quality.md §The floor and the means`).
+
+A running task, an updated summary, or a green check on one aspect is not a checkpoint met.
+The first checkpoint is set when use starts. It is not set after the result is called done.
+
+## How the result is used
+
+The method covers the way the owner uses the result, not only the build. Write each of these
+when it applies, with its minimum. Not applicable is a written reason (§Areas and owners).
+
+- **Several experiments.** When more than one route is open, each experiment has its own
+  objective, its budget, its stop condition, and what it must show before it continues or
+  closes. Starting another does not drop the minima of the ones already running. The project
+  that carries the primary objective stays named (`../SKILL.md §1`). One experiment is not a
+  portfolio. A portfolio is not a reason to skip the minima.
+- **Outward exposure.** What leaves the working environment stays inside what the owner has
+  authorised. A message, a listing, a price, a name, a publish, or a spend. Low exposure is
+  the default until the owner raises it. Each outward act records what it commits and how it
+  can be taken back. One act reinforcing another is not a reason to send more than the
+  authority allows (`../SKILL.md §8`).
+- **Money as a means.** Where the world the project lives in requires money, the system
+  operates that money. What is owed, what is collected, what is spent, by when, and the date
+  of the next money decision. Finance keeps the books. Commercial keeps the exchange
+  (§The vision, the plan and the business). Money is a tool for the objective. It is the
+  vision only when the owner has said that earning is the aim.
+- **An aim above the money.** Where the owner has named what the money is for, that aim is
+  the vision and the money is a means under it. Where the owner has not named it, the record
+  says the aim is unnamed. Do not invent a higher purpose and attribute it to the owner. An
+  agent proposal is marked as a proposal. The money is still operated, because the world
+  requires it, while the aim stays open.
 
 ## Alternative routes
 
@@ -168,6 +237,8 @@ apply:
   reconciled, the first completed exchange, and what brings the buyer back. Finance keeps the
   books. Commercial is whether the exchange works. A business keeps this area while the first
   version is free, because the path to earning is part of the vision.
+- **Use:** several experiments, outward exposure, money as a means, and any aim above the
+  money (§How the result is used).
 - **Distribution:** where people find it, get it and start it (§Releasing to people).
 - **Support and community:** how people get help, and how what they say reaches the plan
   (§Hearing back).
