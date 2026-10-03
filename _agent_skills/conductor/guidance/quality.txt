@@ -196,6 +196,9 @@ you add.
 - **Every budget in the bar is asserted by a check that fails when it is exceeded:** in CI for
   software; in the recurring inspection or acceptance procedure otherwise. A budget measured once
   in a report is a snapshot, not a budget.
+- **A time limit is the same kind of check.** A date, a quarter or a duration in the schedule
+  fails when it has no source (`planning.md §Time limits`). A duration written once in a plan,
+  with no history and no opened class, is a guess, not a limit.
 - **For anything that serves more than one person,** measure the expected peak with a margin,
   memory and open handles steady over a long run, and the cost of one use.
 

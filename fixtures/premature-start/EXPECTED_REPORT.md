@@ -41,6 +41,7 @@ Most of that start decided things the idea did not ask for, and none of it can b
 - outward-before-authority: Buyers were emailed the price before the owner approved any message. That is outward exposure past the authority. The next work is to record the message, what it commits, and how it can be taken back, and to send nothing further until the owner has authorised it.
 - one-experiment-closed-the-rest: the only experiment is this stack. Other routes were not opened. One experiment is not the portfolio. Each open route needs an objective, a budget, a stop condition, and what it must show. The primary objective stays named.
 - money-stood-in-for-the-aim: Earning from the kit is called the vision. No separate aim was named by the owner, and none will be asked. Money is a means. An aim the owner has not named stays unnamed. Do not invent one. The money is still operated.
+- date-with-no-source: PLAN.md's schedule says ship the first batch on 1 June, the build takes two weeks, and launch is Q3. Nobody measured a task, and no finished project of this kind was opened. A date, a quarter or a duration with no source is not a time limit. The next work is a measured history, a committed artefact, an opened reference class of the same kind of work, or the item marked unscheduled with no date.
 
 ## Verdicts
 
@@ -68,8 +69,9 @@ Most of that start decided things the idea did not ask for, and none of it can b
 | outward exposure inside authority | buyers were emailed before the owner approved | broken |
 | several experiments, each with a stop | only experiment is this stack; other routes were not opened | broken |
 | money as a means, aim unnamed if unstated | earning from the kit called the vision; no separate aim | broken |
+| time limit has a source | 1 June, two weeks, and Q3, with no measurement and no opened class | broken |
 
-22 items: 1 holds, 20 broken, 1 skipped.
+23 items: 1 holds, 21 broken, 1 skipped.
 
 defect_id: no-need-evidence
 defect_id: unmeasurable-goal
@@ -87,3 +89,4 @@ defect_id: no-checkpoint-after-start
 defect_id: outward-before-authority
 defect_id: one-experiment-closed-the-rest
 defect_id: money-stood-in-for-the-aim
+defect_id: date-with-no-source

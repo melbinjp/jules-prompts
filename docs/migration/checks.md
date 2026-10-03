@@ -12,6 +12,7 @@ The old library is the tag `library-26-final`.
 |---|---|---|---|
 | Library integrity (`check_library_integrity.py`) | replaced | the pieces of the library agree with each other | rewritten for the conductor and fixtures; see the function table below |
 | Conductor check tests (`test_check_conductor.py`) | retained | the package check rejects broken installs and references | unchanged; runs in the same job |
+| Time-limit check tests (`test_check_time_limits.py`) | new | a date, quarter or duration in a schedule with no source fails, and a sourced schedule passes | runs in the same job; the planted case is premature-start |
 | `emit.py --check` | retained | every generated form is byte for byte its source | source is `conductor/`; targets are skills, agent-skills, archive, site, pages, redirects (the plugin, marketplace and index targets are retired, below) |
 | `test_emit_bytes.py` | retained, changed | a CRLF checkout cannot silently invalidate published digests | rewritten (see below) and extended to the archive |
 | `test_trial_prep.py` | retained | trial preparation never deletes interrupted evidence | unchanged |

@@ -2,7 +2,7 @@
   "fixture": "premature-start",
   "skill": "start-from-an-idea",
   "prompt_slug": "task_start_from_an_idea",
-  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price with no route to close the gap, and a pipeline only that agent can run. Later extension: the season promise is dropped because hobby boards cannot meet it, the service list is treated as the work, use has started with no checkpoint, buyers were emailed before approval, one experiment closes the other routes, and earning stands in for an unnamed aim.",
+  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price with no route to close the gap, and a pipeline only that agent can run. Later extension: the season promise is dropped because hobby boards cannot meet it, the service list is treated as the work, use has started with no checkpoint, buyers were emailed before approval, one experiment closes the other routes, earning stands in for an unnamed aim, and the schedule states 1 June, two weeks and Q3 with no source.",
   "defects": [
     {
       "id": "no-need-evidence",
@@ -147,6 +147,16 @@
       "must_mention": [
         "Earning from the kit",
         "No separate aim"
+      ]
+    },
+    {
+      "id": "date-with-no-source",
+      "file": "PLAN.md",
+      "tell": "The schedule ships the first batch on 1 June, says the build takes two weeks, and puts launch in Q3. Nobody measured a task, and no finished project of this kind was opened. A date, a quarter or a duration with no source is not a time limit.",
+      "must_mention": [
+        "1 June",
+        "two weeks",
+        "Q3"
       ]
     }
   ],

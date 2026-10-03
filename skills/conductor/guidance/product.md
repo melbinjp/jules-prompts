@@ -143,6 +143,8 @@ Name one of these when it is true:
 - A minimum is met on paper and missed in the result.
 - This method has a part the run needed and did not load. An unread section does not prove it
   does not apply (`../SKILL.md §2`).
+- A date, a quarter or a duration in the schedule has no source
+  (`planning.md §Time limits`).
 
 When any of those can be named, covering it is the next work, before the next batch. When none
 can, record the search, its date and what was read. Write the gap in the records the project

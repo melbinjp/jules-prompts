@@ -68,8 +68,12 @@ harness that a model built for itself. Do not change either's behaviour without 
   `RETIRED_SKILLS` in `scripts/emit.py`.
 - Do not edit `docs/trials/`: it records what was run. `docs/migration/checks.md` says which check protects
   which behaviour.
+- A schedule date with no source fails `scripts/check_time_limits.py`.
+  `scripts/test_check_time_limits.py` must reject the planted schedule and accept a sourced one.
+  A check that is not in the list below can be skipped.
 - Before pushing: `python scripts/emit.py --check`, `python scripts/check_library_integrity.py`,
   `python scripts/check_conductor.py`, `python scripts/test_check_conductor.py`,
+  `python scripts/test_check_time_limits.py`,
   `python scripts/test_emit_bytes.py`, `python scripts/test_trial_prep.py`,
   `python scripts/inventory_map.py --destinations`, `python scripts/test_check_trace.py`,
   `python scripts/test_conformance.py`, and `python scripts/check_site.py _site`

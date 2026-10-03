@@ -163,6 +163,7 @@ python scripts/emit.py --check
 python scripts/check_library_integrity.py
 python scripts/check_conductor.py
 python scripts/test_check_conductor.py
+python scripts/test_check_time_limits.py
 python scripts/test_emit_bytes.py
 python scripts/test_trial_prep.py
 python scripts/inventory_map.py --destinations

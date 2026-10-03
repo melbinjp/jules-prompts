@@ -22,11 +22,17 @@ to change to reach it.
    procedure covers. The conductor makes such failures visible; it does not prevent them.
 7. **The evidence is thin.** One real software delivery, simulations for physical and event work,
    and no real product carried from idea to operation yet.
-8. **The whole-result rules are still instructions.** A whole project requires a vision, a plan
-   and a minimum on every applicable aspect, including the exchange when it must earn, what the
-   record still misses, checkpoints after use has started, and the way the result is used. The
-   minimum stays when the technology already in hand falls short. An agent can still skip them.
-   They block nothing until they are checks that fail the run.
+8. **One schedule rule is now a check. The other whole-result rules are still instructions.** A
+   schedule record that states a date, a quarter or a duration with no source fails
+   `scripts/check_time_limits.py`. That check has been shown to fail a planted schedule and to
+   pass a sourced one.
+
+   A whole project still requires a vision, a plan and a minimum on every applicable aspect.
+   That includes the exchange when it must earn, what the record still misses, checkpoints after
+   use has started, and the way the result is used. The minimum stays when the technology
+   already in hand falls short. An agent can still skip those. They block nothing until they
+   are checks that fail the run. Scoring a fixture finds a skipped rule only when someone runs
+   the scorer.
 
 ## What reaching the aim needs
 
@@ -59,5 +65,7 @@ what it may send or sign, and what they accept. Everything else should be checke
 that runs, not by the reader remembering.
 
 The largest single step toward that is the first item
-above: turn the conductor's checkable rules into checks that block. Until then the honest claim is
+above: turn the conductor's checkable rules into checks that block. One schedule rule now does.
+An unsourced date in a schedule fails the run. The others do not, until they are checks too.
+Until then the honest claim is
 that the conductor raises the floor and makes gaps visible; it does not yet make quality automatic.

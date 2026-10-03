@@ -6,7 +6,7 @@
       "type": "archive",
       "description": "One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs. That includes the exchange when the project must earn, what a record still misses, checkpoints after use starts, and the way the result is used. It keeps those minima when the technology in hand falls short. Focused guidance loads only when the project needs it.",
       "url": "/.well-known/agent-skills/conductor.zip",
-      "digest": "sha256:5e0148df5ed69b21e781513fd25c5cb56d95eb4201791c4fcdf7893fe458595b"
+      "digest": "sha256:3618299c7d97b2dca238126f8aa8966fc42df16207350fc1938c3c8c32694a61"
     }
   ]
 }

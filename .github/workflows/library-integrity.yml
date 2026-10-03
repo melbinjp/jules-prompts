@@ -46,6 +46,11 @@ jobs:
       - name: The conductor check must reject broken installations and references
         run: python scripts/test_check_conductor.py
 
+      # A date in a schedule with no source must fail, and a sourced schedule must pass.
+      # The planted case is fixtures/premature-start. A check that is not in this job can be skipped.
+      - name: An unsourced schedule date must fail, and a sourced one must pass
+        run: python scripts/test_check_time_limits.py
+
       - name: Every generated form must still match conductor/
         run: python scripts/emit.py --check
 

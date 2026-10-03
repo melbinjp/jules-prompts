@@ -84,7 +84,7 @@ does not make all adjacent or parked work commissioned (`../SKILL.md §1. Classi
 3. **Draw the network or the Gantt chart when it makes coordination clearer;** the records hold
    the links and dates, the chart is a view of them.
 4. **Keep the schedule honest:** a date is either committed by the party who controls it, or an
-   estimate marked as such.
+   estimate marked as such. What may stand as that source, and what may not, is §Time limits.
 
 ## Critical path and resources
 
@@ -194,6 +194,112 @@ requirement (`decisions.md`); do not build one.
 
 Failures this prevents: a battery that lasts two days where the idea promised a season; a free
 tier that becomes a four-figure bill at the target size; a bill of materials above the price.
+
+## Time limits
+
+A time limit is a check, in the same way a budget is (`quality.md §Budgets as checks`). A date, a
+quarter or a duration in the schedule is kept only when its source is named. Otherwise the check
+fails and the run stops. This section says what the conductor can time, how that limit is
+reached, and the line an unsourced date may not cross.
+
+**What can be timed**
+
+- **The next wave, as a distribution from work the doer has already finished.** For software,
+  the method is Joel Spolsky, Evidence-Based Scheduling, 26 October 2007
+  (https://www.joelonsoftware.com/2007/10/26/evidence-based-scheduling/). Break a task the
+  person has done before into at most 16 hours. A larger package means the steps were not
+  listed. Only the actor who will do the work estimates it. Another actor's number is not a
+  source. Do not press an estimate shorter to protect a date. Velocity is that actor's
+  estimate divided by the time the task actually took. His practice drops velocities older
+  than about six months. A new estimator keeps a stand-in history, deliberately wide, until
+  about half a dozen real tasks exist. Do not add the estimates into one ship date. Draw many
+  futures. His essay draws 100, and treats each as 1 percent. In each future, divide each
+  estimate by a velocity drawn at random from that history, then place the hours on that
+  person's calendar. The result is a distribution, not a day. In each round, the team is done
+  when the last person finishes. A person shared with other work is not free for the whole of
+  that round (`§Critical path and resources`).
+- **A committed date.** Only when the party who controls the date has committed, and the record
+  names the artefact (a signed date, a written confirmation, a contract clause). An estimate is
+  not that artefact.
+- **A reference class of the same kind of finished work.** Bent Flyvbjerg, "From Nobel Prize to
+  Project Management: Getting Risks Right", Project Management Journal, vol. 37, no. 3, August
+  2006, pp. 5-15 (arXiv:1302.3642), gives three steps. Identify a class of past similar
+  projects, broad enough to be statistically meaningful and narrow enough to be comparable.
+  Establish the probability distribution from credible empirical data for a sufficient number
+  of projects in that class. Place this project on that distribution. The outside view uses the
+  outcomes of similar completed actions. It does not forecast the events inside this one. The
+  paper's curriculum case is one project of that kind. The team's own estimates ran from 18 to
+  30 months. About 40 percent of the comparable efforts were abandoned. The rest took seven to
+  ten years. The work finished eight years later. Those figures time curriculum work of that
+  kind. They do not time a software change. A different kind of work is not a source. Record
+  that the class was rejected, and do not copy its figures.
+- **The same method on a different class is still not this project's numbers.** Flyvbjerg, Hon
+  and Fok, arXiv:1710.09419, submitted 3 October 2017, report a 2012 Hong Kong Development
+  Bureau study. It covered 25 roadwork projects. Forecast costs and durations were compared
+  with actual outcomes. The projects were benchmarked against 863 similar projects. The
+  abstract states those counts. It does not state a percentage to lift. The roadworks
+  distribution does not time software.
+
+**When nothing above exists**
+
+No history of finished tasks, and no opened class of the same kind, means the next work is to
+measure or to open a class. Until then the item is unscheduled. It carries no calendar date, no
+quarter and no duration. Spolsky's half-dozen tasks are his stated practice for a software
+estimator. They are not a law for every trade. Say whose practice a threshold is.
+
+**What this procedure will not treat as a limit**
+
+- The weighted average in §Estimates and arithmetic is an inside view of this task. It is not a
+  reference class and it is not a measured velocity. The curriculum case is why: the inside
+  estimates and the outcomes of similar finished work were different distributions.
+- One ship date as the sum of the estimates. Spolsky's point is that the sum sounds right and
+  is the wrong result.
+- A shorter estimate written to keep a date. His picture is a box of wood blocks. Use a bigger
+  box, or fewer blocks. Do not shrink the blocks. If the date must move, cut scope or move the
+  date. On Excel 5, the feature list would not fit the schedule, so the team cut it and called
+  the cuts a deferral to the next version. When that next list was reviewed, not one deferred
+  feature was worth doing. Cutting scope was the schedule. Shrinking the estimates would have
+  hidden the choice.
+- An old date kept by adding people. His essay says new people will probably work at 50 percent
+  for several months, and will slow the people who teach them. That 50 percent is his
+  illustration, not a constant to paste into a plan. Adding people starts a new estimate.
+- A multiplier in place of a breakdown. He writes that thinking of the code without listing the
+  steps makes the work seem to take n, when listing the steps makes it more like 4n. That is
+  what an unlistable package hides. It is not a measured ratio to multiply into a schedule. The
+  remedy is the 16-hour breakdown, not a multiplier.
+- A space-flight confidence level copied onto a small task. NASA's planning page states a joint
+  confidence level as the probability that cost is at or under the target and the schedule
+  finishes at or under the target date. It describes CADRe as the historical record of cost,
+  schedule and technical attributes for analogous projects, completed at each milestone and
+  stored in ONCE (https://www.nasa.gov/ocfo/ppc-corner/ppc-guidance-documents/). The Schedule
+  Management Handbook and Cost Estimating Handbook Appendix J are listed there. This procedure
+  does not take a percentage from a handbook it has not opened, and it does not apply one
+  agency's threshold to a different kind of work.
+
+**How a limit is written, so a check can see it**
+
+In the schedule record, under a heading `## Schedule`, each item uses one of these markers.
+The text after the colon is not empty.
+
+- `measured:` the doer's own completed tasks, which velocities were kept, and the distribution
+  that followed. For software, name Evidence-Based Scheduling when that is the method used.
+- `committed:` the artefact and the party who controls the date.
+- `reference class:` the opened source, the class, and the figure that source states. A class
+  of a different kind of work is recorded as rejected, not used.
+- `unscheduled:` why there is no history and no opened class. No date, quarter or duration on
+  that item.
+
+`scripts/check_time_limits.py` reads that section. A date, a quarter or a duration with none of
+the first three markers fails, and the message names the claim. A marker with nothing after the
+colon fails. An unscheduled item that still states a date, a quarter or a duration fails. A
+file with no `## Schedule` section passes, because it claimed no schedule. The check has to be
+run. A rule that is not run does not block the work.
+
+**When the date slips**
+
+Recompute. If the ship date moves later by more than one day per day, work is being added
+faster than it is finished. That is Spolsky's stated test, not a new ratio. Cut scope or move
+the date. Do not edit the velocities to recover the old day.
 
 ## Work records in the project's tool
 

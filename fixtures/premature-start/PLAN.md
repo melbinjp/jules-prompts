@@ -50,3 +50,8 @@ start. Nothing will be looked at again until launch. Buyers were emailed the pri
 owner approved any message. The only experiment is this stack. Other routes were not opened.
 Earning from the kit is the vision. No separate aim was named by the owner, and none will be
 asked.
+
+## Schedule
+
+Ship the first batch on 1 June. The build takes two weeks. Launch is Q3.
+Nobody measured a task, and no finished project of this kind was opened.

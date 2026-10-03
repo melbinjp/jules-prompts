@@ -116,7 +116,8 @@ them whenever the evidence changes.
    owners`).
 4. **Account for dependencies and resources.** What must happen before what; the people,
    equipment, parts, money, access and time each piece needs, and when they are available;
-   the forecast that follows (`guidance/planning.md`).
+   the forecast that follows (`guidance/planning.md`, including
+   `guidance/planning.md §Time limits`).
 5. **Execute within authority.** Take the next ready work package (§5); perform it by its
    procedure (§4); run its gates (§6); record the result (§3); take the next. Nothing outside
    the delegated authority is done without the decision it needs (§8).
@@ -170,6 +171,10 @@ A running task or an updated summary is not a checkpoint met
 money operated as a means, and whether an aim sits above that money, are aspects when they
 apply. Each has a minimum. An aim the owner has not named stays unnamed
 (`guidance/product.md §How the result is used`).
+
+**A time limit is sourced, or it is not a date.** A date, a quarter or a duration in the
+schedule names where it came from, or the item stays unscheduled. An unsourced one fails the
+check (`guidance/planning.md §Time limits`).
 
 **The smallest loop that finishes things.** One ready work package at a time: do it, run its
 gates, record it with a link to its evidence, update the state note, take the next. Review at
@@ -426,7 +431,7 @@ covers; sections refer to each other as `file §Heading`.
 | When | Load |
 |---|---|
 | Always, for the objective, the vision and the business (`§The vision, the plan and the business`), what the record still misses, checkpoints after use starts, how the result is used, measures, requests and reaching people | `guidance/product.md` |
-| Always, at least `§Choosing methods by need` and `§Work records in the project's tool`; the rest when there are dependencies, dates, shared resources, risks or changes to control | `guidance/planning.md` |
+| Always, at least `§Choosing methods by need`, `§Time limits` and `§Work records in the project's tool`; the rest when there are dependencies, dates, shared resources, risks or changes to control | `guidance/planning.md` |
 | Any choice that matters: a tool, supplier, part, platform, design or route | `guidance/decisions.md` |
 | Anything people or agents see, hear or operate | `guidance/design.md` |
 | Setting or checking the bar a result must meet, including `§The floor and the means` | `guidance/quality.md` |

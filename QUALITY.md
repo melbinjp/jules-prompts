@@ -53,6 +53,7 @@ pull request.
 | agent, from `llms.txt` | every file listed with its digest; every link resolves in the built site (CI) | verified |
 | a saved link to a retired page or skill address | 41 retired pages redirect, 26 old `SKILL.md` addresses serve a notice, `/workflow.json` serves a notice; checked on a build (CI) | verified |
 | the package installs whole | `check_conductor.py` on the repository and on a copied install; mutation tests for broken copies (CI) | verified |
+| a schedule date has a source | `test_check_time_limits.py` fails the planted unsourced schedule and passes a sourced one (CI) | verified |
 | every fixture can go red | 26 fixtures, each with `defects.json`, an expected report naming every planted defect, and a request (CI) | verified |
 | an agent delivers a project | not shown by structural checks; recorded in `docs/trials/runs/status.md` | not verified |
 | the ledger check other projects copy | the worked example passes; each of the 29 ways of breaking a ledger fails it by name (CI) | verified |
