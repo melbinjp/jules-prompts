@@ -2,7 +2,7 @@
   "fixture": "premature-start",
   "skill": "start-from-an-idea",
   "prompt_slug": "task_start_from_an_idea",
-  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price with no route to close the gap, and a pipeline only that agent can run.",
+  "description": "An idea for a soil-moisture kit, and the start an agent made on it: microservices for no users, a battery that lasts two days where the idea promised a season, a kit that costs more to make than its price with no route to close the gap, and a pipeline only that agent can run. October 3 extension: the season promise is dropped because hobby boards cannot meet it, and the service list is treated as the work.",
   "defects": [
     {
       "id": "no-need-evidence",
@@ -92,6 +92,25 @@
       "must_mention": [
         "£15",
         "bill of materials"
+      ]
+    },
+    {
+      "id": "means-capped-the-result",
+      "file": "PLAN.md",
+      "tell": "Settled product drops the owner's season-long battery promise because the chosen ESP32 dev board and hobby boards cannot do it, and forbids looking at another radio or a custom board. The kit the owner recharges every two days is then called the product. The season promise is the floor; the board is a means that failed it.",
+      "must_mention": [
+        "hobby boards",
+        "recharges",
+        "season"
+      ]
+    },
+    {
+      "id": "actions-without-a-vision",
+      "file": "PLAN.md",
+      "tell": "PLAN.md says the services listed above are the work and there is no separate plan. The vision heading is an unmeasurable slogan. The architecture, milestones and next steps are a batch of actions with no vision of a kit a gardener can buy and no plan those actions come from.",
+      "must_mention": [
+        "no separate plan",
+        "services listed"
       ]
     }
   ],

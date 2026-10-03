@@ -33,6 +33,11 @@ Most of that start decided things the idea did not ask for, and none of it can b
 - layered-milestones: the milestones are layers (backend, app, hardware, integration), and nothing usable exists until the fourth. Proposed MS1: one kit in the owner's own bed, sending a real reading end to end to the owner's phone, confirmed by pushing a hand probe into the same soil. Proposed MS2: five kits at the association for a month (moves M1 and M2). Proposed MS3: a batch of fifty with certification done (moves M3).
 - agent-only-pipeline: DEPLOY.md says to ask the agent to deploy and to flash. No command in the repository does either, so no person, no CI and no other agent can. Every stage needs a command (`make flash`, `make deploy`, `make test`) that a person or an agent can run, with the operating model saying who runs each today.
 
+## Vision, plan and the floor
+
+- means-capped-the-result: PLAN.md's settled product drops the owner's season promise because the chosen ESP32 dev board, and hobby boards in general, cannot last a season. It then calls a kit the owner recharges every two days the product, and refuses another radio or a custom board. The season is the minimum. The board is a means that missed it. The next work is a route that can meet the season, using the battery arithmetic and the radio comparison, or an open gap. The two-day kit is not the vision.
+- actions-without-a-vision: the same section says the services listed above are the work and there is no separate plan. The vision heading is the slogan already rejected under unmeasurable-goal. Architecture, milestones and next steps are a batch of actions. The kit a gardener can buy, and the plan those actions come from, are absent. Until they are written, more services are not the next work.
+
 ## Verdicts
 
 | item | evidence | verdict |
@@ -53,8 +58,10 @@ Most of that start decided things the idea did not ask for, and none of it can b
 | every stage runnable by a person, an agent or CI | deploy and flash exist only as "ask the agent" | broken |
 | soil sensor decision | three options, two kinds of evidence, one seam | holds |
 | dev board sleep current | not measured; no board to hand | skipped |
+| season promise kept as the minimum | dropped because hobby boards cannot meet it; two-day recharge called the product | broken |
+| vision and plan before the service list | "no separate plan"; the services listed above treated as the work | broken |
 
-16 items: 1 holds, 14 broken, 1 skipped.
+18 items: 1 holds, 16 broken, 1 skipped.
 
 defect_id: no-need-evidence
 defect_id: unmeasurable-goal
@@ -66,3 +73,5 @@ defect_id: layered-milestones
 defect_id: agent-only-pipeline
 defect_id: no-certification
 defect_id: no-money
+defect_id: means-capped-the-result
+defect_id: actions-without-a-vision

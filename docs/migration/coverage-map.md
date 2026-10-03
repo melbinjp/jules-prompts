@@ -46,6 +46,13 @@ These additions are outside the frozen 1,825-item baseline, which still contains
 146 defects. Historical trial results retain that original denominator. Expected-report scoring
 checks the case records; detecting these cases in an independent agent run remains separate.
 
+October 3, from the lair application: a whole project now requires a vision, a plan and a
+minimum on every applicable aspect before a batch of actions, including the commercial exchange
+when the project must earn. The minimum stays when current technology cannot meet it. Two
+synthetic defects extend premature-start (`means-capped-the-result`, `actions-without-a-vision`),
+163 across the same 26 fixtures. They are outside the frozen baseline. The trial record is
+unchanged.
+
 These decisions recur through the map. Each is taken from the finalisation proposal.
 
 1. **Home-made records become established ones.** `PROJECT.md` with G/M/J/R/K/MS rows, the
@@ -90,13 +97,14 @@ then checks that every `file §Heading` in this map exists.
   dependencies · Change control · Rolling-wave planning and exploration · Resources and their
   sources · Estimates and arithmetic · Work records in the project's tool
 - `conductor/guidance/product.md`: Intake: what only the owner knows · Starting from nothing or a
-  single word · What it takes · Objective, outcomes and measures · Alternative routes · Areas and
-  owners · Journeys and threads · Experience design · Requests, however they are worded ·
+  single word · What it takes · Objective, outcomes and measures · The vision, the plan and the
+  business · Alternative routes · Areas and owners · Journeys and threads · Experience design ·
+  Requests, however they are worded ·
   Releasing to people · Hearing back
 - `conductor/guidance/decisions.md`: Which decisions need evidence · Options · Criteria before
   scores · Evidence · Redo every number · A way out and a reopening condition · Recording and
   superseding decisions · Asking the owner
-- `conductor/guidance/quality.md`: Write the bar first · Walk every area · Fix in order of cost to
+- `conductor/guidance/quality.md`: Write the bar first · The floor and the means · Walk every area · Fix in order of cost to
   the person · Scope by the job · Every platform and environment, for real · Failures caused on
   purpose · Craft standard · Budgets as checks · Complexity budget · Operable · Reviewing work
 - `conductor/guidance/software.md`: Setup that runs from cold · Tests that do not need services ·

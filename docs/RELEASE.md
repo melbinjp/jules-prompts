@@ -27,7 +27,10 @@ of accepted methods, conditional alternatives, settled-core claim consistency, q
 and explicit operating modes with existing cloud reuse. The shared state template is an optional
 view of existing records. Standing rules and generated forms follow the source. Fifteen new defects
 extend eight existing regression cases, for 161 across the same 26 fixtures; the trial results below
-remain the historical 146-defect run. These changes do not establish successful autonomous
+remain the historical 146-defect run. October 3 adds two further defects on premature-start
+(`means-capped-the-result`, `actions-without-a-vision`), 163 across the same 26 fixtures: a season
+promise dropped because current boards cannot meet it, and a service list treated as the work.
+The trial record is unchanged. These changes do not establish successful autonomous
 operation of Utily or any workspace project. Model detection of the new cases remains to be tried.
 
 - Structural checks do not show that an agent delivers a project. That is what the trials in

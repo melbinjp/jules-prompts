@@ -22,6 +22,10 @@ to change to reach it.
    procedure covers. The conductor makes such failures visible; it does not prevent them.
 7. **The evidence is thin.** One real software delivery, simulations for physical and event work,
    and no real product carried from idea to operation yet.
+8. **The new whole-result rules are still instructions.** As of October 3 a whole project requires
+   a vision, a plan and a minimum on every applicable aspect, including the exchange when it must
+   earn, and that minimum stays when the technology already in hand falls short. An agent can
+   still skip them. They block nothing until they are checks that fail the run.
 
 ## What reaching the aim needs
 

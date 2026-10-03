@@ -6,7 +6,7 @@ excerpt_separator: ""
 ---
 {% raw %}---
 name: conductor
-description: One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.
+description: One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs, including the exchange when the project must earn, and it keeps those minima when the technology already in hand falls short. Focused guidance loads only when the project needs it.
 ---
 # Conductor: deliver any project, with evidence
 
@@ -31,7 +31,9 @@ alone: each one is a part of this loop, not a substitute for it.
   guidance are the ordinary ones (work breakdown, dependencies, schedules, boards, RACI, risks,
   change control, decision records, verification and validation). Use the ones the project
   needs, in the tools it already has. Build a tool only when a demonstrated need is not met by
-  one that exists.
+  one that exists. The ordinary methods do not cap the result. When the current technology,
+  material or habit cannot meet a minimum, the minimum stays and the means change
+  (`guidance/quality.md §The floor and the means`).
 - **Stay within the law and the terms of every service used.**
 
 ## 1. Classify the project
@@ -66,6 +68,12 @@ changes:
    (`guidance/autonomy.md` for any but the first two).
 8. **Actions on the physical world.** Anything the work will move, heat, dispense, spend or
    send (`guidance/physical.md`).
+9. **The vision, the plan and the floors.** What successful looks like for the people it is
+   for, including how it earns and keeps earning when it is a business or must earn money.
+   The plan the next actions come from. The minimum each applicable aspect must meet
+   (`guidance/product.md §The vision, the plan and the business`,
+   `guidance/quality.md §The floor and the means`). These are written before a batch of
+   actions. They stay as written when the current technology, tools, team or habits fall short.
 
 **An existing project** has its records written from what is there before anything changes:
 what it is for (in the owner's words), what exists and what actually runs, the decisions it
@@ -78,6 +86,12 @@ for revisiting. Then it starts where §2 says, like any other.
 objective, authority, records and acceptance. Apply the loop to the work commissioned in each;
 coordinate actual dependencies and shared resources through linked views in existing records.
 Make competing priorities explicit; allocate only within the owner's priorities and delegation.
+
+Name which project carries the owner's primary objective. A request to choose or continue the
+workspace's work starts from that project's unmet vision, plan or minimum. A bounded commission
+still gets done. The record states what the primary project loses by waiting
+(`guidance/product.md §The vision, the plan and the business`).
+
 Do not merge separate authorities, copy private runtime data into source, override deterministic
 responsibilities or restart parked or retired work without authorisation. Parked work may be
 evaluated within an authorised review and recommended for reopening; that does not commission it.
@@ -125,6 +139,15 @@ whose dependencies are unknown starts at 4. When the request is a bounded piece 
 fix, a review, a change), readiness (§5) applies to that work and its actual dependencies; a
 project-wide responsibility comes first only when its absence blocks the requested work or its
 acceptance. A bounded fix does not rebuild the business case.
+
+**The whole result before the actions.** On a whole-project request, three things are written
+before a batch of build, outreach or operations starts. A vision. A plan the next actions come
+from. A minimum for every applicable aspect
+(`guidance/product.md §The vision, the plan and the business`). Where any of those is missing,
+writing it is the next work. A bounded fix still has three limits. It does not contradict the
+vision. It does not drop an aspect below its minimum. It does not rename a weaker result as the
+vision when the current means cannot reach it (`guidance/quality.md §The floor and the means`).
+A group of actions with no vision and no plan is not delivery.
 
 **The smallest loop that finishes things.** One ready work package at a time: do it, run its
 gates, record it with a link to its evidence, update the state note, take the next. Review at
@@ -380,11 +403,11 @@ covers; sections refer to each other as `file §Heading`.
 
 | When | Load |
 |---|---|
-| Always, for the objective, measures, requests and reaching people | `guidance/product.md` |
+| Always, for the objective, the vision and the business (`§The vision, the plan and the business`), measures, requests and reaching people | `guidance/product.md` |
 | Always, at least `§Choosing methods by need` and `§Work records in the project's tool`; the rest when there are dependencies, dates, shared resources, risks or changes to control | `guidance/planning.md` |
 | Any choice that matters: a tool, supplier, part, platform, design or route | `guidance/decisions.md` |
 | Anything people or agents see, hear or operate | `guidance/design.md` |
-| Setting or checking the bar a result must meet | `guidance/quality.md` |
+| Setting or checking the bar a result must meet, including `§The floor and the means` | `guidance/quality.md` |
 | Any software in the output or in the work | `guidance/software.md` |
 | Physical products, installations, devices, or actions on the world | `guidance/physical.md` |
 | Service or creative delivery | `guidance/service.md` |

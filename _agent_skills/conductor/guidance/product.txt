@@ -68,13 +68,18 @@ source:
   constraint the routes around it and what each costs. A large idea gets a staged path; a small
   budget gets a route that fits it. The owner chooses the route; you bring the evidence and the
   arithmetic.
+- **Beyond the means already in hand.** What the vision and its minima need that the current
+  tools, materials, hosts and habits cannot do. Each such need is work to raise the means, or
+  an open gap with its next step (`quality.md §The floor and the means`). The vision keeps the
+  need either way.
 
 Show every number with its units and inputs (`planning.md §Estimates and arithmetic`). Send the
 owner the path as one message with a recommendation.
 
 Failures this prevents: nobody worked out what it takes, so the project runs out of money, time
 or direction halfway; the first option found became the plan; complexity arrived before the
-need; only engineering was considered.
+need; only engineering was considered; the result was shrunk to the tools already chosen; a
+batch of actions stood in for a vision.
 
 ## Objective, outcomes and measures
 
@@ -94,6 +99,38 @@ need; only engineering was considered.
 - **Switch conditions** for the routes (§Alternative routes).
 - With no records yet, write the smallest set this work needs: the objective, and the measure
   the current work moves.
+
+## The vision, the plan and the business
+
+This applies to every project the conductor is used on: software, physical, service, creative,
+hybrid, and a business. It is written before a batch of actions, and rewritten when the evidence
+changes.
+
+- **A vision is recorded before a batch of actions.** In the owner's words where they gave
+  them: who it serves, what those people can do that they cannot do now, and what successful
+  looks like, with a date and a way to tell it was missed. A task list, a stack, a backlog or
+  a pile of improvements is not a vision. Where the owner has not said it, write the smallest
+  vision the evidence supports, mark it as derived, and confirm it.
+- **The plan is the source of the next action.** Deliverables, the order, the dependencies and
+  the resources (`planning.md`). An action that traces to none of them is not execution. When
+  the request is the project itself, establishing the vision and the plan is the work until
+  they exist.
+- **When the project must earn, or the owner is building a business, success includes the
+  exchange.** Record each of these with its source:
+  - the offer: what is exchanged, with whom, and why they choose it;
+  - the price, the full cost to deliver one, and what remains;
+  - how money is collected and reconciled, and one completed exchange observed (a settled
+    invoice, a paid order, a wage received);
+  - how a buyer hears of it, starts, pays and comes back;
+  - the runway, and the latest date for the next money decision.
+  Checkout, pricing copy, outreach or a payment integration while the offer is unset stays an
+  open decision. A later change to what was promised is change control (`../SKILL.md §7`)
+  before the words people see are changed.
+- **Acceptance of the build leaves the business unaccepted until an exchange measure is met.**
+  At least one measure can be missed by money, use or the promised change. A green build with
+  no completed exchange does not meet a vision whose success is to earn.
+- **Every aspect is founded before the build is called the project.** §Areas and owners. For a
+  whole-project request, an area with no owner and no written reason fails the check.
 
 ## Alternative routes
 
@@ -117,7 +154,7 @@ For every area the product needs, record an owner (the owner, a person, an agent
 service), the first deliverable and the measure it serves, or one line on why it does not
 apply:
 
-- **Product:** objective, measures, scope.
+- **Product:** the vision, the objective, the measures, the scope.
 - **Research:** evidence of need, and how feedback keeps arriving.
 - **Design:** people and situations, journeys, states, words, one system of look and behaviour,
   operability by people and agents (`design.md`).
@@ -132,14 +169,22 @@ apply:
 - **Legal:** licences, terms, privacy notice, certification (radio, electrical, safety,
   medical, food), contracts, and a company and tax where money is taken.
 - **Finance:** costs, price, funding routes, runway, who pays each bill.
+- **Commercial, when anything is sold, paid for, sponsored, or the project must earn:** the
+  offer, the buyer, the price against the cost to deliver one, how money is collected and
+  reconciled, the first completed exchange, and what brings the buyer back. Finance keeps the
+  books. Commercial is whether the exchange works. A business keeps this area while the first
+  version is free, because the path to earning is part of the vision.
 - **Distribution:** where people find it, get it and start it (§Releasing to people).
 - **Support and community:** how people get help, and how what they say reaches the plan
   (§Hearing back).
 
-An area nobody named is not reported as broken; it is not reported at all, and a report that
-is silent about it reads exactly like one that checked it. A radio device needs certification;
-one that records where people are needs a privacy notice; one that costs money to run needs
-someone paying. These shape the design, so they are founded at the start.
+For a whole-project request, an area left off the record fails the check. Not applicable is a
+written reason, and it is never a pass (`../SKILL.md §6`). A report that never mentions an
+applicable area has not checked it: silence reads the same as a pass, which is why the row has
+to exist. A radio device needs certification; one that records where people are needs a privacy
+notice; one that costs money to run needs someone paying; one that must earn needs the commercial
+area at its minimum (`quality.md §The floor and the means`). These shape the design, so they are
+founded at the start.
 
 ## Journeys and threads
 

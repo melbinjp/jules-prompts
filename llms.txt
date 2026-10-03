@@ -1,6 +1,6 @@
 # Jules Prompts
 
-> The conductor: one entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.
+> The conductor: one entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs, including the exchange when the project must earn, and it keeps those minima when the technology already in hand falls short. Focused guidance loads only when the project needs it.
 
 To use it as an agent:
 
@@ -9,13 +9,13 @@ To use it as an agent:
 3. End every report with its counts: verified, failed, not verified and not applicable.
 
 The whole folder as one archive (zip, SKILL.md at its root): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor.zip
-SHA-256 of that archive: sha256:225f97a3a5946b073ee32a67040dbe767dd982aa6663cd7b0d89be48764bc09a
+SHA-256 of that archive: sha256:2f02a48c14ac37b5e1d03b8dff8309c0d8953e9e694b3c14eb6731000ffe60a8
 Discovery index (Agent Skills 0.2.0): https://jules-prompts.wecanuseai.com/.well-known/agent-skills/index.json
-SHA-256 of SKILL.md: sha256:ef40187270079c4592b742c3069f815aa926a7abc5f100ee935e60e3d9bb076c
+SHA-256 of SKILL.md: sha256:cd1ad2febaab57c3f17bcb7451b1fa2af2fc63172c199ea2edeb8042602fd766
 
 ## The conductor
 
-- [Conductor: deliver any project, with evidence](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/SKILL.md): One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. Focused guidance loads only when the project needs it.
+- [Conductor: deliver any project, with evidence](https://jules-prompts.wecanuseai.com/.well-known/agent-skills/conductor/SKILL.md): One entry point for delivering any project, software, physical, service or hybrid, from nothing, a single word, an idea, an existing build or a live product, to an accepted result, and for handing over whatever must keep running. It classifies the project, runs a control loop of established project responsibilities (objective and acceptance, deliverables and work, owners, dependencies and resources, execution within authority, verification and validation, change, handover or closure), keeps one authoritative set of work records in the project's own tool, and never counts work as done without evidence about the actual result and an accountable verifier. On a whole project it requires a vision, a plan and a minimum on every aspect the result needs, including the exchange when the project must earn, and it keeps those minima when the technology already in hand falls short. Focused guidance loads only when the project needs it.
 
 ## Guidance
 

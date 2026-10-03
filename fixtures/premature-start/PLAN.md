@@ -35,3 +35,10 @@ batteries. The firmware reads the sensor and posts to GrowCloud over Wi-Fi every
 
 - Owner to sign up for GrowCloud Pro when we pass 5 devices.
 - Owner to buy 100 ESP32 dev boards so the price per board comes down.
+
+## Settled product
+
+A whole season on one set of batteries is not possible on the ESP32 dev board already chosen,
+and hobby boards cannot do better, so that promise is dropped. The product is a kit the owner
+recharges every two days. No other radio and no custom board will be looked at. The services
+listed above are the work. There is no separate plan.

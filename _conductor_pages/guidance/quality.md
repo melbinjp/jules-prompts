@@ -7,7 +7,7 @@ permalink: /conductor/guidance/quality.html
 kind: guidance
 file: "guidance/quality.md"
 source_url: /.well-known/agent-skills/conductor/guidance/quality.md
-toc: [{"id": "write-the-bar-first", "title": "Write the bar first"}, {"id": "walk-every-area", "title": "Walk every area"}, {"id": "fix-in-order-of-cost-to-the-person", "title": "Fix in order of cost to the person"}, {"id": "scope-by-the-job", "title": "Scope by the job"}, {"id": "every-platform-and-environment-for-real", "title": "Every platform and environment, for real"}, {"id": "failures-caused-on-purpose", "title": "Failures caused on purpose"}, {"id": "craft-standard", "title": "Craft standard"}, {"id": "budgets-as-checks", "title": "Budgets as checks"}, {"id": "complexity-budget", "title": "Complexity budget"}, {"id": "operable", "title": "Operable"}, {"id": "challenging-recommendations-and-existing-methods", "title": "Challenging recommendations and existing methods"}, {"id": "reviewing-work", "title": "Reviewing work"}]
+toc: [{"id": "write-the-bar-first", "title": "Write the bar first"}, {"id": "the-floor-and-the-means", "title": "The floor and the means"}, {"id": "walk-every-area", "title": "Walk every area"}, {"id": "fix-in-order-of-cost-to-the-person", "title": "Fix in order of cost to the person"}, {"id": "scope-by-the-job", "title": "Scope by the job"}, {"id": "every-platform-and-environment-for-real", "title": "Every platform and environment, for real"}, {"id": "failures-caused-on-purpose", "title": "Failures caused on purpose"}, {"id": "craft-standard", "title": "Craft standard"}, {"id": "budgets-as-checks", "title": "Budgets as checks"}, {"id": "complexity-budget", "title": "Complexity budget"}, {"id": "operable", "title": "Operable"}, {"id": "challenging-recommendations-and-existing-methods", "title": "Challenging recommendations and existing methods"}, {"id": "reviewing-work", "title": "Reviewing work"}]
 ---
 {% raw %}Load when setting or checking what "good enough to hand over" means, for any kind of output:
 software, a physical product or installation, a service, an event, a document. It also holds the
@@ -47,6 +47,32 @@ the project has set itself); what actually runs and what is actually checked; ev
 stores, sends or moves what people care about; the dependency or parts list, read as a list of
 costs; and the bad days already reported (issues, crash reports, complaints, returns).
 
+## The floor and the means {#the-floor-and-the-means}
+
+- **Every applicable aspect has a minimum, written before acceptance.** The minimum is what
+  the people, the law, the vision and the objective require. It includes the one job, nothing
+  trusted lost, an experience finished enough to use, and, where the project must earn, the
+  exchange in `product.md §The vision, the plan and the business`. A result below its minimum
+  is not accepted. Passing checks on some other aspect leave it unmet.
+- **The minimum stays when the means fall short.** A current technology, library, host,
+  material, supplier, team habit or first design that runs does not lower a floor and does not
+  redefine the vision. If the means cannot meet the minimum, the route is short. The vision
+  stays.
+- **Raise the means, or leave the gap open.** Search past what the project already uses:
+  another design, a supplier, a standard, published research, or a method and a capability the
+  project does not have yet. Record the search and the sources. Building that capability is in
+  scope when the minimum requires it and the authority and budget allow it. An open gap records
+  the next step and stays open. Certifying the weaker behaviour as the vision, because nothing
+  already in hand can do better, fails the check.
+- **Above every minimum, take the strongest route the evidence supports,** within authority,
+  budget and the law. Compare defensible alternatives (`decisions.md §Options`). The first
+  thing that runs is a candidate. Stop changing it when no stronger route is evidenced and no
+  measure would move. Further polish that moves no measure is not a minimum.
+- **A met minimum has evidence about the actual result.** A plan, a deploy or a suite of tests
+  does not meet the commercial minimum. The named exchange, observed, does. A quality minimum
+  is met by the checks in this file, including a check shown to fail for the defect it exists
+  for (`../SKILL.md §6`).
+
 ## Walk every area {#walk-every-area}
 
 For every area below, add rows to the bar, or write one line on why it does not apply, so a
@@ -78,6 +104,10 @@ failure or the attack happen, then look.
 - **Legal:** licences of dependencies, fonts, images, music, footage and data compatible with how
   the result is distributed, with the notices they require; terms, a privacy notice, contracts and
   certifications the result needs.
+- **Commercial, when the project must earn or takes money:** the offer matches what is actually
+  exchanged; the price covers the cost to deliver; collection and reconciliation have been walked
+  with a real small payment or the project's real equivalent; a buyer can find it, pay, and receive
+  what was promised (`product.md §The vision, the plan and the business`).
 - **Physical safety,** whenever it moves, heats, dispenses, spends or sends
   (`physical.md §Safety states and irreversible actions`).
 
@@ -107,7 +137,7 @@ ready (`../SKILL.md §6. Gates: verification and validation`).
 
 ## Scope by the job {#scope-by-the-job}
 
-- **Whatever the core job needs in order to be dependable is in scope, however large; whatever it
+- **Whatever the core job needs to be dependable is in scope, however large; whatever it
   does not need is out, however easy.** "No new features" is the wrong rule, and so is "add
   whatever seems useful". If it cannot keep what it is given, add the keeping; if one platform
   cannot run it at all, make it run.
@@ -217,6 +247,8 @@ Challenge missing development setup against an accepted requirement, measured fa
 demonstrated operating need. Reuse an adequate tool or configure/build the smallest capability
 that closes the gap; otherwise record an authorised exception and its cost. Do not turn tooling
 into its own objective or permanently accept a workaround that defeats agreed quality or autonomy.
+When a written minimum is unmet because the current means cannot reach it, §The floor and the means
+applies: raise the means or leave the gap open.
 
 ## Reviewing work {#reviewing-work}
 
