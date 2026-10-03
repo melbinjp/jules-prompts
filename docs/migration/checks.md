@@ -52,7 +52,7 @@ Kept as they were: pinned actions, no `continue-on-error`, both operating system
 | Every skill has a fixture | replaced | nothing was unseen to fail | every fixture has a request in `requests.json`, none is extra, and `planted` in the index equals `defects.json` |
 | Conductor package check | retained | package complete | unchanged |
 | (new) retired paths are absent | new | two sources of truth do not return | `_prompts`, `workflow.json`, `compact`, `generate_skills.py` |
-| (new) `docs/RELEASE.md` has its four sections | new | the release statement exists | headings only; the content is reviewed |
+| (new) `docs/RELEASE.md` has its four sections, and the status files state the planted total | new | the release statement exists, and its count cannot drift from the fixture index | headings, plus the live total from `fixtures/index.json` in `docs/RELEASE.md`, `docs/VISION.md` and `docs/migration/coverage-map.md`. The release also keeps the trial denominator 146 |
 
 ## `check_site.py`
 

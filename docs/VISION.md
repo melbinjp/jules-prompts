@@ -21,7 +21,8 @@ to change to reach it.
 6. **The world is outside it.** Suppliers, budgets, hardware and people fail in ways no
    procedure covers. The conductor makes such failures visible; it does not prevent them.
 7. **The evidence is thin.** One real software delivery, simulations for physical and event work,
-   and no real product carried from idea to operation yet.
+   and no real product carried from idea to operation yet. The fixtures now plant 168 defects.
+   The trial scored 146. Defects planted after that run are not part of that result.
 8. **One schedule rule is now a check. The other whole-result rules are still instructions.** A
    schedule record that states a date, a quarter or a duration with no source fails
    `scripts/check_time_limits.py`. That check has been shown to fail a planted schedule and to

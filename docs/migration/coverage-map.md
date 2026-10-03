@@ -55,7 +55,8 @@ applies: several experiments, outward exposure kept inside authority, money oper
 and an aim above that money left unnamed when the owner has not named it. Six synthetic defects
 extend premature-start (`means-capped-the-result`, `actions-without-a-vision`,
 `no-checkpoint-after-start`, `outward-before-authority`, `one-experiment-closed-the-rest`,
-`money-stood-in-for-the-aim`), 167 across the same 26 fixtures. They are outside the frozen
+`money-stood-in-for-the-aim`). `date-with-no-source` is the later one. The fixtures plant 168
+across the same 26 fixtures. They are outside the frozen
 baseline. The trial record is unchanged. No new inventory rows are added for these ids.
 
 These decisions recur through the map. Each is taken from the finalisation proposal.

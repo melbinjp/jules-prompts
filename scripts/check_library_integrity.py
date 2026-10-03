@@ -65,6 +65,14 @@ LIST_ITEM = re.compile(r"^\s*(?:[*+-]|\d+\.)\s")
 CODE_SPAN = re.compile(r"`[^`]*`")
 
 RELEASE_SECTIONS = ("Supported scope", "Known limitations", "Evidence", "Migration from the 26-skill library")
+# The windows-cohort trial scored the corpus at this size. Later defects raised the live
+# total. The release keeps both numbers. The live total is read from the fixture index.
+TRIAL_DENOMINATOR = 146
+STATUS_FILES = (
+    ROOT / "docs" / "RELEASE.md",
+    ROOT / "docs" / "VISION.md",
+    ROOT / "docs" / "migration" / "coverage-map.md",
+)
 
 
 def main() -> int:
@@ -128,10 +136,12 @@ def main() -> int:
         problems.append("docs/trials/tools/requests.json is missing, so no fixture can be run")
     else:
         requests = json.loads(REQUESTS.read_text(encoding="utf-8"))
+    planted_total = None
     if not index_path.exists():
         problems.append("fixtures/index.json is missing")
     else:
         listed = json.loads(index_path.read_text(encoding="utf-8")).get("fixtures") or []
+        planted_total = sum(int(entry.get("planted") or 0) for entry in listed)
         if not listed:
             problems.append("BLIND: fixtures/index.json lists no fixtures")
         listed_names = [entry.get("name") for entry in listed]
@@ -179,6 +189,17 @@ def main() -> int:
         for section in RELEASE_SECTIONS:
             if section not in headings:
                 problems.append(f"docs/RELEASE.md has no '{section}' section")
+        release_text = RELEASE.read_text(encoding="utf-8")
+        if not re.search(rf"\b{TRIAL_DENOMINATOR}\b", release_text):
+            problems.append(
+                f"docs/RELEASE.md does not keep the trial denominator {TRIAL_DENOMINATOR}"
+            )
+    if planted_total is not None:
+        for path in STATUS_FILES:
+            label = path.relative_to(ROOT).as_posix()
+            text = path.read_text(encoding="utf-8") if path.exists() else ""
+            if not re.search(rf"\b{planted_total}\b", text):
+                problems.append(f"{label} does not state the planted total {planted_total}")
 
     print(
         f"checked conductor: {counts['files']} files, {counts['references']} local references, "

@@ -1,5 +1,8 @@
 # Complete the conductor candidate
 
+This note is the build on 27 September 2026. The states in the table are the states that day.
+Later evidence is in `docs/RELEASE.md` and `docs/trials/report.md`.
+
 2026-09-27. The owner asked to sync the up-to-date development branch and complete the build.
 The starting revision is `927997a` on `m/brave-shannon-e884k9`; main is `f5fc9c0e`.
 

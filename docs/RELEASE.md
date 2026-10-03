@@ -1,7 +1,8 @@
 # Release: the conductor as the one entry point
 
-Version 3.0.0. The conductor replaces the 26-skill
-library everywhere it was published.
+Version 3.0.0. In this tree the conductor replaces the 26-skill library. The public site
+serves whatever GitHub Pages builds from `main`. Until this tree is that build, the live site
+is still the library.
 
 ## Supported scope
 
@@ -16,23 +17,22 @@ library everywhere it was published.
 - **What stays.** `harness/AGENTS.md` (standing rules, now pointing at the conductor), `harness/check_trace.py`
   (for projects that already keep the older ledger; unchanged), `harness/conformance.py` (for harnesses a model
   built for itself), and the 26 fixtures as the conductor's regression cases.
+- **What this tree keeps.** `conductor/` is the procedure. `skills/`, `_agent_skills/`, `_conductor_pages/`,
+  `.well-known/`, `llms.txt` and `redirects/` are that same procedure in the forms the site and the byte check
+  serve. Pages runs Jekyll and does not run `scripts/emit.py`, so those copies stay committed. `fixtures/`,
+  `scripts/` and `docs/migration/coverage-map.md` are what the checks read. `docs/trials/` is the evidence in
+  the section below, including the raw runs. Build output and Python caches are gitignored.
 - **What is checked structurally.** Package integrity and references. Byte-for-byte agreement of every
   generated form with the source. A reproducible archive with a stated digest. A real build of the site. Each fixture's expected report against its planted defects.
   `docs/migration/checks.md` says which check protects which behaviour.
 
 ## Known limitations
 
-October 1 local strengthening adds complete consequence/journey coverage, evidence-based challenge
-of accepted methods, conditional alternatives, settled-core claim consistency, qualified takeover
-and explicit operating modes with existing cloud reuse. The shared state template is an optional
-view of existing records. Standing rules and generated forms follow the source. Fifteen new defects
-extend eight existing regression cases, for 161 across the same 26 fixtures; the trial results below
-remain the historical 146-defect run. A later extension of premature-start adds defects for a
-season promise dropped because current boards cannot meet it, a service list treated as the
-work, no checkpoint after use has started, an outward message before it was authorised, one
-experiment closing the other routes, and money standing in for an unnamed aim. That is 167
-across the same 26 fixtures. The trial record is unchanged. These changes do not establish
-that an agent delivers a project. Model detection of the new cases remains to be tried.
+The fixtures plant 168 defects across the same 26 cases. The count is the sum of `planted` in
+`fixtures/index.json`. The trial below scored the corpus when it planted 146. Defects planted
+after that run have not been through it. One of them, a schedule date with no source, fails
+`scripts/check_time_limits.py` on its own. The others are still found only when someone runs an
+agent and scores the report. None of this shows that an agent delivers a project.
 
 - Structural checks do not show that an agent delivers a project. That is what the trials in
   `docs/trials/` are for, and the section below points at their record.

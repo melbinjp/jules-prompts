@@ -175,7 +175,8 @@ python scripts/check_site.py _site      # on a build of the site, made the way G
 If a change to the conductor is meant to catch a failure, add or extend a fixture under `fixtures/` with a
 `defects.json`, an `EXPECTED_REPORT.md` that names every planted defect, and a request. Evidence that an
 agent delivered a project is separate from these structural checks: see the
-[trial protocol](docs/trials/protocol.md) and the [current run status](docs/trials/runs/status.md).
+[trial protocol](docs/trials/protocol.md) and the [finished trial](docs/trials/report.md).
+The table in `docs/trials/runs/status.md` is the earlier cohort. Its new-approach column was not started.
 
 ## Contributing
 
