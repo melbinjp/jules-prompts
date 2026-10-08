@@ -68,3 +68,55 @@ pull request.
 | Safari and Firefox engines, a real screen reader | not run for this change | not verified |
 | the live deployment | checked on a local build with the GitHub Pages image; CI builds with the Pages action | not verified |
 | found in search results | a fresh crawl can only be requested by the owner in the search consoles | not verified |
+
+## Production-process documentation and factual draft, 8 October 2026
+
+Commission: add every named production-process stage as a README study/build task and prepare
+a development article without personal context. Subsequent owner steering requires supported
+facts only, with false critiques removed. The native next work is recorded in `docs/VISION.md`.
+This package changes documentation; it does not implement the proposed execution system.
+
+| Acceptance item | Performed evidence |
+|---|---|
+| Complete process inventory | Both arrow inventories contain all 17 source labels once, in their original order; the README has 17 matching evidence rows. |
+| Current state and next action | The README distinguishes guidance/checks from missing whole-sequence enforcement and gives a bounded failure/resumption/independent-verification demonstration. VISION carries the next work. |
+| Facts-only development account | Dated native project, trial and operating records were read. Unsupported impossibility, probability, session-count, wasted-work and permission-bypass critiques were excluded. Primary research is used only for its supported scope. |
+| Personal context removed | Article checks find no private project labels, local paths, secrets or personal operational identifiers in prose. The public Jules project and repository references are intentional. Raw transcripts and private provenance stay outside this repository. |
+| Writing correction and publish checks | Final article and changed README section each return exit 0, no findings, from voiceproof correct and check with point/takeaway. No checker changes. |
+| Audience Mirror | Final mirror commands return exit 0, no findings and all five publish gates PASS; article grade 12.7, README section 12.3. Independent reader judgment also accepts the draft and its concrete next action. |
+| Independent factual/source review | Separate reviewers checked stage coverage, native records, dates, standards claims, privacy and current/proposed distinctions. Security acceptance was narrowed to material risks/missing required evidence; UI wording was narrowed to what browser checks missed. |
+| Local artifact integrity | UTF-8/LF, native article front matter, README local links and VISION anchor inspected; current fixture inventory remains 168, historical trial denominator 146; git diff --check passes. The blog tree remains unchanged. |
+
+At the conclusion of draft preparation, the article remained in the workspace's private draft
+records and no push or publication had occurred. The owner subsequently authorised push and
+publication on 8 October. Existing runtime/fixture behaviour was not changed, so delivery trials
+were not rerun for this documentation package.
+
+8 documentation items verified, 0 failed, 0 not verified of 8. Runtime implementation and
+real-project acceptance remain separate from the authorised documentation publication.
+
+
+## Authorised documentation release checks, 8 October 2026
+
+The owner authorised push and publication. The release checkout starts at `d5bacd2` and
+changes only README, VISION, RELEASE and this documentation receipt. Canonical guidance,
+generated forms, archive, fixtures, scripts and workflows remain byte-identical to that
+baseline. The earlier development candidate is separate.
+
+All eleven mandatory checks pass on this exact release source: emitter agreement; library
+integrity; conductor references (15 files, 190 local and 181 section references); conductor
+mutation tests (18); time-limit tests (10); byte tests (9); trial-preparation tests (3);
+inventory mapping (1,825/1,825); trace checks (29 mutations); harness conformance (12 mutations);
+and the fresh offline Pages build's site check (62 pages, 144 checks). The installed Pages
+image ran without network, with read-only source and a separate fresh output. Source, build
+and index agree on archive SHA-256
+`3618299c7d97b2dca238126f8aa8966fc42df16207350fc1938c3c8c32694a61`.
+
+The publication article adds the reproducible inventory-count command, links the README
+section and states the limit of private historical evidence. Its generated page was inspected
+through real-browser using the existing site style. All 17 stages are retained. The writing
+checks and independent factual/privacy review pass; publishing requirements does not release
+runtime enforcement.
+
+11 release gates verified, 0 failed, 0 not verified of 11. Hosted deployment and served bytes
+must be observed after the push; no hosted outcome is inferred from these local gates.

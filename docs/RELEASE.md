@@ -1,8 +1,20 @@
 # Release: the conductor as the one entry point
 
-Version 3.0.0. In this tree the conductor replaces the 26-skill library. The public site
-serves whatever GitHub Pages builds from `main`. Until this tree is that build, the live site
-is still the library.
+Version 3.0.0. The conductor replaces the 26-skill library. GitHub Pages serves `main`.
+The published conductor baseline was verified at `d5bacd2` before this documentation release.
+
+## Documentation release, 8 October 2026
+
+The owner authorised publication of the production-process documentation and its factual
+article. This documentation release adds the README's complete 17-stage inventory, proposed
+evidence requirements and bounded next build task. The native work remains in `docs/VISION.md`;
+`QUALITY.md` records review and checks.
+
+The conductor package in this release is unchanged from `d5bacd2`. The earlier adoption and
+concise-policy candidate (`e6ad212`, `cd9bb24`) remains separate on the development branch and
+is not part of this Pages release. No new execution engine or whole-sequence enforcement is
+released. Publishing these requirements does not establish real-project acceptance or
+unattended delivery.
 
 ## Supported scope
 

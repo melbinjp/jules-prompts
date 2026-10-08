@@ -104,6 +104,64 @@ a copy tells nobody.
   of the loop, not a substitute for it.
 - [`templates/`](conductor/templates): `adr.md` for decision records and `handover.md` for handover.
 
+## From an idea to a production system: the next build task
+
+The next goal is to enforce the conductor's engineering stages. Check each stage in order.
+Missing evidence or a failed check stops the run. Fix the cause. Verify before moving on.
+The conductor now supplies guidance and some checks. It does not yet enforce this whole sequence.
+[The vision and its open gaps](docs/VISION.md) remain the work authority.
+
+The source analysis named these **17 stages**, all retained here. They are a starting inventory,
+not a standardised count or a limit on coverage:
+
+```text
+1. Requirement extraction -> 2. Domain modeling -> 3. Schema design
+-> 4. Auth & session architecture -> 5. State management -> 6. API design
+-> 7. Business logic -> 8. Error handling -> 9. Payment integration
+-> 10. Third-party webhooks -> 11. Security hardening -> 12. Responsive UI design
+-> 13. Accessibility -> 14. Performance/caching -> 15. Migration safety
+-> 16. Deployment pipeline -> 17. Telemetry & monitoring
+```
+
+Each stage needs an input, a responsible actor, a clear condition for acceptance, evidence from
+the actual result, and an independent verifier. Show that its gate detects the defect it is meant
+to prevent. Some dependencies lead back to earlier stages. Later work cannot make a failed
+prerequisite valid. When a stage does not apply, record and justify that decision.
+
+| Stage | Evidence the proposed gate must require |
+|---|---|
+| Requirement extraction | Intended users, their job, scope, constraints and checkable acceptance agreed with the owner |
+| Domain modeling | Entities, relationships, rules and invariants exercised against representative cases |
+| Schema design | Data constraints, ownership, retention and recovery demonstrated with realistic records |
+| Auth & session architecture | Authentication, authorisation, isolation, expiry and revocation checked, including denied actions |
+| State management | State transitions, persistence, concurrency and interrupted work checked against the invariants |
+| API design | Contracts, validation, compatibility and failure responses exercised by actual callers |
+| Business logic | Rules and exceptional cases verified against the accepted requirements |
+| Error handling | Induced failures yield truthful status, preserved work and a usable recovery action |
+| Payment integration | Where money is involved, collection, reconciliation, duplicates, failure and refund obligations demonstrated; sandbox evidence labelled |
+| Third-party webhooks | Where used, authenticity, replay, duplicates, ordering, retries and reconciliation verified |
+| Security hardening | Threats, permissions, secrets and required controls checked; unresolved material risks or missing required evidence block acceptance |
+| Responsive UI design | Actual default, loading, error, recovery and expanded views inspected at supported sizes with realistic content |
+| Accessibility | Applicable access requirements checked with automated tools and actual keyboard and assistive use |
+| Performance/caching | Representative load and resource budgets measured; cache correctness and invalidation checked |
+| Migration safety | Upgrade, interrupted migration, restore and the chosen rollback or roll-forward route rehearsed on representative data |
+| Deployment pipeline | Reproducible version, environment separation, release authority, verification and recovery demonstrated |
+| Telemetry & monitoring | Actual service and user outcomes observed; induced faults reach the operator and exercise the missed-run or incident response |
+
+**Why this remains a build task.** An agent can skip prose or miss a required review. It can also
+mistake its own report for independent evidence. Passing tests do not prove that people can use
+the screens, that the service is secure, or that customers received the result. Trial outcomes
+varied. The proposed system must preserve state across interruptions,
+check evidence independently, enforce action limits and observe actual operation. Its verdict
+covers what was tested; it cannot guarantee perfection.
+
+**Next deliverable:** study the existing checks and execution tools. Map all 17 stages to working
+capabilities and gaps. Design and demonstrate the smallest missing control on a bounded real
+project. Fail a stage deliberately: dependent work must stop. Resume after an interruption.
+Show that state and standing limits survive. The corrected result must pass independent inspection.
+Keep the project's native records and settled authority. Building another ledger does not meet
+this task. Publication and unattended operation require their own acceptance.
+
 ## Fixtures
 
 `fixtures/` holds 26 miniature projects with planted defects, each with a `defects.json`, an

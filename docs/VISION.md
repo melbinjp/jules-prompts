@@ -55,6 +55,36 @@ to change to reach it.
 - **Real projects as evidence.** Carry several real projects, software, physical and service, from
   idea to operation, and record what failed.
 
+## Commissioned production-system study and build task, 8 October 2026
+
+The owner requests that the production stages and the current conductor's failures be made an
+explicit part of the README, with private context removed, and that the development analysis be
+prepared as an anonymised publication draft. The source is an Antigravity architectural
+assessment dated 7 October 2026. The owner's subsequent direction is to retain only supported
+facts and discard false critiques. Claims are checked against the underlying records and
+primary research. The source names 17 stages; its 15 to 25 estimate is not a prescribed standard.
+
+The [README section](../README.md#from-an-idea-to-a-production-system-the-next-build-task) carries
+every named stage and its proposed acceptance evidence. The system goal is an ordered evaluation
+that cannot advance past a failed or unverified applicable prerequisite. It must retain the
+project's native authority, independent verification, delegated action limits and operating
+feedback. Existing effective checks are retained; a state machine controls transitions but does
+not prove the completeness or quality of its criteria.
+
+Responsible for this package: documentation implementer, with independent source and reader
+review. Acceptor: project owner. Acceptance: all 17 stages retained, limitations accurate, private
+identifiers absent, and a concrete study/build deliverable distinguishable from delivered
+runtime enforcement. Status: documentation and article reviewed; the owner authorised their
+push and publication on 8 October. Release evidence belongs in `QUALITY.md`. Runtime
+implementation and production acceptance remain open.
+
+Next system work: inspect existing execution tools and checks, map each stage to a working gate
+or a demonstrated gap, and propose the smallest missing mechanism on a bounded real project.
+The demonstration must stop on a planted failure, preserve state across interruption and admit
+only independently verified correction. Dates and resource commitments remain unset pending
+the scoped implementation plan. The publication draft and its private provenance stay in the
+workspace's existing draft records, outside this repository.
+
 ## Our view
 
 The aim is right, and it should be pursued, but it should be stated precisely. No procedure can
